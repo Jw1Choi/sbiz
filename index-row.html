@@ -1,0 +1,2412 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <!-- ===== 기본 메타 ===== -->
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>FitCase | 개인회생·파산 실시간 DB 파트너</title>
+  <meta name="description" content="법무법인·법무사 전용 개인회생/파산 실시간 DB. 지역·채무규모·진행상태 등 10가지 항목으로 정밀 분류하여 신뢰 기반의 리드를 제공합니다." />
+  <meta name="format-detection" content="telephone=no, address=no, email=no" />
+  <meta name="theme-color" content="#13b5a3" />
+  <meta name="color-scheme" content="light dark" />
+
+  <!-- ===== SEO ===== -->
+  <link rel="canonical" href="https://www.example.com/" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+  <!-- ===== Open Graph / Twitter ===== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="FitCase" />
+  <meta property="og:title" content="FitCase | 개인회생·파산 실시간 DB 파트너" />
+  <meta property="og:description" content="출처가 명확한 공식 플랫폼의 실시간 DB로 선임 가능성을 높여보세요." />
+  <meta property="og:url" content="https://www.example.com/" />
+  <meta property="og:image" content="https://www.example.com/og/fitcase_og.jpg" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="FitCase | 개인회생·파산 실시간 DB 파트너" />
+  <meta name="twitter:description" content="지역·채무규모·진행상태 등 10가지 항목 정밀 분류, 신뢰 기반 리드 제공." />
+  <meta name="twitter:image" content="https://www.example.com/og/fitcase_og.jpg" />
+
+  <!-- ===== 파비콘 / PWA ===== -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- ===== 성능(안전 옵션) ===== -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <!-- 시스템 폰트 중심이지만, Pretendard 웹폰트를 쓸 경우만 아래 주석 해제
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700;900&display=swap" rel="stylesheet">
+  -->
+
+  <!-- ===== 스타일 ===== -->
+   <link href="./css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="./css/style.css" rel="stylesheet" type="text/css" />
+
+  <!-- ===== 구조화 데이터(JSON-LD) ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "FitCase",
+        "url": "https://www.example.com/",
+        "logo": "https://www.example.com/og/fitcase_logo.png",
+        "sameAs": []
+      },
+      {
+        "@type": "WebSite",
+        "name": "FitCase",
+        "url": "https://www.example.com/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.example.com/search?q={query}",
+          "query-input": "required name=query"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+  html, body { background:#ffffff !important; }
+  :root { color-scheme: light; } /* UA 기본 컨트롤 라이트로 */
+</style>
+</head>
+
+<body>
+
+<!-- ✅ 고정 헤더: 섹션을 분리하고 header 안에 topbar를 배치 (전체 코드 - 로테이트 텍스트를 로고 '아래칸'에 배치) -->
+<section id="stickyTopbar" aria-label="상단 고정 헤더">
+  <style>
+    /* ===== Scope: #stickyTopbar only ===== */
+    #stickyTopbar{
+      --brand:#13b5a3;
+      --accent:#11a292;
+      --muted:#556070;
+      --ink:#0b1220;
+      --line:#e8ecef;
+      position:relative;
+      z-index:9999;
+    }
+
+    /* ===== Topbar 기본 ===== */
+    #stickyTopbar .topbar{
+      position:fixed;
+      top:0;
+      left:50%;
+      transform:translate(-50%, 0);
+      width:100%;
+      max-width:1200px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px;
+      font-family:Pretendard, "Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      font-size:.95rem; color:var(--muted);
+      padding:10px 14px;
+      border-radius:14px;
+      background:rgba(255,255,255,.86);
+      backdrop-filter:saturate(130%) blur(10px);
+      box-shadow:0 10px 24px rgba(0,0,0,.08);
+      transition:transform .32s ease, background-color .25s ease, color .25s ease;
+      will-change:transform;
+    }
+
+    /* 왼쪽 영역: 로고(1줄) + 로테이트 텍스트(아래칸) 수직 스택 */
+    #stickyTopbar .left{
+      display:flex; flex-direction:column; align-items:flex-start;
+      gap:2px; padding-left:18px;
+    }
+
+    /* 브랜드 라벨 (첫 줄) */
+    #stickyTopbar .brand{
+      font-weight:800; line-height:1; white-space:nowrap;
+      font-size:20px; color:var(--ink);
+      display:block;
+    }
+
+    /* ====== 한 줄씩 페이드 교대 텍스트 (둘째 줄) ====== */
+    #stickyTopbar .fade-rotator{
+      position:relative;
+      height:1.35em; /* 한 줄 높이 고정 */
+      line-height:1.35;
+      /* overflow:hidden; */
+      margin-top:2px; /* 로고 아래 여백 */
+      width:100%;
+      max-width:520px; /* 필요 시 조절 */
+    }
+    /* 시각적으로 겹치되 스크린리더 중복 읽힘 방지(필요 시 사용) */
+    #stickyTopbar .fade-rotator .sr-only{
+      position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+      clip:rect(0,0,0,0);white-space:nowrap;border:0;
+    }
+
+    #stickyTopbar .fade-rotator .line{
+      position:absolute; inset:0 auto auto 0;
+      width:100%;min-width:200px; opacity:0; transform:translateY(10%);
+      will-change:opacity, transform;
+      animation:none; /* .play에서만 활성화 */
+    }
+    #stickyTopbar .fade-rotator.play .line{ animation: fadeLoop 6s infinite; }
+    #stickyTopbar .fade-rotator.play .line:nth-child(1){ animation-delay:0s; }
+    #stickyTopbar .fade-rotator.play .line:nth-child(2){ animation-delay:3s; }
+
+    @keyframes fadeLoop{
+      0%   { opacity:0; transform:translateY(10%); }
+      10%  { opacity:1; transform:translateY(0); }
+      40%  { opacity:1; transform:translateY(0); }
+      50%  { opacity:0; transform:translateY(-10%); }
+      100% { opacity:0; transform:translateY(-10%); }
+    }
+
+    /* 버튼 */
+    #stickyTopbar .tel{
+      font-weight:800; color:#fff; background:var(--brand);
+      border:1.5px solid var(--brand); padding:9px 18px; border-radius:999px;
+      font-size:.98rem; box-shadow:0 4px 12px rgba(19,181,163,.25);
+      text-decoration:none; transition:transform .18s ease, box-shadow .2s ease, background-color .2s ease, border-color .2s ease;
+      margin-right:10px; white-space:nowrap;
+    }
+    #stickyTopbar .tel:hover{
+      background:var(--accent); border-color:var(--accent);
+      box-shadow:0 8px 20px rgba(19,181,163,.40); transform:translateY(-1px);
+    }
+
+    /* 접근성: 모션 최소화 환경 */
+    @media (prefers-reduced-motion: reduce){
+      #stickyTopbar .topbar{ transition:none; }
+      #stickyTopbar .fade-rotator .line{ animation:none !important; opacity:1; transform:none; }
+      #stickyTopbar .fade-rotator{ height:auto; }
+    }
+
+    /* 반응형 */
+    @media (max-width:720px){
+      #stickyTopbar .topbar{ border-radius:0; max-width:100%; }
+      #stickyTopbar .brand{ font-size:18px; margin-left:10px; }
+      #stickyTopbar .fade-rotator{ margin-left:10px; max-width:78vw; }
+      #stickyTopbar .tel{ padding:8px 14px; font-size:.9rem; }
+    }
+  </style>
+
+  <header class="topbar" role="banner">
+    <div class="left" aria-live="polite">
+      <!-- 1줄: 로고 -->
+      <!-- FitCase Wordmark (for light backgrounds) -->
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="36" viewBox="0 0 220 36" role="img" aria-label="FitCase">
+  <defs>
+    <style>
+      .txt{ font: 900 20px/1 Pretendard, "Noto Sans KR", Segoe UI, Roboto, system-ui, -apple-system, sans-serif; }
+    </style>
+  </defs>
+  <!-- Mark -->
+  <g transform="translate(2 4)">
+    <!-- mint tile -->
+    <rect x="0" y="0" width="28" height="28" rx="8" fill="#13b5a3"/>
+    <!-- F cutout (white) -->
+    <rect x="8" y="6.8" width="5.2" height="15" rx="2.2" fill="#ffffff"/>
+    <rect x="8" y="6.8" width="12.2" height="5.2" rx="2.2" fill="#ffffff"/>
+    <rect x="8" y="13.8" width="9.4" height="5.2" rx="2.2" fill="#ffffff"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text class="txt" x="38" y="25" fill="#0b1220">FitCase</text>
+</svg>
+
+
+      <!-- 2줄: 로테이트 텍스트 (로고 '아래칸') -->
+      <div class="fade-rotator" aria-hidden="true">
+        <div class="line">법무법인·법무사 전용</div>
+        <div class="line"><b>개인회생/파산 DB 파트너</b></div>
+      </div>
+      <!-- 스크린리더용 고정 텍스트가 필요하면 아래 주석 해제
+      <span class="sr-only">법무법인·법무사 전용, 개인회생·파산 DB 파트너</span> -->
+    </div>
+    <a class="tel" href="#form_e12">바로 신청하기</a>
+
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function(e) {
+      const targetId = this.getAttribute("href");
+      if (targetId.length > 1) { // #만 있는 링크 제외
+        e.preventDefault();
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    });
+  });
+});
+</script>
+  </header>
+
+  <script>
+    (() => {
+      const headerSec = document.getElementById('stickyTopbar');
+      if(!headerSec) return;
+
+      const bar = headerSec.querySelector('.topbar');
+      const rotator = headerSec.querySelector('.fade-rotator');
+      const hero = document.querySelector('#legalDBHero');
+
+      /* ===== 헤더 높이에 맞춰 히어로 여백 변수 반영 ===== */
+      function setHeroHeaderSpace(){
+        if(!hero || !bar) return;
+        const h = bar.getBoundingClientRect().height;
+        hero.style.setProperty('--hdr-space', (h + 20) + 'px');
+      }
+      setHeroHeaderSpace();
+      addEventListener('resize', setHeroHeaderSpace, { passive:true });
+
+      /* ===== 스크롤 방향에 따라 헤더 숨김/표시 ===== */
+      let lastY = window.pageYOffset || document.documentElement.scrollTop;
+      let ticking = false;
+      const threshold = 8;
+      const minShowTop = 10;
+
+      function onScroll(){
+        const y = window.pageYOffset || document.documentElement.scrollTop;
+        const dy = y - lastY;
+
+        if(Math.abs(dy) > threshold){
+          if(dy > 0 && y > bar.offsetHeight + 10){
+            bar.style.transform = 'translate(-50%, -120%)';   // 아래로 스크롤 → 숨김
+          }else{
+            bar.style.transform = 'translate(-50%, 0)';       // 위로 스크롤/상단 → 표시
+          }
+          lastY = y;
+        }
+        if(y <= minShowTop) bar.style.transform = 'translate(-50%, 0)';
+        ticking = false;
+      }
+      addEventListener('scroll', () => {
+        if(!ticking){ requestAnimationFrame(onScroll); ticking = true; }
+      }, { passive:true });
+
+      /* ===== 회전 텍스트: 화면 이탈 후 재진입 시에도 다시 적용 =====
+         - IntersectionObserver로 뷰포트 진입 시 .play 클래스 부여 → 애니메이션 재시작
+         - 고정 헤더라도 브라우저 탭 전환/가시성 변화 대응 */
+      function playRotate(){ rotator && rotator.classList.add('play'); }
+      function stopRotate(){ rotator && rotator.classList.remove('play'); }
+
+      if('IntersectionObserver' in window && rotator){
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(ent => {
+            if(ent.isIntersecting) playRotate();
+            else stopRotate();
+          });
+        }, { root:null, threshold:0.01 });
+        io.observe(bar);
+      }else{
+        // 폴백: 즉시 재생
+        playRotate();
+      }
+
+      // 탭 비가시 → 일시정지 / 가시 → 재생 (재진입 시 항상 다시 적용)
+      document.addEventListener('visibilitychange', () => {
+        if(document.hidden) stopRotate();
+        else {
+          stopRotate();
+          requestAnimationFrame(playRotate);
+        }
+      });
+    })();
+  </script>
+</section>
+
+
+
+
+
+<!-- ✅ 본문 히어로: 기존 섹션에서 topbar 제거, 나머지 그대로 -->
+<section id="legalDBHero" aria-label="개인회생·파산 실시간 DB 공급">
+  <style>
+    /* ================= Scope: #legalDBHero only ================= */
+    #legalDBHero {
+      --ink: #0b1220;
+      --muted: #556070;
+      --brand: #13b5a3;
+      --line: #e8ecef;
+      --bg: #f6f8fa;
+      --radius: 18px;
+      --shadow: 0 16px 40px rgba(0, 0, 0, .1);
+      --soft: 0 1px 3px rgba(19,181,163,.12), 0 1px 2px rgba(0,0,0,.04);
+      --soft-hover: 0 6px 16px rgba(19,181,163,.16), 0 2px 4px rgba(0,0,0,.05);
+      --accent: #11a292;
+      --bubble:#e9f5f3;
+      --hdr-space: 92px; /* 헤더 높이만큼 여유(스크립트에서 보정) */
+
+      font-family: Pretendard, "Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background:#fff; color:var(--ink);
+      padding:60px 20px;
+      position:relative; overflow:hidden; isolation:isolate;
+    }
+    #legalDBHero .wrap { max-width:1200px; margin:0 auto; display:flex; flex-direction:column; gap:40px; }
+
+    /* 🔹 라이트 버블 */
+    #legalDBHero .bg-bubble{position:absolute; border-radius:50%; background:var(--bubble); filter:blur(.2px); opacity:.7; z-index:0;}
+    #legalDBHero .b1{width:520px; height:520px; left:-180px; top:-160px; z-index:-1;}
+    #legalDBHero .b2{width:440px; height:440px; right:-140px; bottom:20px; opacity:.55; z-index:-1;}
+    #legalDBHero .b3{width:380px; height:380px; right:20%; top:50%; translate:0 -50%; opacity:.45; z-index:-1;}
+    @media (max-width:980px){
+      #legalDBHero .b1{width:340px; height:340px; left:-120px; top:-120px;}
+      #legalDBHero .b2{width:150px; height:150px; right:-80px; bottom:10px;}
+      #legalDBHero .b3{display:none;}
+    }
+
+    /* 타이틀 (헤더 공간만큼 아래에서 시작) */
+    #legalDBHero .headline { text-align:center; margin-top:var(--hdr-space); }
+    #legalDBHero .headline .tag { display:inline-block; background:var(--bg); color:var(--brand); padding:4px 12px; font-size:.85rem; border-radius:50px; margin-bottom:14px; font-weight:600; }
+    #legalDBHero .headline h2 { font-size:clamp(1.8rem,3.2vw,2.4rem); line-height:1.4; margin:0 0 12px; font-weight:800; }
+    #legalDBHero .headline h2 b { color:var(--brand); }
+    #legalDBHero .headline p { margin:0; font-size:1rem; color:var(--muted); }
+
+    /* 본문 박스 */
+    #legalDBHero .content { display:flex; flex-wrap:wrap; gap:32px; background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); padding:40px; align-items:stretch; }
+
+    /* ========= Left: DB 스택 티커 ========= */
+    #legalDBHero .left { flex:1 1 50%; min-width:100px; position:relative; }
+    #legalDBHero .content .left { box-shadow:0 6px 16px rgba(19,181,163,.09), 0 2px 4px rgba(0,0,0,.01); border-radius:10px; }
+    #legalDBHero .left::before { content:""; position:absolute; inset:auto -10% -20% -10%; height:360px; pointer-events:none; }
+
+    #legalDBHero .dbStack { position:relative; width:min(560px,96%); height:370px; overflow:hidden; margin:0 auto; }
+    #legalDBHero .dbTrack { display:flex; flex-direction:column; gap:10px; will-change:transform; }
+    #legalDBHero .dbTrack.is-shifting { transition:transform .55s cubic-bezier(.22,.75,.16,1); }
+
+    /* 카드 */
+    #legalDBHero .db-card {
+      border:1.2px solid #00000011; border-radius:12px; box-shadow:var(--soft);
+      padding:14px 20px; display:flex; gap:14px; align-items:center; height:78px; box-sizing:border-box;
+      opacity:1; transform:translateY(0);
+    }
+    #legalDBHero .db-card.enter { opacity:0; transform:translateY(16px); }
+    #legalDBHero .db-card.enter.is-in { transition:opacity .55s ease, transform .55s ease; opacity:1; transform:translateY(0); }
+
+    /* 아바타 */
+    #legalDBHero .db-avatar {
+      flex:0 0 44px; height:44px; border:1px solid #11a29233; border-radius:50%;
+      background:#13b5a353; display:grid; place-items:center; color:#fff; font-weight:700; font-size:1.5rem;
+      box-shadow:inset 0 0 0 2px rgba(255,255,255,.7);
+    }
+    #legalDBHero .db-avatar::before { content:'👤'; font-size:20px; color:#fff; }
+
+    #legalDBHero .db-main { flex:1 1 auto; }
+    #legalDBHero .db-title { margin:0 0 4px; font-size:1.05rem; font-weight:800; letter-spacing:-.01em; }
+    #legalDBHero .db-sub { margin:0; font-size:.92rem; color:var(--muted); }
+
+    /* 말풍선 */
+    #legalDBHero .left .bubble { position:absolute; background:#fff; box-shadow:0 4px 20px rgba(0,0,0,.08); border-radius:12px; padding:8px 14px; font-size:.85rem; white-space:nowrap; font-weight:500; }
+    #legalDBHero .bubble1 { top:8px; left:8px; }
+    #legalDBHero .bubble2 { bottom:10px; left:0; }
+    #legalDBHero .bubble3 { top:28%; right:0; }
+
+    /* ========= Right ========= */
+    #legalDBHero .right { flex:1 1 45%; min-width:280px; display:flex; flex-direction:column; justify-content:space-between; }
+    #legalDBHero .right h3 { font-size:1.25rem; font-weight:700; margin-bottom:18px; }
+    #legalDBHero .right ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0; }
+    #legalDBHero .right ul li { padding:12px 0; background:none; border-radius:0; font-size:.98rem; border-bottom:1px dashed var(--line); }
+    #legalDBHero .right ul li:last-child { border-bottom:none; }
+    #legalDBHero .right ul li:before { content:"✓"; color:var(--brand); font-weight:800; margin-right:10px; font-size:1.1em; }
+
+    /* 버튼 */
+    #legalDBHero .actions { margin-top:25px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+    #legalDBHero .actions .btn-outline, #legalDBHero .actions .btn-fill {
+      border:none; cursor:pointer; font-size:1rem; font-weight:700; padding:12px 20px; border-radius:50px; transition:all .2s; text-decoration:none; display:inline-block; text-align:center;
+    }
+    #legalDBHero .actions .btn-outline { background:#fff; border:1.5px solid var(--brand); color:var(--brand); }
+    #legalDBHero .actions .btn-fill { background:var(--brand); color:#fff; box-shadow:0 6px 15px rgba(19,181,163,.35); }
+    #legalDBHero .actions .btn-fill:hover { background:var(--accent); }
+    .border1{display:none;}
+
+    #legalDBHero .right ul li.pulse{background:linear-gradient(90deg,rgba(19,181,163,.10),rgba(19,181,163,0));box-shadow:inset 0 0 0 2px rgba(19,181,163,.22),0 10px 26px rgba(19,181,163,.16);transition:background .35s ease,box-shadow .35s ease,transform .35s ease;transform:translateZ(0);font-weight:700;transition:1s;}
+#legalDBHero .right ul li.pulse::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,transparent,var(--brand),transparent);animation:legalDBHeroPulseBar 2.2s linear infinite;transition:1s;}
+@keyframes legalDBHeroPulseBar{0%{opacity:.0;transform:translateX(-20%)}10%{opacity:.8}90%{opacity:.8}100%{opacity:0;transform:translateX(20%)}}
+
+    /* 반응형 */
+    @media(max-width:768px){
+      #legalDBHero { padding:40px 10px; }
+      #legalDBHero .content { flex-direction:column; padding:20px; gap:20px; }
+      #legalDBHero .left { margin-top:0; }
+      #legalDBHero .right { order:1; min-width:100%; }
+      #legalDBHero .headline h2 { font-size:1.6rem; }
+      #legalDBHero .headline p { font-size:.95rem; }
+      #legalDBHero .dbStack { width:100%; height:370px; }
+      #legalDBHero .db-card { padding:12px 16px; height:75px; }
+      #legalDBHero .db-title { font-size:1rem; }
+      #legalDBHero .db-sub { font-size:.85rem; }
+      #legalDBHero .left .bubble { display:none; }
+      #legalDBHero .right h3 { font-size:1.35rem; margin-top:10px; margin-bottom:15px; }
+      #legalDBHero .right ul li { font-size:1.1rem; padding:10px 0; }
+      #legalDBHero .actions { flex-direction:column; gap:8px; }
+      #legalDBHero .actions .btn-outline, #legalDBHero .actions .btn-fill { width:100%; max-width:200px; font-size:.95rem; }
+      .border1{display:block;}
+    }
+  </style>
+
+  <!-- 🔹 버블 요소 -->
+  <span aria-hidden="true" class="bg-bubble b1"></span>
+  <span aria-hidden="true" class="bg-bubble b2"></span>
+  <span aria-hidden="true" class="bg-bubble b3"></span>
+
+  <div class="wrap">
+    <!-- (topbar는 별도 #stickyTopbar 섹션으로 분리됨) -->
+    <div class="headline">
+      <div class="tag">실시간 접수 · 지역/사건유형 분류</div>
+      <h2>출처 불분명하고,<br>성과 없는 DB에 지치셨다면?<br><br>
+
+<b>10가지 항목으로 구별된<br>공식 플랫폼의 실시간 DB로</b><br>선임의 가능성을 높여보세요</h2>
+      <p>공식적인 플랫폼과 신뢰를 기반으로<br>실시간 접수한 고객을 선별!<br>지역·채무규모·진행상태로 분류해 제공합니다.</p>
+    </div>
+
+    <div class="content">
+      <div class="left">
+        <div class="dbStack" aria-live="polite">
+          <div class="dbTrack"></div>
+        </div>
+        <!-- <div class="bubble bubble1">실시간 유입</div>
+        <div class="bubble bubble2">중복 제거</div>
+        <div class="bubble bubble3">전환율 상위</div> -->
+      </div>
+
+      <div class="right">
+        <div>
+          <hr class="border1" style="width:100%;border:1px solid #00000012;margin:20px 0;">
+          <h3>이런 DB만 전달합니다</h3>
+          <ul>
+            <li>최근 24시간 이내 접수 · 중복/허수 제거</li>
+            <li>지역 · 채무규모 · 진행상태 정교 분류</li>
+            <li>당사에 대한 신뢰 정보를 기반한 DB</li>
+            <li>당일 5건·10건·50건 단위 원하는 만큼 수급 가능</li>
+          </ul>
+          <small style="color:var(--muted); display:block; margin-top:15px; font-size:.85rem;">* 개인정보보호법 및 광고성 정보 수신 동의 기준을 준수하여 수집·전달합니다.</small>
+        </div>
+        <div class="actions">
+          <a class="btn-fill" href="#form_e12">실시간 DB 신청하기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const root = document.querySelector('#legalDBHero');
+      const track = root.querySelector('.dbTrack');
+      const stack = root.querySelector('.dbStack');
+
+      const VISIBLE = 5, GAP = 10, INTERVAL = 2600;
+
+      const DB_LIST = [
+        { city:'서울', age:34, overdue:'연체 3개월', debt:'채무 7,800만원', memo:'회생 상담 희망', time:'오늘 13:42' },
+        { city:'부산', age:41, overdue:'연체 1개월', debt:'채무 5,200만원', memo:'파산 상담 문의', time:'오늘 13:55' },
+        { city:'대구', age:29, overdue:'연체 없음', debt:'채무 3,900만원', memo:'채무조정 가능 여부', time:'오늘 14:10' },
+        { city:'수원', age:38, overdue:'연체 2개월', debt:'채무 9,100만원', memo:'회생/파산 비교 문의', time:'오늘 14:22' },
+        { city:'인천', age:33, overdue:'연체 4개월', debt:'채무 1억 1,000만원', memo:'급한 상담 요청', time:'오늘 14:35' },
+        { city:'대전', age:36, overdue:'연체 1개월', debt:'채무 6,400만원', memo:'회생 자격 문의', time:'오늘 14:48' },
+        { city:'창원', age:45, overdue:'연체 5개월', debt:'채무 1억 3,000만원', memo:'급히 상담 요청', time:'오늘 15:02' }
+      ];
+
+      function createCard(data){
+        const el = document.createElement('div');
+        el.className = 'db-card enter';
+        el.innerHTML = `
+          <div class="db-avatar"></div>
+          <div class="db-main">
+            <p class="db-title">${data.city} · ${data.age}세 · ${data.overdue}</p>
+            <p class="db-sub">${data.debt} · ${data.memo} <span style="color:var(--muted);font-size:.9em">(${data.time})</span></p>
+          </div>`;
+        requestAnimationFrame(()=> el.classList.add('is-in'));
+        return el;
+      }
+
+      function shiftUp(by){
+        track.classList.add('is-shifting');
+        track.style.transform = `translateY(-${by}px)`;
+        return new Promise(res=>{
+          const onEnd = ()=>{ track.removeEventListener('transitionend', onEnd); res(); };
+          track.addEventListener('transitionend', onEnd, {once:true});
+        }).then(()=>{
+          track.classList.remove('is-shifting');
+          track.style.transform = 'translateY(0)';
+        });
+      }
+
+      let idx = 0, paused = false, timer = null, cardHeight = 78;
+
+      function prime(){
+        const init = Math.min(VISIBLE, DB_LIST.length);
+        for(let i=0;i<init;i++) pushNext();
+        if(track.children.length) cardHeight = track.children[0].getBoundingClientRect().height;
+      }
+
+      function pushNext(){
+        const data = DB_LIST[idx % DB_LIST.length]; idx++;
+        const card = createCard(data);
+        track.appendChild(card);
+
+        const cards = track.children;
+        if(cards.length > VISIBLE){
+          const first = cards[0];
+          shiftUp(cardHeight + GAP).then(()=> first.remove());
+        }
+      }
+
+      function schedule(){
+        clearInterval(timer);
+        timer = setInterval(()=>{ if(!paused) pushNext(); }, INTERVAL);
+      }
+
+      stack.addEventListener('mouseenter',()=> paused = true);
+      stack.addEventListener('mouseleave',()=> paused = false);
+
+      const io = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting) schedule();
+          else clearInterval(timer);
+        });
+      },{threshold:.2});
+      io.observe(stack);
+
+      prime();
+    })();
+
+    /* ▼▼▼ li 하이라이트 (디자인 개선: 체크마크 보존, 부드러운 바 애니메이션, 뷰포트 재진입 재시작) ▼▼▼ */
+  </script>
+
+  <!-- ▼▼▼ 추가 스타일: li 하이라이트 애니메이션 (업그레이드 / 체크 마크 보존) ▼▼▼ -->
+  <style>
+    #legalDBHero .right ul li { position: relative; overflow: hidden; }
+    /* 체크마크 가독성 강화 (원본 규칙 유지 + 레이어만 부여) */
+    #legalDBHero .right ul li::before { position: relative; z-index: 2; display:inline-block; width:1.2em; text-align:center; margin-right:10px; }
+
+    /* 선택된 항목 */
+    #legalDBHero .right ul li.pulse {
+      background: linear-gradient(90deg, rgba(19,181,163,.12) 0%, rgba(19,181,163,.06) 55%, rgba(19,181,163,0) 100%);
+      box-shadow: inset 0 0 0 1px rgba(19,181,163,.22), 0 10px 26px rgba(19,181,163,.14);
+      transform: translateZ(0);
+      border-radius:10px;
+      /* padding:5px; */
+      transition: background .35s ease, box-shadow .35s ease;
+    }
+
+    /* 진행 바: 아래쪽에서 좌->우로 차오르는 얇은 라인 */
+    #legalDBHero .right ul li.pulse::after{
+      content:""; position:absolute; left:0; bottom:0; height:2px; width:100%;
+      background: linear-gradient(90deg, var(--brand), rgba(19,181,163,.0));
+      transform-origin:left center; transform:scaleX(0);
+      animation: legalDBHeroBarGrow 2.4s ease forwards;
+      z-index:1; /* 텍스트/체크(2) 아래, 배경(0) 위 */
+    }
+
+    @keyframes legalDBHeroBarGrow {
+      0%   { transform:scaleX(0); opacity:.7 }
+      85%  { transform:scaleX(1); opacity:.9 }
+      100% { transform:scaleX(1); opacity:.0 }
+    }
+  </style>
+
+  <script>
+    (function(){
+      const root=document.querySelector('#legalDBHero');
+      if(!root)return;
+      const list=root.querySelector('.right ul');
+      if(!list)return;
+      const items=Array.from(list.querySelectorAll('li'));
+      if(!items.length)return;
+
+      let idx=0; let timer=null; let playing=false;
+      const STEP=3000; // 항목당 유지 시간 (ms)
+
+      function tick(){
+        items.forEach(li=>li.classList.remove('pulse'));
+        items[idx].classList.add('pulse');
+        idx=(idx+1)%items.length;
+      }
+      function start(){
+        if(playing) return; playing=true; tick();
+        timer=setInterval(tick, STEP);
+      }
+      function stop(){
+        if(!playing) return; playing=false;
+        clearInterval(timer); timer=null;
+      }
+
+      // 스크롤로 섹션이 화면을 벗어나면 일시정지, 다시 들어오면 재개 (모바일/PC 모두)
+      const io=new IntersectionObserver((ents)=>{
+        ents.forEach(e=>{ if(e.isIntersecting) start(); else stop(); });
+      },{threshold:.15});
+      io.observe(list);
+
+      // 초기 1회 시도 (뷰포트 안에 있을 경우 바로 시작)
+      start();
+    })();
+  </script>
+</section>
+
+
+<section id="late-response" aria-label="지원제도 안내 및 실적">
+  <style>
+    /* ===== Design Tokens ===== */
+    #late-response{
+      /* colors */
+      --mint:#13b5a3;
+      --mint-2:#11a292;
+      --ink:#0b1220;
+      --panel:#0e1625;         /* 다크 패널 */
+      --panel-2:#111c2d;
+      --line:rgba(255,255,255,.18);
+      --white:#fff;
+
+      /* effects */
+      --radius:18px;
+      --shadow:0 20px 50px rgba(0,0,0,.25);
+      --soft:0 1px 2px rgba(0,0,0,.18), 0 6px 18px rgba(19,181,163,.14);
+
+      position:relative;
+      padding:80px 20px;
+      color:var(--white);
+      font-family:Pretendard,"Noto Sans KR",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      overflow:hidden;
+      background:
+        radial-gradient(1200px 600px at 85% -10%, rgba(19,181,163,.10), transparent 60%),
+        radial-gradient(900px 480px at -10% 30%, rgba(19,181,163,.08), transparent 60%),
+        linear-gradient(180deg, #0a0f1a 0%, #0b1220 100%);
+    background:url('./img/second-bg.jpg') center/cover no-repeat;
+      isolation:isolate;
+    }
+
+    /* subtle mint dots */
+    #late-response::before{
+      content:""; position:absolute; inset:0; pointer-events:none; z-index:0;
+      background:
+        radial-gradient(220px 220px at 8% 16%, rgba(19,181,163,.12), rgba(19,181,163,0) 70%),
+        radial-gradient(200px 200px at 92% 70%, rgba(19,181,163,.10), rgba(19,181,163,0) 70%);
+      opacity:.85;
+    }
+
+    /* layout */
+    #late-response .lr-container{
+      position:relative; z-index:1;
+      max-width:1200px; margin:0 auto;
+      display:grid; grid-template-columns:1fr 1.2fr; gap:40px;
+    }
+    @media (max-width:900px){
+      #late-response{ padding:64px 16px; }
+      #late-response .lr-container{ grid-template-columns:1fr; gap:28px; }
+    }
+
+    /* text area */
+    #late-response .lr-card{
+      background:linear-gradient(180deg, #0e1625cf 0%, #111c2dcc 100%);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:32px clamp(18px,3.5vw,28px);
+    }
+
+    #late-response .lr-title{
+      margin:0 0 18px;
+      font-size:clamp(1.6rem,3.2vw,2.3rem);
+      line-height:1.35; font-weight:900; letter-spacing:-.02em;
+    }
+    #late-response .lr-title b{ color:var(--mint); }
+
+    #late-response .lr-desc{ margin-top:8px; }
+    #late-response .lr-desc p{
+      margin:10px 0;
+      font-size:clamp(1rem,1.4vw,1.1rem);
+      line-height:1.75;
+      color:#d7dde8;
+    }
+
+    /* stat strip (PC: row / Mobile: column) */
+    #late-response .lr-stats{
+      display:flex; align-items:stretch; justify-content:space-between; gap:0;
+      background:linear-gradient(180deg, #0e1625cf 0%, #111c2dcc 100%);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--soft);
+      padding:18px;
+    }
+    #late-response .lr-stat{
+      flex:1 1 0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding:16px 12px; text-align:center; position:relative;
+    }
+    /* white separators only on PC */
+    @media (min-width:900px){
+      #late-response .lr-stat + .lr-stat::before{
+        content:""; position:absolute; left:0; top:18px; bottom:18px; width:1px;
+        background:rgba(255,255,255,.28);
+      }
+    }
+
+    #late-response .lr-stat .label{
+      font-size:.98rem; font-weight:800; letter-spacing:.02em; color:#c9d3e6; margin-bottom:6px;
+    }
+    #late-response .lr-stat .num{
+      font-weight:900; letter-spacing:-.02em;
+      font-size:clamp(1.8rem,4vw,2.6rem);
+      color:#11e1c9;
+      text-shadow:0 0 24px rgba(19,181,163,.15);
+      display:flex; align-items:flex-end; gap:6px;
+    }
+    #late-response .lr-stat .unit{
+      font-weight:900; color:#f3f6fb; opacity:.95; font-size:clamp(1rem,2.2vw,1.2rem);
+    }
+    #late-response .lr-stat .hint{
+      margin-top:6px; font-size:.85rem; color:#9fb8b4;
+    }
+
+    /* mobile: stack vertically with gaps, no separators */
+    @media (max-width:900px){
+      #late-response .lr-stats{ flex-direction:column; gap:10px; padding:14px; }
+      #late-response .lr-stat{ border:none; background:rgba(255,255,255,.02); border-radius:12px; }
+    }
+
+    /* entrance motion (reduced-motion aware) */
+    @keyframes fadeUp{ from{ transform:translateY(12px); opacity:0 } to{ transform:none; opacity:1 } }
+    #late-response .lr-card, #late-response .lr-stats{ animation:fadeUp .6s ease-out both; }
+    #late-response .lr-stats{ animation-delay:.08s; }
+    @media (prefers-reduced-motion:reduce){
+      #late-response .lr-card, #late-response .lr-stats{ animation:none; }
+    }
+
+    /* CTA (선택) – 이미지 톤 참고해 라운드 버튼 */
+    #late-response .lr-cta{
+      margin-top:18px; display:inline-flex; align-items:center; gap:10px;
+      padding:12px 18px; border-radius:999px; border:1.5px solid var(--mint);
+      color:#fff; text-decoration:none; font-weight:900; background:var(--mint);
+      box-shadow:0 10px 24px rgba(19,181,163,.28);
+      transition:transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease;
+    }
+    #late-response .lr-cta:hover{
+      background:var(--mint-2); border-color:var(--mint-2); transform:translateY(-1px);
+      box-shadow:0 16px 34px rgba(19,181,163,.36);
+    }
+  </style>
+
+  <div class="lr-container">
+    <!-- Copy Card -->
+    <div class="lr-card">
+      <h2 class="lr-title">
+        <b>10가지 항목</b>을 기준으로<br>
+        놓치고 있으면 손해인<br>정책 자금을 빠르게 찾아드립니다.
+      </h2>
+      <div class="lr-desc">
+        <p>혼자서는 찾기 어렵고 절차가 번거로운 정부·지자체의 다양한 제도들,</p>
+        <p>업종·매출·운영 현황 등 핵심 데이터를 토대로 자동 분류하여 가장 적합한 정책과 자금 확보를 돕습니다.</p>
+      </div>
+      <a href="#form_e12" class="lr-cta">실시간 DB 신청하기</a>
+    </div>
+
+    <!-- Stats (row on PC, column on mobile) -->
+    <div class="lr-stats" role="list" aria-label="누적 실적">
+      <div class="lr-stat" role="listitem">
+        <div class="label">성공 사례</div>
+        <div class="num">
+          <span class="count" data-target="4490">0</span><span class="unit">건+</span>
+        </div>
+        <div class="hint" aria-hidden="true">최근 24h 기준 포함</div>
+      </div>
+      <div class="lr-stat" role="listitem">
+        <div class="label">총 조정 금액</div>
+        <div class="num">
+          <span class="count" data-target="4821">0</span><span class="unit">억+</span>
+        </div>
+        <div class="hint" aria-hidden="true">중복·허수 제거 후</div>
+      </div>
+      <div class="lr-stat" role="listitem">
+        <div class="label">누적 상담 수</div>
+        <div class="num">
+          <span class="count" data-target="12490">0</span><span class="unit">명+</span>
+        </div>
+        <div class="hint" aria-hidden="true">문의 기준</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== Count-up with re-trigger on re-enter =====
+    (function(){
+      const SCOPE = document.querySelector('#late-response');
+      if(!SCOPE) return;
+      const counters = SCOPE.querySelectorAll('.count');
+
+      // helper: animate a single element
+      function animateCount(el){
+        const target   = +el.dataset.target || 0;
+        const duration = +el.dataset.duration || 1800;
+        const start    = performance.now();
+        el.dataset.playing = '1';
+
+        function frame(now){
+          const p = Math.min((now - start) / duration, 1);
+          const eased = p < .5 ? 2*p*p : -1 + (4 - 2*p) * p; // easeInOutQuad
+          const val = Math.round(eased * target);
+          el.textContent = val.toLocaleString();
+          if (p < 1 && el.dataset.playing === '1') requestAnimationFrame(frame);
+          else el.dataset.playing = '0';
+        }
+        requestAnimationFrame(frame);
+      }
+
+      // Reduced motion → set final numbers immediately
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced){
+        counters.forEach(el => el.textContent = (+el.dataset.target || 0).toLocaleString());
+        return;
+      }
+
+      // Intersection Observer to restart when re-entering
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          const el = entry.target;
+          if(entry.isIntersecting){
+            // start/restart
+            el.dataset.playing = '0';
+            el.textContent = '0';
+            animateCount(el);
+          }else{
+            // reset when out
+            el.dataset.playing = '0';
+            el.textContent = '0';
+          }
+        });
+      }, {threshold:.6});
+
+      counters.forEach(el => io.observe(el));
+    })();
+  </script>
+</section>
+
+
+<section id="whoCanPartner">
+  <style>
+    /* ===== Scope: #whoCanPartner only ===== */
+    #whoCanPartner{
+      --ink:#0b1220;
+      --sub:#475569;
+      --brand:#0b4a8b;    /* 기존 블루 유지 */
+      --brand-2:#184a7d;  /* 포인트 바 */
+      --mint:#13b5a3;     /* 민트 포인트 */
+      --accent:#11a292;
+      --hl:#d6f7f1;       /* 하이라이트 밑줄 */
+      --line:#e5e7eb;
+      --card:#ffffff;
+      --thumb-bg:#fff6e8;
+      --tag-shadow:0 6px 16px rgba(19,181,163,.28);
+
+      font-family: Pretendard, "Noto Sans KR", "Noto Sans", system-ui, -apple-system, Segoe UI, Roboto, Apple SD Gothic Neo, sans-serif;
+      color:var(--ink);
+
+      /* ✅ 라이트 고정: 섹션 자체 흰 배경 + 독립 스택 */
+      background:#ffffff;
+      position:relative; isolation:isolate; z-index:0;
+
+      max-width:1080px;
+      margin:0 auto;
+      padding:36px 16px 56px;
+    }
+
+    /* ===== 상단 배너형 헤더 ===== */
+    #whoCanPartner .hero{
+      text-align:center; max-width:820px; margin:0 auto 28px;
+      background:transparent; /* 상위 흰색이 비치도록 */
+    }
+    #whoCanPartner .hero .tag{
+      display:inline-block; background:#f6f8fa; color:#13b5a3;
+      padding:6px 14px; border-radius:999px; font-weight:700; font-size:.86rem;
+    }
+    #whoCanPartner .hero .headline{
+      font-weight:900; font-size:40px; line-height:1.2; letter-spacing:-.4px; color:#0f172a;
+    }
+    #whoCanPartner .hero .headline .hl{
+      display:inline-block; color:var(--mint);
+      background:linear-gradient(transparent 66%, var(--hl) 66% 100%);
+      border-radius:2px; padding:0 .04em;
+    }
+    #whoCanPartner .hero .sub{ margin-top:12px; font-size:22px; font-weight:800; color:#111827; }
+    #whoCanPartner .hero .note{ margin-top:8px; font-size:14px; color:#94a3b8; }
+
+    /* 포인트 3분할 바 */
+    #whoCanPartner .points{
+      margin:26px auto 34px; background:var(--brand-2); color:#fff;
+      border-radius:12px; padding:22px 16px;
+      box-shadow:0 8px 18px rgba(24,74,125,.16);
+      max-width:920px;
+    }
+    #whoCanPartner .points .wrap{ display:grid; grid-template-columns:repeat(3,1fr); align-items:center; text-align:center; }
+    #whoCanPartner .points .col{ padding:6px 10px; }
+    #whoCanPartner .points .label{ font-size:16px; color:#cfe3fb; font-weight:600; }
+    #whoCanPartner .points .value{ font-size:28px; font-weight:900; letter-spacing:-.3px; }
+    #whoCanPartner .points .col:not(:last-child){ position:relative; }
+    /* ✅ 오타 수정: :not(:last-child)::after */
+    #whoCanPartner .points .col:not(:last-child)::after{
+      content:""; position:absolute; right:0; top:50%; transform:translateY(-50%);
+      width:2px; height:44px; border-radius:1px;
+      background:linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,.65), rgba(255,255,255,.25));
+    }
+
+    /* 기존 타이틀/부제는 사용 안 함 */
+    #whoCanPartner .head{ display:none; }
+
+    /* ===== 카드 그리드 ===== */
+    #whoCanPartner .grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    @media (max-width:630px){ #whoCanPartner .grid{ grid-template-columns:1fr; } }
+
+    #whoCanPartner .card{
+      background:var(--card); border:1px solid var(--line); border-radius:18px;
+      box-shadow:0 1px 0 rgba(16,24,40,.04), 0 1px 2px rgba(16,24,40,.06);
+      overflow:hidden; transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      text-decoration:none; color:inherit; display:block;
+    }
+    #whoCanPartner .card:hover{ transform:translateY(-2px); border-color:rgba(19,181,163,.35); box-shadow:0 10px 24px rgba(16,24,40,.12); }
+
+    #whoCanPartner .thumb{ position:relative; background:var(--thumb-bg); aspect-ratio:5/2; overflow:hidden; }
+    #whoCanPartner .thumb img{ width:100%; height:100%; object-fit:cover; display:block; transition: transform .45s ease, filter .35s ease; }
+    #whoCanPartner .card:hover .thumb img{ transform:scale(1.03); filter:saturate(1.02); }
+
+    #whoCanPartner .tag.left{ left:16px; }
+    #whoCanPartner .tag.right{ right:16px; }
+
+    #whoCanPartner .info{ text-align:center; padding:14px 12px 18px; }
+    #whoCanPartner .info .leading{ font-weight:900; font-size:22px; color:var(--mint); margin-bottom:6px; }
+    #whoCanPartner .info .desc{ font-size:17px; color:#1f2937; }
+
+    /* FadeIn */
+    #whoCanPartner .card.reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s cubic-bezier(.2,.65,.25,1); }
+    #whoCanPartner .card.reveal.show{ opacity:1; transform:none; }
+    #whoCanPartner .grid .card.reveal:nth-child(2n){ transition-delay:.06s; }
+    #whoCanPartner .grid .card.reveal:nth-child(3n){ transition-delay:.12s; }
+    @media (prefers-reduced-motion:reduce){ #whoCanPartner .card.reveal{ opacity:1; transform:none; } }
+  </style>
+
+  <!-- 새 상단 헤더 -->
+  <div class="hero" aria-label="만기 후 100% 환급 배너">
+    <div class="tag">FitCase만의 특별한 장점</div>
+    <h2 class="headline">기존의 문제를 없애고<br><span class="hl">신뢰와 브랜딩을 더하다!<br></span></h2>
+    <div class="sub">부재, 허위디비 뿐만 아니라<br>출처와 타겟의 오류를 없애고<br><br>회사의 신뢰를 높이고<br>계약 조건에 맞는 고객을<br>맞춤으로 전달<br></div>
+  </div>
+
+  <!-- 카드 그리드 -->
+  <div class="grid">
+    <a class="card reveal" href="#">
+      <div class="thumb">
+        <img src="./img/check1.jpg" alt="중복·허수 크레딧 보상 정책">
+        <span class="tag left"><i>SAFE</i>보상정책</span>
+      </div>
+      <div class="info">
+        <div class="leading">중복·허수 무료 보상</div>
+        <div class="desc">수집 단계 차단 + 발생 시 보상으로 리스크 최소화</div>
+      </div>
+    </a>
+
+    <a class="card reveal" href="#">
+      <div class="thumb">
+        <img src="./img/check.jpg" alt="10항목 정밀 분류">
+        <span class="tag left"><i>PRO</i>정밀분류</span>
+      </div>
+      <div class="info">
+        <div class="leading">10항목 정밀 분류</div>
+        <div class="desc">지역·채무·진행·의사 등 원하는 사건만 선별</div>
+      </div>
+    </a>
+
+    <a class="card reveal" href="#">
+      <div class="thumb">
+        <img src="./img/check2.jpg" alt="브랜딩 연동 랜딩·광고 공동 제작">
+        <span class="tag right"><i>BRAND</i>공동제작</span>
+      </div>
+      <div class="info">
+        <div class="leading">신뢰 기반 제공</div>
+        <div class="desc">계약의 핵심인 신뢰를 줄 수 있는 요소 제공</div>
+      </div>
+    </a>
+
+    <a class="card reveal" href="#">
+      <div class="thumb">
+        <img src="./img/check3.jpg" alt="브랜딩 연동 랜딩·광고 공동 제작">
+        <span class="tag right"><i>BRAND</i>공동제작</span>
+      </div>
+      <div class="info">
+        <div class="leading">명확한 출처와 효율측정</div>
+        <div class="desc">매체별 계약율을 측정 더 높은 효율로 운영</div>
+      </div>
+    </a>
+
+    <a class="card reveal" href="#">
+      <div class="thumb">
+        <img src="./img/check4.jpg" alt="실시간·24시간 이내 전달">
+        <span class="tag left"><i>FAST</i>실시간</span>
+      </div>
+      <div class="info">
+        <div class="leading">실시간·24h 내 전달</div>
+        <div class="desc">적치 없이 신선한 리드, 시간대 옵션 제공</div>
+      </div>
+    </a>
+
+    <a class="card reveal" href="#">
+      <div class="thumb">
+        <img src="./img/check5.jpg" alt="파일럿 운영과 A/B 테스트">
+        <span class="tag right"><i>PILOT</i>테스트</span>
+      </div>
+      <div class="info">
+        <div class="leading">파일럿 운영·A/B 테스트</div>
+        <div class="desc">문구·타겟·룰을 주간 단위로 개선</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- IntersectionObserver: fadeIn -->
+  <script>
+    (function(){
+      const root = document.getElementById('whoCanPartner');
+      if(!root) return;
+      const targets = root.querySelectorAll('.card.reveal');
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){ entry.target.classList.add('show'); }
+          else{ entry.target.classList.remove('show'); }
+        });
+      }, {threshold:.18, rootMargin:'0px 0px -5% 0px'});
+      targets.forEach(el=> io.observe(el));
+    })();
+  </script>
+</section>
+
+
+
+
+<section id="carLoanPlus" aria-label="상상인플러스 자동차담보대출">
+  <style>
+    /* ================= Scope: #carLoanPlus only ================= */
+    #carLoanPlus{
+      --ink:#0b1220;               /* 본문 텍스트 */
+      --muted:#556070;             /* 보조 텍스트 */
+      --brand:#13b5a3;             /* 포인트(청록) */
+      --bg:#f6f8fa;                /* 연한 배경 */
+      --line:#e8ecef;              /* 구분선 */
+      --radius:18px;
+      --shadow:0 16px 40px rgba(0,0,0,.10);
+      --soft:0 1px 3px rgba(19,181,163,.12), 0 1px 2px rgba(0,0,0,.04);
+      --soft-hover:0 6px 16px rgba(19,181,163,.16), 0 2px 4px rgba(0,0,0,.05);
+      --accent:#11a292;            /* hover 진한 색 */
+      font-family:Pretendard, "Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background:#fff; color:var(--ink);
+      padding:64px 20px;
+    }
+    #carLoanPlus .wrap{max-width:1200px; margin:0 auto; display:flex; flex-direction:column; gap:34px;}
+
+/* 상단 일러스트 (선형 SVG) */
+#carLoanPlus .illu{display:flex; justify-content:center;}
+#carLoanPlus .illu svg{width:min(420px,60vw); height:auto; filter:drop-shadow(0 8px 20px rgba(19,181,163,.12));}
+#carLoanPlus .illu line,
+#carLoanPlus .illu path{stroke:var(--brand)}
+
+/* 헤드라인 – legalDBHero 톤 */
+#carLoanPlus .headline{text-align:center}
+#carLoanPlus .headline .tag{display:inline-block; background:var(--bg); color:var(--brand); padding:6px 14px; border-radius:999px; font-weight:700; font-size:.86rem; margin-bottom:14px}
+#carLoanPlus .headline h2{margin:0 0 10px; font-size:clamp(1.7rem,3.2vw,2.3rem); line-height:1.35; font-weight:800; letter-spacing:-.01em}
+#carLoanPlus .headline h2 b{color:var(--brand)}
+#carLoanPlus .headline p{margin:0; color:var(--muted); font-size:1rem}
+
+/* 옵션 원 카드 4EA */
+#carLoanPlus .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; align-items:stretch}
+#carLoanPlus .step{position:relative; background:var(--bg); border:1px solid #00000010; border-radius:999px; box-shadow:var(--soft); aspect-ratio:4/1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1rem; transition:.28s ease; text-align:center}
+#carLoanPlus .step:hover{transform:translateY(-4px); box-shadow:var(--soft-hover)}
+#carLoanPlus .no{position:absolute; top:10px; left:14px; width:32px; height:32px; border-radius:50%; background:#fff; border:1px solid var(--line); display:grid; place-items:center; font-weight:800; color:var(--brand); box-shadow:0 4px 10px rgba(0,0,0,.05)}
+#carLoanPlus .label{font-size:1.06rem; font-weight:800; letter-spacing:-.01em; margin-bottom:.2rem}
+#carLoanPlus .em{display:block; font-weight:900; color:var(--brand)}
+
+/* 하단 보조 라인 (이미지의 양옆 얇은 라인 느낌) */
+#carLoanPlus .baseline{display:flex; align-items:center; justify-content:center; gap:14px; margin-top:6px}
+#carLoanPlus .baseline .dash{flex:0 1 38px; height:2px; background:linear-gradient(90deg, transparent, var(--line), transparent)}
+
+/* 반응형 */
+@media (max-width:1024px){
+  #carLoanPlus .steps{grid-template-columns:repeat(2,1fr)}
+}
+
+@media (max-width:500px){
+  #carLoanPlus .steps{grid-template-columns:repeat(1,1fr)}
+}
+
+
+@media (max-width:560px){
+  #carLoanPlus{padding:44px 14px}
+  #carLoanPlus .steps{gap:14px}
+  #carLoanPlus .label{font-size:1rem}
+  #carLoanPlus .illu svg{width:min(340px,84vw)}
+}
+
+
+  </style>
+
+  <div class="wrap">
+    <!-- 상단 선형 일러스트 (톤만 맞춘 간결 SVG) -->
+  
+<div class="headline">
+  <div class="tag">실시간 접수 · 맞춤 분류</div>
+  <h2>단순 디비 전달로 끝이 아닌,<br><b>함께 만들어가는 파트너로서!</b></h2>
+  <p>브랜딩 연동 랜딩·광고와 10개 항목 정밀 분류로<br>조건에 맞는 DB를 함께 찾아갑니다.</p>
+</div>
+
+<!-- 4가지 옵션 원 카드 -->
+<div class="steps" role="list">
+  <div class="step" role="listitem" aria-label="랜딩/스크립트 공동 설계">
+    <span class="no">1</span>
+    <div class="label">상황과 조건 확인</div>
+    <span class="em">먼저 테스트 디비 전달</span>
+  </div>
+   <div class="step" role="listitem" aria-label="10개 항목 정밀 분류">
+    <span class="no">2</span>
+    <div class="label">지역·채무·진행</div>
+    <span class="em">정밀 분류(10항목)</span>
+  </div>
+  <div class="step" role="listitem" aria-label="실시간 수집 및 동의 검증">
+    <span class="no">3</span>
+    <div class="label">실시간 수집 ·</div>
+    <span class="em">동의 검증</span>
+  </div>
+ 
+  <div class="step" role="listitem" aria-label="파일럿 운영과 지속 최적화">
+    <span class="no">4</span>
+    <div class="label">파일럿 운영 ·</div>
+    <span class="em">지속 최적화</span>
+  </div>
+</div>
+
+
+
+
+  </div>
+</section>
+
+
+
+<section id="eventList">
+  <style>
+    /* ---------- Scope: #eventList only ---------- */
+    #eventList{
+      /* Light tone tokens */
+      --bg:#f7f8fa;
+      --panel:#ffffff;
+      --line:#e2e6ec;
+      --ink:#111827;
+      --muted:#6b7280;
+      --blue:#13b5a3;     /* 메인 민트 */
+      --blue-2:#11a292;   /* 보조 민트 */
+      --hl:#d6f7f1;       /* 하이라이트 밑줄 (민트톤) */
+      --radius:12px;
+
+      font-family: Pretendard, "Noto Sans KR", sans-serif;
+      background: radial-gradient(80% 130% at 50% 0%, #fff 0%, var(--bg) 80%);
+      padding:40px 20px;
+      color:var(--ink);
+      max-width:960px;
+      margin:0 auto;
+    }
+
+    /* ===== 상단 헤더 (배너 레이아웃) ===== */
+    #eventList .hero{
+      text-align:center;
+      max-width:760px;
+      margin:0 auto 28px;
+    }
+    #eventList .hero .headline{
+      font-size:40px;
+      font-weight:900;
+      letter-spacing:-.4px;
+      line-height:1.2;
+      color:var(--ink);
+    }
+    #eventList .hero .headline .hl{
+      position:relative;
+      display:inline-block;
+      color:var(--blue-2); /* 민트 포인트 컬러 */
+      /* 밑줄 하이라이트 */
+      background: linear-gradient(transparent 65%, var(--hl) 65% 100%);
+      padding:0 .06em;
+      border-radius:2px;
+    }
+    #eventList .hero .sub{
+      margin-top:12px;
+      font-size:17px;
+      font-weight:800;
+      color:var(--ink);
+    }
+    #eventList .hero .note{
+      margin-top:8px;
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    /* 포인트 3개 바 */
+    #eventList .points{
+      margin:26px auto 34px;
+      background:var(--blue);     /* 민트로 변경 */
+      color:#fff;
+      border-radius:10px;
+      padding:22px 16px;
+      box-shadow:0 6px 14px rgba(19,181,163,.15); /* 민트 그림자 */
+    }
+    #eventList .points .wrap{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:0;
+      max-width:860px;
+      margin:0 auto;
+      align-items:center;
+      text-align:center;
+    }
+    #eventList .points .col{
+      padding:8px 10px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    #eventList .points .label{
+      font-size:16px;
+      color:#cdeee9; /* 민트 계열 라벨 색 */
+      font-weight:600;
+    }
+    #eventList .points .value{
+      font-size:26px;
+      font-weight:900;
+      letter-spacing:-.3px;
+    }
+    /* 세로 구분선 */
+    #eventList .points .col:not(:last-child){
+      position:relative;
+    }
+    #eventList .points .col:not(:last-child)::after{
+      content:"";
+      position:absolute; right:0; top:50%; transform:translateY(-50%);
+      width:2px; height:42px;
+      background:linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,.6), rgba(255,255,255,.25));
+      border-radius:1px;
+    }
+
+    /* ===== 기존 카드 리스트 (밝은 톤 유지) ===== */
+    #eventList .item{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:linear-gradient(180deg, var(--panel) 0%, #f5f7fb 100%);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:20px;
+      margin-bottom:14px;
+      transition:background .45s ease, transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+      box-shadow:0 4px 12px rgba(0,0,0,.06);
+    }
+    #eventList .item:last-child{ margin-bottom:0; }
+
+    #eventList .item .txt{
+      font-size:24px;
+      font-weight:700;
+      line-height:1.45;
+      color:var(--ink);
+    }
+    #eventList .item .txt strong{
+      color:var(--blue-2); /* 보조 민트 */
+      font-size:26px;
+      font-weight:900;
+    }
+    #eventList .item img{
+      max-width:90px;
+      height:auto;
+      border-radius:8px;
+      margin-left:16px;
+      transition: transform .35s ease, filter .35s ease;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+
+    /* 자동 강조(액티브) – 민트 포커스 */
+    #eventList .item.active{
+      background:
+        linear-gradient(135deg, #fff 0%, #e9fbf8 50%, #d2f5ef 75%, #b9efe8 100%); /* 민트 톤 그라데이션 */
+      border-color:#9ee5db; /* 민트 테두리 */
+      transform:translateY(-2px);
+      box-shadow:0 10px 22px rgba(19,181,163,.18); /* 민트 그림자 */
+    }
+    #eventList .item.active .txt{ color:#0b3b36; } /* 딥 틸 텍스트 */
+    #eventList .item.active .txt strong{ color:#13b5a3; text-shadow:0 0 8px rgba(19,181,163,.12); }
+    #eventList .item.active img{ transform:scale(1.05); filter:saturate(1.05) brightness(1.05); }
+
+    /* 반응형 */
+    @media (max-width:640px){
+      #eventList .hero .headline{ font-size:34px; }
+      #eventList .points .value{ font-size:24px; }
+    }
+    @media (max-width:520px){
+        #eventList .hero .headline{ font-size:24px; }
+      #eventList .points .wrap{ grid-template-columns:1fr; gap:12px; }
+      #eventList .points .col:not(:last-child)::after{ display:none; }
+      #eventList .item .txt{ font-size:17px; }
+      #eventList .item .txt strong{ font-size:17px; }
+    }
+  </style>
+
+  <!-- 상단 헤더 -->
+  <div class="hero">
+    <h2 class="headline">DB 확보는 너무 어렵고<br>온라인 마케팅 위한<br>기반 갖추기 어렵다면?<br><br>고객에게 신뢰를 전달하고<br>성장의 기회를 함께 할<br><span class="hl blink">파트너로 함께 하세요!</span></h2>
+    <div class="sub">* 최적화 된 DB는<br>단기적인 관점으론 지속할 수 없습니다.<br>그래서 함께 파트너로 성장할 팀을 찾습니다.</div>
+    <!-- <div class="note">*만기 납입 후 1개월 시점 해약시 또는 라이프서비스 사용시</div> -->
+
+    <div class="points" aria-label="핵심 포인트">
+      <div class="wrap">
+        <div class="col">
+          <div class="label">신청 조건</div>
+          <div class="value">좋은 DB가 필요한<br>법무법인 or 법무사</div>
+        </div>
+        <div class="col">
+          <div class="label">우대 사항</div>
+          <div class="value">끈끈한 소통으로<br>함께하는 곳</div>
+        </div>
+        <div class="col">
+          <div class="label">지금 파트너가 되면?</div>
+          <div class="value">4가지 혜택 제공</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 기존 이벤트 항목들 -->
+  <div class="item">
+    <div class="txt">1. <strong>랜딩 및 신뢰 기반</strong> 제공</div>
+    <!-- <img src="https://picsum.photos/seed/set/200" alt="세트이미지"> -->
+  </div>
+
+  <div class="item">
+    <div class="txt">2. 상황과 조건에 맞는 <strong>DB 지원</strong></div>
+    <!-- <img src="https://picsum.photos/seed/mini/200" alt="미니세트"> -->
+  </div>
+
+  <div class="item">
+    <div class="txt">3. <strong>24시간 실시간 디비</strong>만 제공</div>
+    <!-- <img src="https://picsum.photos/seed/tester/200" alt="테스터"> -->
+  </div>
+
+  <div class="item">
+    <div class="txt">4. 허수, 중복 <strong>100% 무료 보상</strong></div>
+    <!-- <img src="https://picsum.photos/seed/tester/200" alt="테스터"> -->
+  </div>
+
+   
+
+   
+  <script>
+    (function(){
+      const items = document.querySelectorAll('#eventList .item');
+      let idx = -1;
+      setInterval(()=>{
+        items.forEach(i=>i.classList.remove('active'));
+        idx = (idx+1) % items.length;
+        items[idx].classList.add('active');
+      }, 2000); // 2초마다 강조 전환
+    })();
+  </script>
+</section>
+
+
+<section id="applyMintForm" aria-label="신청 폼">
+  <style>
+    /* ===== Scope: #applyMintForm only ===== */
+    #applyMintForm{
+      --ink:#0b1220;
+      --muted:#556070;
+      --brand:#13b5a3;   /* 포인트 민트 */
+      --accent:#11a292;  /* 호버/진한 민트 */
+      --bg:#f6f8fa;      /* 연한 배경 */
+      --bubble:#e9f5f3;  /* 라이트 버블 */
+      --line:#e8ecef;
+      --card:#ffffff;
+      --radius:18px;
+      --shadow:0 16px 40px rgba(0,0,0,.10);
+      --soft:0 1px 3px rgba(19,181,163,.12), 0 1px 2px rgba(0,0,0,.04);
+      --soft-hover:0 6px 16px rgba(19,181,163,.16), 0 2px 4px rgba(0,0,0,.05);
+      font-family:Pretendard, "Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color:var(--ink);
+      background:#fff;
+      position:relative; isolation:isolate; overflow:hidden;
+      padding:60px 16px;
+    }
+    #applyMintForm .wrap{max-width:960px; margin:0 auto; display:grid; grid-template-columns:1fr; gap:min(5vw,48px); align-items:stretch;}
+    @media (max-width:940px){ #applyMintForm .wrap{grid-template-columns:1fr; gap:24px;} }
+
+    /* 라이트 버블 배경 */
+    #applyMintForm .bg-bubble{position:absolute; border-radius:50%; background:var(--bubble); filter:blur(.2px); opacity:.75; z-index:0;}
+    #applyMintForm .b1{width:520px; height:520px; left:-160px; top:-160px; z-index:-1;}
+    #applyMintForm .b2{width:420px; height:420px; right:-120px; bottom:-120px; opacity:.55; z-index:-1;}
+    #applyMintForm .b3{width:360px; height:360px; right:40%; top:52%; translate:50% -50%; opacity:.45; z-index:-1;}
+    @media (max-width:940px){ #applyMintForm .b3{display:none;} }
+
+    /* 좌측 카피 + 포인트 */
+    #applyMintForm .copy{align-self:center}
+    #applyMintForm .tag{display:inline-block; background:var(--bg); color:var(--brand); padding:6px 14px; border-radius:999px; font-weight:700; font-size:.88rem; margin-bottom:12px; border:1px solid rgba(19,181,163,.28); box-shadow:0 1px 0 rgba(255,255,255,.6) inset;}
+    #applyMintForm .headline{margin:.2em 0 .45em; line-height:1.25; letter-spacing:-.02em; font-weight:900; font-size:clamp(28px,4.2vw,44px);}
+    #applyMintForm .headline b{color:var(--brand)}
+    #applyMintForm .sub{color:var(--muted); font-weight:600;}
+    #applyMintForm .points{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:18px}
+    @media screen and (max-width:550px){
+      #applyMintForm .points{grid-template-columns:1fr}
+    }
+    #applyMintForm .chip{display:flex; align-items:center; justify-content:center; gap:8px; padding:10px 12px; border-radius:12px; background:#fff; border:1px solid var(--line); font-weight:800; font-size:.95rem; box-shadow:var(--soft)}
+
+    /* 우측 폼 카드 */
+    #applyMintForm .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:26px; position:relative;}
+    #applyMintForm .card h3{margin:0 0 14px; font-size:1.25rem; font-weight:900; letter-spacing:-.01em}
+    #applyMintForm .help{margin:-6px 0 16px; font-size:.92rem; color:var(--muted)}
+
+    #applyMintForm .grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    #applyMintForm .grid .full{grid-column:1/-1}
+    @media (max-width:560px){ #applyMintForm .grid{grid-template-columns:1fr} }
+
+    #applyMintForm .field{display:flex; flex-direction:column; gap:8px}
+    #applyMintForm label{font-size:.95rem; font-weight:800; color:#2c313a}
+    #applyMintForm input[type="text"],
+    #applyMintForm input[type="tel"],
+    #applyMintForm input[type="number"],
+    #applyMintForm select,
+    #applyMintForm textarea{
+      appearance:none; -webkit-appearance:none; -moz-appearance:none;
+      width:100%; padding:12px 14px; border-radius:12px; border:1.5px solid var(--line); background:#fff;
+      font-size:1rem; color:var(--ink); outline:none; transition:border-color .2s ease, box-shadow .2s ease;
+    }
+    #applyMintForm textarea{min-height:92px; resize:vertical}
+    #applyMintForm input:focus, #applyMintForm select:focus, #applyMintForm textarea:focus{border-color:rgba(19,181,163,.55); box-shadow:0 0 0 4px rgba(19,181,163,.15)}
+
+    /* 인라인 어시스트 */
+    #applyMintForm .assist{font-size:.82rem; color:var(--muted)}
+
+    /* 칩 선택 – 유형 빠른 선택 */
+    #applyMintForm .case-chips{display:flex; flex-wrap:wrap; gap:8px}
+    #applyMintForm .case-chips button{border:none; cursor:pointer; padding:8px 12px; border-radius:999px; font-weight:800; font-size:.92rem; background:var(--bg); color:var(--brand); border:1px solid rgba(19,181,163,.3); transition:all .2s}
+    #applyMintForm .case-chips button[aria-pressed="true"]{background:var(--brand); color:#fff; border-color:var(--brand); box-shadow:0 8px 18px rgba(19,181,163,.28)}
+
+    /* 액션 */
+    #applyMintForm .actions{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:4px}
+    #applyMintForm .btn{display:inline-flex; width:100%; margin:20px 0 0; align-items:center; justify-content:center; gap:8px; padding:12px 18px; border-radius:999px; font-weight:900; cursor:pointer; text-decoration:none; border:1.5px solid transparent; transition:all .2s}
+    #applyMintForm .btn-fill{background:var(--brand); color:#fff; box-shadow:0 8px 18px rgba(19,181,163,.35)}
+    #applyMintForm .btn-fill:hover{background:var(--accent)}
+    #applyMintForm .btn-outline{background:#fff; color:var(--brand); border-color:var(--brand)}
+
+    /* 약관 */
+    #applyMintForm .agree{display:flex; gap:10px; align-items:flex-start; font-size:.92rem; color:var(--muted)}
+    #applyMintForm .agree input{margin-top:3px}
+
+    /* 제출 상태 메시지 */
+    #applyMintForm .toast{display:none; margin-top:12px; padding:12px 14px; border-radius:12px; background:#ecfbf7; color:#0f3c36; border:1px solid #b8efe6; font-weight:700}
+    #applyMintForm .toast.show{display:block}
+  </style>
+
+  <!-- 배경 버블 -->
+  <span aria-hidden="true" class="bg-bubble b1"></span>
+  <span aria-hidden="true" class="bg-bubble b2"></span>
+  <span aria-hidden="true" class="bg-bubble b3"></span>
+
+  <div class="wrap">
+    <!-- 좌측 카피 -->
+    <div class="copy">
+      <span class="tag">무료 상담 신청</span>
+      <h2 class="headline">지금 바로 <b>상담 신청</b>하고<br>안내 받으세요!</h2>
+      <p class="sub">어려운 부분을 이해하고 해결할 수 있도록 함께 하겠습니다.</p>
+      <div class="points" aria-hidden="true">
+        <div class="chip">✓ 24시간 상담 가능</div>
+        <div class="chip">✓ 즉시 전화 안내</div>
+        <div class="chip">✓ 카카오 문의 가능</div>
+      </div>
+    </div>
+
+    <!-- 우측 폼 카드 -->
+     <div class="card" id="applyForm">
+  <form action="" id="form_e12" method="POST" target="hidden_iframe12" onsubmit="dll(); submitted=true;">
+    <input type="hidden" name="entry.865661619" value="메타">
+
+      <h3>상담 신청 폼</h3>
+      <p class="help">* 표시는 필수 입력</p>
+
+      <div class="grid">
+        <div class="field">
+          <label for="name">성함 *</label>
+          <input id="name1" name="entry.291909257" type="text" placeholder="홍길동" maxlength="4">
+        </div>
+        <div class="field">
+          <label for="phone">연락처 *</label>
+          <input id="phone1" name="entry.515525599" type="text" placeholder="01012345678" maxlength="11">
+          <small id="phoneHelp" class="assist">숫자만 입력해도 자동으로 하이픈이 들어갑니다.</small>
+        </div>
+
+        <div class="field">
+          <label for="region">지역 *</label>
+          <select id="region" name="entry.272144119">
+            <option value="" selected disabled>지역 선택</option>
+            <option>서울</option>
+            <option>부산</option>
+            <option>대구</option>
+            <option>인천</option>
+            <option>광주</option>
+            <option>대전</option>
+            <option>울산</option>
+            <option>경기</option>
+            <option>강원</option>
+            <option>충북</option>
+            <option>충남</option>
+            <option>전북</option>
+            <option>전남</option>
+            <option>경북</option>
+            <option>경남</option>
+            <option>제주</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="amount">필요 DB 규모</label>
+          <select id="db4" name="entry.2060839557">
+            <option value="" selected disabled>필요 규모 선택</option>
+            <option>하루 1~5개</option>
+            <option>하루 6~10개</option>
+            <option>하루 11~30개</option>
+            <option>하루 31개 ~</option>
+          </select>
+          <small id="amtHelp" class="assist">하루 필요한 디비를 기준으로 선택해주세요.</small>
+        </div>
+
+        <div class="field full">
+          <label for="memo">문의 사항</label>
+          <textarea id="memo" name="entry.454059833" placeholder="상담이 필요한 내용을 간단히 남겨주세요."></textarea>
+        </div>
+
+        <div class="field full">
+          <label class="agree">
+            <input id="agree" type="checkbox" checked>
+            <span>개인정보 수집·이용 및 광고성 정보 수신에 동의합니다. (필수)</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="actions">
+        <input class="btn btn-fill" id="send_message1" type="submit" value="지금 신청하기" disabled>
+      </div>
+
+    
+    </form>
+    </div>
+  </div>
+
+
+    <script type="text/javascript">var submitted = false;</script>
+
+                                <iframe name="hidden_iframe11" id="hidden_iframe11" style="display:none;" onload=""></iframe>
+                                <iframe name="hidden_iframe12" id="hidden_iframe12" style="display:none;" onload=""></iframe>
+                        
+
+
+ 
+
+  <!-- ▼▼▼ '개인정보 동의 약관 보기' 기능 (모바일 370px 최적화 포함) ▼▼▼ -->
+  <style>
+    #applyMintForm[data-modal-open="true"]{ overflow:hidden; }
+    #applyMintForm .terms-overlay{ position:fixed; inset:0; display:grid; place-items:center; background:rgba(17,24,39,.55); padding:24px; z-index:9999; overscroll-behavior:contain; touch-action:none; min-height:100vh; min-height:100svh; min-height:100dvh; }
+    #applyMintForm .terms-overlay[hidden]{ display:none; }
+    #applyMintForm .terms-sheet{ width:min(820px,90vw); max-height:min(82vh,840px); max-height:min(82dvh,840px); background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); display:grid; grid-template-rows:auto 1fr auto; overflow:hidden; animation:termsPop .24s ease-out; }
+    #applyMintForm .terms-header{ display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid var(--line); }
+    #applyMintForm .terms-title{ margin:0; font-size:1.1rem; font-weight:900; color:var(--ink); }
+    #applyMintForm .terms-close-x{ border:none; background:transparent; font-size:20px; cursor:pointer; line-height:1; padding:6px; border-radius:8px; }
+    #applyMintForm .terms-close-x:hover{ background:var(--bg); }
+    #applyMintForm .terms-body{ padding:16px 18px; overflow:auto; -webkit-overflow-scrolling:touch; line-height:1.65; color:var(--muted); }
+    #applyMintForm .terms-body h4{ margin:14px 0 8px; font-size:1rem; font-weight:800; color:var(--ink); }
+    #applyMintForm .terms-body ul{ padding-left:18px; margin:6px 0 12px; }
+    #applyMintForm .terms-footer{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; padding:14px 18px; border-top:1px solid var(--line); background:#fff; }
+    #applyMintForm .terms-link{ margin-left:8px; border:none; background:transparent; color:var(--brand); font-weight:800; cursor:pointer; text-decoration:underline; text-underline-offset:2px; }
+    #applyMintForm .terms-link:focus{ outline:none; box-shadow:0 0 0 3px rgba(19,181,163,.3); border-radius:6px; }
+    #applyMintForm .agree-mini{ display:flex; align-items:flex-start; gap:8px; font-size:.92rem; color:var(--muted); }
+
+    @keyframes termsPop{ from{ transform:scale(.98); opacity:.0 } to{ transform:scale(1); opacity:1 } }
+
+    @media (max-width:420px){
+      #applyMintForm .terms-overlay{ padding:max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left)); align-items:flex-end; }
+      #applyMintForm .terms-sheet{ width:100%; border-radius:16px 16px 0 0; max-height:calc(100dvh - max(10px, env(safe-area-inset-bottom)) - 10px); animation:sheetSlideUp .28s cubic-bezier(.2,.7,.2,1); }
+      #applyMintForm .terms-header{ padding:12px 14px; position:relative; }
+      #applyMintForm .terms-header::before{ content:""; position:absolute; top:6px; left:50%; transform:translateX(-50%); width:44px; height:4px; border-radius:999px; background:#e5e7eb; }
+      #applyMintForm .terms-title{ font-size:1rem; }
+      #applyMintForm .terms-body{ padding:12px 14px; font-size:.95rem; }
+      #applyMintForm .terms-footer{ padding:12px 14px; gap:10px; }
+      #applyMintForm .terms-footer .btn{ min-height:44px; }
+    }
+    @keyframes sheetSlideUp{ from{ transform:translateY(12px); opacity:.0 } to{ transform:translateY(0); opacity:1 } }
+
+    @media (max-width:370px){
+      #applyMintForm .terms-title{ font-size:.98rem; }
+      #applyMintForm .terms-body{ padding:10px 12px; font-size:.94rem; }
+      #applyMintForm .terms-footer{ flex-direction:column; align-items:stretch; gap:8px; }
+      #applyMintForm .terms-footer .btn{ width:100%; }
+      #applyMintForm .agree-mini{ font-size:.9rem; }
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      #applyMintForm .terms-sheet{ animation:none; }
+    }
+  </style>
+
+  <script>
+    (function(){
+      const root = document.querySelector('#applyMintForm');
+      const form = root.querySelector('#applyForm');
+      const agreeBox = form.querySelector('#agree');
+      const submitBtn = form.querySelector('#submitBtn');
+      const agreeTextSpan = form.querySelector('.agree span');
+
+      /* '자세히 보기' 버튼 삽입 */
+      const termsBtn = document.createElement('button');
+      termsBtn.type = 'button';
+      termsBtn.className = 'terms-link';
+      termsBtn.textContent = '자세히 보기';
+      termsBtn.setAttribute('aria-haspopup','dialog');
+      if(agreeTextSpan){
+        agreeTextSpan.appendChild(document.createTextNode(' '));
+        agreeTextSpan.appendChild(termsBtn);
+      }
+
+      /* 모달 DOM */
+      const overlay = document.createElement('div');
+      overlay.className = 'terms-overlay';
+      overlay.setAttribute('hidden','');
+      overlay.innerHTML = `
+        <div class="terms-sheet" role="dialog" aria-modal="true" aria-labelledby="termsTitle" tabindex="-1">
+          <div class="terms-header">
+            <h3 id="termsTitle" class="terms-title">개인정보 처리방침</h3>
+            <button type="button" class="terms-close-x" aria-label="닫기">✕</button>
+          </div>
+          <div class="terms-body" id="termsBody">
+            <p>회사명(이하 ‘회사’라 한다)는 개인정보 보호법 제30조에 따라 정보 주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리지침을 수립, 공개합니다.</p>
+
+            <h4>제1조 (개인정보의 처리목적)</h4>
+            <p>회사는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.</p>
+            <ul>
+              <li><b>홈페이지 회원 가입 및 관리</b>: 회원 가입 의사 확인, 회원제 서비스 제공에 따른 본인 식별․인증, 회원자격 유지․관리, 제한적 본인확인제 시행에 따른 본인확인, 서비스 부정 이용 방지, 만 14세 미만 아동의 개인정보처리 시 법정대리인의 동의 여부 확인, 각종 고지․통지, 고충 처리 등을 목적으로 개인정보를 처리합니다.</li>
+              <li><b>재화 또는 서비스 제공</b>: 물품 배송, 서비스 제공, 계약서 및 청구서 발송, 콘텐츠 제공, 맞춤서비스 제공, 본인인증, 연령인증, 요금 결제 및 정산, 채권추심 등을 목적으로 개인정보를 처리합니다.</li>
+              <li><b>고충 처리</b>: 민원인의 신원 확인, 민원사항 확인, 사실조사를 위한 연락․통지, 처리 결과 통보 등의 목적으로 개인정보를 처리합니다.</li>
+            </ul>
+
+            <h4>제2조 (개인정보의 처리 및 보유기간)</h4>
+            <p>① 회사는 법령에 따른 개인정보 보유, 이용 기간 또는 정보주체로부터 개인정보를 수집 시에 동의 받은 개인정보 보유, 이용 기간 내에서 개인정보를 처리, 보유합니다.</p>
+            <p>② 각각의 개인정보 처리 및 보유 기간은 다음과 같습니다.</p>
+            <ul>
+              <li><b>1. 홈페이지 회원 가입 및 관리</b>: 사업자/단체 홈페이지 탈퇴 시까지<br>
+              다만, 다음의 사유에 해당하는 경우에는 해당 사유 종료 시까지
+                <ul>
+                  <li>1) 관계 법령 위반에 따른 수사, 조사 등이 진행 중인 경우에는 해당 수사, 조사 종료 시까지</li>
+                  <li>2) 홈페이지 이용에 따른 채권 및 채무관계 잔존 시에는 해당 채권, 채무 관계 정산 시까지</li>
+                </ul>
+              </li>
+              <li><b>2. 재화 또는 서비스 제공</b>: 재화․서비스 공급완료 및 요금결제․정산 완료 시까지<br>
+              다만, 다음의 사유에 해당하는 경우에는 해당 기간 종료 시까지
+                <ul>
+                  <li>1) 「전자상거래 등에서의 소비자 보호에 관한 법률」에 따른 표시․광고, 계약내용 및 이행 등 거래에 관한 기록
+                    <ul>
+                      <li>- 표시․광고에 관한 기록 : 6월</li>
+                      <li>- 계약 또는 청약 철회, 대금결제, 재화 등의 공급기록 : 5년</li>
+                      <li>- 소비자 불만 또는 분쟁 처리에 관한 기록 : 3년</li>
+                    </ul>
+                  </li>
+                  <li>2) 「통신비밀보호법」 제41조에 따른 통신사실확인자료 보관
+                    <ul>
+                      <li>- 가입자 전기통신일시, 개시․종료 시간, 상대방 가입자 번호, 사용도수, 발신기지국 위치추적자료 : 1년</li>
+                      <li>- 컴퓨터 통신, 인터넷 로그 기록자료, 접속지 추적자료 : 3개월</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+
+            <h4>제3조 (개인정보의 제3자 제공)</h4>
+            <p>① 회사는 정보주체의 개인정보를 제1조(개인정보의 처리목적)에서 명시한 범위 내에서만 처리하며, 정보주체의 동의, 법률의 특별한 규정 등 개인정보 보호법 제17조 및 제18조에 해당하는 경우에만 개인정보를 제3자에게 제공하고 그 외에는 정보주체의 개인정보를 제3자에게 제공하지 않습니다.</p>
+            <p>② 회사는 원활한 서비스 제공을 위해 다음의 경우 개인정보보호법 제17조 제1항 제1호에 따라 정보주체의 동의를 얻어 필요 최소한의 범위로만 개인정보를 제3자에게 제공할 수 있습니다.</p>
+            <ul>
+              <li>- 개인정보를 제공받는 자 : &lt;예) (주) OOO 카드&gt;</li>
+              <li>- 제공받는 자의 개인정보 이용목적 : &lt;예) 이벤트 공동개최 등 업무제휴 및 제휴 신용카드 발급&gt;</li>
+              <li>- 제공하는 개인정보 항목 : &lt;예) 성명, 주소, 전화번호, 이메일주소, 카드결제계좌정보&gt;</li>
+              <li>- 제공받는 자의 보유, 이용기간 : &lt;예) 신용카드 발급계약에 따른 거래기간동안&gt;</li>
+            </ul>
+
+            <h4>제4조 (개인정보처리의 위탁)</h4>
+            <p>① 회사는 원활한 개인정보 업무처리를 위하여 다음과 같이 개인정보 처리업무를 위탁하고 있습니다.</p>
+            <ul>
+              <li>- 위탁업무 내용</li>
+              <li>- 위탁받는 자 (수탁자) : (주)아임웹 – 위탁하는 업무의 내용 : 쇼핑몰 호스팅 서비스의 시스템 제공, 모바일 앱 서비스, 마케팅 서비스 및 부가, 제휴서비스 제공 및 알림톡, 친구톡, 문자메시지 발송대행 서비스 등</li>
+              <li>- 위탁받는 자 (수탁자) : OOO PG – 위탁하는 업무의 내용 : 결제 및 에스크로 업무</li>
+              <li>- 위탁받는 자 (수탁자) : OOO 택배 – 위탁하는 업무의 내용 : 상품 배송 업무</li>
+              <li>- 위탁받는 자 (수탁자) : OOO 고객센터 – 위탁하는 업무의 내용 : 고객상담 업무</li>
+              <li>- 위탁받는 자 (수탁자) : OOO – 위탁하는 업무의 내용 : 본인확인 업무</li>
+              <li><b>재위탁사</b></li>
+              <li><b>- 재위탁받는 자(수탁자) : (주)아임웹 → 인포빕(유)</b> – <b>업무</b> : 문자메시지 발송, 카카오톡 알림톡(정보성 메시지) 발송 업무</li>
+              <li><b>- 재위탁받는 자(수탁자) : (주)아임웹 → (주)루나소프트</b> – <b>업무</b> : 문자메시지 발송, 카카오톡 알림톡(정보성 메시지) 및 친구톡 발송 업무</li>
+            </ul>
+            <p>② 회사는 위탁계약 체결 시 개인정보 보호법 제25조에 따라 위탁업무 수행목적 외 개인정보 처리금지, 기술적․관리적 보호조치, 재위탁 제한, 수탁자에 대한 관리․감독, 손해배상 등 책임에 관한 사항을 계약서 등 문서에 명시하고, 수탁자가 개인정보를 안전하게 처리하는지를 감독하고 있습니다.</p>
+            <p>③ 위탁업무의 내용이나 수탁자가 변경될 경우에는 지체없이 본 개인정보 처리방침을 통하여 공개하도록 하겠습니다.</p>
+
+            <h4>제5조 (정보주체 및 법정대리인의 권리와 그 행사 방법)</h4>
+            <p>① 정보주체는 회사에 대해 언제든지 다음 각 호의 개인정보 보호 관련 권리를 행사할 수 있습니다.</p>
+            <ul>
+              <li>1. 개인정보 열람 요구</li>
+              <li>2. 오류 등이 있을 경우 정정 요구</li>
+              <li>3. 삭제요구</li>
+              <li>4. 처리정지 요구</li>
+            </ul>
+            <p>② 제1항에 따른 권리 행사는 회사에 대해 서면, 전화, 전자우편, 모사전송(FAX) 등을 통하여 하실 수 있으며 회사는 이에 대해 지체없이 조치하겠습니다.</p>
+            <p>③ 정보주체가 개인정보의 오류 등에 대한 정정 또는 삭제를 요구한 경우에는 회사는 정정 또는 삭제를 완료할 때까지 당해 개인정보를 이용하거나 제공하지 않습니다.</p>
+            <p>④ 제1항에 따른 권리 행사는 정보주체의 법정대리인이나 위임을 받은 자 등 대리인을 통하여 하실 수 있습니다. 이 경우 개인정보 보호법 시행규칙 별지 제11호 서식에 따른 위임장을 제출하셔야 합니다.</p>
+            <p>⑤ 정보주체는 개인정보 보호법 등 관계 법령을 위반하여 회사가 처리하고 있는 정보주체 본인이나 타인의 개인정보 및 사생활을 침해하여서는 아니 됩니다.</p>
+
+            <h4>제6조 (처리하는 개인정보 항목)</h4>
+            <p>회사는 다음의 개인정보 항목을 처리하고 있습니다.</p>
+            <ul>
+              <li><b>1. 홈페이지 회원 가입 및 관리</b><br>
+                필수항목 : &lt;예) 성명, 생년월일, 아이디, 비밀번호, 주소, 전화번호, 성별, 이메일주소, 아이핀번호&gt;<br>
+                선택항목 : &lt;예) 결혼 여부, 관심 분야&gt;
+              </li>
+              <li><b>2. 재화 또는 서비스 제공</b><br>
+                필수항목 : &lt;예) 성명, 생년월일, 아이디, 비밀번호, 주소, 전화번호, 이메일주소, 아이핀번호, 신용카드번호, 은행계좌정보 등 결제정보&gt;<br>
+                선택항목 : &lt;관심분야, 과거 구매내역&gt;
+              </li>
+            </ul>
+
+            <h4>제7조 (개인정보의 파기)</h4>
+            <p>① 회사는 개인정보 보유 기간의 경과, 처리목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체없이 해당 개인정보를 파기합니다.</p>
+            <p>② 정보주체로부터 동의받은 개인정보 보유 기간이 경과하거나 처리목적이 달성되었음에도 불구하고 다른 법령에 따라 개인정보를 계속 보존하여야 하는 경우에는, 해당 개인정보를 별도의 데이터베이스(DB)로 옮기거나 보관장소를 달리하여 보존합니다.</p>
+            <p>③ 개인정보 파기의 절차 및 방법은 다음과 같습니다.</p>
+            <ul>
+              <li>1. 파기 절차: 회사는 파기 사유가 발생한 개인정보를 선정하고, 회사의 개인정보 보호책임자의 승인을 받아 개인정보를 파기합니다.</li>
+              <li>2. 파기 방법: 전자적 파일은 복구 불가능한 방법으로, 종이 문서는 분쇄 또는 소각으로 파기합니다.</li>
+            </ul>
+
+            <h4>제8조 (개인정보의 안전성 확보조치)</h4>
+            <p>회사는 개인정보의 안전성 확보를 위해 다음과 같은 조치를 하고 있습니다.</p>
+            <ul>
+              <li>1. 관리적 조치 : 내부관리계획 수립 및 시행, 정기적 직원 교육 등</li>
+              <li>2. 기술적 조치 : 개인정보처리시스템 등의 접근 권한 관리, 접근통제시스템 설치, 고유 식별정보 등의 암호화, 보안프로그램 설치</li>
+              <li>3. 물리적 조치 : 전산실, 자료보관실 등의 접근통제</li>
+            </ul>
+
+            <h4>제9조 (개인정보 자동 수집 장치의 설치∙운영 및 거부에 관한 사항)</h4>
+            <p>① 회사는 이용자에게 개별적인 맞춤 서비스를 제공하기 위해 이용정보를 저장하고 수시로 불러오는 ‘쿠키(cookie)’를 사용합니다.</p>
+            <p>② 쿠키는 웹사이트를 운영하는데 이용되는 서버(http)가 이용자의 컴퓨터 브라우저에 보내는 소량의 정보이며 이용자들의 PC 또는 모바일에 저장됩니다.</p>
+            <p>③ 정보주체는 웹 브라우저 옵션 설정을 통해 쿠키 허용, 차단 등의 설정을 할 수 있습니다. 다만, 쿠키 저장을 거부할 경우 맞춤형 서비스 이용에 어려움이 발생할 수 있습니다.</p>
+            <p><b>▶ 웹 브라우저에서 쿠키 허용/차단</b><br>
+              - 크롬(Chrome) : 웹 브라우저 설정 &gt; 개인정보 보호 및 보안 &gt; 인터넷 사용기록 삭제<br>
+              - 엣지(Edge) : 웹 브라우저 설정 &gt; 쿠키 및 사이트 권한 &gt; 쿠키 및 사이트 데이터 관리 및 삭제
+            </p>
+            <p><b>▶ 모바일 브라우저에서 쿠키 허용/차단</b><br>
+              - 크롬(Chrome) : 모바일 브라우저 설정 &gt; 개인정보 보호 및 보안 &gt; 인터넷 사용기록 삭제<br>
+              - 사파리(Safari) : 모바일 기기 설정 &gt; 사파리(Safari) &gt; 고급 &gt; 모든 쿠키 차단<br>
+              - 삼성 인터넷 : 모바일 브라우저 설정 &gt; 인터넷 사용 기록 &gt; 인터넷 사용 기록 삭제
+            </p>
+            <p>④ 회사는 서비스 이용과정에서 사용자가 방문한 각 서비스와 웹 사이트들에 대한 방문 및 이용형태, 인기 검색어, 보안접속 여부 등을 파악하여 이용자에게 최적화된 정보 제공을 위해 수집・이용하고 있습니다.</p>
+
+            <h4>제10조 (개인정보 보호책임자)</h4>
+            <p>① 회사는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 정보주체의 불만 처리 및 피해구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.</p>
+            <p><b>▶ 개인정보 보호책임자</b><br>
+              성명 : OOO<br>
+              직책 : OOO<br>
+              연락처 : &lt;전화번호&gt;, &lt;이메일&gt;, &lt;팩스번호&gt;<br>
+              ※ 개인정보 보호 담당부서로 연결됩니다.
+            </p>
+            <p><b>▶ 개인정보 보호 담당부서</b><br>
+              부서명 : OOO 팀<br>
+              연락처 : &lt;전화번호&gt;, &lt;이메일&gt;, &lt;팩스번호&gt;
+            </p>
+            <p>② 정보주체께서는 회사의 서비스(또는 사업)을 이용하시면서 발생한 모든 개인정보 보호 관련 문의, 불만 처리, 피해구제 등에 관한 사항을 개인정보 보호책임자 및 담당부서로 문의하실 수 있습니다. 회사는 정보주체의 문의에 대해 지체없이 답변 및 처리해드릴 것입니다.</p>
+
+            <h4>제11조 (개인정보 열람청구)</h4>
+            <p>정보주체는 개인정보 보호법 제35조에 따른 개인정보의 열람 청구를 아래의 부서에 할 수 있습니다. 회사는 정보주체의 개인정보 열람 청구가 신속하게 처리되도록 노력하겠습니다.</p>
+            <p><b>▶ 개인정보 열람청구 접수․처리 부서</b><br>
+              부서명 : OOO<br>
+              연락처 : &lt;전화번호&gt;, &lt;이메일&gt;, &lt;팩스번호&gt;
+            </p>
+
+            <h4>제12조 (권익침해 구제 방법)</h4>
+            <p>정보주체는 아래의 기관에 대해 개인정보 침해에 대한 피해구제, 상담 등을 문의하실 수 있습니다.</p>
+            <ul>
+              <li>1. 개인정보 분쟁조정위원회 : (국번없이) 1833-6972 (www.kopico.go.kr)</li>
+              <li>2. 개인정보침해신고센터 : (국번없이) 118 (privacy.kisa.or.kr)</li>
+              <li>3. 대검찰청 : (국번없이) 1301 (www.spo.go.kr)</li>
+              <li>4. 경찰청 : (국번없이) 182 (ecrm.police.go.kr/minwon/main)</li>
+            </ul>
+
+            <h4>제13조 (개인정보 처리방침 시행 및 변경)</h4>
+            <p>이 개인정보 처리방침은 20XX. X. X. 부터 적용됩니다.</p>
+          </div>
+          <div class="terms-footer">
+            <label class="agree-mini">
+              <input type="checkbox" id="termsInlineAgree">
+              <span>상기 개인정보 처리 안내를 확인했습니다.</span>
+            </label>
+            <div style="display:flex; gap:8px; margin-left:auto; width:auto;">
+              <button type="button" class="btn btn-outline terms-cancel">닫기</button>
+              <button type="button" class="btn btn-fill terms-accept">동의하고 계속</button>
+            </div>
+          </div>
+        </div>
+      `;
+      root.appendChild(overlay);
+
+      const sheet = overlay.querySelector('.terms-sheet');
+      const closeX = overlay.querySelector('.terms-close-x');
+      const cancelBtn = overlay.querySelector('.terms-cancel');
+      const acceptBtn = overlay.querySelector('.terms-accept');
+      const inlineAgree = overlay.querySelector('#termsInlineAgree');
+
+      let prevFocus = null;
+
+      function openTerms(){
+        prevFocus = document.activeElement;
+        root.setAttribute('data-modal-open','true');
+        overlay.hidden = false;
+        sheet.focus();
+        document.addEventListener('keydown', onKeydown, true);
+        overlay.addEventListener('click', onBackdrop);
+      }
+      function closeTerms(){
+        overlay.hidden = true;
+        root.removeAttribute('data-modal-open');
+        document.removeEventListener('keydown', onKeydown, true);
+        overlay.removeEventListener('click', onBackdrop);
+        if(prevFocus && typeof prevFocus.focus === 'function') prevFocus.focus();
+      }
+      function onBackdrop(e){
+        if(e.target === overlay) closeTerms();
+      }
+      function onKeydown(e){
+        if(e.key === 'Escape'){ e.preventDefault(); closeTerms(); }
+        if(e.key === 'Tab'){
+          const f = sheet.querySelectorAll('a,button,input,select,textarea,[tabindex]:not([tabindex="-1"])');
+          const focusables = Array.prototype.slice.call(f);
+          if(!focusables.length) return;
+          const first = focusables[0];
+          const last = focusables[focusables.length-1];
+          if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+          else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+        }
+      }
+
+      /* 이벤트 바인딩 */
+      termsBtn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); openTerms(); });
+      closeX.addEventListener('click', (e)=>{ e.preventDefault(); closeTerms(); });
+      cancelBtn.addEventListener('click', (e)=>{ e.preventDefault(); closeTerms(); });
+
+      /* 동의하고 계속: 자동 동의 + 제출버튼 즉시 활성화 */
+      acceptBtn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        e.stopPropagation();
+        inlineAgree.checked = true;            // 모달 내 확인 체크
+        const agreeBox = form.querySelector('#agree');
+        agreeBox.checked = true;               // 본문 필수 동의 체크
+        agreeBox.dispatchEvent(new Event('change', {bubbles:true}));
+        acceptBtn.blur();
+        closeTerms();
+      });
+
+      /* 미동 안내 애니메이션 정의 */
+      const css = document.createElement('style');
+      css.textContent = `
+        #applyMintForm .terms-sheet.shake{ animation: applyShake .3s; }
+        @keyframes applyShake{
+          10%{ transform:translateY(0) translateX(-2px) }
+          20%{ transform:translateY(0) translateX(2px) }
+          30%{ transform:translateY(0) translateX(-2px) }
+          40%{ transform:translateY(0) translateX(2px) }
+          50%{ transform:translateY(0) translateX(-1px) }
+          60%{ transform:translateY(0) translateX(1px) }
+          100%{ transform:translateY(0) translateX(0) }
+        }
+      `;
+      root.appendChild(css);
+    })();
+  </script>
+
+  <!-- ▼▼▼ Select 오른쪽 화살표(모든 OS 지원) – 기존 코드 보존 + 기능만 추가 ▼▼▼ -->
+  <style>
+    /* 화살표 이미지를 CSS 변수로 (Base64, 안전/안정) */
+    #applyMintForm{
+      --arr:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTU2MDcwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlsaW5lIHBvaW50cz0iNiA5IDEyIDE1IDE4IDkiLz48L3N2Zz4=');
+      --arr-open:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTNiNWEzIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlsaW5lIHBvaW50cz0iNiA5IDEyIDE1IDE4IDkiLz48L3N2Zz4=');
+    }
+    /* 래퍼가 화살표를 그린다 (의사 요소라 OS/브라우저 일관) */
+    #applyMintForm .select-wrap{ position:relative; }
+    #applyMintForm .select-wrap select{ padding-right:42px !important; }
+    #applyMintForm .select-wrap::after{
+      content:""; position:absolute; right:12px; top:50%; transform:translateY(-50%);
+      width:18px; height:18px; pointer-events:none;
+      background-image:var(--arr); background-repeat:no-repeat; background-size:18px 18px;
+      opacity:.9; transition:transform .18s ease, background-image .18s ease, opacity .18s ease;
+    }
+    #applyMintForm .select-wrap.open::after{
+      transform:translateY(-50%) rotate(180deg) scale(1.05);
+      background-image:var(--arr-open);
+      opacity:1;
+    }
+    /* 고대/강제색 대비 환경 접근성 폴백 */
+    @media (forced-colors:active){
+      #applyMintForm .select-wrap::after{
+        background:none; width:8px; height:8px;
+        border:2px solid CanvasText; border-width:0 2px 2px 0;
+        transform:translateY(-50%) rotate(45deg);
+      }
+      #applyMintForm .select-wrap.open::after{
+        transform:translateY(-50%) rotate(-135deg);
+      }
+    }
+  </style>
+  <script>
+    (function(){
+      const root = document.querySelector('#applyMintForm');
+      const selects = root.querySelectorAll('select');
+
+      /* 각 select를 래핑해서 화살표 의사요소 부착 */
+      selects.forEach(sel=>{
+        if (sel.closest('.select-wrap')) return; // 이미 래핑된 경우 방지
+        const wrap = document.createElement('div');
+        wrap.className = 'select-wrap';
+        sel.parentNode.insertBefore(wrap, sel);
+        wrap.appendChild(sel);
+
+        const open = ()=> wrap.classList.add('open');
+        const close = ()=> wrap.classList.remove('open');
+
+        // 모바일(iOS/Android) & 데스크톱 호환 이벤트
+        sel.addEventListener('focus', open);
+        sel.addEventListener('click', open);
+        sel.addEventListener('mousedown', open);
+        sel.addEventListener('touchstart', open, {passive:true});
+        sel.addEventListener('blur', close);
+        sel.addEventListener('change', close);
+        sel.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') close(); });
+      });
+    })();
+  </script>
+  <!-- ▲▲▲ Select 화살표 보완 끝 ▲▲▲ -->
+</section>
+
+
+
+<section id="kakaoFloating" aria-label="카카오톡 바로 상담 버튼">
+  <style>
+    /* ===== Scope: #kakaoFloating only ===== */
+    #kakaoFloating{
+      --kakao:#ffeb3a;           /* 카카오 옐로우 */
+      --bubble:#3B1E1E;          /* 카카오 브라운 (SVG 사용 시 아이콘 색) */
+      --shadow:0 10px 22px rgba(0,0,0,.22), 0 2px 6px rgba(0,0,0,.12);
+      --ring:rgba(254,229,0,.45);
+      position:fixed; inset:auto;
+      right:clamp(12px,2vw,20px);
+      bottom:calc(clamp(12px,2.5vw,20px) + env(safe-area-inset-bottom, 0px));
+      z-index:9999;
+      -webkit-tap-highlight-color:transparent;
+      isolation:isolate;
+      font-family:Pretendard, "Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+
+    /* 버튼 */
+    #kakaoFloating .fab{
+      width:60px; height:60px; border-radius:50%;
+      background:var(--kakao);
+      box-shadow:var(--shadow);
+      display:grid; place-items:center;
+      text-decoration:none;
+      position:relative;
+      overflow:visible;
+      outline:none;
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    #kakaoFloating .fab:hover{ transform:translateY(-2px); }
+    #kakaoFloating .fab:active{ transform:translateY(0); }
+    #kakaoFloating .fab:focus-visible{
+      box-shadow:0 0 0 4px rgba(17,24,39,.3), var(--shadow);
+    }
+
+    /* 접근성용 숨김 텍스트 */
+    #kakaoFloating .sr-only{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    }
+
+    /* 아이콘 공통 (SVG/IMG 모두 적용) */
+    #kakaoFloating .ico{
+      width:34px; height:34px; display:block;
+      object-fit:contain;
+    }
+    /* SVG를 사용할 때는 currentColor로 제어 */
+    #kakaoFloating svg.ico{ color:var(--bubble); }
+    /* IMG를 사용할 때는 원본 색을 유지 (필요하면 filter로 조정 가능) */
+    #kakaoFloating img.ico{ image-rendering:auto; }
+
+    /* 라벨 (호버 시) */
+    #kakaoFloating .label{
+      position:absolute; right:72px; bottom:50%;
+      transform:translateY(50%);
+      background:#111827; color:#fff; font-size:13px; font-weight:800;
+      padding:8px 10px; border-radius:10px; white-space:nowrap;
+      box-shadow:0 8px 18px rgba(0,0,0,.25);
+      opacity:0; pointer-events:none; transition:opacity .18s ease, transform .18s ease;
+    }
+    #kakaoFloating .label::after{
+      content:""; position:absolute; right:-6px; top:50%; transform:translateY(-50%) rotate(45deg);
+      width:12px; height:12px; background:#111827; border-radius:2px;
+    }
+    #kakaoFloating .fab:hover + .label,
+    #kakaoFloating .fab:focus + .label{
+      opacity:1; transform:translateY(50%) translateX(-2px);
+    }
+
+    /* 펄스 링 */
+    #kakaoFloating .fab::after{
+      content:""; position:absolute; inset:0; border-radius:inherit;
+      box-shadow:0 0 0 0 var(--ring);
+      animation:kakaoPulse 1.8s ease-out infinite;
+    }
+    @keyframes kakaoPulse{
+      0%{ box-shadow:0 0 0 0 var(--ring); }
+      70%{ box-shadow:0 0 0 16px rgba(254,229,0,0); }
+      100%{ box-shadow:0 0 0 0 rgba(254,229,0,0); }
+    }
+
+    /* 모션 최소화 환경 배려 */
+    @media (prefers-reduced-motion: reduce){
+      #kakaoFloating .fab{ transition:none; }
+      #kakaoFloating .fab::after{ animation:none; }
+      #kakaoFloating .label{ transition:none; }
+    }
+
+    /* 작은 화면 라벨 숨김(터치 환경) */
+    @media (max-width:640px){
+      #kakaoFloating .label{ display:none; }
+    }
+  </style>
+
+  <!-- 링크: 카카오 채널/상담 URL로 교체하세요 -->
+  <a class="fab" href="https://pf.kakao.com/_YOUR_CHANNEL" target="_blank" rel="noopener nofollow" aria-describedby="kakaoLabel">
+    <span class="sr-only">카카오톡 상담 열기</span>
+
+    <!-- ✅ IMG 아이콘 버전 (활성) -->
+    <img class="ico" src="./img/kakao.png" alt="카카오톡 아이콘" width="34" height="34" decoding="async" />
+
+
+  </a>
+  <span id="kakaoLabel" class="label">카카오톡 상담</span>
+
+  <script>
+    // 재진입 시 효과가 항상 다시 잘 보이도록(가시성 기반 재시작)
+    (function(){
+      const root = document.getElementById('kakaoFloating');
+      const btn  = root?.querySelector('.fab');
+      if(!root || !btn || !('IntersectionObserver' in window)) return;
+
+      const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            // 펄스 애니메이션 재시작 트릭
+            btn.style.animation = 'none';
+            // 강제로 리플로우
+            void btn.offsetHeight;
+            btn.style.animation = '';
+          }
+        });
+      }, { threshold: 0.01 });
+
+      observer.observe(root);
+    })();
+  </script>
+</section>
+
+
+
+<script src="./js/jquery-1.11.0.min.js"></script>
+<script src="./js/validation-elihigh2.js"> </script>
+
+ <script>
+$(function(){
+  $('input[name="entry.865661619"]').val('메타');
+});
+</script>
+
+
+<script>
+(function(){
+  const TEXTUAL_TYPES = new Set(['', 'text', 'search', 'tel', 'password', 'url', 'email']);
+  const composing = new WeakMap(); // 각 필드의 IME 조합 상태 저장
+
+  function isTextual(el){
+    return el.tagName === 'TEXTAREA' ||
+           (el.tagName === 'INPUT' && TEXTUAL_TYPES.has((el.type||'').toLowerCase()));
+  }
+
+  function attach(el){
+    if (!isTextual(el)) return;
+    if (!el.hasAttribute('maxlength')) return;
+
+    const getMAX = () => {
+      const n = parseInt(el.getAttribute('maxlength'), 10);
+      return Number.isFinite(n) ? n : Infinity;
+    };
+
+    // IME(한글 조합) 상태 관리
+    el.addEventListener('compositionstart', () => composing.set(el, true));
+    el.addEventListener('compositionend',  () => { composing.set(el, false); truncate(el, getMAX()); });
+
+    // 키 타이핑으로 초과 입력 방지 (붙여넣기는 input에서 자름)
+    el.addEventListener('beforeinput', (e) => {
+      if (composing.get(el)) return;
+      if (e.inputType !== 'insertText') return; // paste 등은 아래 input 핸들러에서 처리
+      const MAX = getMAX();
+      if (!isFinite(MAX)) return;
+
+      const { value, selectionStart, selectionEnd } = el;
+      const replacing = Math.max(0, (selectionEnd ?? value.length) - (selectionStart ?? value.length));
+      const inserting  = (e.data || '').length;
+      const nextLen    = value.length - replacing + inserting;
+
+      if (nextLen > MAX) e.preventDefault();
+    });
+
+    // 붙여넣기/드래그 교체/프로그램적 변경 등 모든 케이스에서 최종 길이 보정
+    el.addEventListener('input', () => {
+      if (composing.get(el)) return;
+      truncate(el, getMAX());
+    });
+  }
+
+  function truncate(el, MAX){
+    if (!isFinite(MAX)) return;
+    const v = el.value || '';
+    if (v.length > MAX){
+      const pos = el.selectionStart;
+      el.value = v.slice(0, MAX);
+      const p = Math.min(typeof pos === 'number' ? pos : MAX, MAX);
+      if (el.setSelectionRange) el.setSelectionRange(p, p);
+    }
+  }
+
+  // 초기 문서 내 모든 대상에 적용
+  document.querySelectorAll('input[maxlength], textarea[maxlength]').forEach(attach);
+
+  // 이후 동적으로 추가/변경되는 필드에도 자동 적용
+  const mo = new MutationObserver((mutations)=>{
+    for (const m of mutations){
+      // 새 노드 추가
+      m.addedNodes && m.addedNodes.forEach(node=>{
+        if (!(node instanceof Element)) return;
+        if (node.matches?.('input[maxlength], textarea[maxlength]')) attach(node);
+        node.querySelectorAll?.('input[maxlength], textarea[maxlength]').forEach(attach);
+      });
+      // 기존 노드에 maxlength 속성 추가/변경
+      if (m.type === 'attributes' && m.attributeName === 'maxlength' &&
+          m.target instanceof Element &&
+          m.target.matches('input[maxlength], textarea[maxlength]')) {
+        attach(m.target);
+      }
+    }
+  });
+  mo.observe(document.documentElement, { childList:true, subtree:true, attributes:true, attributeFilter:['maxlength'] });
+})();
+</script>
+
+<!-- ======================= Footer (Formal / Corporate Tone) ======================= -->
+<section id="siteFooter" aria-label="사이트 푸터">
+  <style>
+    /* ===== Scope: #siteFooter only ===== */
+    #siteFooter{
+      --bg:#0f172a;        /* 다크 배경 */
+      --panel:#0b1323;     /* 더 어두운 패널 */
+      --ink:#e5e7eb;       /* 본문 글자 */
+      --muted:#94a3b8;     /* 보조 글자 */
+      --line:#1f2937;      /* 경계선 */
+      --brand:#13b5a3;     /* 포인트 민트(절제) */
+      --accent:#11a292;
+      --radius:14px;
+      font-family:Pretendard, "Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      border-top:1px solid #0b1220;
+      position:relative;
+    }
+    #siteFooter .wrap{
+      max-width:1200px; margin:0 auto; padding:28px 16px 22px;
+      display:flex; flex-direction:column; gap:22px;
+    }
+
+    /* 상단: 로고 + 약관 링크 */
+    #siteFooter .head{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      border-bottom:1px solid var(--line); padding-bottom:14px;
+    }
+    #siteFooter .brand{
+      display:flex; align-items:center; gap:10px; min-height:32px;
+    }
+    #siteFooter .brand .logo{
+      width:auto; height:26px; display:block; object-fit:contain;
+      filter:drop-shadow(0 0 0 rgba(0,0,0,0)); /* 크로스브라우저 안정 */
+    }
+    #siteFooter .policy{
+      display:flex; align-items:center; gap:12px; flex-wrap:wrap; font-weight:700;
+    }
+    #siteFooter .policy a{
+      color:var(--ink); text-decoration:none; opacity:.9;
+    }
+    #siteFooter .policy a:hover{ color:#fff; opacity:1; text-decoration:underline; text-underline-offset:2px; }
+    #siteFooter .bar{ opacity:.35; }
+
+    /* 회사 정보 블록 */
+    #siteFooter .corp{
+      display:flex; flex-direction:column; gap:8px; line-height:1.7;
+    }
+    #siteFooter .corp .ko-name{
+      font-weight:900; color:#fff; letter-spacing:-.01em; margin-top:6px;
+    }
+    #siteFooter .row{
+      color:var(--muted); font-weight:700;
+    }
+    #siteFooter .row b{ color:#cbd5e1; font-weight:800; }
+    #siteFooter address{
+      font-style:normal; color:var(--muted); font-weight:700;
+    }
+
+    /* 하단 바: 카피라이트 + 바로가기 */
+    #siteFooter .legal{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      color:#8aa1b6; font-size:.92rem; border-top:1px solid var(--line);
+      padding-top:12px; margin-top:6px;
+      flex-wrap:wrap;
+    }
+    #siteFooter .legal .links{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+    #siteFooter .legal a{ color:var(--brand); font-weight:800; text-decoration:none; }
+    #siteFooter .legal a:hover{ color:#17c8b3; text-decoration:underline; text-underline-offset:2px; }
+
+    /* 맨 위로 버튼 (푸터 내부 좌하단 고정 느낌) */
+    #siteFooter .toTop{
+      position:fixed; left:12px; bottom:12px; z-index:50;
+      width:44px; height:44px; border-radius:12px; border:1px solid #263343;
+      background:linear-gradient(180deg, #0f1a2a 0%, #0b1323 100%);
+      box-shadow:0 8px 18px rgba(0,0,0,.35);
+      display:grid; place-items:center; cursor:pointer;
+      transition:transform .18s ease, box-shadow .18s ease, opacity .2s ease;
+      opacity:.95;
+    }
+    #siteFooter .toTop:hover{ transform:translateY(-2px); box-shadow:0 12px 26px rgba(0,0,0,.45); }
+    #siteFooter .toTop:active{ transform:translateY(0); }
+    #siteFooter .toTop img{ width:18px; height:18px; display:block; object-fit:contain; }
+
+    /* 반응형 */
+    @media (max-width:640px){
+      #siteFooter .head{ flex-direction:column; align-items:flex-start; gap:10px; }
+      #siteFooter .policy{ gap:10px; }
+    }
+
+    /* 모션 최소화 환경 */
+    @media (prefers-reduced-motion:reduce){
+      #siteFooter .toTop{ transition:none; }
+    }
+  </style>
+
+  <div class="wrap">
+    <!-- 상단: 로고 + 정책 링크 -->
+    <div class="head">
+      <div class="brand">
+ <!-- FitCase Wordmark (for dark backgrounds) -->
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="36" viewBox="0 0 220 36" role="img" aria-label="FitCase">
+  <defs>
+    <style>
+      .txt{ font: 900 20px/1 Pretendard, "Noto Sans KR", Segoe UI, Roboto, system-ui, -apple-system, sans-serif; }
+    </style>
+  </defs>
+  <!-- Mark -->
+  <g transform="translate(2 4)">
+    <!-- mint tile -->
+    <rect x="0" y="0" width="28" height="28" rx="8" fill="#13b5a3"/>
+    <!-- F cutout (white) -->
+    <rect x="8" y="6.8" width="5.2" height="15" rx="2.2" fill="#ffffff"/>
+    <rect x="8" y="6.8" width="12.2" height="5.2" rx="2.2" fill="#ffffff"/>
+    <rect x="8" y="13.8" width="9.4" height="5.2" rx="2.2" fill="#ffffff"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text class="txt" x="38" y="25" fill="#ffffff">FitCase</text>
+</svg>
+
+      </div>
+      <!-- <nav class="policy" aria-label="정책 및 약관">
+        <a href="#" data-open-terms="true">이용약관</a>
+        <span class="bar">|</span>
+        <a href="#" data-open-terms="true">개인정보처리방침</a>
+      </nav> -->
+    </div>
+
+    <!-- 회사 정보 -->
+    <div class="corp">
+      <!-- <div class="ko-name">FitCase</div> -->
+      <p class="row"><b>회사명</b> : 미디어제트&nbsp;&nbsp;|&nbsp;&nbsp;<b>대표명</b> : 안서윤</p>
+      <address><b>주소</b> : 서울특별시 영등포구 선유로 130, 3층 301호 15호</address>
+      <p class="row"><b>사업자등록번호</b> : 361-07-02765</p>
+      <!-- 필요 시 추가
+      <p class="row"><b>통신판매업신고번호</b> : 제2025-서울성동-0000호</p>
+      <p class="row"><b>대표번호</b> : 02-000-0000&nbsp;&nbsp;|&nbsp;&nbsp;<b>이메일</b> : hello@fitcase.co</p>
+      -->
+    </div>
+
+    <!-- 하단 바 -->
+    <!-- <div class="legal">
+      <div>© <span id="footerYear"></span> FitCase. All rights reserved.</div>
+      <div class="links">
+        <a href="#applyMintForm">문의하기</a>
+        <span aria-hidden="true" style="opacity:.35">|</span>
+        <a href="#stickyTopbar">회사 소개</a>
+      </div>
+    </div> -->
+  </div>
+
+  <!-- 푸터 내부 '맨 위로' 버튼 (아이콘은 img 사용) -->
+  <!-- <button type="button" class="toTop" id="footerToTop" aria-label="맨 위로">
+    <img src="./img/ico-chevron-up.png" alt="">
+  </button> -->
+
+  <script>
+    (function(){
+      const footer = document.getElementById('siteFooter');
+      if(!footer) return;
+
+      // 연도 자동 갱신
+      const y = footer.querySelector('#footerYear');
+      if(y) y.textContent = new Date().getFullYear();
+
+      // 맨 위로
+      const toTop = footer.querySelector('#footerToTop');
+      if(toTop){
+        toTop.addEventListener('click', (e)=>{
+          e.preventDefault();
+          try{
+            document.querySelector('#stickyTopbar')?.scrollIntoView({behavior:'smooth'});
+          }catch(_){
+            window.scrollTo(0,0);
+          }
+        });
+      }
+
+      // 약관/정책 링크가 기존 약관 모달(#applyMintForm)과 연동되도록
+      function openTerms(){
+        const btn = document.querySelector('#applyMintForm .terms-link');
+        if(btn) { btn.click(); return true; }
+        return false;
+      }
+      footer.querySelectorAll('[data-open-terms]').forEach(a=>{
+        a.addEventListener('click', (e)=>{ e.preventDefault(); if(!openTerms()) location.hash = '#applyMintForm'; });
+      });
+    })();
+  </script>
+</section>
+</body>
+</html>

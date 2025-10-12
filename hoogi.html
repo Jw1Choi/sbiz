@@ -1,0 +1,310 @@
+<!-- ==================== 채무 탕감 후기 슬라이드 (최신 ver.) ==================== -->
+<style>
+  /* ────── RESET & 공통 ────── */
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Noto Sans KR',sans-serif;}
+  body{background:#0e0e0e;color:#fff;}
+
+  /* ────── 후기 영역 ────── */
+  #lawfirm-testimonials{padding:60px 5vw;overflow:hidden;}
+  #lawfirm-testimonials h2{
+    font-size:32px;font-weight:700;text-align:center;margin:80px 0;letter-spacing:-0.01em;
+  }
+
+  /* 슬라이드 래퍼 */
+  .marquee-row{display:flex;gap:24px;will-change:transform;}
+
+  .testimonial-card{
+    border:1px solid #ffffff40;flex:0 0 370px;background:#181611;border-radius:16px;
+    padding:32px 28px 24px;line-height:1.55;box-shadow:0 6px 28px rgba(0,0,0,.44);
+    display:flex;flex-direction:column;justify-content:space-between;height:250px;min-width:0;
+    transition:box-shadow .3s;
+  }
+  .testimonial-card:hover{box-shadow:0 12px 44px rgba(255,228,106,0.11),0 2px 20px rgba(220,220,0,0.03);}
+  .testimonial-card q{display:block;font-size:17px;font-weight:500;margin-bottom:10px;color:#fff;letter-spacing:-0.02em;}
+
+  /* finance bar */
+  .finance-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0 4px;}
+  .f-item{background:#222;border-radius:8px;text-align:center;padding:7px 4px;}
+  .f-label{font-size:11px;font-weight:600;color:#bfbfbf;letter-spacing:-.02em;}
+  .f-val{display:block;margin-top:2px;font-size:15px;font-weight:800;color:#ffe46a;}
+  .f-val.minus{color:#ff6c5c;}
+
+  .testimonial-meta{display:flex;justify-content:space-between;align-items:center;margin-top:8px;width:100%;}
+  .author{font-size:15px;color:#ffe46a;font-weight:700;letter-spacing:-0.01em;}
+  .rate{
+    display:inline-block;font-size:13px;background:#ffe46a;color:#181611;font-weight:900;
+    border-radius:7px;padding:3.5px 13px;letter-spacing:0.04em;min-width:60px;text-align:center;
+    box-shadow:0 2px 10px rgba(255,228,106,0.16);
+  }
+
+  @media(max-width:1100px){
+    .testimonial-card{flex:0 0 340px;padding:26px 17px 18px;height:255px;}
+    .f-val{font-size:14px;}
+    #lawfirm-testimonials{padding:36px 2vw;}
+  }
+  .row-gap{height:28px;}
+</style>
+
+<section id="lawfirm-testimonials">
+  <h2>실제 채무조정 후기</h2>
+
+  <!-- 위쪽 행 (→) -->
+  <div class="marquee-row top">
+
+    <!-- 1 : 90% -->
+    <article class="testimonial-card">
+      <q>도박으로 망가졌던 삶이었습니다. 탕감 후에는 숨통이 트여 다시 일어설 용기가 생겼습니다.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">2,400만</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-2,160만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">8만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">오○○ (도박&nbsp;빚)</p><span class="rate">탕감율 90%</span></div>
+    </article>
+
+    <!-- 2 -->
+    <article class="testimonial-card">
+      <q>생활비 때문에 카드 돌려막기를 반복했는데, 이제는 가족과 웃으며 식탁에 앉을 수 있습니다.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">4,000만</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-3,000만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">20만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">김○○ (생활비)</p><span class="rate">탕감율 75%</span></div>
+    </article>
+
+    <!-- 3 : 90% -->
+    <article class="testimonial-card">
+      <q>코인 폭락 후 모든 것이 끝난 줄 알았지만, 큰 틀에서 정리하고 다시 저축을 시작했습니다.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">5,500만</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-4,950만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">18만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">장○○ (코인&nbsp;빚)</p><span class="rate">탕감율 90%</span></div>
+    </article>
+
+    <!-- 4 -->
+    <article class="testimonial-card">
+      <q>주식 빚에 눌려 숨조차 쉬기 힘들었는데, 부담이 확 줄어 마음 편히 출근하고 있습니다.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">7,200만</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-6,336만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">23만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">박○○ (주식&nbsp;빚)</p><span class="rate">탕감율 88%</span></div>
+    </article>
+
+    <!-- 5 -->
+    <article class="testimonial-card">
+      <q>은행 대출이 눈덩이처럼 불어 걱정이 컸는데, 직원들과 공장을 지킬 수 있어 감사합니다.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">1억</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-7,000만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">50만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">이○○ (은행&nbsp;빚)</p><span class="rate">탕감율 70%</span></div>
+    </article>
+
+    <!-- 6 -->
+    <article class="testimonial-card">
+      <q>신용카드 연체 알림이 사라지니 밤잠이 달라졌습니다. 다시 삶의 리듬을 찾았어요.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">1억&nbsp;6000만</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-1억&nbsp;3120만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">60만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">윤○○ (신용카드)</p><span class="rate">탕감율 82%</span></div>
+    </article>
+
+    <!-- 7 : 90% -->
+    <article class="testimonial-card">
+      <q>끝이 안 보이던 사업자금 대출이 정리되니, 숨쉬는 것부터 달라졌습니다.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">2억&nbsp;3000만</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-2억&nbsp;700만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">65만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">최○○ (은행&nbsp;빚)</p><span class="rate">탕감율 90%</span></div>
+    </article>
+
+    <!-- 8 -->
+    <article class="testimonial-card">
+      <q>투자 실패로 눌렸던 가슴이 탕감 이후 한결 가벼워졌습니다. 다시 도전할 힘을 얻었어요.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">3억&nbsp;5000만</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-2억&nbsp;7300만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">120만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">남○○ (은행&nbsp;빚)</p><span class="rate">탕감율 78%</span></div>
+    </article>
+
+    <!-- 9 -->
+    <article class="testimonial-card">
+      <q>공장 확장 때문에 진 빚도 정리되어 이제는 매출에만 집중할 수 있습니다.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">5억</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-3억&nbsp;7000만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">250만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">문○○ (은행&nbsp;빚)</p><span class="rate">탕감율 74%</span></div>
+    </article>
+
+    <!-- 10 -->
+    <article class="testimonial-card">
+      <q>보증으로 떠안은 큰 빚이 정리되자, 처음으로 미래 계획을 세우게 됐습니다.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">7억</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-5억&nbsp;8100만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">300만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">배○○ (은행&nbsp;빚)</p><span class="rate">탕감율 83%</span></div>
+    </article>
+  </div>
+
+  <div class="row-gap"></div>
+
+  <!-- 아래쪽 행 (←) -->
+  <div class="marquee-row bottom">
+
+    <!-- 11 -->
+    <article class="testimonial-card">
+      <q>생활비 대출 부담이 사라지니 매달 월급날이 기다려집니다.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">2,600만</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-1,872만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">9만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">홍○○ (생활비)</p><span class="rate">탕감율 72%</span></div>
+    </article>
+
+    <!-- 12 : 90% -->
+    <article class="testimonial-card">
+      <q>도박빚 때문에 잠 못 이루던 날들이 끝났습니다. 마음껏 숨 쉬고 있어요.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">3,800만</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-3,420만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">17만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">서○○ (도박&nbsp;빚)</p><span class="rate">탕감율 90%</span></div>
+    </article>
+
+    <!-- 13 : 90% -->
+    <article class="testimonial-card">
+      <q>주식 계좌를 볼 때마다 괴로웠는데, 큰 부분이 정리되어 마음이 한결 가볍습니다.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">4,900만</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-4,410만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">19만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">정○○ (주식&nbsp;빚)</p><span class="rate">탕감율 90%</span></div>
+    </article>
+
+    <!-- 14 -->
+    <article class="testimonial-card">
+      <q>코인 빚이 정리되고 나니 다시 공부할 마음의 여유가 생겼어요.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">6,600만</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-5,544만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">25만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">안○○ (코인&nbsp;빚)</p><span class="rate">탕감율 84%</span></div>
+    </article>
+
+    <!-- 15 -->
+    <article class="testimonial-card">
+      <q>가게가 힘들어졌을 때 손 내밀어 주셔서 폐업 대신 희망을 택했습니다.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">9,000만</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-6,300만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">40만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">곽○○ (은행&nbsp;빚)</p><span class="rate">탕감율 70%</span></div>
+    </article>
+
+    <!-- 16 -->
+    <article class="testimonial-card">
+      <q>신용카드 연체 문자에서 해방되니 하루하루가 가벼워졌습니다.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">1억&nbsp;4000만</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-1억&nbsp;1900만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">55만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">임○○ (신용카드)</p><span class="rate">탕감율 85%</span></div>
+    </article>
+
+    <!-- 17 -->
+    <article class="testimonial-card">
+      <q>투자 실패로 접었던 꿈을 다시 꿉니다. 도움 주신 분들께 정말 감사합니다.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">2억</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-1억&nbsp;4600만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">90만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">류○○ (주식&nbsp;빚)</p><span class="rate">탕감율 73%</span></div>
+    </article>
+
+    <!-- 18 : 90% -->
+    <article class="testimonial-card">
+      <q>주식 신용거래로 무너진 가정에 웃음이 돌아왔습니다. 고맙습니다.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">2억&nbsp;8000만</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-2억&nbsp;5200만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">110만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">문○○ (주식&nbsp;빚)</p><span class="rate">탕감율 90%</span></div>
+    </article>
+
+    <!-- 19 -->
+    <article class="testimonial-card">
+      <q>도박으로 잃은 시간은 되돌릴 수 없지만, 부채 걱정 없이 다시 시작합니다.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">4억</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-3억</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">200만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">박○○ (도박&nbsp;빚)</p><span class="rate">탕감율 75%</span></div>
+    </article>
+
+    <!-- 20 -->
+    <article class="testimonial-card">
+      <q>코로나로 멈춘 매출 때문에 절망했지만, 탕감 후 회사를 지킬 수 있었습니다.</q>
+      <div class="finance-bar">
+        <div class="f-item"><span class="f-label">대출금</span><span class="f-val">6억</span></div>
+        <div class="f-item"><span class="f-label">탕감액</span><span class="f-val minus">-4억&nbsp;9200만</span></div>
+        <div class="f-item"><span class="f-label">월 상환액</span><span class="f-val">270만</span></div>
+      </div>
+      <div class="testimonial-meta"><p class="author">고○○ (은행&nbsp;빚)</p><span class="rate">탕감율 82%</span></div>
+    </article>
+  </div>
+</section>
+
+<script>
+  /* 무한 슬라이드(마퀴) */
+  function initMarquee(row,{direction='left',speed=30}={}){
+    const originals=[...row.children];
+    originals.forEach(c=>row.appendChild(c.cloneNode(true)));
+
+    const gap=24;
+    const full=originals.reduce((w,el)=>w+el.getBoundingClientRect().width+gap,-gap);
+    const dir=direction==='left'?-1:1;
+
+    let pos=0,last=performance.now();
+    function step(now){
+      const dt=(now-last)/1000;last=now;
+      pos+=dir*speed*dt;
+      if(dir===-1&&Math.abs(pos)>=full)pos+=full;
+      if(dir=== 1&&pos>=0)       pos-=full;
+      row.style.transform=`translateX(${pos}px)`;
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  window.addEventListener('DOMContentLoaded',()=>{
+    initMarquee(document.querySelector('.marquee-row.top'),   {direction:'right',speed:30});
+    initMarquee(document.querySelector('.marquee-row.bottom'),{direction:'left', speed:30});
+  });
+</script>
+<!-- ==================== /채무 탕감 후기 슬라이드 ==================== -->
+

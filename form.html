@@ -1,0 +1,482 @@
+<section id="applyMintForm" aria-label="신청 폼">
+  <style>
+    /* ===== Scope: #applyMintForm only ===== */
+    #applyMintForm{
+      --ink:#0b1220;
+      --muted:#556070;
+      --brand:#13b5a3;   /* 포인트 민트 */
+      --accent:#11a292;  /* 호버/진한 민트 */
+      --bg:#f6f8fa;      /* 연한 배경 */
+      --bubble:#e9f5f3;  /* 라이트 버블 */
+      --line:#e8ecef;
+      --card:#ffffff;
+      --radius:18px;
+      --shadow:0 16px 40px rgba(0,0,0,.10);
+      --soft:0 1px 3px rgba(19,181,163,.12), 0 1px 2px rgba(0,0,0,.04);
+      --soft-hover:0 6px 16px rgba(19,181,163,.16), 0 2px 4px rgba(0,0,0,.05);
+      font-family:Pretendard, "Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color:var(--ink);
+      background:#fff;
+      position:relative; isolation:isolate; overflow:hidden;
+      padding:60px 16px;
+    }
+    #applyMintForm .wrap{max-width:960px; margin:0 auto; display:grid; grid-template-columns:1fr; gap:min(5vw,48px); align-items:stretch;}
+    @media (max-width:940px){ #applyMintForm .wrap{grid-template-columns:1fr; gap:24px;} }
+
+    /* 라이트 버블 배경 */
+    #applyMintForm .bg-bubble{position:absolute; border-radius:50%; background:var(--bubble); filter:blur(.2px); opacity:.75; z-index:0;}
+    #applyMintForm .b1{width:520px; height:520px; left:-160px; top:-160px; z-index:-1;}
+    #applyMintForm .b2{width:420px; height:420px; right:-120px; bottom:-120px; opacity:.55; z-index:-1;}
+    #applyMintForm .b3{width:360px; height:360px; right:40%; top:52%; translate:50% -50%; opacity:.45; z-index:-1;}
+    @media (max-width:940px){ #applyMintForm .b3{display:none;} }
+
+    /* 좌측 카피 + 포인트 */
+    #applyMintForm .copy{align-self:center}
+    #applyMintForm .tag{display:inline-block; background:var(--bg); color:var(--brand); padding:6px 14px; border-radius:999px; font-weight:700; font-size:.88rem; margin-bottom:12px; border:1px solid rgba(19,181,163,.28); box-shadow:0 1px 0 rgba(255,255,255,.6) inset;}
+    #applyMintForm .headline{margin:.2em 0 .45em; line-height:1.25; letter-spacing:-.02em; font-weight:900; font-size:clamp(28px,4.2vw,44px);}    
+    #applyMintForm .headline b{color:var(--brand)}
+    #applyMintForm .sub{color:var(--muted); font-weight:600;}
+    #applyMintForm .points{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:18px}
+    @media screen and (max-width:550px){
+      #applyMintForm .points{grid-template-columns:1fr}
+    }
+    #applyMintForm .chip{display:flex; align-items:center; justify-content:center; gap:8px; padding:10px 12px; border-radius:12px; background:#fff; border:1px solid var(--line); font-weight:800; font-size:.95rem; box-shadow:var(--soft)}
+
+    /* 우측 폼 카드 */
+    #applyMintForm .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:26px; position:relative;}
+    #applyMintForm .card h3{margin:0 0 14px; font-size:1.25rem; font-weight:900; letter-spacing:-.01em}
+    #applyMintForm .help{margin:-6px 0 16px; font-size:.92rem; color:var(--muted)}
+
+    #applyMintForm .grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    #applyMintForm .grid .full{grid-column:1/-1}
+    @media (max-width:560px){ #applyMintForm .grid{grid-template-columns:1fr} }
+
+    #applyMintForm .field{display:flex; flex-direction:column; gap:8px}
+    #applyMintForm label{font-size:.95rem; font-weight:800; color:#2c313a}
+    #applyMintForm input[type="text"],
+    #applyMintForm input[type="tel"],
+    #applyMintForm input[type="number"],
+    #applyMintForm select,
+    #applyMintForm textarea{
+      appearance:none; -webkit-appearance:none; -moz-appearance:none;
+      width:100%; padding:12px 14px; border-radius:12px; border:1.5px solid var(--line); background:#fff;
+      font-size:1rem; color:var(--ink); outline:none; transition:border-color .2s ease, box-shadow .2s ease;
+    }
+    #applyMintForm textarea{min-height:92px; resize:vertical}
+    #applyMintForm input:focus, #applyMintForm select:focus, #applyMintForm textarea:focus{border-color:rgba(19,181,163,.55); box-shadow:0 0 0 4px rgba(19,181,163,.15)}
+
+    /* 인라인 어시스트 */
+    #applyMintForm .assist{font-size:.82rem; color:var(--muted)}
+
+    /* 칩 선택 – 유형 빠른 선택 */
+    #applyMintForm .case-chips{display:flex; flex-wrap:wrap; gap:8px}
+    #applyMintForm .case-chips button{border:none; cursor:pointer; padding:8px 12px; border-radius:999px; font-weight:800; font-size:.92rem; background:var(--bg); color:var(--brand); border:1px solid rgba(19,181,163,.3); transition:all .2s}
+    #applyMintForm .case-chips button[aria-pressed="true"]{background:var(--brand); color:#fff; border-color:var(--brand); box-shadow:0 8px 18px rgba(19,181,163,.28)}
+
+    /* 액션 */
+    #applyMintForm .actions{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:4px}
+    #applyMintForm .btn{display:inline-flex; width:100%; margin:20px 0 0; align-items:center; justify-content:center; gap:8px; padding:12px 18px; border-radius:999px; font-weight:900; cursor:pointer; text-decoration:none; border:1.5px solid transparent; transition:all .2s}
+    #applyMintForm .btn-fill{background:var(--brand); color:#fff; box-shadow:0 8px 18px rgba(19,181,163,.35)}
+    #applyMintForm .btn-fill:hover{background:var(--accent)}
+    #applyMintForm .btn-outline{background:#fff; color:var(--brand); border-color:var(--brand)}
+
+    /* 약관 */
+    #applyMintForm .agree{display:flex; gap:10px; align-items:flex-start; font-size:.92rem; color:var(--muted)}
+    #applyMintForm .agree input{margin-top:3px}
+
+    /* 제출 상태 메시지 */
+    #applyMintForm .toast{display:none; margin-top:12px; padding:12px 14px; border-radius:12px; background:#ecfbf7; color:#0f3c36; border:1px solid #b8efe6; font-weight:700}
+    #applyMintForm .toast.show{display:block}
+  </style>
+
+  <!-- 배경 버블 -->
+  <span aria-hidden="true" class="bg-bubble b1"></span>
+  <span aria-hidden="true" class="bg-bubble b2"></span>
+  <span aria-hidden="true" class="bg-bubble b3"></span>
+
+  <div class="wrap">
+    <!-- 좌측 카피 -->
+    <div class="copy">
+      <span class="tag">무료 상담 신청</span>
+      <h2 class="headline">지금 바로 <b>상담 신청</b>하고<br>안내 받으세요!</h2>
+      <p class="sub">어려운 부분을 이해하고 해결할 수 있도록 함께 하겠습니다.</p>
+      <div class="points" aria-hidden="true">
+        <div class="chip">✓ 24시간 상담 가능</div>
+        <div class="chip">✓ 즉시 전화 안내</div>
+        <div class="chip">✓ 카카오 문의 가능</div>
+      </div>
+    </div>
+
+    <!-- 우측 폼 카드 -->
+    <div class="card" id="applyForm">
+      <form action="" id="form_e12" method="POST" target="hidden_iframe12" onsubmit="dll(); submitted=true;">
+        <input type="hidden" name="entry.865661619" value="메타">
+
+        <h3>상담 신청 폼</h3>
+        <p class="help">* 표시는 필수 입력</p>
+
+        <div class="grid">
+          <div class="field">
+            <label for="name">성함 *</label>
+            <input id="name1" name="entry.291909257" type="text" placeholder="홍길동" maxlength="4">
+          </div>
+          <div class="field">
+            <label for="phone">연락처 *</label>
+            <input id="phone1" name="entry.515525599" type="text" placeholder="01012345678" maxlength="11">
+            <small id="phoneHelp" class="assist">숫자만 입력해도 자동으로 하이픈이 들어갑니다.</small>
+          </div>
+
+          <div class="field">
+            <label for="region">지역 *</label>
+            <select id="region" name="entry.272144119">
+              <option value="" selected disabled>지역 선택</option>
+              <option>서울</option>
+              <option>부산</option>
+              <option>대구</option>
+              <option>인천</option>
+              <option>광주</option>
+              <option>대전</option>
+              <option>울산</option>
+              <option>경기</option>
+              <option>강원</option>
+              <option>충북</option>
+              <option>충남</option>
+              <option>전북</option>
+              <option>전남</option>
+              <option>경북</option>
+              <option>경남</option>
+              <option>제주</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="amount">필요 DB 규모</label>
+            <select id="db4" name="entry.2060839557">
+              <option value="" selected disabled>필요 규모 선택</option>
+              <option>하루 1~5개</option>
+              <option>하루 6~10개</option>
+              <option>하루 11~30개</option>
+              <option>하루 31개 ~</option>
+            </select>
+            <small id="amtHelp" class="assist">하루 필요한 디비를 기준으로 선택해주세요.</small>
+          </div>
+
+          <div class="field full">
+            <label for="memo">문의 사항</label>
+            <textarea id="memo" name="entry.454059833" placeholder="상담이 필요한 내용을 간단히 남겨주세요."></textarea>
+          </div>
+
+          <div class="field full">
+            <label class="agree">
+              <input id="agree" type="checkbox" checked>
+              <span>개인정보 수집·이용 및 광고성 정보 수신에 동의합니다. (필수)</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="actions">
+          <input class="btn btn-fill" id="send_message1" type="submit" value="지금 신청하기" disabled>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <script type="text/javascript">var submitted = false;</script>
+
+  <iframe name="hidden_iframe11" id="hidden_iframe11" style="display:none;" onload=""></iframe>
+  <iframe name="hidden_iframe12" id="hidden_iframe12" style="display:none;" onload=""></iframe>
+
+  <!-- ▼▼▼ '개인정보 동의 약관 보기' 기능 (모바일 370px 최적화 포함) ▼▼▼ -->
+  <style>
+    #applyMintForm[data-modal-open="true"]{ overflow:hidden; }
+    #applyMintForm .terms-overlay{ position:fixed; inset:0; display:grid; place-items:center; background:rgba(17,24,39,.55); padding:24px; z-index:9999; overscroll-behavior:contain; touch-action:none; min-height:100vh; min-height:100svh; min-height:100dvh; }
+    #applyMintForm .terms-overlay[hidden]{ display:none; }
+    #applyMintForm .terms-sheet{ width:min(820px,90vw); max-height:min(82vh,840px); max-height:min(82dvh,840px); background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); display:grid; grid-template-rows:auto 1fr auto; overflow:hidden; animation:termsPop .24s ease-out; }
+    #applyMintForm .terms-header{ display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid var(--line); }
+    #applyMintForm .terms-title{ margin:0; font-size:1.1rem; font-weight:900; color:var(--ink); }
+    #applyMintForm .terms-close-x{ border:none; background:transparent; font-size:20px; cursor:pointer; line-height:1; padding:6px; border-radius:8px; }
+    #applyMintForm .terms-close-x:hover{ background:var(--bg); }
+    #applyMintForm .terms-body{ padding:16px 18px; overflow:auto; -webkit-overflow-scrolling:touch; line-height:1.65; color:var(--muted); }
+    #applyMintForm .terms-body h4{ margin:14px 0 8px; font-size:1rem; font-weight:800; color:var(--ink); }
+    #applyMintForm .terms-body ul{ padding-left:18px; margin:6px 0 12px; }
+    #applyMintForm .terms-footer{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; padding:14px 18px; border-top:1px solid var(--line); background:#fff; }
+    #applyMintForm .terms-link{ margin-left:8px; border:none; background:transparent; color:var(--brand); font-weight:800; cursor:pointer; text-decoration:underline; text-underline-offset:2px; }
+    #applyMintForm .terms-link:focus{ outline:none; box-shadow:0 0 0 3px rgba(19,181,163,.3); border-radius:6px; }
+    #applyMintForm .agree-mini{ display:flex; align-items:flex-start; gap:8px; font-size:.92rem; color:var(--muted); }
+
+    @keyframes termsPop{ from{ transform:scale(.98); opacity:.0 } to{ transform:scale(1); opacity:1 } }
+
+    @media (max-width:420px){
+      #applyMintForm .terms-overlay{ padding:max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left)); align-items:flex-end; }
+      #applyMintForm .terms-sheet{ width:100%; border-radius:16px 16px 0 0; max-height:calc(100dvh - max(10px, env(safe-area-inset-bottom)) - 10px); animation:sheetSlideUp .28s cubic-bezier(.2,.7,.2,1); }
+      #applyMintForm .terms-header{ padding:12px 14px; position:relative; }
+      #applyMintForm .terms-header::before{ content:""; position:absolute; top:6px; left:50%; transform:translateX(-50%); width:44px; height:4px; border-radius:999px; background:#e5e7eb; }
+      #applyMintForm .terms-title{ font-size:1rem; }
+      #applyMintForm .terms-body{ padding:12px 14px; font-size:.95rem; }
+      #applyMintForm .terms-footer{ padding:12px 14px; gap:10px; }
+      #applyMintForm .terms-footer .btn{ min-height:44px; }
+    }
+    @keyframes sheetSlideUp{ from{ transform:translateY(12px); opacity:.0 } to{ transform:translateY(0); opacity:1 } }
+
+    @media (max-width:370px){
+      #applyMintForm .terms-title{ font-size:.98rem; }
+      #applyMintForm .terms-body{ padding:10px 12px; font-size:.94rem; }
+      #applyMintForm .terms-footer{ flex-direction:column; align-items:stretch; gap:8px; }
+      #applyMintForm .terms-footer .btn{ width:100%; }
+      #applyMintForm .agree-mini{ font-size:.9rem; }
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      #applyMintForm .terms-sheet{ animation:none; }
+    }
+  </style>
+
+  <script>
+    (function(){
+      const root = document.querySelector('#applyMintForm');
+      const form = root.querySelector('#applyForm');
+      const agreeBox = form.querySelector('#agree');
+      const submitBtn = form.querySelector('#submitBtn');
+      const agreeTextSpan = form.querySelector('.agree span');
+
+      /* '자세히 보기' 버튼 삽입 */
+      const termsBtn = document.createElement('button');
+      termsBtn.type = 'button';
+      termsBtn.className = 'terms-link';
+      termsBtn.textContent = '자세히 보기';
+      termsBtn.setAttribute('aria-haspopup','dialog');
+      if(agreeTextSpan){
+        agreeTextSpan.appendChild(document.createTextNode(' '));
+        agreeTextSpan.appendChild(termsBtn);
+      }
+
+      /* 모달 DOM */
+      const overlay = document.createElement('div');
+      overlay.className = 'terms-overlay';
+      overlay.setAttribute('hidden','');
+      overlay.innerHTML = `
+        <div class=\"terms-sheet\" role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"termsTitle\" tabindex=\"-1\">\n          <div class=\"terms-header\">\n            <h3 id=\"termsTitle\" class=\"terms-title\">개인정보 처리방침</h3>\n            <button type=\"button\" class=\"terms-close-x\" aria-label=\"닫기\">✕</button>\n          </div>\n          <div class=\"terms-body\" id=\"termsBody\">\n            <p>회사명(이하 ‘회사’라 한다)는 개인정보 보호법 제30조에 따라 정보 주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리지침을 수립, 공개합니다.</p>\n\n            <h4>제1조 (개인정보의 처리목적)</h4>\n            <p>회사는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.</p>\n            <ul>\n              <li><b>홈페이지 회원 가입 및 관리</b>: 회원 가입 의사 확인, 회원제 서비스 제공에 따른 본인 식별․인증, 회원자격 유지․관리, 제한적 본인확인제 시행에 따른 본인확인, 서비스 부정 이용 방지, 만 14세 미만 아동의 개인정보처리 시 법정대리인의 동의 여부 확인, 각종 고지․통지, 고충 처리 등을 목적으로 개인정보를 처리합니다.</li>\n              <li><b>재화 또는 서비스 제공</b>: 물품 배송, 서비스 제공, 계약서 및 청구서 발송, 콘텐츠 제공, 맞춤서비스 제공, 본인인증, 연령인증, 요금 결제 및 정산, 채권추심 등을 목적으로 개인정보를 처리합니다.</li>\n              <li><b>고충 처리</b>: 민원인의 신원 확인, 민원사항 확인, 사실조사를 위한 연락․통지, 처리 결과 통보 등의 목적으로 개인정보를 처리합니다.</li>\n            </ul>\n\n            <h4>제2조 (개인정보의 처리 및 보유기간)</h4>\n            <p>① 회사는 법령에 따른 개인정보 보유, 이용 기간 또는 정보주체로부터 개인정보를 수집 시에 동의 받은 개인정보 보유, 이용 기간 내에서 개인정보를 처리, 보유합니다.</p>\n            <p>② 각각의 개인정보 처리 및 보유 기간은 다음과 같습니다.</p>\n            <ul>\n              <li><b>1. 홈페이지 회원 가입 및 관리</b>: 사업자/단체 홈페이지 탈퇴 시까지<br>\n              다만, 다음의 사유에 해당하는 경우에는 해당 사유 종료 시까지\n                <ul>\n                  <li>1) 관계 법령 위반에 따른 수사, 조사 등이 진행 중인 경우에는 해당 수사, 조사 종료 시까지</li>\n                  <li>2) 홈페이지 이용에 따른 채권 및 채무관계 잔존 시에는 해당 채권, 채무 관계 정산 시까지</li>\n                </ul>\n              </li>\n              <li><b>2. 재화 또는 서비스 제공</b>: 재화․서비스 공급완료 및 요금결제․정산 완료 시까지<br>\n              다만, 다음의 사유에 해당하는 경우에는 해당 기간 종료 시까지\n                <ul>\n                  <li>1) 「전자상거래 등에서의 소비자 보호에 관한 법률」에 따른 표시․광고, 계약내용 및 이행 등 거래에 관한 기록\n                    <ul>\n                      <li>- 표시․광고에 관한 기록 : 6월</li>\n                      <li>- 계약 또는 청약 철회, 대금결제, 재화 등의 공급기록 : 5년</li>\n                      <li>- 소비자 불만 또는 분쟁 처리에 관한 기록 : 3년</li>\n                    </ul>\n                  </li>\n                  <li>2) 「통신비밀보호법」 제41조에 따른 통신사실확인자료 보관\n                    <ul>\n                      <li>- 가입자 전기통신일시, 개시․종료 시간, 상대방 가입자 번호, 사용도수, 발신기지국 위치추적자료 : 1년</li>\n                      <li>- 컴퓨터 통신, 인터넷 로그 기록자료, 접속지 추적자료 : 3개월</li>\n                    </ul>\n                  </li>\n                </ul>\n              </li>\n            </ul>\n\n            <h4>제3조 (개인정보의 제3자 제공)</h4>\n            <p>① 회사는 정보주체의 개인정보를 제1조(개인정보의 처리목적)에서 명시한 범위 내에서만 처리하며, 정보주체의 동의, 법률의 특별한 규정 등 개인정보 보호법 제17조 및 제18조에 해당하는 경우에만 개인정보를 제3자에게 제공하고 그 외에는 정보주체의 개인정보를 제3자에게 제공하지 않습니다.</p>\n            <p>② 회사는 원활한 서비스 제공을 위해 다음의 경우 개인정보보호법 제17조 제1항 제1호에 따라 정보주체의 동의를 얻어 필요 최소한의 범위로만 개인정보를 제3자에게 제공할 수 있습니다.</p>\n            <ul>\n              <li>- 개인정보를 제공받는 자 : &lt;예) (주) OOO 카드&gt;</li>\n              <li>- 제공받는 자의 개인정보 이용목적 : &lt;예) 이벤트 공동개최 등 업무제휴 및 제휴 신용카드 발급&gt;</li>\n              <li>- 제공하는 개인정보 항목 : &lt;예) 성명, 주소, 전화번호, 이메일주소, 카드결제계좌정보&gt;</li>\n              <li>- 제공받는 자의 보유, 이용기간 : &lt;예) 신용카드 발급계약에 따른 거래기간동안&gt;</li>\n            </ul>\n\n            <h4>제4조 (개인정보처리의 위탁)</h4>\n            <p>① 회사는 원활한 개인정보 업무처리를 위하여 다음과 같이 개인정보 처리업무를 위탁하고 있습니다.</p>\n            <ul>\n              <li>- 위탁업무 내용</li>\n              <li>- 위탁받는 자 (수탁자) : (주)아임웹 – 위탁하는 업무의 내용 : 쇼핑몰 호스팅 서비스의 시스템 제공, 모바일 앱 서비스, 마케팅 서비스 및 부가, 제휴서비스 제공 및 알림톡, 친구톡, 문자메시지 발송대행 서비스 등</li>\n              <li>- 위탁받는 자 (수탁자) : OOO PG – 위탁하는 업무의 내용 : 결제 및 에스크로 업무</li>\n              <li>- 위탁받는 자 (수탁자) : OOO 택배 – 위탁하는 업무의 내용 : 상품 배송 업무</li>\n              <li>- 위탁받는 자 (수탁자) : OOO 고객센터 – 위탁하는 업무의 내용 : 고객상담 업무</li>\n              <li>- 위탁받는 자 (수탁자) : OOO – 위탁하는 업무의 내용 : 본인확인 업무</li>\n              <li><b>재위탁사</b></li>\n              <li><b>- 재위탁받는 자(수탁자) : (주)아임웹 → 인포빕(유)</b> – <b>업무</b> : 문자메시지 발송, 카카오톡 알림톡(정보성 메시지) 발송 업무</li>\n              <li><b>- 재위탁받는 자(수탁자) : (주)아임웹 → (주)루나소프트</b> – <b>업무</b> : 문자메시지 발송, 카카오톡 알림톡(정보성 메시지) 및 친구톡 발송 업무</li>\n            </ul>\n            <p>② 회사는 위탁계약 체결 시 개인정보 보호법 제25조에 따라 위탁업무 수행목적 외 개인정보 처리금지, 기술적․관리적 보호조치, 재위탁 제한, 수탁자에 대한 관리․감독, 손해배상 등 책임에 관한 사항을 계약서 등 문서에 명시하고, 수탁자가 개인정보를 안전하게 처리하는지를 감독하고 있습니다.</p>\n            <p>③ 위탁업무의 내용이나 수탁자가 변경될 경우에는 지체없이 본 개인정보 처리방침을 통하여 공개하도록 하겠습니다.</p>\n\n            <h4>제5조 (정보주체 및 법정대리인의 권리와 그 행사 방법)</h4>\n            <p>① 정보주체는 회사에 대해 언제든지 다음 각 호의 개인정보 보호 관련 권리를 행사할 수 있습니다.</p>\n            <ul>\n              <li>1. 개인정보 열람 요구</li>\n              <li>2. 오류 등이 있을 경우 정정 요구</li>\n              <li>3. 삭제요구</li>\n              <li>4. 처리정지 요구</li>\n            </ul>\n            <p>② 제1항에 따른 권리 행사는 회사에 대해 서면, 전화, 전자우편, 모사전송(FAX) 등을 통하여 하실 수 있으며 회사는 이에 대해 지체없이 조치하겠습니다.</p>\n            <p>③ 정보주체가 개인정보의 오류 등에 대한 정정 또는 삭제를 요구한 경우에는 회사는 정정 또는 삭제를 완료할 때까지 당해 개인정보를 이용하거나 제공하지 않습니다.</p>\n            <p>④ 제1항에 따른 권리 행사는 정보주체의 법정대리인이나 위임을 받은 자 등 대리인을 통하여 하실 수 있습니다. 이 경우 개인정보 보호법 시행규칙 별지 제11호 서식에 따른 위임장을 제출하셔야 합니다.</p>\n            <p>⑤ 정보주체는 개인정보 보호법 등 관계 법령을 위반하여 회사가 처리하고 있는 정보주체 본인이나 타인의 개인정보 및 사생활을 침해하여서는 아니 됩니다.</p>\n\n            <h4>제6조 (처리하는 개인정보 항목)</h4>\n            <p>회사는 다음의 개인정보 항목을 처리하고 있습니다.</p>\n            <ul>\n              <li><b>1. 홈페이지 회원 가입 및 관리</b><br>
+                필수항목 : &lt;예) 성명, 생년월일, 아이디, 비밀번호, 주소, 전화번호, 성별, 이메일주소, 아이핀번호&gt;<br>
+                선택항목 : &lt;예) 결혼 여부, 관심 분야&gt;
+              </li>
+              <li><b>2. 재화 또는 서비스 제공</b><br>
+                필수항목 : &lt;예) 성명, 생년월일, 아이디, 비밀번호, 주소, 전화번호, 이메일주소, 아이핀번호, 신용카드번호, 은행계좌정보 등 결제정보&gt;<br>
+                선택항목 : &lt;관심분야, 과거 구매내역&gt;
+              </li>
+            </ul>
+
+            <h4>제7조 (개인정보의 파기)</h4>
+            <p>① 회사는 개인정보 보유 기간의 경과, 처리목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체없이 해당 개인정보를 파기합니다.</p>
+            <p>② 정보주체로부터 동의받은 개인정보 보유 기간이 경과하거나 처리목적이 달성되었음에도 불구하고 다른 법령에 따라 개인정보를 계속 보존하여야 하는 경우에는, 해당 개인정보를 별도의 데이터베이스(DB)로 옮기거나 보관장소를 달리하여 보존합니다.</p>
+            <p>③ 개인정보 파기의 절차 및 방법은 다음과 같습니다.</p>
+            <ul>
+              <li>1. 파기 절차: 회사는 파기 사유가 발생한 개인정보를 선정하고, 회사의 개인정보 보호책임자의 승인을 받아 개인정보를 파기합니다.</li>
+              <li>2. 파기 방법: 전자적 파일은 복구 불가능한 방법으로, 종이 문서는 분쇄 또는 소각으로 파기합니다.</li>
+            </ul>
+
+            <h4>제8조 (개인정보의 안전성 확보조치)</h4>
+            <p>회사는 개인정보의 안전성 확보를 위해 다음과 같은 조치를 하고 있습니다.</p>
+            <ul>
+              <li>1. 관리적 조치 : 내부관리계획 수립 및 시행, 정기적 직원 교육 등</li>
+              <li>2. 기술적 조치 : 개인정보처리시스템 등의 접근 권한 관리, 접근통제시스템 설치, 고유 식별정보 등의 암호화, 보안프로그램 설치</li>
+              <li>3. 물리적 조치 : 전산실, 자료보관실 등의 접근통제</li>
+            </ul>
+
+            <h4>제9조 (개인정보 자동 수집 장치의 설치∙운영 및 거부에 관한 사항)</h4>
+            <p>① 회사는 이용자에게 개별적인 맞춤 서비스를 제공하기 위해 이용정보를 저장하고 수시로 불러오는 ‘쿠키(cookie)’를 사용합니다.</p>
+            <p>② 쿠키는 웹사이트를 운영하는데 이용되는 서버(http)가 이용자의 컴퓨터 브라우저에 보내는 소량의 정보이며 이용자들의 PC 또는 모바일에 저장됩니다.</p>
+            <p>③ 정보주체는 웹 브라우저 옵션 설정을 통해 쿠키 허용, 차단 등의 설정을 할 수 있습니다. 다만, 쿠키 저장을 거부할 경우 맞춤형 서비스 이용에 어려움이 발생할 수 있습니다.</p>
+            <p><b>▶ 웹 브라우저에서 쿠키 허용/차단</b><br>
+              - 크롬(Chrome) : 웹 브라우저 설정 &gt; 개인정보 보호 및 보안 &gt; 인터넷 사용기록 삭제<br>
+              - 엣지(Edge) : 웹 브라우저 설정 &gt; 쿠키 및 사이트 권한 &gt; 쿠키 및 사이트 데이터 관리 및 삭제
+            </p>
+            <p><b>▶ 모바일 브라우저에서 쿠키 허용/차단</b><br>
+              - 크롬(Chrome) : 모바일 브라우저 설정 &gt; 개인정보 보호 및 보안 &gt; 인터넷 사용기록 삭제<br>
+              - 사파리(Safari) : 모바일 기기 설정 &gt; 사파리(Safari) &gt; 고급 &gt; 모든 쿠키 차단<br>
+              - 삼성 인터넷 : 모바일 브라우저 설정 &gt; 인터넷 사용 기록 &gt; 인터넷 사용 기록 삭제
+            </p>
+            <p>④ 회사는 서비스 이용과정에서 사용자가 방문한 각 서비스와 웹 사이트들에 대한 방문 및 이용형태, 인기 검색어, 보안접속 여부 등을 파악하여 이용자에게 최적화된 정보 제공을 위해 수집・이용하고 있습니다.</p>
+
+            <h4>제10조 (개인정보 보호책임자)</h4>
+            <p>① 회사는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 정보주체의 불만 처리 및 피해구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.</p>
+            <p><b>▶ 개인정보 보호책임자</b><br>
+              성명 : OOO<br>
+              직책 : OOO<br>
+              연락처 : &lt;전화번호&gt;, &lt;이메일&gt;, &lt;팩스번호&gt;<br>
+              ※ 개인정보 보호 담당부서로 연결됩니다.
+            </p>
+            <p><b>▶ 개인정보 보호 담당부서</b><br>
+              부서명 : OOO 팀<br>
+              연락처 : &lt;전화번호&gt;, &lt;이메일&gt;, &lt;팩스번호&gt;
+            </p>
+            <p>② 정보주체께서는 회사의 서비스(또는 사업)을 이용하시면서 발생한 모든 개인정보 보호 관련 문의, 불만 처리, 피해구제 등에 관한 사항을 개인정보 보호책임자 및 담당부서로 문의하실 수 있습니다. 회사는 정보주체의 문의에 대해 지체없이 답변 및 처리해드릴 것입니다.</p>
+
+            <h4>제11조 (개인정보 열람청구)</h4>
+            <p>정보주체는 개인정보 보호법 제35조에 따른 개인정보의 열람 청구를 아래의 부서에 할 수 있습니다. 회사는 정보주체의 개인정보 열람 청구가 신속하게 처리되도록 노력하겠습니다.</p>
+            <p><b>▶ 개인정보 열람청구 접수․처리 부서</b><br>
+              부서명 : OOO<br>
+              연락처 : &lt;전화번호&gt;, &lt;이메일&gt;, &lt;팩스번호&gt;
+            </p>
+
+            <h4>제12조 (권익침해 구제 방법)</h4>
+            <p>정보주체는 아래의 기관에 대해 개인정보 침해에 대한 피해구제, 상담 등을 문의하실 수 있습니다.</p>
+            <ul>
+              <li>1. 개인정보 분쟁조정위원회 : (국번없이) 1833-6972 (www.kopico.go.kr)</li>
+              <li>2. 개인정보침해신고센터 : (국번없이) 118 (privacy.kisa.or.kr)</li>
+              <li>3. 대검찰청 : (국번없이) 1301 (www.spo.go.kr)</li>
+              <li>4. 경찰청 : (국번없이) 182 (ecrm.police.go.kr/minwon/main)</li>
+            </ul>
+
+            <h4>제13조 (개인정보 처리방침 시행 및 변경)</h4>
+            <p>이 개인정보 처리방침은 20XX. X. X. 부터 적용됩니다.</p>
+          </div>
+          <div class="terms-footer">
+            <label class="agree-mini">
+              <input type="checkbox" id="termsInlineAgree">
+              <span>상기 개인정보 처리 안내를 확인했습니다.</span>
+            </label>
+            <div style="display:flex; gap:8px; margin-left:auto; width:auto;">
+              <button type="button" class="btn btn-outline terms-cancel">닫기</button>
+              <button type="button" class="btn btn-fill terms-accept">동의하고 계속</button>
+            </div>
+          </div>
+        </div>
+      `;
+      root.appendChild(overlay);
+
+      const sheet = overlay.querySelector('.terms-sheet');
+      const closeX = overlay.querySelector('.terms-close-x');
+      const cancelBtn = overlay.querySelector('.terms-cancel');
+      const acceptBtn = overlay.querySelector('.terms-accept');
+      const inlineAgree = overlay.querySelector('#termsInlineAgree');
+
+      let prevFocus = null;
+
+      function openTerms(){
+        prevFocus = document.activeElement;
+        root.setAttribute('data-modal-open','true');
+        overlay.hidden = false;
+        sheet.focus();
+        document.addEventListener('keydown', onKeydown, true);
+        overlay.addEventListener('click', onBackdrop);
+      }
+      function closeTerms(){
+        overlay.hidden = true;
+        root.removeAttribute('data-modal-open');
+        document.removeEventListener('keydown', onKeydown, true);
+        overlay.removeEventListener('click', onBackdrop);
+        if(prevFocus && typeof prevFocus.focus === 'function') prevFocus.focus();
+      }
+      function onBackdrop(e){
+        if(e.target === overlay) closeTerms();
+      }
+      function onKeydown(e){
+        if(e.key === 'Escape'){ e.preventDefault(); closeTerms(); }
+        if(e.key === 'Tab'){
+          const f = sheet.querySelectorAll('a,button,input,select,textarea,[tabindex]:not([tabindex="-1"])');
+          const focusables = Array.prototype.slice.call(f);
+          if(!focusables.length) return;
+          const first = focusables[0];
+          const last = focusables[focusables.length-1];
+          if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+          else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+        }
+      }
+
+      /* 이벤트 바인딩 */
+      termsBtn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); openTerms(); });
+      closeX.addEventListener('click', (e)=>{ e.preventDefault(); closeTerms(); });
+      cancelBtn.addEventListener('click', (e)=>{ e.preventDefault(); closeTerms(); });
+
+      /* 동의하고 계속: 자동 동의 + 제출버튼 즉시 활성화 */
+      acceptBtn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        e.stopPropagation();
+        inlineAgree.checked = true;            // 모달 내 확인 체크
+        const agreeBox = form.querySelector('#agree');
+        agreeBox.checked = true;               // 본문 필수 동의 체크
+        agreeBox.dispatchEvent(new Event('change', {bubbles:true}));
+        acceptBtn.blur();
+        closeTerms();
+      });
+
+      /* 미동 안내 애니메이션 정의 */
+      const css = document.createElement('style');
+      css.textContent = `
+        #applyMintForm .terms-sheet.shake{ animation: applyShake .3s; }
+        @keyframes applyShake{
+          10%{ transform:translateY(0) translateX(-2px) }
+          20%{ transform:translateY(0) translateX(2px) }
+          30%{ transform:translateY(0) translateX(-2px) }
+          40%{ transform:translateY(0) translateX(2px) }
+          50%{ transform:translateY(0) translateX(-1px) }
+          60%{ transform:translateY(0) translateX(1px) }
+          100%{ transform:translateY(0) translateX(0) }
+        }
+      `;
+      root.appendChild(css);
+    })();
+  </script>
+
+  <!-- ▼▼▼ Select 오른쪽 화살표(모든 OS 지원) – 기존 코드 보존 + 기능만 추가 ▼▼▼ -->
+  <style>
+    /* 화살표 이미지를 CSS 변수로 (Base64, 안전/안정) */
+    #applyMintForm{
+      --arr:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTU2MDcwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlsaW5lIHBvaW50cz0iNiA5IDEyIDE1IDE4IDkiLz48L3N2Zz4=');
+      --arr-open:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTNiNWEzIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlsaW5lIHBvaW50cz0iNiA5IDEyIDE1IDE4IDkiLz48L3N2Zz4=');
+    }
+    /* 래퍼가 화살표를 그린다 (의사 요소라 OS/브라우저 일관) */
+    #applyMintForm .select-wrap{ position:relative; }
+    #applyMintForm .select-wrap select{ padding-right:42px !important; }
+    #applyMintForm .select-wrap::after{
+      content:""; position:absolute; right:12px; top:50%; transform:translateY(-50%);
+      width:18px; height:18px; pointer-events:none;
+      background-image:var(--arr); background-repeat:no-repeat; background-size:18px 18px;
+      opacity:.9; transition:transform .18s ease, background-image .18s ease, opacity .18s ease;
+    }
+    #applyMintForm .select-wrap.open::after{
+      transform:translateY(-50%) rotate(180deg) scale(1.05);
+      background-image:var(--arr-open);
+      opacity:1;
+    }
+    /* 고대/강제색 대비 환경 접근성 폴백 */
+    @media (forced-colors:active){
+      #applyMintForm .select-wrap::after{
+        background:none; width:8px; height:8px;
+        border:2px solid CanvasText; border-width:0 2px 2px 0;
+        transform:translateY(-50%) rotate(45deg);
+      }
+      #applyMintForm .select-wrap.open::after{
+        transform:translateY(-50%) rotate(-135deg);
+      }
+    }
+  </style>
+  <script>
+    (function(){
+      const root = document.querySelector('#applyMintForm');
+      const selects = root.querySelectorAll('select');
+
+      /* 각 select를 래핑해서 화살표 의사요소 부착 */
+      selects.forEach(sel=>{
+        if (sel.closest('.select-wrap')) return; // 이미 래핑된 경우 방지
+        const wrap = document.createElement('div');
+        wrap.className = 'select-wrap';
+        sel.parentNode.insertBefore(wrap, sel);
+        wrap.appendChild(sel);
+
+        const open = ()=> wrap.classList.add('open');
+        const close = ()=> wrap.classList.remove('open');
+
+        // 모바일(iOS/Android) & 데스크톱 호환 이벤트
+        sel.addEventListener('focus', open);
+        sel.addEventListener('click', open);
+        sel.addEventListener('mousedown', open);
+        sel.addEventListener('touchstart', open, {passive:true});
+        sel.addEventListener('blur', close);
+        sel.addEventListener('change', close);
+        sel.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') close(); });
+      });
+    })();
+  </script>
+  <!-- ▲▲▲ Select 화살표 보완 끝 ▲▲▲ -->
+</section>

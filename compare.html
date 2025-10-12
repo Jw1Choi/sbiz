@@ -1,0 +1,460 @@
+
+<section id="carCompare">
+  <style>
+    /* ================= Scope: #carCompare only ================= */
+    #carCompare {
+      font-family: "Pretendard", "Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: #e9f6f7;
+      padding: 60px 20px 80px;
+      text-align: center;
+      color: #1a1a1a;
+
+      /* 애니메이션 토큰 */
+      --ease: cubic-bezier(.22,.61,.36,1);
+      --dur: 700ms;
+    }
+
+    #carCompare .title {
+      font-size: 20px;
+      letter-spacing: 2px;
+      color: #5a646d;
+      margin-bottom: 10px;
+    }
+
+    #carCompare .subTitle {
+      font-size: 32px;
+      font-weight: 900;
+      color: #111;
+      margin-bottom: 38px;
+    }
+
+    #carCompare .subTitle .hi {
+      color: #1f6dff;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55);
+    }
+
+    /* ===== 2열 카드 중앙 정렬 ===== */
+    #carCompare .compare-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center; /* 전체를 가운데 정렬 */
+      align-items: center;
+      gap: 0;
+      margin: 0 auto 56px;
+      max-width: 900px;
+      perspective: 1000px; /* 3D 살짝 */
+    }
+
+    #carCompare .box {
+      position: relative;
+      border-radius: 18px;
+      padding: 36px 30px 32px;
+      background: #f5f5f5;
+      text-align: left;
+      height: 230px;
+
+      /* ▼▼ 세로 가운데 정렬 핵심 ▼▼ */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;   /* 자식(h3, ul) 묶음 세로 가운데 */
+
+      transform-style: preserve-3d;
+      will-change: transform, opacity, filter;
+    }
+
+    #carCompare .box.loan {
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06), 0 20px 40px rgba(0, 0, 0, 0.05);
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    #carCompare .box.policy {
+      background: #0b7a70;
+      color: #fff;
+      width: 250px;
+      height: 280px;
+      box-shadow: 0 5px 9px rgb(12 122 112), 0 10px 20px rgba(0, 0, 0, 0.22);
+      padding: 42px 34px 36px 64px;
+      transform: translateY(-2px);
+      overflow: hidden; /* 하이라이트 스윕용 */
+    }
+
+    #carCompare .box h3 {
+      font-size: 30px;
+      font-weight: 800;
+      margin: 0 0 22px;
+      letter-spacing: 0.4px;
+    }
+
+    #carCompare .box.loan h3 {
+      color: #7a8a96;
+    }
+
+    #carCompare ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 19px;
+      line-height: 240%;
+    }
+
+    #carCompare li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      will-change: transform, opacity;
+    }
+
+    #carCompare .loan li::before {
+      content: "●";
+      font-size: 8px;
+      color: #adb8c3;
+      border: 2px solid #adb8c3;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #carCompare .policy li::before {
+      content: "✓";
+      font-weight: 900;
+      font-size: 13px;
+      color: #bffff1;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.22);
+    }
+
+    /* ===== VS 배지: 경계선 중앙 ===== */
+    #carCompare .vs {
+      position: absolute;
+      top: 50%;
+      left: 43%;
+      transform: translate(-50%, -50%);
+      width: 46px;
+      height: 36px;
+      border-radius: 40%;
+      background: #0f8e82;
+      color: #fff;
+      font-weight: 800;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.22), 0 0 0 2px #e9f6f7;
+      will-change: transform, opacity;
+    }
+
+    #carCompare .bottom {
+      font-size: 22px;
+      font-weight: 800;
+      color: #303a44;
+      will-change: transform, opacity;
+    }
+
+    #carCompare .bottom .em {
+      color: #1f6dff;
+    }
+
+    @media (max-width: 860px) {
+      #carCompare .compare-wrap {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      #carCompare .vs {
+        position: absolute;
+        left: 50%;
+        top: calc(45.5%);
+        transform: translate(-50%, -50%);
+      }
+
+      #carCompare .box.loan {
+        border-radius: 18px;
+      }
+
+      #carCompare .box.policy {
+        border-radius: 18px;
+      }
+    }
+
+    /* ==================== 등장/강조 효과 (반복 재생 가능) ==================== */
+
+    /* 1) 공통 등장 초기 상태 */
+    #carCompare .reveal {
+      opacity: 0;
+      transform: translateY(16px) scale(.98);
+      filter: blur(6px);
+    }
+
+    /* 2) 보여질 때 상태 (.in 이 붙으면) */
+    #carCompare.in .reveal {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+      transition:
+        opacity var(--dur) var(--ease),
+        transform var(--dur) var(--ease),
+        filter calc(var(--dur) + 120ms) var(--ease);
+      transition-delay: var(--d, 0ms);
+    }
+
+    /* 3) VS 배지 팝 인 */
+    @keyframes pop-in {
+      0%   { transform: translate(-50%,-50%) scale(.6); opacity: 0; filter: blur(3px); }
+      60%  { transform: translate(-50%,-50%) scale(1.08); opacity: 1; }
+      100% { transform: translate(-50%,-50%) scale(1);   filter: blur(0); }
+    }
+    /* 애니메이션은 클래스 토글로 재생되도록 유지 */
+    #carCompare.in .vs {
+      animation: pop-in 640ms var(--ease) forwards;
+      animation-delay: 220ms;
+    }
+
+    /* 4) 정책 자금 카드 강조: 스윕 하이라이트 + 살짝 확대 + 펄스 */
+    #carCompare .box.policy::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(115deg,
+        rgba(255,255,255,0) 30%,
+        rgba(255,255,255,.28) 48%,
+        rgba(255,255,255,0) 66%);
+      transform: translateX(-130%) skewX(-12deg);
+      pointer-events: none;
+    }
+    @keyframes sweep {
+      0%   { transform: translateX(-130%) skewX(-12deg); }
+      100% { transform: translateX(150%)  skewX(-12deg); }
+    }
+    @keyframes pulseShadow {
+      0%,100% { box-shadow: 0 5px 9px rgba(12,122,112,1), 0 10px 20px rgba(0,0,0,.22); }
+      50%     { box-shadow: 0 12px 22px rgba(12,122,112,.85), 0 24px 50px rgba(0,0,0,.28); }
+    }
+    #carCompare.in .box.policy {
+      transform: translateY(-2px) scale(1.02);
+      animation: pulseShadow 1600ms ease-in-out 320ms 2 both; /* 두 번만 펄스 */
+    }
+    #carCompare.in .box.policy::before {
+      animation: sweep 1100ms cubic-bezier(.11,.61,.28,.95) 380ms both;
+    }
+
+    /* 5) 리스트 항목은 좌우로 살짝씩 교차 등장 */
+    #carCompare .list-l > li { transform: translateX(-14px); opacity:0; filter:blur(6px); }
+    #carCompare .list-r > li { transform: translateX(14px);  opacity:0; filter:blur(6px); }
+    #carCompare.in .list-l > li,
+    #carCompare.in .list-r > li {
+      transform: none;
+      transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease), filter var(--dur) var(--ease);
+      opacity: 1; filter: none;
+      transition-delay: var(--d, 0ms);
+    }
+
+    /* 모션 감도 낮춤 선호 시 */
+    @media (prefers-reduced-motion: reduce){
+      #carCompare .reveal,
+      #carCompare .vs,
+      #carCompare .box.policy,
+      #carCompare .box.policy::before,
+      #carCompare .list-l > li,
+      #carCompare .list-r > li {
+        transition: none !important;
+        animation: none !important;
+        filter: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+    }
+  </style>
+
+  <div class="title reveal" style="--d:40ms">한 눈에 비교하는</div>
+  <div class="subTitle reveal" style="--d:100ms">할부 구매 <span class="hi">vs 신차 장기 렌트</span></div>
+
+  <div class="compare-wrap">
+    <div class="box loan reveal" style="--d:160ms">
+      <h3>일반 대출</h3>
+      <!-- 좌측 리스트에는 list-l 클래스만 부여(기능 영향 없음) -->
+      <ul class="list-l" style="font-size:1rem;">
+        <li style="--d:240ms;">월 할부금 000,000원</li>
+        <li style="--d:300ms;">취등록세 별도</li>
+        <li style="--d:360ms;">자동차 세금 별도</li>
+        <li style="--d:420ms;">4년 보험료 별도</li>
+      </ul>
+    </div>
+
+    <div class="vs">VS</div>
+
+    <div class="box policy reveal" style="--d:220ms">
+      <h3>정책 자금</h3>
+      <!-- 우측 리스트에는 list-r 클래스만 부여 -->
+      <ul class="list-r">
+        <li style="--d:300ms;">월 렌탈료 000,000원</li>
+        <li style="--d:360ms;">취등록세 포함</li>
+        <li style="--d:420ms;">자동차 세금 포함</li>
+        <li style="--d:480ms;">4년 보험료 포함</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bottom reveal" style="--d:520ms">이제는 <span class="em">장기 렌트</span>가 정답입니다!</div>
+
+  <script>
+    (function(){
+      const root = document.querySelector('#carCompare');
+      if(!root) return;
+
+      // 목표: 화면을 벗어났다가 다시 들어와도 동일한 등장/강조 효과 재생
+      const reveals = root.querySelectorAll('.reveal');
+      const listL = root.querySelectorAll('.list-l > li');
+      const listR = root.querySelectorAll('.list-r > li');
+      const policy = root.querySelector('.box.policy');
+
+      // 초기 상태를 강제로 세팅 (CSS와 동일한 숨김 상태로)
+      function setHidden(){
+        reveals.forEach(el=>{
+          el.style.opacity = '0';
+          el.style.filter  = 'blur(6px)';
+          el.style.transform = 'translateY(16px) scale(.98)';
+        });
+        listL.forEach(li=>{
+          li.style.opacity='0';
+          li.style.filter='blur(6px)';
+          li.style.transform='translateX(-14px)';
+        });
+        listR.forEach(li=>{
+          li.style.opacity='0';
+          li.style.filter='blur(6px)';
+          li.style.transform='translateX(14px)';
+        });
+        // VS 배지 애니메이션 리셋
+        const vs = root.querySelector('.vs');
+        if(vs){
+          vs.style.animation = 'none';
+          // 강제 리플로우로 애니메이션 재적용 준비
+          void vs.offsetWidth;
+          vs.style.animation = '';
+        }
+        // 정책 자금 카드 애니메이션 리셋
+        if(policy){
+          policy.style.animation = 'none';
+          void policy.offsetWidth;
+          policy.style.animation = '';
+          // ::before는 클래스 토글로 재생되므로 .in 토글로 처리
+        }
+      }
+
+      // 보여질 때: 클래스 부여 + 인라인 스타일을 자연스럽게 해제
+      function setVisible(){
+        // 클래스 토글로 CSS 트랜지션/키프레임 발동
+        root.classList.add('in');
+
+        // reveal/리스트 항목 인라인 해제 → CSS 트랜지션 사용
+        const delayed = root.querySelectorAll('[style*="--d"]');
+        delayed.forEach(el=>{
+          el.style.transition = `opacity var(--dur) var(--ease), transform var(--dur) var(--ease), filter calc(var(--dur) + 120ms) var(--ease)`;
+        });
+
+        requestAnimationFrame(()=>{
+          reveals.forEach(el=>{
+            el.style.opacity = '1';
+            el.style.filter = 'none';
+            el.style.transform = 'none';
+          });
+          listL.forEach(li=>{
+            li.style.opacity='1';
+            li.style.filter='none';
+            li.style.transform='none';
+          });
+          listR.forEach(li=>{
+            li.style.opacity='1';
+            li.style.filter='none';
+            li.style.transform='none';
+          });
+        });
+      }
+
+      // 숨겨질 때: 클래스 제거 + 초기 상태로 리셋
+      function unsetVisible(){
+        root.classList.remove('in');
+        // 다음 진입 시 다시 재생되도록 전체 숨김 상태로 되돌림
+        setHidden();
+      }
+
+      // IntersectionObserver: 뷰포트 진입/이탈 시 토글 (disconnect 제거)
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            // 들어올 때: 먼저 깨끗하게 리셋하고 보이게
+            setHidden();
+            // 한 프레임 후 visible (재생 보장)
+            requestAnimationFrame(setVisible);
+          }else{
+            // 완전히 벗어나면 리셋
+            if(entry.intersectionRatio === 0){
+              unsetVisible();
+            }
+          }
+        });
+      }, {threshold: 0.25, rootMargin: '0px 0px -10% 0px'});
+
+      io.observe(root);
+
+      // 3) 마우스 미세 인터랙션(정책자금만 강조): 포인터 정교 환경에서만
+      const fine = matchMedia('(pointer:fine)').matches;
+      if(policy && fine){
+        let rx=0, ry=0, TX=0, TY=0, raf=null;
+        const max=6;
+        const lerp=(a,b,t)=>a+(b-a)*t;
+
+        const move=(e)=>{
+          const r = policy.getBoundingClientRect();
+          const cx=r.left+r.width/2, cy=r.top+r.height/2;
+          const x=(e.clientX-cx)/(r.width/2);
+          const y=(e.clientY-cy)/(r.height/2);
+          TX = (max * y * -1);
+          TY = (max * x);
+          if(!raf) raf=requestAnimationFrame(update);
+        };
+        const update=()=>{
+          rx = lerp(rx,TX,0.12);
+          ry = lerp(ry,TY,0.12);
+          policy.style.transform = `translateY(-2px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+          raf = (Math.abs(rx-TX)<0.1 && Math.abs(ry-TY)<0.1) ? null : requestAnimationFrame(update);
+        };
+        const leave=()=>{
+          TX=0; TY=0;
+          if(!raf) raf=requestAnimationFrame(update);
+        };
+        policy.addEventListener('mousemove', move);
+        policy.addEventListener('mouseleave', leave);
+      }
+
+      // 4) 탭 전환/페이지 가시성 변화 후 복귀 시에도 재생 (가시성 API)
+      document.addEventListener('visibilitychange', ()=>{
+        if(document.visibilityState === 'visible'){
+          // 화면으로 복귀 → 현재 섹션이 보이는 상태면 재생
+          const rect = root.getBoundingClientRect();
+          const inView = rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25;
+          if(inView){
+            unsetVisible();
+            // 한 프레임 후 재생
+            requestAnimationFrame(()=>{
+              setVisible();
+            });
+          }
+        }
+      });
+
+      // 초기엔 숨김 상태를 명확히 세팅 (스크롤 최상단에서도 깔끔하게)
+      setHidden();
+    })();
+  </script>
+</section>

@@ -1,0 +1,1394 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <!-- ===== 기본 메타 ===== -->
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>FitCase | 개인회생·파산 실시간 DB 파트너</title>
+  <meta name="description" content="법무법인·법무사 전용 개인회생/파산 실시간 DB. 지역·채무규모·진행상태 등 10가지 항목으로 정밀 분류하여 신뢰 기반의 리드를 제공합니다." />
+  <meta name="format-detection" content="telephone=no, address=no, email=no" />
+  <meta name="theme-color" content="#13b5a3" />
+  <meta name="color-scheme" content="light dark" />
+
+  <!-- ===== SEO ===== -->
+  <link rel="canonical" href="https://www.example.com/" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+  <!-- ===== Open Graph / Twitter ===== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="FitCase" />
+  <meta property="og:title" content="FitCase | 개인회생·파산 실시간 DB 파트너" />
+  <meta property="og:description" content="출처가 명확한 공식 플랫폼의 실시간 DB로 선임 가능성을 높여보세요." />
+  <meta property="og:url" content="https://www.example.com/" />
+  <meta property="og:image" content="https://www.example.com/og/fitcase_og.jpg" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="FitCase | 개인회생·파산 실시간 DB 파트너" />
+  <meta name="twitter:description" content="지역·채무규모·진행상태 등 10가지 항목 정밀 분류, 신뢰 기반 리드 제공." />
+  <meta name="twitter:image" content="https://www.example.com/og/fitcase_og.jpg" />
+
+  <!-- ===== 파비콘 / PWA ===== -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- ===== 성능(안전 옵션) ===== -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <!-- 시스템 폰트 중심이지만, Pretendard 웹폰트를 쓸 경우만 아래 주석 해제
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700;900&display=swap" rel="stylesheet">
+  -->
+
+  <!-- ===== 스타일 ===== -->
+   <link href="./css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="./css/style.css" rel="stylesheet" type="text/css" />
+
+  <!-- ===== 구조화 데이터(JSON-LD) ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "FitCase",
+        "url": "https://www.example.com/",
+        "logo": "https://www.example.com/og/fitcase_logo.png",
+        "sameAs": []
+      },
+      {
+        "@type": "WebSite",
+        "name": "FitCase",
+        "url": "https://www.example.com/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.example.com/search?q={query}",
+          "query-input": "required name=query"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+<!-- ✅ 고정 헤더: 섹션을 분리하고 header 안에 topbar를 배치 (전체 코드 - 로테이트 텍스트를 로고 '아래칸'에 배치) -->
+<section id="stickyTopbar" aria-label="상단 고정 헤더">
+
+
+  <header class="topbar" role="banner">
+    <div class="left" aria-live="polite">
+      <!-- 1줄: 로고 -->
+      <!-- FitCase Wordmark (for light backgrounds) -->
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="36" viewBox="0 0 220 36" role="img" aria-label="FitCase">
+  <defs>
+    <style>
+      .txt{ font: 900 20px/1 Pretendard, "Noto Sans KR", Segoe UI, Roboto, system-ui, -apple-system, sans-serif; }
+    </style>
+  </defs>
+  <!-- Mark -->
+  <g transform="translate(2 4)">
+    <!-- mint tile -->
+    <rect x="0" y="0" width="28" height="28" rx="8" fill="#13b5a3"/>
+    <!-- F cutout (white) -->
+    <rect x="8" y="6.8" width="5.2" height="15" rx="2.2" fill="#ffffff"/>
+    <rect x="8" y="6.8" width="12.2" height="5.2" rx="2.2" fill="#ffffff"/>
+    <rect x="8" y="13.8" width="9.4" height="5.2" rx="2.2" fill="#ffffff"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text class="txt" x="38" y="25" fill="#0b1220">FitCase</text>
+</svg>
+
+
+      <!-- 2줄: 로테이트 텍스트 (로고 '아래칸') -->
+      <div class="fade-rotator" aria-hidden="true">
+        <div class="line">자금이 필요한 소상공인을 위한</div>
+        <div class="line"><b>정책자금 지원 파트너</b></div>
+      </div>
+      <!-- 스크린리더용 고정 텍스트가 필요하면 아래 주석 해제
+      <span class="sr-only">법무법인·법무사 전용, 개인회생·파산 DB 파트너</span> -->
+    </div>
+    <a class="tel" href="#form_e12">바로 신청하기</a>
+
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function(e) {
+      const targetId = this.getAttribute("href");
+      if (targetId.length > 1) { // #만 있는 링크 제외
+        e.preventDefault();
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    });
+  });
+});
+</script>
+  </header>
+
+
+</section>
+
+
+
+
+
+<!-- ✅ 본문 히어로: 기존 섹션에서 topbar 제거, 나머지 그대로 -->
+<section id="legalDBHero" aria-label="개인회생·파산 실시간 DB 공급">
+
+
+  <!-- 🔹 버블 요소 -->
+  <span aria-hidden="true" class="bg-bubble b1"></span>
+  <span aria-hidden="true" class="bg-bubble b2"></span>
+  <span aria-hidden="true" class="bg-bubble b3"></span>
+
+  <div class="wrap">
+    <!-- (topbar는 별도 #stickyTopbar 섹션으로 분리됨) -->
+    <div class="headline">
+      <div class="tag">정부지원 정책자금</div>
+      <h2>성장과 안정적 운영이<br>필요한 시점에<br><Br>
+몰라서 놓치고 있거나<br>자금 확보 가능한<br>
+정부 지원금을 찾고 있다면?<br><br>
+
+<b>10가지 항목으로 구별된<br>공식 플랫폼의 실시간 DB로</b><br>선임의 가능성을 높여보세요</h2>
+      <p>공식적인 플랫폼과 신뢰를 기반으로<br>실시간 접수한 고객을 선별!<br>지역·채무규모·진행상태로 분류해 제공합니다.</p>
+    </div>
+
+    <div class="content">
+      <div class="left">
+        <div class="dbStack" aria-live="polite">
+          <div class="dbTrack"></div>
+        </div>
+        <!-- <div class="bubble bubble1">실시간 유입</div>
+        <div class="bubble bubble2">중복 제거</div>
+        <div class="bubble bubble3">전환율 상위</div> -->
+      </div>
+
+      <div class="right">
+        <div>
+          <hr class="border1" style="width:100%;border:1px solid #00000012;margin:20px 0;">
+          <h3>이런 DB만 전달합니다</h3>
+          <ul>
+            <li>최근 24시간 이내 접수 · 중복/허수 제거</li>
+            <li>지역 · 채무규모 · 진행상태 정교 분류</li>
+            <li>당사에 대한 신뢰 정보를 기반한 DB</li>
+            <li>당일 5건·10건·50건 단위 원하는 만큼 수급 가능</li>
+          </ul>
+          <small style="color:var(--muted); display:block; margin-top:15px; font-size:.85rem;">* 개인정보보호법 및 광고성 정보 수신 동의 기준을 준수하여 수집·전달합니다.</small>
+        </div>
+        <div class="actions">
+          <a class="btn-fill" href="#form_e12">실시간 DB 신청하기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+
+
+<section id="whoCanPartner">
+
+
+  <!-- 새 상단 헤더 -->
+  <div class="hero" aria-label="만기 후 100% 환급 배너">
+    <!-- 🔹 추가된 헤드라인 태그 -->
+    <div class="tag">FitCase만의 특별한 장점</div>
+
+    <h2 class="headline">기존의 문제를 없애고<br><span class="hl">신뢰와 브랜딩을 더하다!<br></span></h2>
+    <div class="sub">부재, 허위디비 뿐만 아니라<br>출처와 타겟의 오류를 없애고<br><br>회사의 신뢰를 높이고<br>계약 조건에 맞는 고객을<br>맞춤으로 전달<br></div>
+    <!-- <div class="note">*만기 납입 후 1개월 시점 해약시 또는 라이프서비스 사용시</div> -->
+  </div>
+
+  <!-- (기존 카드 그리드 그대로) -->
+  <div class="grid">
+    <!-- 01 -->
+     <a class="card reveal" href="#">
+    <div class="thumb">
+      <img src="./img/check1.jpg" alt="중복·허수 크레딧 보상 정책">
+      <span class="tag left"><i>SAFE</i>보상정책</span>
+    </div>
+    <div class="info">
+      <div class="leading">중복·허수 무료 보상</div>
+      <div class="desc">수집 단계 차단 + 발생 시 보상으로 리스크 최소화</div>
+    </div>
+  </a>
+
+  <!-- 03 -->
+  <a class="card reveal" href="#">
+    <div class="thumb">
+      <img src="./img/check.jpg" alt="10항목 정밀 분류">
+      <span class="tag left"><i>PRO</i>정밀분류</span>
+    </div>
+    <div class="info">
+      <div class="leading">10항목 정밀 분류</div>
+      <div class="desc">지역·채무·진행·의사 등 원하는 사건만 선별</div>
+    </div>
+  </a>
+
+  <!-- 04 -->
+  <a class="card reveal" href="#">
+    <div class="thumb">
+      <img src="./img/check2.jpg" alt="브랜딩 연동 랜딩·광고 공동 제작">
+      <span class="tag right"><i>BRAND</i>공동제작</span>
+    </div>
+    <div class="info">
+      <div class="leading">신뢰 기반 제공</div>
+      <div class="desc">계약의 핵심인 신뢰를 줄 수 있는 요소 제공</div>
+    </div>
+  </a>
+
+  <!-- 04 -->
+  <a class="card reveal" href="#">
+    <div class="thumb">
+      <img src="./img/check3.jpg" alt="브랜딩 연동 랜딩·광고 공동 제작">
+      <span class="tag right"><i>BRAND</i>공동제작</span>
+    </div>
+    <div class="info">
+      <div class="leading">명확한 출처와 효율측정</div>
+      <div class="desc">매체별 계약율을 측정 더 높은 효율로 운영</div>
+    </div>
+  </a>
+
+  <!-- 05 -->
+  <a class="card reveal" href="#">
+    <div class="thumb">
+      <img src="./img/check4.jpg" alt="실시간·24시간 이내 전달">
+      <span class="tag left"><i>FAST</i>실시간</span>
+    </div>
+    <div class="info">
+      <div class="leading">실시간·24h 내 전달</div>
+      <div class="desc">적치 없이 신선한 리드, 시간대 옵션 제공</div>
+    </div>
+  </a>
+
+  <!-- 06 -->
+  <a class="card reveal" href="#">
+    <div class="thumb">
+      <img src="./img/check5.jpg" alt="파일럿 운영과 A/B 테스트">
+      <span class="tag right"><i>PILOT</i>테스트</span>
+    </div>
+    <div class="info">
+      <div class="leading">파일럿 운영·A/B 테스트</div>
+      <div class="desc">문구·타겟·룰을 주간 단위로 개선</div>
+    </div>
+  </a>
+
+  </div>
+
+
+</section>
+
+
+<section id="carLoanPlus" aria-label="상상인플러스 자동차담보대출">
+
+  <div class="wrap">
+    <!-- 상단 선형 일러스트 (톤만 맞춘 간결 SVG) -->
+  
+<div class="headline">
+  <div class="tag">실시간 접수 · 맞춤 분류</div>
+  <h2>단순 디비 전달로 끝이 아닌,<br><b>함께 만들어가는 파트너로서!</b></h2>
+  <p>브랜딩 연동 랜딩·광고와 10개 항목 정밀 분류로<br>조건에 맞는 DB를 함께 찾아갑니다.</p>
+</div>
+
+<!-- 4가지 옵션 원 카드 -->
+<div class="steps" role="list">
+  <div class="step" role="listitem" aria-label="랜딩/스크립트 공동 설계">
+    <span class="no">1</span>
+    <div class="label">상황과 조건 확인</div>
+    <span class="em">먼저 테스트 디비 전달</span>
+  </div>
+   <div class="step" role="listitem" aria-label="10개 항목 정밀 분류">
+    <span class="no">2</span>
+    <div class="label">지역·채무·진행</div>
+    <span class="em">정밀 분류(10항목)</span>
+  </div>
+  <div class="step" role="listitem" aria-label="실시간 수집 및 동의 검증">
+    <span class="no">3</span>
+    <div class="label">실시간 수집 ·</div>
+    <span class="em">동의 검증</span>
+  </div>
+ 
+  <div class="step" role="listitem" aria-label="파일럿 운영과 지속 최적화">
+    <span class="no">4</span>
+    <div class="label">파일럿 운영 ·</div>
+    <span class="em">지속 최적화</span>
+  </div>
+</div>
+
+
+
+
+  </div>
+</section>
+
+
+
+<section id="eventList">
+
+
+  <!-- 상단 헤더 -->
+  <div class="hero">
+    <h2 class="headline">DB 확보는 너무 어렵고<br>온라인 마케팅 위한<br>기반 갖추기 어렵다면?<br><br>고객에게 신뢰를 전달하고<br>성장의 기회를 함께 할<br><span class="hl blink">파트너로 함께 하세요!</span></h2>
+    <div class="sub">* 최적화 된 DB는<br>단기적인 관점으론 지속할 수 없습니다.<br>그래서 함께 파트너로 성장할 팀을 찾습니다.</div>
+    <!-- <div class="note">*만기 납입 후 1개월 시점 해약시 또는 라이프서비스 사용시</div> -->
+
+    <div class="points" aria-label="핵심 포인트">
+      <div class="wrap">
+        <div class="col">
+          <div class="label">신청 조건</div>
+          <div class="value">좋은 DB가 필요한<br>법무법인 or 법무사</div>
+        </div>
+        <div class="col">
+          <div class="label">우대 사항</div>
+          <div class="value">끈끈한 소통으로<br>함께하는 곳</div>
+        </div>
+        <div class="col">
+          <div class="label">지금 파트너가 되면?</div>
+          <div class="value">4가지 혜택 제공</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 기존 이벤트 항목들 -->
+  <div class="item">
+    <div class="txt">1. <strong>랜딩 및 신뢰 기반</strong> 제공</div>
+    <!-- <img src="https://picsum.photos/seed/set/200" alt="세트이미지"> -->
+  </div>
+
+  <div class="item">
+    <div class="txt">2. 상황과 조건에 맞는 <strong>DB 지원</strong></div>
+    <!-- <img src="https://picsum.photos/seed/mini/200" alt="미니세트"> -->
+  </div>
+
+  <div class="item">
+    <div class="txt">3. <strong>24시간 실시간 디비</strong>만 제공</div>
+    <!-- <img src="https://picsum.photos/seed/tester/200" alt="테스터"> -->
+  </div>
+
+  <div class="item">
+    <div class="txt">4. 허수, 중복 <strong>100% 무료 보상</strong></div>
+    <!-- <img src="https://picsum.photos/seed/tester/200" alt="테스터"> -->
+  </div>
+
+   
+
+   
+
+</section>
+
+
+<section id="applyMintForm" aria-label="신청 폼">
+
+  <!-- 배경 버블 -->
+  <span aria-hidden="true" class="bg-bubble b1"></span>
+  <span aria-hidden="true" class="bg-bubble b2"></span>
+  <span aria-hidden="true" class="bg-bubble b3"></span>
+
+  <div class="wrap">
+    <!-- 좌측 카피 -->
+    <div class="copy">
+      <span class="tag">무료 상담 신청</span>
+      <h2 class="headline">지금 바로 <b>상담 신청</b>하고<br>안내 받으세요!</h2>
+      <p class="sub">어려운 부분을 이해하고 해결할 수 있도록 함께 하겠습니다.</p>
+      <div class="points" aria-hidden="true">
+        <div class="chip">✓ 24시간 상담 가능</div>
+        <div class="chip">✓ 즉시 전화 안내</div>
+        <div class="chip">✓ 카카오 문의 가능</div>
+      </div>
+    </div>
+
+    <!-- 우측 폼 카드 -->
+     <div class="card" id="applyForm">
+  <form action="" id="form_e12" method="POST" target="hidden_iframe12" onsubmit="dll(); submitted=true;">
+    <input type="hidden" name="entry.1524668040" value="당근">
+
+      <h3>상담 신청 폼</h3>
+      <p class="help">* 표시는 필수 입력</p>
+
+      <div class="grid">
+        <div class="field">
+          <label for="name">성함 *</label>
+          <input id="name1" name="entry.1069240464" type="text" placeholder="홍길동" maxlength="4">
+        </div>
+        <div class="field">
+          <label for="phone">연락처 *</label>
+          <input id="phone1" name="entry.1985153351" type="text" placeholder="01012345678" maxlength="11">
+          <!-- <small id="phoneHelp" class="assist">숫자만 입력해도 자동으로 하이픈이 들어갑니다.</small> -->
+        </div>
+
+         <div class="field">
+          <label for="name">회사명 *</label>
+          <input id="company1" name="entry.54578187" type="text" placeholder="회사명" maxlength="10">
+        </div>
+
+          <div class="field">
+          <label for="region">지역 *</label>
+          <select id="region1" name="entry.2044065206">
+            <option value="" selected disabled>지역 선택</option>
+            <option>서울</option>
+            <option>부산</option>
+            <option>대구</option>
+            <option>인천</option>
+            <option>광주</option>
+            <option>대전</option>
+            <option>울산</option>
+            <option>경기</option>
+            <option>강원</option>
+            <option>충북</option>
+            <option>충남</option>
+            <option>전북</option>
+            <option>전남</option>
+            <option>경북</option>
+            <option>경남</option>
+            <option>제주</option>
+          </select>
+        </div>
+
+
+          <div class="field">
+          <label for="region">업태 *</label>
+          <select id="type1" name="entry.17479036">
+            <option value="" selected disabled>업태 선택</option>
+            <option>제조업</option>
+            <option>도소매업</option>
+            <option>정보통신업(IT)</option>
+            <option>건설업</option>
+            <option>서비스업</option>
+            <option>일반음식점</option>
+            <option>기타</option>
+          </select>
+        </div>
+
+
+          <div class="field">
+          <label for="region">사업연혁 *</label>
+          <select id="runtime1" name="entry.1389324988">
+            <option value="" selected disabled>사업 연혁 선택</option>
+            <option>1년 미만</option>
+            <option>1년 - 3년</option>
+            <option>3년 - 7년</option>
+            <option>7년 이상</option>
+          </select>
+        </div>
+
+
+
+  <div class="field">
+          <label for="region">연매출 *</label>
+          <select id="sales1" name="entry.1400342969">
+            <option value="" selected disabled>연매출 선택</option>
+            <option>1억 미만 (신청불가)</option>
+            <option>2~3억원</option>
+            <option>4~5억원</option>
+            <option>5~10억원</option>
+            <option>10~20억원</option>
+            <option>20억원 이상</option>
+          </select>
+        </div>
+
+
+          <div class="field">
+          <label for="region">필요자금 *</label>
+          <select id="fund1" name="entry.1362031850">
+            <option value="" selected disabled>필요 금액 선택</option>
+            <option>3천만원 ~ 5천만원</option>
+            <option>5천만원 ~ 1억원</option>
+            <option>1억원 ~ 2억원</option>
+            <option>5억원 ~ 10억원</option>
+            <option>5억원 ~ 10억원</option>
+            <option>10억원 이상</option>
+            <option>그 외 시설자금</option>
+          </select>
+        </div>
+
+
+     <div class="field">
+          <label for="region">연체 및 체납여부 *</label>
+          <select id="overdue1" name="entry.1037729320">
+            <option value="" selected disabled>연체 / 체납 여부 선택</option>
+            <option>있음</option>
+            <option>없음</option>
+          </select>
+        </div>
+
+
+           <div class="field">
+          <label for="region">자금 필요 기간 *</label>
+          <select id="need1" name="entry.1742892989">
+            <option value="" selected disabled>자금이 필요한 기간 선택</option>
+            <option>1개월 이내</option>
+            <option>2개월 이내</option>
+            <option>3개월 이내</option>
+            <option>6개월 이내</option>
+          </select>
+        </div>
+
+
+
+
+
+
+
+
+
+
+     
+
+        <div class="field full">
+          <label for="memo">문의 사항</label>
+          <textarea id="memo" name="entry.549289795" placeholder="상담이 필요한 내용을 간단히 남겨주세요."></textarea>
+        </div>
+
+        <div class="field full">
+          <label class="agree">
+            <input id="agree" type="checkbox" checked>
+            <span>개인정보 수집·이용 및 광고성 정보 수신에 동의합니다. (필수)</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="actions">
+        <input class="btn btn-fill" id="send_message1" type="submit" value="지금 신청하기" disabled>
+      </div>
+
+    
+    </form>
+    </div>
+  </div>
+
+
+    <script type="text/javascript">var submitted = false;</script>
+
+                                <iframe name="hidden_iframe11" id="hidden_iframe11" style="display:none;" onload=""></iframe>
+                                <iframe name="hidden_iframe12" id="hidden_iframe12" style="display:none;" onload=""></iframe>
+                        
+
+
+
+
+<!-- ▼▼▼ 기존 코드 보존: Select 오른쪽 화살표 기능만 “추가” ▼▼▼ -->
+<style>
+
+</style>
+<script>
+  (function(){
+    const root = document.querySelector('#applyMintForm');
+    if(!root) return;
+    const selects = root.querySelectorAll('select');
+
+    /* 원본 DOM/ID 보존: select를 래퍼로 감싸 화살표만 추가 */
+    selects.forEach(function(sel){
+      if(sel.closest('.select-wrap')) return; // 중복 래핑 방지
+      const wrap = document.createElement('div');
+      wrap.className = 'select-wrap';
+      sel.parentNode.insertBefore(wrap, sel);
+      wrap.appendChild(sel);
+
+      const open = function(){ wrap.classList.add('open'); };
+      const close = function(){ wrap.classList.remove('open'); };
+
+      sel.addEventListener('focus', open);
+      sel.addEventListener('click', open);
+      sel.addEventListener('mousedown', open);
+      sel.addEventListener('touchstart', open, {passive:true});
+      sel.addEventListener('blur', close);
+      sel.addEventListener('change', close);
+      sel.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+    });
+  })();
+</script>
+<!-- ▲▲▲ 추가 끝: 나머지 코드는 단 한 줄도 수정/삭제하지 않았습니다 ▲▲▲ -->
+
+
+
+  <!-- ▲▲▲ Select 화살표 보완 끝 ▲▲▲ -->
+</section>
+
+
+
+<section id="kakaoFloating" aria-label="카카오톡 바로 상담 버튼">
+
+
+  <!-- 링크: 카카오 채널/상담 URL로 교체하세요 -->
+  <!-- <a class="fab" href="https://pf.kakao.com/_YOUR_CHANNEL" target="_blank" rel="noopener nofollow" aria-describedby="kakaoLabel">
+    <span class="sr-only">카카오톡 상담 열기</span>
+
+    <img class="ico" src="./img/kakao.png" alt="카카오톡 아이콘" width="34" height="34" decoding="async" />
+
+
+  </a>
+  <span id="kakaoLabel" class="label">카카오톡 상담</span> -->
+
+  <script>
+    // 재진입 시 효과가 항상 다시 잘 보이도록(가시성 기반 재시작)
+    (function(){
+      const root = document.getElementById('kakaoFloating');
+      const btn  = root?.querySelector('.fab');
+      if(!root || !btn || !('IntersectionObserver' in window)) return;
+
+      const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            // 펄스 애니메이션 재시작 트릭
+            btn.style.animation = 'none';
+            // 강제로 리플로우
+            void btn.offsetHeight;
+            btn.style.animation = '';
+          }
+        });
+      }, { threshold: 0.01 });
+
+      observer.observe(root);
+    })();
+  </script>
+</section>
+
+
+
+<script src="./js/jquery-1.11.0.min.js"></script>
+<script src="./js/validation1.js"> </script>
+
+ <script>
+$(function(){
+  $('input[name="entry.865661619"]').val('메타');
+});
+</script>
+
+
+<!-- ======================= Footer (Formal / Corporate Tone) ======================= -->
+
+</body>
+
+<section id="siteFooter" aria-label="사이트 푸터">
+
+  <div class="wrap">
+    <!-- 상단: 로고 + 정책 링크 -->
+    <div class="head">
+      <div class="brand">
+ <!-- FitCase Wordmark (for dark backgrounds) -->
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="36" viewBox="0 0 220 36" role="img" aria-label="FitCase">
+  <defs>
+    <style>
+      .txt{ font: 900 20px/1 Pretendard, "Noto Sans KR", Segoe UI, Roboto, system-ui, -apple-system, sans-serif; }
+    </style>
+  </defs>
+  <!-- Mark -->
+  <g transform="translate(2 4)">
+    <!-- mint tile -->
+    <rect x="0" y="0" width="28" height="28" rx="8" fill="#13b5a3"/>
+    <!-- F cutout (white) -->
+    <rect x="8" y="6.8" width="5.2" height="15" rx="2.2" fill="#ffffff"/>
+    <rect x="8" y="6.8" width="12.2" height="5.2" rx="2.2" fill="#ffffff"/>
+    <rect x="8" y="13.8" width="9.4" height="5.2" rx="2.2" fill="#ffffff"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text class="txt" x="38" y="25" fill="#ffffff">FitCase</text>
+</svg>
+
+      </div>
+      <!-- <nav class="policy" aria-label="정책 및 약관">
+        <a href="#" data-open-terms="true">이용약관</a>
+        <span class="bar">|</span>
+        <a href="#" data-open-terms="true">개인정보처리방침</a>
+      </nav> -->
+    </div>
+
+    <!-- 회사 정보 -->
+    <div class="corp">
+      <!-- <div class="ko-name">FitCase</div> -->
+      <p class="row"><b>회사명</b> : 미디어제트&nbsp;&nbsp;|&nbsp;&nbsp;<b>대표명</b> : 안서윤</p>
+      <address><b>주소</b> : 서울특별시 영등포구 선유로 130, 3층 301호 15호</address>
+      <p class="row"><b>사업자등록번호</b> : 361-07-02765</p>
+      <!-- 필요 시 추가
+      <p class="row"><b>통신판매업신고번호</b> : 제2025-서울성동-0000호</p>
+      <p class="row"><b>대표번호</b> : 02-000-0000&nbsp;&nbsp;|&nbsp;&nbsp;<b>이메일</b> : hello@fitcase.co</p>
+      -->
+    </div>
+
+    <!-- 하단 바 -->
+    <!-- <div class="legal">
+      <div>© <span id="footerYear"></span> FitCase. All rights reserved.</div>
+      <div class="links">
+        <a href="#applyMintForm">문의하기</a>
+        <span aria-hidden="true" style="opacity:.35">|</span>
+        <a href="#stickyTopbar">회사 소개</a>
+      </div>
+    </div> -->
+  </div>
+
+  <!-- 푸터 내부 '맨 위로' 버튼 (아이콘은 img 사용) -->
+  <!-- <button type="button" class="toTop" id="footerToTop" aria-label="맨 위로">
+    <img src="./img/ico-chevron-up.png" alt="">
+  </button> -->
+
+ <script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function(e) {
+      const targetId = this.getAttribute("href");
+      if (targetId.length > 1) { // #만 있는 링크 제외
+        e.preventDefault();
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    });
+  });
+});
+</script>
+
+  <script>
+    (() => {
+      const headerSec = document.getElementById('stickyTopbar');
+      if(!headerSec) return;
+
+      const bar = headerSec.querySelector('.topbar');
+      const rotator = headerSec.querySelector('.fade-rotator');
+      const hero = document.querySelector('#legalDBHero');
+
+      /* ===== 헤더 높이에 맞춰 히어로 여백 변수 반영 ===== */
+      function setHeroHeaderSpace(){
+        if(!hero || !bar) return;
+        const h = bar.getBoundingClientRect().height;
+        hero.style.setProperty('--hdr-space', (h + 20) + 'px');
+      }
+      setHeroHeaderSpace();
+      addEventListener('resize', setHeroHeaderSpace, { passive:true });
+
+      /* ===== 스크롤 방향에 따라 헤더 숨김/표시 ===== */
+      let lastY = window.pageYOffset || document.documentElement.scrollTop;
+      let ticking = false;
+      const threshold = 8;
+      const minShowTop = 10;
+
+      function onScroll(){
+        const y = window.pageYOffset || document.documentElement.scrollTop;
+        const dy = y - lastY;
+
+        if(Math.abs(dy) > threshold){
+          if(dy > 0 && y > bar.offsetHeight + 10){
+            bar.style.transform = 'translate(-50%, -120%)';   // 아래로 스크롤 → 숨김
+          }else{
+            bar.style.transform = 'translate(-50%, 0)';       // 위로 스크롤/상단 → 표시
+          }
+          lastY = y;
+        }
+        if(y <= minShowTop) bar.style.transform = 'translate(-50%, 0)';
+        ticking = false;
+      }
+      addEventListener('scroll', () => {
+        if(!ticking){ requestAnimationFrame(onScroll); ticking = true; }
+      }, { passive:true });
+
+      /* ===== 회전 텍스트: 화면 이탈 후 재진입 시에도 다시 적용 =====
+         - IntersectionObserver로 뷰포트 진입 시 .play 클래스 부여 → 애니메이션 재시작
+         - 고정 헤더라도 브라우저 탭 전환/가시성 변화 대응 */
+      function playRotate(){ rotator && rotator.classList.add('play'); }
+      function stopRotate(){ rotator && rotator.classList.remove('play'); }
+
+      if('IntersectionObserver' in window && rotator){
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(ent => {
+            if(ent.isIntersecting) playRotate();
+            else stopRotate();
+          });
+        }, { root:null, threshold:0.01 });
+        io.observe(bar);
+      }else{
+        // 폴백: 즉시 재생
+        playRotate();
+      }
+
+      // 탭 비가시 → 일시정지 / 가시 → 재생 (재진입 시 항상 다시 적용)
+      document.addEventListener('visibilitychange', () => {
+        if(document.hidden) stopRotate();
+        else {
+          stopRotate();
+          requestAnimationFrame(playRotate);
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    (function(){
+      const root = document.querySelector('#legalDBHero');
+      const track = root.querySelector('.dbTrack');
+      const stack = root.querySelector('.dbStack');
+
+      const VISIBLE = 5, GAP = 10, INTERVAL = 2600;
+
+      const DB_LIST = [
+        { city:'서울', age:34, overdue:'연체 3개월', debt:'채무 7,800만원', memo:'회생 상담 희망', time:'오늘 13:42' },
+        { city:'부산', age:41, overdue:'연체 1개월', debt:'채무 5,200만원', memo:'파산 상담 문의', time:'오늘 13:55' },
+        { city:'대구', age:29, overdue:'연체 없음', debt:'채무 3,900만원', memo:'채무조정 가능 여부', time:'오늘 14:10' },
+        { city:'수원', age:38, overdue:'연체 2개월', debt:'채무 9,100만원', memo:'회생/파산 비교 문의', time:'오늘 14:22' },
+        { city:'인천', age:33, overdue:'연체 4개월', debt:'채무 1억 1,000만원', memo:'급한 상담 요청', time:'오늘 14:35' },
+        { city:'대전', age:36, overdue:'연체 1개월', debt:'채무 6,400만원', memo:'회생 자격 문의', time:'오늘 14:48' },
+        { city:'창원', age:45, overdue:'연체 5개월', debt:'채무 1억 3,000만원', memo:'급히 상담 요청', time:'오늘 15:02' }
+      ];
+
+      function createCard(data){
+        const el = document.createElement('div');
+        el.className = 'db-card enter';
+        el.innerHTML = `
+          <div class="db-avatar"></div>
+          <div class="db-main">
+            <p class="db-title">${data.city} · ${data.age}세 · ${data.overdue}</p>
+            <p class="db-sub">${data.debt} · ${data.memo} <span style="color:var(--muted);font-size:.9em">(${data.time})</span></p>
+          </div>`;
+        requestAnimationFrame(()=> el.classList.add('is-in'));
+        return el;
+      }
+
+      function shiftUp(by){
+        track.classList.add('is-shifting');
+        track.style.transform = `translateY(-${by}px)`;
+        return new Promise(res=>{
+          const onEnd = ()=>{ track.removeEventListener('transitionend', onEnd); res(); };
+          track.addEventListener('transitionend', onEnd, {once:true});
+        }).then(()=>{
+          track.classList.remove('is-shifting');
+          track.style.transform = 'translateY(0)';
+        });
+      }
+
+      let idx = 0, paused = false, timer = null, cardHeight = 78;
+
+      function prime(){
+        const init = Math.min(VISIBLE, DB_LIST.length);
+        for(let i=0;i<init;i++) pushNext();
+        if(track.children.length) cardHeight = track.children[0].getBoundingClientRect().height;
+      }
+
+      function pushNext(){
+        const data = DB_LIST[idx % DB_LIST.length]; idx++;
+        const card = createCard(data);
+        track.appendChild(card);
+
+        const cards = track.children;
+        if(cards.length > VISIBLE){
+          const first = cards[0];
+          shiftUp(cardHeight + GAP).then(()=> first.remove());
+        }
+      }
+
+      function schedule(){
+        clearInterval(timer);
+        timer = setInterval(()=>{ if(!paused) pushNext(); }, INTERVAL);
+      }
+
+      stack.addEventListener('mouseenter',()=> paused = true);
+      stack.addEventListener('mouseleave',()=> paused = false);
+
+      const io = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting) schedule();
+          else clearInterval(timer);
+        });
+      },{threshold:.2});
+      io.observe(stack);
+
+      prime();
+    })();
+  </script>
+
+  <script>
+    (function(){
+      const root = document.getElementById('whoCanPartner');
+      if(!root) return;
+      const targets = root.querySelectorAll('.card.reveal');
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){ entry.target.classList.add('show'); }
+          else{ entry.target.classList.remove('show'); }
+        });
+      }, {threshold:.18, rootMargin:'0px 0px -5% 0px'});
+      targets.forEach(el=> io.observe(el));
+    })();
+  </script>
+
+
+  <script>
+    (function(){
+      const items = document.querySelectorAll('#eventList .item');
+      let idx = -1;
+      setInterval(()=>{
+        items.forEach(i=>i.classList.remove('active'));
+        idx = (idx+1) % items.length;
+        items[idx].classList.add('active');
+      }, 2000); // 2초마다 강조 전환
+    })();
+  </script>
+
+<script>
+  (function(){
+    const root = document.querySelector('#applyMintForm');
+    const form = root.querySelector('#applyForm');
+    const agreeBox = form.querySelector('#agree');
+    const submitBtn = form.querySelector('#submitBtn');
+    const agreeTextSpan = form.querySelector('.agree span');
+
+    /* ====== 푸터 z-index 제어 준비 ====== */
+    const footer = document.getElementById('siteFooter');   // <section id="siteFooter"> 대상
+    let prevFooterZ = null;                                  // 기존 인라인 z-index 저장
+
+    // 방법 A) 전역 클래스 토글(권장) — 기존 스타일 보존 + 확실한 복구
+    // iOS/인앱 브라우저 등에서도 확실히 적용되도록 !important 사용
+    (function injectFooterRule(){
+      const style = document.createElement('style');
+      style.textContent = `
+        html.__modal-open #siteFooter{ z-index:-1 !important; }
+      `;
+      document.head.appendChild(style);
+    })();
+
+    function lowerFooter(){
+      document.documentElement.classList.add('__modal-open');
+      // 혹시 외부 스타일이 강해서 클래스가 먹지 않을 경우 대비로 인라인도 백업 후 강제
+      if(footer){
+        prevFooterZ = footer.style.zIndex || '';
+        footer.style.zIndex = '-1';
+      }
+    }
+    function restoreFooter(){
+      document.documentElement.classList.remove('__modal-open');
+      if(footer){
+        if(prevFooterZ) footer.style.zIndex = prevFooterZ;
+        else footer.style.removeProperty('z-index');
+        prevFooterZ = null;
+      }
+    }
+
+    /* '자세히 보기' 버튼 삽입 */
+    const termsBtn = document.createElement('button');
+    termsBtn.type = 'button';
+    termsBtn.className = 'terms-link';
+    termsBtn.textContent = '자세히 보기';
+    termsBtn.setAttribute('aria-haspopup','dialog');
+    if(agreeTextSpan){
+      agreeTextSpan.appendChild(document.createTextNode(' '));
+      agreeTextSpan.appendChild(termsBtn);
+    }
+
+    /* 모달 DOM */
+    const overlay = document.createElement('div');
+    overlay.className = 'terms-overlay';
+    overlay.setAttribute('hidden','');
+    overlay.innerHTML = `
+      <div class="terms-sheet" role="dialog" aria-modal="true" aria-labelledby="termsTitle" tabindex="-1">
+        <div class="terms-header">
+          <h3 id="termsTitle" class="terms-title">개인정보 처리방침</h3>
+          <button type="button" class="terms-close-x" aria-label="닫기">✕</button>
+        </div>
+        <div class="terms-body" id="termsBody">
+          <p>회사명(이하 ‘회사’라 한다)는 개인정보 보호법 제30조에 따라 정보 주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리지침을 수립, 공개합니다.</p>
+          <h4>제1조 (개인정보의 처리목적)</h4>
+          <p>회사는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.</p>
+          <ul>
+            <li><b>홈페이지 회원 가입 및 관리</b>: 회원 가입 의사 확인, 회원제 서비스 제공에 따른 본인 식별․인증, 회원자격 유지․관리, 제한적 본인확인제 시행에 따른 본인확인, 서비스 부정 이용 방지, 만 14세 미만 아동의 개인정보처리 시 법정대리인의 동의 여부 확인, 각종 고지․통지, 고충 처리 등을 목적으로 개인정보를 처리합니다.</li>
+            <li><b>재화 또는 서비스 제공</b>: 물품 배송, 서비스 제공, 계약서 및 청구서 발송, 콘텐츠 제공, 맞춤서비스 제공, 본인인증, 연령인증, 요금 결제 및 정산, 채권추심 등을 목적으로 개인정보를 처리합니다.</li>
+            <li><b>고충 처리</b>: 민원인의 신원 확인, 민원사항 확인, 사실조사를 위한 연락․통지, 처리 결과 통보 등의 목적으로 개인정보를 처리합니다.</li>
+          </ul>
+
+          <h4>제2조 (개인정보의 처리 및 보유기간)</h4>
+          <p>① 회사는 법령에 따른 개인정보 보유, 이용 기간 또는 정보주체로부터 개인정보를 수집 시에 동의 받은 개인정보 보유, 이용 기간 내에서 개인정보를 처리, 보유합니다.</p>
+          <p>② 각각의 개인정보 처리 및 보유 기간은 다음과 같습니다.</p>
+          <ul>
+            <li><b>1. 홈페이지 회원 가입 및 관리</b>: 사업자/단체 홈페이지 탈퇴 시까지<br>
+            다만, 다음의 사유에 해당하는 경우에는 해당 사유 종료 시까지
+              <ul>
+                <li>1) 관계 법령 위반에 따른 수사, 조사 등이 진행 중인 경우에는 해당 수사, 조사 종료 시까지</li>
+                <li>2) 홈페이지 이용에 따른 채권 및 채무관계 잔존 시에는 해당 채권, 채무 관계 정산 시까지</li>
+              </ul>
+            </li>
+            <li><b>2. 재화 또는 서비스 제공</b>: 재화․서비스 공급완료 및 요금결제․정산 완료 시까지<br>
+            다만, 다음의 사유에 해당하는 경우에는 해당 기간 종료 시까지
+              <ul>
+                <li>1) 「전자상거래 등에서의 소비자 보호에 관한 법률」에 따른 표시․광고, 계약내용 및 이행 등 거래에 관한 기록
+                  <ul>
+                    <li>- 표시․광고에 관한 기록 : 6월</li>
+                    <li>- 계약 또는 청약 철회, 대금결제, 재화 등의 공급기록 : 5년</li>
+                    <li>- 소비자 불만 또는 분쟁 처리에 관한 기록 : 3년</li>
+                  </ul>
+                </li>
+                <li>2) 「통신비밀보호법」 제41조에 따른 통신사실확인자료 보관
+                  <ul>
+                    <li>- 가입자 전기통신일시, 개시․종료 시간, 상대방 가입자 번호, 사용도수, 발신기지국 위치추적자료 : 1년</li>
+                    <li>- 컴퓨터 통신, 인터넷 로그 기록자료, 접속지 추적자료 : 3개월</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <h4>제3조 (개인정보의 제3자 제공)</h4>
+          <p>① 회사는 정보주체의 개인정보를 제1조(개인정보의 처리목적)에서 명시한 범위 내에서만 처리하며, 정보주체의 동의, 법률의 특별한 규정 등 개인정보 보호법 제17조 및 제18조에 해당하는 경우에만 개인정보를 제3자에게 제공하고 그 외에는 정보주체의 개인정보를 제3자에게 제공하지 않습니다.</p>
+          <p>② 회사는 원활한 서비스 제공을 위해 다음의 경우 개인정보보호법 제17조 제1항 제1호에 따라 정보주체의 동의를 얻어 필요 최소한의 범위로만 개인정보를 제3자에게 제공할 수 있습니다.</p>
+          <ul>
+            <li>- 개인정보를 제공받는 자 : &lt;예) (주) OOO 카드&gt;</li>
+            <li>- 제공받는 자의 개인정보 이용목적 : &lt;예) 이벤트 공동개최 등 업무제휴 및 제휴 신용카드 발급&gt;</li>
+            <li>- 제공하는 개인정보 항목 : &lt;예) 성명, 주소, 전화번호, 이메일주소, 카드결제계좌정보&gt;</li>
+            <li>- 제공받는 자의 보유, 이용기간 : &lt;예) 신용카드 발급계약에 따른 거래기간동안&gt;</li>
+          </ul>
+
+          <h4>제4조 (개인정보처리의 위탁)</h4>
+          <p>① 회사는 원활한 개인정보 업무처리를 위하여 다음과 같이 개인정보 처리업무를 위탁하고 있습니다.</p>
+          <ul>
+            <li>- 위탁업무 내용</li>
+            <li>- 위탁받는 자 (수탁자) : (주)아임웹 – 위탁하는 업무의 내용 : 쇼핑몰 호스팅 서비스의 시스템 제공, 모바일 앱 서비스, 마케팅 서비스 및 부가, 제휴서비스 제공 및 알림톡, 친구톡, 문자메시지 발송대행 서비스 등</li>
+            <li>- 위탁받는 자 (수탁자) : OOO PG – 위탁하는 업무의 내용 : 결제 및 에스크로 업무</li>
+            <li>- 위탁받는 자 (수탁자) : OOO 택배 – 위탁하는 업무의 내용 : 상품 배송 업무</li>
+            <li>- 위탁받는 자 (수탁자) : OOO 고객센터 – 위탁하는 업무의 내용 : 고객상담 업무</li>
+            <li>- 위탁받는 자 (수탁자) : OOO – 위탁하는 업무의 내용 : 본인확인 업무</li>
+            <li><b>재위탁사</b></li>
+            <li><b>- 재위탁받는 자(수탁자) : (주)아임웹 → 인포빕(유)</b> – <b>업무</b> : 문자메시지 발송, 카카오톡 알림톡(정보성 메시지) 발송 업무</li>
+            <li><b>- 재위탁받는 자(수탁자) : (주)아임웹 → (주)루나소프트</b> – <b>업무</b> : 문자메시지 발송, 카카오톡 알림톡(정보성 메시지) 및 친구톡 발송 업무</li>
+          </ul>
+
+          <h4>제5조 (정보주체 및 법정대리인의 권리와 그 행사 방법)</h4>
+          <p>① 정보주체는 회사에 대해 언제든지 다음 각 호의 개인정보 보호 관련 권리를 행사할 수 있습니다.</p>
+          <ul>
+            <li>1. 개인정보 열람 요구</li>
+            <li>2. 오류 등이 있을 경우 정정 요구</li>
+            <li>3. 삭제요구</li>
+            <li>4. 처리정지 요구</li>
+          </ul>
+          <p>② 제1항에 따른 권리 행사는 회사에 대해 서면, 전화, 전자우편, 모사전송(FAX) 등을 통하여 하실 수 있으며 회사는 이에 대해 지체없이 조치하겠습니다.</p>
+          <p>③ 정보주체가 개인정보의 오류 등에 대한 정정 또는 삭제를 요구한 경우에는 회사는 정정 또는 삭제를 완료할 때까지 당해 개인정보를 이용하거나 제공하지 않습니다.</p>
+          <p>④ 제1항에 따른 권리 행사는 정보주체의 법정대리인이나 위임을 받은 자 등 대리인을 통하여 하실 수 있습니다. 이 경우 개인정보 보호법 시행규칙 별지 제11호 서식에 따른 위임장을 제출하셔야 합니다.</p>
+          <p>⑤ 정보주체는 개인정보 보호법 등 관계 법령을 위반하여 회사가 처리하고 있는 정보주체 본인이나 타인의 개인정보 및 사생활을 침해하여서는 아니 됩니다.</p>
+
+          <h4>제6조 (처리하는 개인정보 항목)</h4>
+          <p>회사는 다음의 개인정보 항목을 처리하고 있습니다.</p>
+          <ul>
+            <li><b>1. 홈페이지 회원 가입 및 관리</b><br>
+              필수항목 : &lt;예) 성명, 생년월일, 아이디, 비밀번호, 주소, 전화번호, 성별, 이메일주소, 아이핀번호&gt;<br>
+              선택항목 : &lt;예) 결혼 여부, 관심 분야&gt;
+            </li>
+            <li><b>2. 재화 또는 서비스 제공</b><br>
+              필수항목 : &lt;예) 성명, 생년월일, 아이디, 비밀번호, 주소, 전화번호, 이메일주소, 아이핀번호, 신용카드번호, 은행계좌정보 등 결제정보&gt;<br>
+              선택항목 : &lt;관심분야, 과거 구매내역&gt;
+            </li>
+          </ul>
+
+          <h4>제7조 (개인정보의 파기)</h4>
+          <p>① 회사는 개인정보 보유 기간의 경과, 처리목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체없이 해당 개인정보를 파기합니다.</p>
+          <p>② 정보주체로부터 동의받은 개인정보 보유 기간이 경과하거나 처리목적이 달성되었음에도 불구하고 다른 법령에 따라 개인정보를 계속 보존하여야 하는 경우에는, 해당 개인정보를 별도의 데이터베이스(DB)로 옮기거나 보관장소를 달리하여 보존합니다.</p>
+          <p>③ 개인정보 파기의 절차 및 방법은 다음과 같습니다.</p>
+          <ul>
+            <li>1. 파기 절차: 회사는 파기 사유가 발생한 개인정보를 선정하고, 회사의 개인정보 보호책임자의 승인을 받아 개인정보를 파기합니다.</li>
+            <li>2. 파기 방법: 전자적 파일은 복구 불가능한 방법으로, 종이 문서는 분쇄 또는 소각으로 파기합니다.</li>
+          </ul>
+
+          <h4>제8조 (개인정보의 안전성 확보조치)</h4>
+          <p>회사는 개인정보의 안전성 확보를 위해 다음과 같은 조치를 하고 있습니다.</p>
+          <ul>
+            <li>1. 관리적 조치 : 내부관리계획 수립 및 시행, 정기적 직원 교육 등</li>
+            <li>2. 기술적 조치 : 개인정보처리시스템 등의 접근 권한 관리, 접근통제시스템 설치, 고유 식별정보 등의 암호화, 보안프로그램 설치</li>
+            <li>3. 물리적 조치 : 전산실, 자료보관실 등의 접근통제</li>
+          </ul>
+
+          <h4>제9조 (개인정보 자동 수집 장치의 설치∙운영 및 거부에 관한 사항)</h4>
+          <p>① 회사는 이용자에게 개별적인 맞춤 서비스를 제공하기 위해 이용정보를 저장하고 수시로 불러오는 ‘쿠키(cookie)’를 사용합니다.</p>
+          <p>② 쿠키는 웹사이트를 운영하는데 이용되는 서버(http)가 이용자의 컴퓨터 브라우저에 보내는 소량의 정보이며 이용자들의 PC 또는 모바일에 저장됩니다.</p>
+          <p>③ 정보주체는 웹 브라우저 옵션 설정을 통해 쿠키 허용, 차단 등의 설정을 할 수 있습니다. 다만, 쿠키 저장을 거부할 경우 맞춤형 서비스 이용에 어려움이 발생할 수 있습니다.</p>
+
+          <h4>제10조 (개인정보 보호책임자)</h4>
+          <p>① 회사는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 정보주체의 불만 처리 및 피해구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.</p>
+          <p><b>▶ 개인정보 보호책임자</b><br>
+            성명 : OOO<br>
+            직책 : OOO<br>
+            연락처 : &lt;전화번호&gt;, &lt;이메일&gt;, &lt;팩스번호&gt;<br>
+            ※ 개인정보 보호 담당부서로 연결됩니다.
+          </p>
+          <p><b>▶ 개인정보 보호 담당부서</b><br>
+            부서명 : OOO 팀<br>
+            연락처 : &lt;전화번호&gt;, &lt;이메일&gt;, &lt;팩스번호&gt;
+          </p>
+
+          <h4>제11조 (개인정보 열람청구)</h4>
+          <p>정보주체는 개인정보 보호법 제35조에 따른 개인정보의 열람 청구를 아래의 부서에 할 수 있습니다. 회사는 정보주체의 개인정보 열람 청구가 신속하게 처리되도록 노력하겠습니다.</p>
+
+          <h4>제12조 (권익침해 구제 방법)</h4>
+          <p>정보주체는 아래의 기관에 대해 개인정보 침해에 대한 피해구제, 상담 등을 문의하실 수 있습니다.</p>
+          <ul>
+            <li>1. 개인정보 분쟁조정위원회 : (국번없이) 1833-6972 (www.kopico.go.kr)</li>
+            <li>2. 개인정보침해신고센터 : (국번없이) 118 (privacy.kisa.or.kr)</li>
+            <li>3. 대검찰청 : (국번없이) 1301 (www.spo.go.kr)</li>
+            <li>4. 경찰청 : (국번없이) 182 (ecrm.police.go.kr/minwon/main)</li>
+          </ul>
+
+          <h4>제13조 (개인정보 처리방침 시행 및 변경)</h4>
+          <p>이 개인정보 처리방침은 20XX. X. X. 부터 적용됩니다.</p>
+        </div>
+        <div class="terms-footer">
+          <label class="agree-mini">
+            <input type="checkbox" id="termsInlineAgree">
+            <span>상기 개인정보 처리 안내를 확인했습니다.</span>
+          </label>
+          <div style="display:flex; gap:8px; margin-left:auto; width:auto;">
+            <button type="button" class="btn btn-outline terms-cancel">닫기</button>
+            <button type="button" class="btn btn-fill terms-accept">동의하고 계속</button>
+          </div>
+        </div>
+      </div>
+    `;
+    root.appendChild(overlay);
+
+    const sheet = overlay.querySelector('.terms-sheet');
+    const closeX = overlay.querySelector('.terms-close-x');
+    const cancelBtn = overlay.querySelector('.terms-cancel');
+    const acceptBtn = overlay.querySelector('.terms-accept');
+    const inlineAgree = overlay.querySelector('#termsInlineAgree');
+
+    let prevFocus = null;
+
+    function openTerms(){
+      prevFocus = document.activeElement;
+      root.setAttribute('data-modal-open','true');
+      overlay.hidden = false;
+      sheet.focus();
+      lowerFooter(); // ✅ 팝업 열릴 때 푸터 z-index 낮추기
+      document.addEventListener('keydown', onKeydown, true);
+      overlay.addEventListener('click', onBackdrop);
+    }
+    function closeTerms(){
+      overlay.hidden = true;
+      root.removeAttribute('data-modal-open');
+      restoreFooter(); // ✅ 팝업 닫힐 때 푸터 z-index 복구
+      document.removeEventListener('keydown', onKeydown, true);
+      overlay.removeEventListener('click', onBackdrop);
+      if(prevFocus && typeof prevFocus.focus === 'function') prevFocus.focus();
+    }
+    function onBackdrop(e){
+      if(e.target === overlay) closeTerms();
+    }
+    function onKeydown(e){
+      if(e.key === 'Escape'){ e.preventDefault(); closeTerms(); }
+      if(e.key === 'Tab'){
+        const f = sheet.querySelectorAll('a,button,input,select,textarea,[tabindex]:not([tabindex="-1"])');
+        const focusables = Array.prototype.slice.call(f);
+        if(!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length-1];
+        if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+    }
+
+    /* 이벤트 바인딩 */
+    termsBtn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); openTerms(); });
+    closeX.addEventListener('click', (e)=>{ e.preventDefault(); closeTerms(); });
+    cancelBtn.addEventListener('click', (e)=>{ e.preventDefault(); closeTerms(); });
+
+    /* 동의하고 계속: 자동 동의 + 제출버튼 즉시 활성화 */
+    acceptBtn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      e.stopPropagation();
+      inlineAgree.checked = true;            // 모달 내 확인 체크
+      const agreeBox = form.querySelector('#agree');
+      agreeBox.checked = true;               // 본문 필수 동의 체크
+      agreeBox.dispatchEvent(new Event('change', {bubbles:true}));
+      acceptBtn.blur();
+      closeTerms();
+    });
+
+    /* 미동 안내 애니메이션 정의 */
+    const css = document.createElement('style');
+    css.textContent = `
+      #applyMintForm .terms-sheet.shake{ animation: applyShake .3s; }
+      @keyframes applyShake{
+        10%{ transform:translateY(0) translateX(-2px) }
+        20%{ transform:translateY(0) translateX(2px) }
+        30%{ transform:translateY(0) translateX(-2px) }
+        40%{ transform:translateY(0) translateX(2px) }
+        50%{ transform:translateY(0) translateX(-1px) }
+        60%{ transform:translateY(0) translateX(1px) }
+        100%{ transform:translateY(0) translateX(0) }
+      }
+    `;
+    root.appendChild(css);
+  })();
+</script>
+
+
+  <script>
+    (function(){
+      const root = document.querySelector('#applyMintForm');
+      const selects = root.querySelectorAll('select');
+
+      /* 각 select를 래핑해서 화살표 의사요소 부착 */
+      selects.forEach(sel=>{
+        if (sel.closest('.select-wrap')) return; // 이미 래핑된 경우 방지
+        const wrap = document.createElement('div');
+        wrap.className = 'select-wrap';
+        sel.parentNode.insertBefore(wrap, sel);
+        wrap.appendChild(sel);
+
+        const open = ()=> wrap.classList.add('open');
+        const close = ()=> wrap.classList.remove('open');
+
+        // 모바일(iOS/Android) & 데스크톱 호환 이벤트
+        sel.addEventListener('focus', open);
+        sel.addEventListener('click', open);
+        sel.addEventListener('mousedown', open);
+        sel.addEventListener('touchstart', open, {passive:true});
+        sel.addEventListener('blur', close);
+        sel.addEventListener('change', close);
+        sel.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') close(); });
+      });
+    })();
+  </script>
+
+  <script>
+    // 재진입 시 효과가 항상 다시 잘 보이도록(가시성 기반 재시작)
+    (function(){
+      const root = document.getElementById('kakaoFloating');
+      const btn  = root?.querySelector('.fab');
+      if(!root || !btn || !('IntersectionObserver' in window)) return;
+
+      const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            // 펄스 애니메이션 재시작 트릭
+            btn.style.animation = 'none';
+            // 강제로 리플로우
+            void btn.offsetHeight;
+            btn.style.animation = '';
+          }
+        });
+      }, { threshold: 0.01 });
+
+      observer.observe(root);
+    })();
+  </script>
+
+<script>
+(function(){
+  const TEXTUAL_TYPES = new Set(['', 'text', 'search', 'tel', 'password', 'url', 'email']);
+  const composing = new WeakMap(); // 각 필드의 IME 조합 상태 저장
+
+  function isTextual(el){
+    return el.tagName === 'TEXTAREA' ||
+           (el.tagName === 'INPUT' && TEXTUAL_TYPES.has((el.type||'').toLowerCase()));
+  }
+
+  function attach(el){
+    if (!isTextual(el)) return;
+    if (!el.hasAttribute('maxlength')) return;
+
+    const getMAX = () => {
+      const n = parseInt(el.getAttribute('maxlength'), 10);
+      return Number.isFinite(n) ? n : Infinity;
+    };
+
+    // IME(한글 조합) 상태 관리
+    el.addEventListener('compositionstart', () => composing.set(el, true));
+    el.addEventListener('compositionend',  () => { composing.set(el, false); truncate(el, getMAX()); });
+
+    // 키 타이핑으로 초과 입력 방지 (붙여넣기는 input에서 자름)
+    el.addEventListener('beforeinput', (e) => {
+      if (composing.get(el)) return;
+      if (e.inputType !== 'insertText') return; // paste 등은 아래 input 핸들러에서 처리
+      const MAX = getMAX();
+      if (!isFinite(MAX)) return;
+
+      const { value, selectionStart, selectionEnd } = el;
+      const replacing = Math.max(0, (selectionEnd ?? value.length) - (selectionStart ?? value.length));
+      const inserting  = (e.data || '').length;
+      const nextLen    = value.length - replacing + inserting;
+
+      if (nextLen > MAX) e.preventDefault();
+    });
+
+    // 붙여넣기/드래그 교체/프로그램적 변경 등 모든 케이스에서 최종 길이 보정
+    el.addEventListener('input', () => {
+      if (composing.get(el)) return;
+      truncate(el, getMAX());
+    });
+  }
+
+  function truncate(el, MAX){
+    if (!isFinite(MAX)) return;
+    const v = el.value || '';
+    if (v.length > MAX){
+      const pos = el.selectionStart;
+      el.value = v.slice(0, MAX);
+      const p = Math.min(typeof pos === 'number' ? pos : MAX, MAX);
+      if (el.setSelectionRange) el.setSelectionRange(p, p);
+    }
+  }
+
+  // 초기 문서 내 모든 대상에 적용
+  document.querySelectorAll('input[maxlength], textarea[maxlength]').forEach(attach);
+
+  // 이후 동적으로 추가/변경되는 필드에도 자동 적용
+  const mo = new MutationObserver((mutations)=>{
+    for (const m of mutations){
+      // 새 노드 추가
+      m.addedNodes && m.addedNodes.forEach(node=>{
+        if (!(node instanceof Element)) return;
+        if (node.matches?.('input[maxlength], textarea[maxlength]')) attach(node);
+        node.querySelectorAll?.('input[maxlength], textarea[maxlength]').forEach(attach);
+      });
+      // 기존 노드에 maxlength 속성 추가/변경
+      if (m.type === 'attributes' && m.attributeName === 'maxlength' &&
+          m.target instanceof Element &&
+          m.target.matches('input[maxlength], textarea[maxlength]')) {
+        attach(m.target);
+      }
+    }
+  });
+  mo.observe(document.documentElement, { childList:true, subtree:true, attributes:true, attributeFilter:['maxlength'] });
+})();
+</script>
+
+
+  <script>
+    (function(){
+      const footer = document.getElementById('siteFooter');
+      if(!footer) return;
+
+      // 연도 자동 갱신
+      const y = footer.querySelector('#footerYear');
+      if(y) y.textContent = new Date().getFullYear();
+
+      // 맨 위로
+      const toTop = footer.querySelector('#footerToTop');
+      if(toTop){
+        toTop.addEventListener('click', (e)=>{
+          e.preventDefault();
+          try{
+            document.querySelector('#stickyTopbar')?.scrollIntoView({behavior:'smooth'});
+          }catch(_){
+            window.scrollTo(0,0);
+          }
+        });
+      }
+
+      // 약관/정책 링크가 기존 약관 모달(#applyMintForm)과 연동되도록
+      function openTerms(){
+        const btn = document.querySelector('#applyMintForm .terms-link');
+        if(btn) { btn.click(); return true; }
+        return false;
+      }
+      footer.querySelectorAll('[data-open-terms]').forEach(a=>{
+        a.addEventListener('click', (e)=>{ e.preventDefault(); if(!openTerms()) location.hash = '#applyMintForm'; });
+      });
+    })();
+  </script>
+
+</section>
+</html>

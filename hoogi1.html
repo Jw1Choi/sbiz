@@ -1,0 +1,184 @@
+<section id="compareLoanVsRent" aria-label="할부 구매 vs 신차 장기 렌트 비교">
+  <style>
+    /* ================= Scope: #compareLoanVsRent only ================= */
+    #compareLoanVsRent {
+      --ink:#222;
+      --blue:#007aff;
+      --green:#1fb86e;
+      --grayBox:#ffffff;
+      --greenBox:#dff5e8;
+      --radius:18px;
+      --shadow:0 8px 28px rgba(0,0,0,.08);
+      font-family: 'Pretendard','Noto Sans KR', sans-serif;
+      background:#f6f8fb;
+      padding:70px 20px 100px;
+      text-align:center;
+      color:var(--ink);
+    }
+
+    #compareLoanVsRent .wrap {
+      max-width:900px;
+      margin:0 auto;
+    }
+
+    /* 제목 */
+    #compareLoanVsRent h2 {
+      font-size:1.25rem;
+      color:#555;
+      margin-bottom:30px;
+      font-weight:500;
+    }
+    #compareLoanVsRent h2 strong {
+      color:var(--blue);
+      font-weight:700;
+    }
+
+    /* 박스 컨테이너 */
+    #compareLoanVsRent .compare-box {
+      display:flex;
+      justify-content:center;
+      align-items:stretch;
+      gap:30px;
+      flex-wrap:wrap;
+      margin-bottom:50px;
+      position:relative;
+    }
+
+    #compareLoanVsRent .card {
+      flex:1 1 360px;
+      background:var(--grayBox);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:40px 20px;
+      text-align:left;
+      position:relative;
+    }
+
+    #compareLoanVsRent .card.right {
+      background:var(--greenBox);
+    }
+
+    #compareLoanVsRent .vs-circle {
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      background:var(--green);
+      color:#fff;
+      font-weight:700;
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1rem;
+      box-shadow:0 6px 18px rgba(0,0,0,.2);
+      z-index:5;
+    }
+
+    /* 카드 제목 */
+    #compareLoanVsRent .card h3 {
+      font-size:1.25rem;
+      font-weight:700;
+      margin-bottom:18px;
+      text-align:center;
+    }
+
+    /* 리스트 */
+    #compareLoanVsRent ul {
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+    #compareLoanVsRent ul li {
+      display:flex;
+      align-items:center;
+      font-size:1rem;
+      margin:12px 0;
+      color:#444;
+    }
+    #compareLoanVsRent ul li::before {
+      content:"●";
+      font-size:0.6rem;
+      color:var(--green);
+      margin-right:10px;
+    }
+
+    /* 오른쪽 박스 강조 */
+    #compareLoanVsRent .card.right ul li {
+      color:#222;
+    }
+    #compareLoanVsRent .card.right ul li::before {
+      content:"✔";
+      color:var(--green);
+      font-size:0.9rem;
+      margin-right:10px;
+    }
+
+    /* 하단 문구 */
+    #compareLoanVsRent .bottom-text {
+      font-size:1.4rem;
+      font-weight:700;
+      color:#333;
+    }
+    #compareLoanVsRent .bottom-text strong {
+      color:var(--blue);
+    }
+
+    /* 아이콘 */
+    #compareLoanVsRent .icon {
+      width:60px;
+      height:60px;
+      margin:0 auto 15px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:12px;
+    }
+    #compareLoanVsRent .icon img {
+      width:42px;
+      height:42px;
+    }
+
+    @media(max-width:768px){
+      #compareLoanVsRent .compare-box{gap:20px;}
+      #compareLoanVsRent .vs-circle{top:auto;bottom:-25px;}
+    }
+  </style>
+
+  <div class="wrap">
+    <h2>한눈에 비교하는 <strong>할부 구매 vs 신차 장기 렌트</strong></h2>
+
+    <div class="compare-box">
+      <div class="card left">
+        <h3>일반 대출</h3>
+        <ul>
+          <li>월 할부금 000,000원</li>
+          <li>취등록세 별도</li>
+          <li>자동차 세금 별도</li>
+          <li>4년 보험료 별도</li>
+        </ul>
+      </div>
+
+      <div class="vs-circle">VS</div>
+
+      <div class="card right">
+        <div class="icon">
+          <img src="https://cdn-icons-png.flaticon.com/512/619/619034.png" alt="money icon">
+        </div>
+        <h3>정책 자금</h3>
+        <ul>
+          <li>월 렌탈료 000,000원</li>
+          <li>취등록세 포함</li>
+          <li>자동차 세금 포함</li>
+          <li>4년 보험료 포함</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom-text">
+      이제는 <strong>장기 렌트</strong>가 정답입니다!
+    </div>
+  </div>
+</section>

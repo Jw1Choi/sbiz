@@ -98,7 +98,7 @@
 
   <header class="topbar" role="banner">
     <div class="left" aria-live="polite">
-    <img src="./img/logo-v1-b.png" style="width:180px;">
+    <img src="./img/logo-v3-b.png" style="width:180px;">
 
   <!-- Wordmark -->
   <!-- <text class="txt" x="38" y="25" fill="#0b1220">FitCase</text> -->
@@ -158,133 +158,13 @@ document.addEventListener("DOMContentLoaded", () => {
 <b>
 최대한 빠르게<br>
 전화 안내 드리겠습니다.</b>
-</h2><br>
+</h2>
 
     </div>
 
-    <div class="content">
-      <div class="left">
-        <div class="dbStack" aria-live="polite">
-          <div class="dbTrack"></div>
-        </div>
-        <!-- <div class="bubble bubble1">실시간 유입</div>
-        <div class="bubble bubble2">중복 제거</div>
-        <div class="bubble bubble3">전환율 상위</div> -->
-      </div>
 
-      <div class="right">
-        <div>
-          <hr class="border1" style="width:100%;border:1px solid #00000012;margin:20px 0;">
-          <h3>2025년 하반기 소상공인 정책자금 안내</h3>
-          <ul>
-            <li>정부 보증, 무담보, 저금리, 높은 한도!</li>
-            <li>최저 금리 연 2% 상환 최대 15년!</li>
-            <li>세금 연체 없는 사업자라면 누구나!</li>
-            <li>신용 점수 700점 이상 & 매출이 있다면!</li>
-          </ul>
-         <small id="legalNotice"
-       data-extra=" 최신 정책자금 업데이트"
-       style="color:var(--muted); display:block; margin-top:15px; font-size:.75rem;">
-  * 
-  <span class="ts" aria-live="polite"></span>
-  <span class="extra"></span>
-</small>
-
-<script>
-(function(){
-  const root = document.getElementById('legalNotice');
-  if(!root) return;
-
-  const tsEl    = root.querySelector('.ts')    || root.appendChild(document.createElement('span'));
-  const extraEl = root.querySelector('.extra') || root.appendChild(document.createElement('span'));
-
-  // 초기 추가 문구(data-extra 속성) 세팅
-  const initExtra = (root.getAttribute('data-extra') || '').trim();
-  if(initExtra) extraEl.textContent = '  ' + initExtra;
-
-  // KST(Asia/Seoul) 기준 시각 포맷터
-  const fmt = new Intl.DateTimeFormat('ko-KR', {
-    timeZone: 'Asia/Seoul',
-    year: 'numeric', month: '2-digit', day: '2-digit',
-    hour: '2-digit', minute: '2-digit', second: '2-digit',
-    hour12: false
-  });
-
-  function formatKST(now=new Date()){
-    const map = Object.fromEntries(fmt.formatToParts(now).map(p => [p.type, p.value]));
-    // 2025-10-09 20:15:07 형식 + KST 표기
-    return ` (${map.year}-${map.month}-${map.day} ${map.hour}:${map.minute}:${map.second} 기준)`;
-  }
-
-  function tick(){
-    tsEl.textContent = formatKST();
-  }
-
-  tick();
-  // 1초마다 갱신
-  const timer = setInterval(tick, 1000);
-
-  // 페이지 이탈 시 타이머 정리(메모리 보호)
-  window.addEventListener('beforeunload', () => clearInterval(timer));
-
-  // 외부에서 추가 문구를 쉽게 바꿀 수 있는 헬퍼 노출
-  window.setExtraNotice = function(msg){
-    if(!msg || !msg.trim()){
-      extraEl.textContent = '';
-      root.removeAttribute('data-extra');
-      return;
-    }
-    extraEl.textContent = ' · ' + msg.trim();
-    root.setAttribute('data-extra', msg.trim());
-  };
-})();
-</script>
-        </div>
-        <div class="actions">
-          <!-- <a class="btn-fill" href="#form_e12">지원 가능 자금 확인하기</a> -->
-        </div>
-      </div>
-    </div>
   </div>
 
- 
-
-  <script>
-    (function(){
-      const root=document.querySelector('#legalDBHero');
-      if(!root)return;
-      const list=root.querySelector('.right ul');
-      if(!list)return;
-      const items=Array.from(list.querySelectorAll('li'));
-      if(!items.length)return;
-
-      let idx=0; let timer=null; let playing=false;
-      const STEP=3000; // 항목당 유지 시간 (ms)
-
-      function tick(){
-        items.forEach(li=>li.classList.remove('pulse'));
-        items[idx].classList.add('pulse');
-        idx=(idx+1)%items.length;
-      }
-      function start(){
-        if(playing) return; playing=true; tick();
-        timer=setInterval(tick, STEP);
-      }
-      function stop(){
-        if(!playing) return; playing=false;
-        clearInterval(timer); timer=null;
-      }
-
-      // 스크롤로 섹션이 화면을 벗어나면 일시정지, 다시 들어오면 재개 (모바일/PC 모두)
-      const io=new IntersectionObserver((ents)=>{
-        ents.forEach(e=>{ if(e.isIntersecting) start(); else stop(); });
-      },{threshold:.15});
-      io.observe(list);
-
-      // 초기 1회 시도 (뷰포트 안에 있을 경우 바로 시작)
-      start();
-    })();
-  </script>
 
 </section>
 
@@ -320,19 +200,15 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 
   <div class="item">
-    <div class="txt">2. <strong>매출액 자체가 없는 분</strong></div>
+    <div class="txt">2. <strong>매출 신고 자체가 없는 분</strong></div>
     <!-- <img src="https://picsum.photos/seed/mini/200" alt="미니세트"> -->
   </div>
 
   <div class="item">
-    <div class="txt">3. <strong>신용 점수 700점 (NICE 기준) 이하</strong></div>
+    <div class="txt">3. <strong>일반 대출 연체 중이신 분</strong></div>
     <!-- <img src="https://picsum.photos/seed/tester/200" alt="테스터"> -->
   </div>
 
-    <div class="item">
-    <div class="txt">4. <strong>신용회복 진행 중인 분 (회생, 파산) </strong></div>
-    <!-- <img src="https://picsum.photos/seed/tester/200" alt="테스터"> -->
-  </div>
 
 
 

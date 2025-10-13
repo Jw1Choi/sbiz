@@ -439,7 +439,6 @@
   #carLoanPlus .illu svg{width:min(340px,84vw)}
 }
 
-
   /* ---------- Scope: #eventList only ---------- */
     #eventList{
       /* Light tone tokens */
@@ -563,7 +562,7 @@
       color:var(--ink);
     }
     #eventList .item .txt strong{
-      color:var(--blue-2); /* 보조 민트 */
+      color:#b51613; /* 보조 민트 */
       font-size:26px;
       font-weight:900;
     }
@@ -580,13 +579,13 @@
     /* 자동 강조(액티브) – 민트 포커스 */
     #eventList .item.active{
       background:
-        linear-gradient(135deg, #fff 0%, #e9fbf8 50%, #d2f5ef 75%, #b9efe8 100%); /* 민트 톤 그라데이션 */
-      border-color:#9ee5db; /* 민트 테두리 */
+        linear-gradient(135deg, #fff 0%, #fbe9e9 50%, #f5d3d2 75%, #efb9b9 100%); /* 민트 톤 그라데이션 */
+      border-color:#e59e9e; /* 민트 테두리 */
       transform:translateY(-2px);
       box-shadow:0 10px 22px rgba(19,181,163,.18); /* 민트 그림자 */
     }
     #eventList .item.active .txt{ color:#0b3b36; } /* 딥 틸 텍스트 */
-    #eventList .item.active .txt strong{ color:#13b5a3; text-shadow:0 0 8px rgba(19,181,163,.12); }
+    #eventList .item.active .txt strong{ color:#b51613; text-shadow:0 0 8px rgba(19,181,163,.12); }
     #eventList .item.active img{ transform:scale(1.05); filter:saturate(1.05) brightness(1.05); }
 
     /* 반응형 */
@@ -601,6 +600,171 @@
       #eventList .item .txt{ font-size:17px; }
       #eventList .item .txt strong{ font-size:17px; }
     }
+
+
+
+     /* ---------- Scope: #eventList only ---------- */
+    #eventList1{
+      /* Light tone tokens */
+      --bg:#f7f8fa;
+      --panel:#ffffff;
+      --line:#e2e6ec;
+      --ink:#111827;
+      --muted:#6b7280;
+      --blue:#13b5a3;     /* 메인 민트 */
+      --blue-2:#11a292;   /* 보조 민트 */
+      --hl:#d6f7f1;       /* 하이라이트 밑줄 (민트톤) */
+      --radius:12px;
+
+      font-family: Pretendard, "Noto Sans KR", sans-serif;
+      /* background: radial-gradient(80% 130% at 50% 0%, #fff 0%, var(--bg) 80%); */
+      padding:40px 20px;
+      color:var(--ink);
+      max-width:960px;
+      margin:0 auto;
+    }
+
+    /* ===== 상단 헤더 (배너 레이아웃) ===== */
+    #eventList1 .hero{
+      text-align:center;
+      max-width:760px;
+      margin:0 auto 28px;
+    }
+    #eventList1 .hero .headline{
+      font-size:40px;
+      font-weight:900;
+      letter-spacing:-.4px;
+      line-height:1.2;
+      color:var(--ink);
+    }
+    #eventList1 .hero .headline .hl{
+      position:relative;
+      display:inline-block;
+      color:var(--blue-2); /* 민트 포인트 컬러 */
+      /* 밑줄 하이라이트 */
+      background: linear-gradient(transparent 65%, var(--hl) 65% 100%);
+      padding:0 .06em;
+      border-radius:2px;
+    }
+    #eventList1 .hero .sub{
+      margin-top:12px;
+      font-size:17px;
+      font-weight:800;
+      color:var(--ink);
+    }
+    #eventList1 .hero .note{
+      margin-top:8px;
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    /* 포인트 3개 바 */
+    #eventList1 .points{
+      margin:26px auto 34px;
+      background:var(--blue);     /* 민트로 변경 */
+      color:#fff;
+      border-radius:10px;
+      padding:22px 16px;
+      box-shadow:0 6px 14px rgba(19,181,163,.15); /* 민트 그림자 */
+    }
+    #eventList1 .points .wrap{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:0;
+      max-width:860px;
+      margin:0 auto;
+      align-items:center;
+      text-align:center;
+    }
+    #eventList1 .points .col{
+      padding:8px 10px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    #eventList1 .points .label{
+      font-size:16px;
+      color:#cdeee9; /* 민트 계열 라벨 색 */
+      font-weight:600;
+    }
+    #eventList1 .points .value{
+      font-size:26px;
+      font-weight:900;
+      letter-spacing:-.3px;
+    }
+    /* 세로 구분선 */
+    #eventList1 .points .col:not(:last-child){
+      position:relative;
+    }
+    #eventList1 .points .col:not(:last-child)::after{
+      content:"";
+      position:absolute; right:0; top:50%; transform:translateY(-50%);
+      width:2px; height:42px;
+      background:linear-gradient(180deg, rgba(255,255,255,.25), rgba(255,255,255,.6), rgba(255,255,255,.25));
+      border-radius:1px;
+    }
+
+    /* ===== 기존 카드 리스트 (밝은 톤 유지) ===== */
+    #eventList1 .item{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:linear-gradient(180deg, var(--panel) 0%, #f5f7fb 100%);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:20px;
+      margin-bottom:14px;
+      transition:background .45s ease, transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+      box-shadow:0 4px 12px rgba(0,0,0,.06);
+    }
+    #eventList1 .item:last-child{ margin-bottom:0; }
+
+    #eventList1 .item .txt{
+      font-size:24px;
+      font-weight:700;
+      line-height:1.45;
+      color:var(--ink);
+    }
+    #eventList1 .item .txt strong{
+      color:#b51613; /* 보조 민트 */
+      font-size:26px;
+      font-weight:900;
+    }
+    #eventList1 .item img{
+      max-width:90px;
+      height:auto;
+      border-radius:8px;
+      margin-left:16px;
+      transition: transform .35s ease, filter .35s ease;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+
+    /* 자동 강조(액티브) – 민트 포커스 */
+    #eventList1 .item.active{
+      background:
+        linear-gradient(135deg, #fff 0%, #fbe9e9 50%, #f5d3d2 75%, #efb9b9 100%); /* 민트 톤 그라데이션 */
+      border-color:#e59e9e; /* 민트 테두리 */
+      transform:translateY(-2px);
+      box-shadow:0 10px 22px rgba(19,181,163,.18); /* 민트 그림자 */
+    }
+    #eventList1 .item.active .txt{ color:#0b3b36; } /* 딥 틸 텍스트 */
+    #eventList1 .item.active .txt strong{ color:#b51613; text-shadow:0 0 8px rgba(19,181,163,.12); }
+    #eventList1 .item.active img{ transform:scale(1.05); filter:saturate(1.05) brightness(1.05); }
+
+    /* 반응형 */
+    @media (max-width:640px){
+      #eventList1 .hero .headline{ font-size:34px; }
+      #eventList1 .points .value{ font-size:24px; }
+    }
+    @media (max-width:520px){
+        #eventList1 .hero .headline{ font-size:24px; }
+      #eventList1 .points .wrap{ grid-template-columns:1fr; gap:12px; }
+      #eventList1 .points .col:not(:last-child)::after{ display:none; }
+      #eventList1 .item .txt{ font-size:17px; }
+      #eventList1 .item .txt strong{ font-size:17px; }
+    }
+    
 
 
      /* ===== Scope: #applyMintForm only ===== */

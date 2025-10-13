@@ -52,6 +52,7 @@
       margin-top:2px; /* 로고 아래 여백 */
       width:100%;
       max-width:520px; /* 필요 시 조절 */
+      font-size:1rem;
     }
     /* 시각적으로 겹치되 스크린리더 중복 읽힘 방지(필요 시 사용) */
     #stickyTopbar .fade-rotator .sr-only{
@@ -90,6 +91,11 @@
       box-shadow:0 8px 20px rgba(19,181,163,.40); transform:translateY(-1px);
     }
 
+
+    #logo-menu{
+     width:180px; 
+    }
+
     /* 접근성: 모션 최소화 환경 */
     @media (prefers-reduced-motion: reduce){
       #stickyTopbar .topbar{ transition:none; }
@@ -101,9 +107,15 @@
     @media (max-width:720px){
       #stickyTopbar .topbar{ border-radius:0; max-width:100%; }
       #stickyTopbar .brand{ font-size:18px; margin-left:10px; }
-      #stickyTopbar .fade-rotator{ margin-left:10px; max-width:78vw; }
+      #stickyTopbar .fade-rotator{ margin-left:0px; max-width:78vw;font-size:.7rem;display: none; }
       #stickyTopbar .tel{ padding:8px 14px; font-size:.9rem; }
+      #logo-menu{width:130px;}
     }
+
+
+
+
+
 
 
      /* ================= Scope: #legalDBHero only ================= */
@@ -1115,3 +1127,4 @@
     @media (prefers-reduced-motion:reduce){
       #siteFooter .toTop{ transition:none; }
     }
+

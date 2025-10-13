@@ -1113,7 +1113,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="kpi-stack">
         <div class="kpi-box">
           <span class="kpi-label">승인금액</span>
-          <span class="kpi-value">₩40,000,000</span>
+          <span class="kpi-value">₩30,000,000</span>
         </div>
         <div class="kpi-box">
           <span class="kpi-label">총 정책자금 횟수</span>
@@ -2331,26 +2331,7 @@ $(function(){
     <!-- 상단: 로고 + 정책 링크 -->
     <div class="head">
       <div class="brand">
- <!-- FitCase Wordmark (for dark backgrounds) -->
-<svg xmlns="http://www.w3.org/2000/svg" width="220" height="36" viewBox="0 0 220 36" role="img" aria-label="FitCase">
-  <defs>
-    <style>
-      .txt{ font: 900 20px/1 Pretendard, "Noto Sans KR", Segoe UI, Roboto, system-ui, -apple-system, sans-serif; }
-    </style>
-  </defs>
-  <!-- Mark -->
-  <g transform="translate(2 4)">
-    <!-- mint tile -->
-    <rect x="0" y="0" width="28" height="28" rx="8" fill="#13b5a3"/>
-    <!-- F cutout (white) -->
-    <rect x="8" y="6.8" width="5.2" height="15" rx="2.2" fill="#ffffff"/>
-    <rect x="8" y="6.8" width="12.2" height="5.2" rx="2.2" fill="#ffffff"/>
-    <rect x="8" y="13.8" width="9.4" height="5.2" rx="2.2" fill="#ffffff"/>
-  </g>
-
-  <!-- Wordmark -->
-  <text class="txt" x="38" y="25" fill="#ffffff">FitCase</text>
-</svg>
+  <img src="./img/logo-v3-w.png" style="width:200px;">
 
       </div>
       <!-- <nav class="policy" aria-label="정책 및 약관">
@@ -2363,9 +2344,9 @@ $(function(){
     <!-- 회사 정보 -->
     <div class="corp">
       <!-- <div class="ko-name">FitCase</div> -->
-      <p class="row"><b>회사명</b> : 미디어제트&nbsp;&nbsp;|&nbsp;&nbsp;<b>대표명</b> : 안서윤</p>
-      <address><b>주소</b> : 서울특별시 영등포구 선유로 130, 3층 301호 15호</address>
-      <p class="row"><b>사업자등록번호</b> : 361-07-02765</p>
+      <p class="row"><b>회사명</b> : 정우세무회계사무소&nbsp;&nbsp;|&nbsp;&nbsp;<b>대표명</b> : 전진현</p>
+      <address><b>주소</b> : 서울특별시 서초구 서초대로46길106 4층</address>
+      <!-- <p class="row"><b>사업자등록번호</b> : 361-07-02765</p> -->
       <!-- 필요 시 추가
       <p class="row"><b>통신판매업신고번호</b> : 제2025-서울성동-0000호</p>
       <p class="row"><b>대표번호</b> : 02-000-0000&nbsp;&nbsp;|&nbsp;&nbsp;<b>이메일</b> : hello@fitcase.co</p>
@@ -2382,6 +2363,7 @@ $(function(){
       </div>
     </div> -->
   </div>
+
 
   <!-- 푸터 내부 '맨 위로' 버튼 (아이콘은 img 사용) -->
   <!-- <button type="button" class="toTop" id="footerToTop" aria-label="맨 위로">
@@ -2493,11 +2475,11 @@ const DB_LIST = [
   { city: '광주', age: '애견샵',        overdue: '1,700만원', debt: '**', memo: '1개월 이내', time: '' },
   { city: '대전', age: '택배업',        overdue: '1,800만원', debt: '**', memo: '2개월 이내', time: '' },
   { city: '울산', age: '화물운송',      overdue: '2,000만원', debt: '**', memo: '1개월 이내', time: '' },
-  { city: '경기', age: '옷가게(소매)',  overdue: '3,500만원', debt: '**', memo: '2개월 이내', time: '' }, // 도소매 계열
+  { city: '경기', age: '옷가게',  overdue: '3,500만원', debt: '**', memo: '2개월 이내', time: '' }, // 도소매 계열
   { city: '강원', age: '도소매업',      overdue: '4,200만원', debt: '**', memo: '3개월 이내', time: '' }, // 도소매
   { city: '충북', age: '카센터',        overdue: '4,500만원', debt: '**', memo: '1개월 이내', time: '' }, // 카센터
   { city: '충남', age: '제조업',        overdue: '4,800만원', debt: '**', memo: '2개월 이내', time: '' }, // 제조업
-  { city: '전북', age: '요식업(일반)',  overdue: '1,600만원', debt: '**', memo: '2개월 이내', time: '' },
+  { city: '전북', age: '요식업',  overdue: '1,600만원', debt: '**', memo: '2개월 이내', time: '' },
   { city: '전남', age: '미용실',        overdue: '1,500만원', debt: '**', memo: '3개월 이내', time: '' },
   { city: '경북', age: '개인택시',      overdue: '1,400만원', debt: '**', memo: '1개월 이내', time: '' },
   { city: '경남', age: '분식집',        overdue: '1,700만원', debt: '**', memo: '2개월 이내', time: '' },
@@ -2507,21 +2489,21 @@ const DB_LIST = [
   { city: '서울', age: '도소매업',      overdue: '3,800만원', debt: '**', memo: '1개월 이내', time: '' },
   { city: '부산', age: '카센터',        overdue: '4,000만원', debt: '**', memo: '2개월 이내', time: '' },
   { city: '대구', age: '제조업',        overdue: '4,300만원', debt: '**', memo: '2개월 이내', time: '' },
-  { city: '인천', age: '옷가게(소매)',  overdue: '3,200만원', debt: '**', memo: '1개월 이내', time: '' },
+  { city: '인천', age: '옷가게',  overdue: '3,200만원', debt: '**', memo: '1개월 이내', time: '' },
   { city: '광주', age: '도소매업',      overdue: '4,900만원', debt: '**', memo: '3개월 이내', time: '' },
   { city: '대전', age: '제조업',        overdue: '3,700만원', debt: '**', memo: '1개월 이내', time: '' },
   { city: '울산', age: '카센터',        overdue: '3,600만원', debt: '**', memo: '2개월 이내', time: '' },
   { city: '경기', age: '도소매업',      overdue: '4,400만원', debt: '**', memo: '1개월 이내', time: '' },
 
   // 일반 소상공인(1,000~2,000) 보강
-  { city: '강원', age: '요식업(일반)',  overdue: '1,500만원', debt: '**', memo: '2개월 이내', time: '' },
+  { city: '강원', age: '요식업',  overdue: '1,500만원', debt: '**', memo: '2개월 이내', time: '' },
   { city: '충북', age: 'PC방',          overdue: '1,700만원', debt: '**', memo: '3개월 이내', time: '' },
   { city: '충남', age: '택배업',        overdue: '1,600만원', debt: '**', memo: '1개월 이내', time: '' },
   { city: '전북', age: '화물운송',      overdue: '2,000만원', debt: '**', memo: '2개월 이내', time: '' },
   { city: '전남', age: '미용실',        overdue: '1,900만원', debt: '**', memo: '1개월 이내', time: '' },
   { city: '경북', age: '분식집',        overdue: '1,300만원', debt: '**', memo: '3개월 이내', time: '' },
   { city: '경남', age: '애견샵',        overdue: '1,400만원', debt: '**', memo: '2개월 이내', time: '' },
-  { city: '제주', age: '요식업(일반)',  overdue: '1,800만원', debt: '**', memo: '1개월 이내', time: '' }
+  { city: '제주', age: '요식업',  overdue: '1,800만원', debt: '**', memo: '1개월 이내', time: '' }
 ];
 
 

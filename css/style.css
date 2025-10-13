@@ -173,6 +173,13 @@
       background:#13b5a353; display:grid; place-items:center; color:#fff; font-weight:700; font-size:1.5rem;
       box-shadow:inset 0 0 0 2px rgba(255,255,255,.7);
     }
+
+@media screen and (max-width:530px) {
+  #legalDBHero .db-avatar {
+      flex:0 0 24px; height:24px; 
+    }
+}
+
     #legalDBHero .db-avatar::before { content:'👤'; font-size:20px; color:#fff; }
 
     #legalDBHero .db-main { flex:1 1 auto; }

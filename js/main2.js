@@ -1,52 +1,48 @@
-/* ======================================================================
-   main.js  —  Single-file integration of all inline scripts
-   - Safe to include once with <script src="./js/main.js" defer></script>
-   - Each feature is isolated & null-guarded to avoid errors
-   - No globals leaked; observers/timers cleaned where relevant
-   ====================================================================== */
+/* =====================================================================
+ * main.js — 외부 파일용 통합 스크립트 (IIFE + 방어적 코딩)
+ * - 요소가 없으면 조용히 skip
+ * - 중복/전역오염 방지
+ * ===================================================================== */
 (() => {
   'use strict';
 
-  // --------------------------------------------------------------------
-  // Helpers
-  // --------------------------------------------------------------------
-  const $  = (sel, root = document) => root.querySelector(sel);
-  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-  const on = (el, ev, fn, opt) => el && el.addEventListener(ev, fn, opt);
+  /* ----------------------- 유틸리티 ----------------------- */
+  const $    = (sel, root=document) => root.querySelector(sel);
+  const $$   = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+  const on   = (el, ev, fn, opt) => el && el.addEventListener(ev, fn, opt);
+  const off  = (el, ev, fn, opt) => el && el.removeEventListener(ev, fn, opt);
+  const raf  = (fn) => requestAnimationFrame(fn);
 
-  const raf   = (fn) => window.requestAnimationFrame(fn);
-  const qsNum = (s, root = document) => parseFloat(getComputedStyle(root).getPropertyValue(s)) || 0;
+  /* ======================= 1) 앵커 스무스 스크롤 (위임) ======================= */
+  // 동적 추가 앵커까지 동작하도록 문서 단위 위임
+  on(document, 'click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+    if (href.length <= 1) return; // '#' 단독 제외
+    const target = document.querySelector(href);
+    if (!target) return;
+    e.preventDefault();
+    try {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch {
+      // 일부 인앱 브라우저 대응
+      const r = target.getBoundingClientRect();
+      window.scrollTo({ top: window.pageYOffset + r.top, behavior: 'smooth' });
+    }
+  }, { passive: false, capture: true });
 
-  // --------------------------------------------------------------------
-  // 1) Smooth anchor scroll (deduped)
-  // --------------------------------------------------------------------
-  function setupSmoothAnchors() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      on(anchor, 'click', function (e) {
-        const targetId = this.getAttribute('href') || '';
-        if (targetId.length <= 1) return; // skip "#" only
-        const targetEl = document.querySelector(targetId);
-        if (!targetEl) return;
-        e.preventDefault();
-        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, { passive: true });
-    });
-  }
-
-  // --------------------------------------------------------------------
-  // 2) Sticky Topbar: hide-on-scroll, rotating text, hero offset
-  //    Requires: #stickyTopbar .topbar, .fade-rotator (optional), #legalDBHero (optional)
-  // --------------------------------------------------------------------
-  function setupStickyTopbar() {
+  /* ======================= 2) 상단 고정바(Topbar) ======================= */
+  (function initStickyTopbar(){
     const headerSec = $('#stickyTopbar');
     if (!headerSec) return;
-
     const bar     = headerSec.querySelector('.topbar');
     const rotator = headerSec.querySelector('.fade-rotator');
     const hero    = $('#legalDBHero');
     if (!bar) return;
 
-    function setHeroHeaderSpace() {
+    // 헤더 높이만큼 히어로 여백 반영
+    function setHeroHeaderSpace(){
       if (!hero) return;
       const h = bar.getBoundingClientRect().height || 0;
       hero.style.setProperty('--hdr-space', (h + 20) + 'px');
@@ -54,17 +50,17 @@
     setHeroHeaderSpace();
     on(window, 'resize', setHeroHeaderSpace, { passive: true });
 
-    let lastY = window.pageYOffset || document.documentElement.scrollTop || 0;
+    // 스크롤 방향에 따른 헤더 숨김/표시
+    let lastY = window.pageYOffset || document.documentElement.scrollTop;
     let ticking = false;
-    const threshold  = 8;
+    const threshold = 8;
     const minShowTop = 10;
 
-    function onScroll() {
-      const y  = window.pageYOffset || document.documentElement.scrollTop || 0;
+    function onScroll(){
+      const y  = window.pageYOffset || document.documentElement.scrollTop;
       const dy = y - lastY;
-
-      if (Math.abs(dy) > threshold) {
-        if (dy > 0 && y > (bar.offsetHeight + 10)) {
+      if (Math.abs(dy) > threshold){
+        if (dy > 0 && y > bar.offsetHeight + 10){
           bar.style.transform = 'translate(-50%, -120%)';
         } else {
           bar.style.transform = 'translate(-50%, 0)';
@@ -74,15 +70,13 @@
       if (y <= minShowTop) bar.style.transform = 'translate(-50%, 0)';
       ticking = false;
     }
-    on(window, 'scroll', () => {
-      if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
-    }, { passive: true });
+    on(window, 'scroll', () => { if (!ticking){ requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
 
-    // Rotator play/pause
-    const playRotate  = () => rotator && rotator.classList.add('play');
-    const stopRotate  = () => rotator && rotator.classList.remove('play');
+    // 회전 텍스트 재생/중지
+    const playRotate = () => rotator && rotator.classList.add('play');
+    const stopRotate = () => rotator && rotator.classList.remove('play');
 
-    if ('IntersectionObserver' in window && rotator) {
+    if ('IntersectionObserver' in window && rotator){
       const io = new IntersectionObserver((entries) => {
         entries.forEach(ent => ent.isIntersecting ? playRotate() : stopRotate());
       }, { threshold: 0.01 });
@@ -90,17 +84,15 @@
     } else {
       playRotate();
     }
+
     on(document, 'visibilitychange', () => {
       if (document.hidden) stopRotate();
       else { stopRotate(); raf(playRotate); }
     });
-  }
+  })();
 
-  // --------------------------------------------------------------------
-  // 3) Legal DB hero — rolling DB list
-  //    Requires: #legalDBHero .dbTrack, .dbStack, constants & DB_LIST data
-  // --------------------------------------------------------------------
-  function setupLegalDbHeroTicker() {
+  /* ======================= 3) 실시간 DB 트랙 롤링 ======================= */
+  (function initDbTrack(){
     const root  = $('#legalDBHero');
     if (!root) return;
     const track = root.querySelector('.dbTrack');
@@ -108,7 +100,6 @@
     if (!track || !stack) return;
 
     const VISIBLE = 5, GAP = 10, INTERVAL = 2600;
-
     const DB_LIST = [
       // 🔹 소규모 개인사업 (2,000~4,000만원)
       { city: '서울', age: '미용실',   overdue: '3,000만원', debt: '**', memo: '1개월 이내', time: '' },
@@ -147,7 +138,7 @@
       { city: '제주', age: '택배업',   overdue: '2,000만원', debt: '**', memo: '1개월 이내', time: '' }
     ];
 
-    function createCard(data) {
+    function createCard(data){
       const el = document.createElement('div');
       el.className = 'db-card enter';
       el.innerHTML = `
@@ -156,17 +147,17 @@
           <p class="db-title">${data.city} · ${data.age} · <b style="color:#13b5a3;">[${data.overdue}  승인]</b></p>
           <p class="db-sub">연매출 ${data.debt} · 승인기간 : ${data.memo} <span style="color:var(--muted);font-size:.9em">${data.time}</span></p>
         </div>`;
-      raf(() => el.classList.add('is-in'));
+      raf(()=> el.classList.add('is-in'));
       return el;
     }
 
-    function shiftUp(by) {
+    function shiftUp(by){
       track.classList.add('is-shifting');
       track.style.transform = `translateY(-${by}px)`;
-      return new Promise(res => {
-        const onEnd = () => { track.removeEventListener('transitionend', onEnd); res(); };
+      return new Promise(res=>{
+        const onEnd = ()=>{ track.removeEventListener('transitionend', onEnd); res(); };
         track.addEventListener('transitionend', onEnd, { once: true });
-      }).then(() => {
+      }).then(()=>{
         track.classList.remove('is-shifting');
         track.style.transform = 'translateY(0)';
       });
@@ -174,139 +165,127 @@
 
     let idx = 0, paused = false, timer = null, cardHeight = 78;
 
-    function pushNext() {
+    function pushNext(){
       const data = DB_LIST[idx % DB_LIST.length]; idx++;
       const card = createCard(data);
       track.appendChild(card);
-
       const cards = track.children;
-      if (cards.length > VISIBLE) {
+      if (cards.length > VISIBLE){
         const first = cards[0];
-        shiftUp(cardHeight + GAP).then(() => first.remove());
+        shiftUp(cardHeight + GAP).then(()=> first.remove());
       }
     }
 
-    function prime() {
+    function prime(){
       const init = Math.min(VISIBLE, DB_LIST.length);
-      for (let i = 0; i < init; i++) pushNext();
-      if (track.children.length) {
+      for (let i=0;i<init;i++) pushNext();
+      if (track.children.length){
         cardHeight = track.children[0].getBoundingClientRect().height || cardHeight;
       }
     }
 
-    function schedule() {
+    function schedule(){
       clearInterval(timer);
-      timer = setInterval(() => { if (!paused) pushNext(); }, INTERVAL);
+      timer = setInterval(()=>{ if(!paused) pushNext(); }, INTERVAL);
     }
 
-    on(stack, 'mouseenter', () => paused = true);
-    on(stack, 'mouseleave', () => paused = false);
+    on(stack, 'mouseenter', ()=> paused = true);
+    on(stack, 'mouseleave', ()=> paused = false);
 
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => e.isIntersecting ? schedule() : clearInterval(timer));
+    if ('IntersectionObserver' in window){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=> e.isIntersecting ? schedule() : clearInterval(timer));
       }, { threshold: .2 });
       io.observe(stack);
     } else {
       schedule();
     }
-
     prime();
-  }
+  })();
 
-  // --------------------------------------------------------------------
-  // 4) Reveal cards under #whoCanPartner (.card.reveal)
-  // --------------------------------------------------------------------
-  function setupWhoCanPartnerReveal() {
+  /* ======================= 4) 카드 리빌 (whoCanPartner) ======================= */
+  (function initWhoCanPartner(){
     const root = $('#whoCanPartner');
     if (!root) return;
-    const targets = root.querySelectorAll('.card.reveal');
+    const targets = $$('.card.reveal', root);
     if (!targets.length || !('IntersectionObserver' in window)) return;
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        entry.target.classList.toggle('show', entry.isIntersecting);
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if (entry.isIntersecting) entry.target.classList.add('show');
+        else entry.target.classList.remove('show');
       });
     }, { threshold: .18, rootMargin: '0px 0px -5% 0px' });
     targets.forEach(el => io.observe(el));
-  }
+  })();
 
-  // --------------------------------------------------------------------
-  // 5) Simple highlighter rotators (#eventList .item, #eventList1 .item)
-  // --------------------------------------------------------------------
-  function setupEventRotators() {
-    const lists = ['#eventList', '#eventList1'];
-    lists.forEach(sel => {
-      const items = document.querySelectorAll(`${sel} .item`);
+  /* ======================= 5) 이벤트 하이라이트 롤러 ======================= */
+  (function initEventRollers(){
+    const makeRoller = (sel) => {
+      const items = $$(sel + ' .item');
       if (!items.length) return;
       let idx = -1;
-      setInterval(() => {
-        items.forEach(i => i.classList.remove('active'));
+      setInterval(()=>{
+        items.forEach(i=>i.classList.remove('active'));
         idx = (idx + 1) % items.length;
         items[idx].classList.add('active');
       }, 2000);
-    });
-  }
+    };
+    makeRoller('#eventList');
+    makeRoller('#eventList1');
+  })();
 
-  // --------------------------------------------------------------------
-  // 6) Terms modal inside #applyMintForm, + footer z-index management
-  // --------------------------------------------------------------------
-  function setupTermsModal() {
+  /* ======================= 6) 신청 폼: 개인정보 모달/동의 ======================= */
+  (function initApplyFormTerms(){
     const root = $('#applyMintForm');
     if (!root) return;
     const form = root.querySelector('#applyForm');
     if (!form) return;
 
-    const agreeBox      = form.querySelector('#agree');
-    const agreeTextSpan = root.querySelector('.agree span');
+    const agreeBox     = form.querySelector('#agree');
+    const agreeTextSpan= form.querySelector('.agree span');
 
+    // 푸터 z-index 제어 준비
     const footer = $('#siteFooter');
     let prevFooterZ = null;
-
-    (function injectFooterRule() {
+    (function injectFooterRule(){
       const style = document.createElement('style');
       style.textContent = `html.__modal-open #siteFooter{ z-index:-1 !important; }`;
       document.head.appendChild(style);
     })();
 
-    const lowerFooter = () => {
+    function lowerFooter(){
       document.documentElement.classList.add('__modal-open');
-      if (footer) {
+      if(footer){
         prevFooterZ = footer.style.zIndex || '';
         footer.style.zIndex = '-1';
       }
-    };
-    const restoreFooter = () => {
+    }
+    function restoreFooter(){
       document.documentElement.classList.remove('__modal-open');
-      if (footer) {
-        if (prevFooterZ) footer.style.zIndex = prevFooterZ;
+      if(footer){
+        if(prevFooterZ) footer.style.zIndex = prevFooterZ;
         else footer.style.removeProperty('z-index');
         prevFooterZ = null;
       }
-    };
-
-    // '자세히 보기' 버튼 삽입 (중복 방지)
-    let termsBtn = root.querySelector('.terms-link');
-    if (!termsBtn) {
-      termsBtn = document.createElement('button');
-      termsBtn.type = 'button';
-      termsBtn.className = 'terms-link';
-      termsBtn.textContent = '자세히 보기';
-      termsBtn.setAttribute('aria-haspopup', 'dialog');
-      if (agreeTextSpan) {
-        agreeTextSpan.appendChild(document.createTextNode(' '));
-        agreeTextSpan.appendChild(termsBtn);
-      }
     }
 
-    // 이미 overlay가 있으면 재사용
-    let overlay = root.querySelector('.terms-overlay');
-    if (!overlay) {
-      overlay = document.createElement('div');
-      overlay.className = 'terms-overlay';
-      overlay.setAttribute('hidden', '');
-      overlay.innerHTML = `
-     <div class="terms-sheet" role="dialog" aria-modal="true" aria-labelledby="termsTitle" tabindex="-1">
+    // '자세히 보기' 버튼 추가
+    const termsBtn = document.createElement('button');
+    termsBtn.type = 'button';
+    termsBtn.className = 'terms-link';
+    termsBtn.textContent = '자세히 보기';
+    termsBtn.setAttribute('aria-haspopup','dialog');
+    if (agreeTextSpan){
+      agreeTextSpan.appendChild(document.createTextNode(' '));
+      agreeTextSpan.appendChild(termsBtn);
+    }
+
+    // 모달 DOM
+    const overlay = document.createElement('div');
+    overlay.className = 'terms-overlay';
+    overlay.setAttribute('hidden','');
+    overlay.innerHTML = `
+      <div class="terms-sheet" role="dialog" aria-modal="true" aria-labelledby="termsTitle" tabindex="-1">
         <div class="terms-header">
           <h3 id="termsTitle" class="terms-title">개인정보 처리방침</h3>
           <button type="button" class="terms-close-x" aria-label="닫기">✕</button>
@@ -325,57 +304,57 @@
           </div>
         </div>
       </div>
-      `;
-      root.appendChild(overlay);
-    }
+    `;
+    root.appendChild(overlay);
 
     const sheet       = overlay.querySelector('.terms-sheet');
     const closeX      = overlay.querySelector('.terms-close-x');
     const cancelBtn   = overlay.querySelector('.terms-cancel');
     const acceptBtn   = overlay.querySelector('.terms-accept');
     const inlineAgree = overlay.querySelector('#termsInlineAgree');
-
     let prevFocus = null;
 
-    function openTerms() {
-      prevFocus = document.activeElement;
-      root.setAttribute('data-modal-open', 'true');
-      overlay.hidden = false;
-      sheet && sheet.focus();
-      lowerFooter();
-      document.addEventListener('keydown', onKeydown, true);
-      overlay.addEventListener('click', onBackdrop);
-    }
-    function closeTerms() {
-      overlay.hidden = true;
-      root.removeAttribute('data-modal-open');
-      restoreFooter();
-      document.removeEventListener('keydown', onKeydown, true);
-      overlay.removeEventListener('click', onBackdrop);
-      if (prevFocus && typeof prevFocus.focus === 'function') prevFocus.focus();
-    }
-    const onBackdrop = (e) => { if (e.target === overlay) closeTerms(); };
-    function onKeydown(e) {
-      if (e.key === 'Escape') { e.preventDefault(); closeTerms(); }
-      if (e.key === 'Tab') {
+    function onKeydown(e){
+      if (e.key === 'Escape'){ e.preventDefault(); closeTerms(); }
+      if (e.key === 'Tab'){
         const f = sheet.querySelectorAll('a,button,input,select,textarea,[tabindex]:not([tabindex="-1"])');
         const focusables = Array.prototype.slice.call(f);
         if (!focusables.length) return;
         const first = focusables[0];
-        const last  = focusables[focusables.length - 1];
-        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        const last  = focusables[focusables.length-1];
+        if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
       }
     }
+    function onBackdrop(e){ if (e.target === overlay) closeTerms(); }
 
-    on(termsBtn, 'click', (e) => { e.preventDefault(); e.stopPropagation(); openTerms(); });
-    on(closeX,   'click', (e) => { e.preventDefault(); closeTerms(); });
-    on(cancelBtn,'click', (e) => { e.preventDefault(); closeTerms(); });
+    function openTerms(){
+      prevFocus = document.activeElement;
+      root.setAttribute('data-modal-open','true');
+      overlay.hidden = false;
+      sheet.focus();
+      lowerFooter();
+      on(document, 'keydown', onKeydown, true);
+      on(overlay, 'click', onBackdrop);
+    }
+    function closeTerms(){
+      overlay.hidden = true;
+      root.removeAttribute('data-modal-open');
+      restoreFooter();
+      off(document, 'keydown', onKeydown, true);
+      off(overlay, 'click', onBackdrop);
+      if (prevFocus && typeof prevFocus.focus === 'function') prevFocus.focus();
+    }
 
-    on(acceptBtn, 'click', (e) => {
-      e.preventDefault(); e.stopPropagation();
+    on(termsBtn, 'click', (e)=>{ e.preventDefault(); e.stopPropagation(); openTerms(); });
+    on(closeX, 'click', (e)=>{ e.preventDefault(); closeTerms(); });
+    on(cancelBtn, 'click', (e)=>{ e.preventDefault(); closeTerms(); });
+
+    on(acceptBtn, 'click', (e)=>{
+      e.preventDefault();
+      e.stopPropagation();
       if (inlineAgree) inlineAgree.checked = true;
-      if (agreeBox) {
+      if (agreeBox){
         agreeBox.checked = true;
         agreeBox.dispatchEvent(new Event('change', { bubbles: true }));
       }
@@ -383,43 +362,28 @@
       closeTerms();
     });
 
-    // 작은 시각 피드백 애니메이션 정의 (필요 시 트리거하여 사용)
-    if (!root.querySelector('style[data-terms-shake]')) {
-      const css = document.createElement('style');
-      css.dataset.termsShake = '1';
-      css.textContent = `
-        #applyMintForm .terms-sheet.shake{ animation: applyShake .3s; }
-        @keyframes applyShake{
-          10%{ transform:translateY(0) translateX(-2px) }
-          20%{ transform:translateY(0) translateX(2px) }
-          30%{ transform:translateY(0) translateX(-2px) }
-          40%{ transform:translateY(0) translateX(2px) }
-          50%{ transform:translateY(0) translateX(-1px) }
-          60%{ transform:translateY(0) translateX(1px) }
-          100%{ transform:translateY(0) translateX(0) }
-        }
-      `;
-      root.appendChild(css);
-    }
+    // 미동 안내 애니메이션 정의 주입
+    const css = document.createElement('style');
+    css.textContent = `
+      #applyMintForm .terms-sheet.shake{ animation: applyShake .3s; }
+      @keyframes applyShake{
+        10%{ transform:translateY(0) translateX(-2px) }
+        20%{ transform:translateY(0) translateX(2px) }
+        30%{ transform:translateY(0) translateX(-2px) }
+        40%{ transform:translateY(0) translateX(2px) }
+        50%{ transform:translateY(0) translateX(-1px) }
+        60%{ transform:translateY(0) translateX(1px) }
+        100%{ transform:translateY(0) translateX(0) }
+      }
+    `;
+    root.appendChild(css);
+  })();
 
-    // Footer 링크 → 약관 모달 열기 연동
-    const openFooterTerms = () => {
-      const btn = $('#applyMintForm .terms-link');
-      if (btn) { btn.click(); return true; }
-      return false;
-    };
-    $$('#siteFooter [data-open-terms]').forEach(a => {
-      on(a, 'click', (e) => { e.preventDefault(); if (!openFooterTerms()) location.hash = '#applyMintForm'; });
-    });
-  }
-
-  // --------------------------------------------------------------------
-  // 7) Select arrow wrapper (once)
-  // --------------------------------------------------------------------
-  function setupSelectWrap() {
+  /* ======================= 7) 셀렉트 화살표 래핑(중복통합) ======================= */
+  (function initSelectWrap(){
     const root = $('#applyMintForm');
     if (!root) return;
-    const selects = root.querySelectorAll('select');
+    const selects = $$('select', root);
     selects.forEach(sel => {
       if (sel.closest('.select-wrap')) return;
       const wrap = document.createElement('div');
@@ -436,55 +400,48 @@
       on(sel, 'touchstart', open, { passive: true });
       on(sel, 'blur', close);
       on(sel, 'change', close);
-      on(sel, 'keydown', (e) => { if (e.key === 'Escape') close(); });
+      on(sel, 'keydown', (e)=>{ if (e.key === 'Escape') close(); });
     });
-  }
+  })();
 
-  // --------------------------------------------------------------------
-  // 8) Kakao floating FAB pulse reset on re-enter
-  // --------------------------------------------------------------------
-  function setupKakaoFloatingPulse() {
+  /* ======================= 8) 카카오 플로팅 버튼 펄스 재시작 ======================= */
+  (function initKakaoFloating(){
     const root = $('#kakaoFloating');
     const btn  = root?.querySelector('.fab');
     if (!root || !btn || !('IntersectionObserver' in window)) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if (entry.isIntersecting){
           btn.style.animation = 'none';
-          void btn.offsetHeight;
+          void btn.offsetHeight; // reflow
           btn.style.animation = '';
         }
       });
     }, { threshold: 0.01 });
     observer.observe(root);
-  }
+  })();
 
-  // --------------------------------------------------------------------
-  // 9) Maxlength enforcement with IME support (inputs & textareas)
-  // --------------------------------------------------------------------
-  function setupMaxlengthGuard() {
+  /* ======================= 9) maxlength 강제 트렁케이트(IME 대응) ======================= */
+  (function enforceMaxlength(){
     const TEXTUAL_TYPES = new Set(['', 'text', 'search', 'tel', 'password', 'url', 'email']);
     const composing = new WeakMap();
 
     const isTextual = (el) =>
-      el && (
-        el.tagName === 'TEXTAREA' ||
-        (el.tagName === 'INPUT' && TEXTUAL_TYPES.has((el.type || '').toLowerCase()))
-      );
+      el?.tagName === 'TEXTAREA' ||
+      (el?.tagName === 'INPUT' && TEXTUAL_TYPES.has((el.type||'').toLowerCase()));
 
-    const truncate = (el, MAX) => {
+    function truncate(el, MAX){
       if (!isFinite(MAX)) return;
       const v = el.value || '';
-      if (v.length > MAX) {
+      if (v.length > MAX){
         const pos = el.selectionStart;
         el.value = v.slice(0, MAX);
         const p = Math.min(typeof pos === 'number' ? pos : MAX, MAX);
         if (el.setSelectionRange) el.setSelectionRange(p, p);
       }
-    };
+    }
 
-    const attach = (el) => {
+    function attach(el){
       if (!isTextual(el)) return;
       if (!el.hasAttribute('maxlength')) return;
 
@@ -499,46 +456,37 @@
       on(el, 'beforeinput', (e) => {
         if (composing.get(el)) return;
         if (e.inputType !== 'insertText') return;
-        const MAX = getMAX();
-        if (!isFinite(MAX)) return;
-
+        const MAX = getMAX(); if (!isFinite(MAX)) return;
         const { value, selectionStart, selectionEnd } = el;
         const replacing = Math.max(0, (selectionEnd ?? value.length) - (selectionStart ?? value.length));
         const inserting  = (e.data || '').length;
         const nextLen    = value.length - replacing + inserting;
-
         if (nextLen > MAX) e.preventDefault();
       });
 
-      on(el, 'input', () => {
-        if (composing.get(el)) return;
-        truncate(el, getMAX());
-      });
-    };
+      on(el, 'input', () => { if (!composing.get(el)) truncate(el, getMAX()); });
+    }
 
-    document.querySelectorAll('input[maxlength], textarea[maxlength]').forEach(attach);
+    $$('input[maxlength], textarea[maxlength]').forEach(attach);
 
-    const mo = new MutationObserver((mutations) => {
-      for (const m of mutations) {
-        m.addedNodes && m.addedNodes.forEach(node => {
+    const mo = new MutationObserver((mutations)=>{
+      for (const m of mutations){
+        m.addedNodes && m.addedNodes.forEach(node=>{
           if (!(node instanceof Element)) return;
           if (node.matches?.('input[maxlength], textarea[maxlength]')) attach(node);
           node.querySelectorAll?.('input[maxlength], textarea[maxlength]').forEach(attach);
         });
         if (m.type === 'attributes' && m.attributeName === 'maxlength' &&
-            m.target instanceof Element &&
-            m.target.matches('input[maxlength], textarea[maxlength]')) {
+            m.target instanceof Element && m.target.matches('input[maxlength], textarea[maxlength]')){
           attach(m.target);
         }
       }
     });
     mo.observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['maxlength'] });
-  }
+  })();
 
-  // --------------------------------------------------------------------
-  // 10) Footer utils: year, scroll to top, terms open
-  // --------------------------------------------------------------------
-  function setupFooterUtils() {
+  /* ======================= 10) 푸터: 연도, 맨위로, 약관연동 ======================= */
+  (function initFooter(){
     const footer = $('#siteFooter');
     if (!footer) return;
 
@@ -546,19 +494,27 @@
     if (y) y.textContent = new Date().getFullYear();
 
     const toTop = footer.querySelector('#footerToTop');
-    if (toTop) {
-      on(toTop, 'click', (e) => {
+    if (toTop){
+      on(toTop, 'click', (e)=>{
         e.preventDefault();
-        try { $('#stickyTopbar')?.scrollIntoView({ behavior: 'smooth' }); }
-        catch { window.scrollTo(0, 0); }
+        try { $('#stickyTopbar')?.scrollIntoView({behavior:'smooth'}); }
+        catch { window.scrollTo({ top: 0, behavior: 'smooth' }); }
       });
     }
-  }
 
-  // --------------------------------------------------------------------
-  // 11) Legal notice clock & external helper setExtraNotice(msg)
-  // --------------------------------------------------------------------
-  function setupLegalNoticeClock() {
+    function openTerms(){
+      const btn = $('#applyMintForm .terms-link');
+      if (btn) { btn.click(); return true; }
+      return false;
+    }
+    $$
+    ('[data-open-terms]', footer).forEach(a=>{
+      on(a, 'click', (e)=>{ e.preventDefault(); if (!openTerms()) location.hash = '#applyMintForm'; });
+    });
+  })();
+
+  /* ======================= 11) 법적 고지 시간표기(Asia/Seoul) ======================= */
+  (function initLegalNotice(){
     const root = $('#legalNotice');
     if (!root) return;
 
@@ -575,19 +531,19 @@
       hour12: false
     });
 
-    const formatKST = (now = new Date()) => {
+    function formatKST(now=new Date()){
       const map = Object.fromEntries(fmt.formatToParts(now).map(p => [p.type, p.value]));
       return ` (${map.year}-${map.month}-${map.day} ${map.hour}:${map.minute}:${map.second} 기준)`;
-      // e.g. (2025-10-13 11:05:07 기준)
-    };
+    }
 
-    const tick = () => { tsEl.textContent = formatKST(); };
+    function tick(){ tsEl.textContent = formatKST(); }
     tick();
     const timer = setInterval(tick, 1000);
     on(window, 'beforeunload', () => clearInterval(timer));
 
-    window.setExtraNotice = function (msg) {
-      if (!msg || !msg.trim()) {
+    // 외부에서 문구 변경할 수 있게 노출
+    window.setExtraNotice = function(msg){
+      if(!msg || !msg.trim()){
         extraEl.textContent = '';
         root.removeAttribute('data-extra');
         return;
@@ -595,153 +551,142 @@
       extraEl.textContent = ' · ' + msg.trim();
       root.setAttribute('data-extra', msg.trim());
     };
-  }
+  })();
 
-  // --------------------------------------------------------------------
-  // 12) Bullet pulser in #legalDBHero (right ul li)
-  // --------------------------------------------------------------------
-  function setupHeroRightPulse() {
+  /* ======================= 12) 히어로 오른쪽 리스트 펄스 ======================= */
+  (function initHeroRightPulse(){
     const root = $('#legalDBHero');
     if (!root) return;
     const list = root.querySelector('.right ul');
     if (!list) return;
-    const items = Array.from(list.querySelectorAll('li'));
+    const items = $$('.right ul li', root);
     if (!items.length) return;
 
-    let idx = 0, timer = null, playing = false;
-    const STEP = 3000;
+    let idx=0, timer=null, playing=false;
+    const STEP=3000;
 
-    function tick() {
-      items.forEach(li => li.classList.remove('pulse'));
+    function tick(){
+      items.forEach(li=>li.classList.remove('pulse'));
       items[idx].classList.add('pulse');
       idx = (idx + 1) % items.length;
     }
-    function start() {
+    function start(){
       if (playing) return; playing = true; tick();
       timer = setInterval(tick, STEP);
     }
-    function stop() {
-      if (!playing) return; playing = false;
-      clearInterval(timer); timer = null;
+    function stop(){
+      if (!playing) return; playing=false;
+      clearInterval(timer); timer=null;
     }
 
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((ents) => {
-        ents.forEach(e => e.isIntersecting ? start() : stop());
-      }, { threshold: .15 });
+    if ('IntersectionObserver' in window){
+      const io=new IntersectionObserver((ents)=>{
+        ents.forEach(e=> e.isIntersecting ? start() : stop());
+      },{threshold:.15});
       io.observe(list);
-      start(); // immediate attempt
     } else {
       start();
     }
-  }
+  })();
 
-  // --------------------------------------------------------------------
-  // 13) Car compare section entrance & tilt effect
-  // --------------------------------------------------------------------
-  function setupCarCompare() {
+  /* ======================= 13) 비교 섹션 진입 애니메이션 ======================= */
+  (function initCarCompare(){
     const root = $('#carCompare');
     if (!root) return;
 
-    const reveals = root.querySelectorAll('.reveal');
-    const listL   = root.querySelectorAll('.list-l > li');
-    const listR   = root.querySelectorAll('.list-r > li');
-    const policy  = root.querySelector('.box.policy');
+    const reveals = $$('.reveal', root);
+    const listL   = $$('.list-l > li', root);
+    const listR   = $$('.list-r > li', root);
+    const policy  = $('.box.policy', root);
 
-    function setHidden() {
-      reveals.forEach(el => {
-        el.style.opacity = '0';
-        el.style.filter  = 'blur(6px)';
-        el.style.transform = 'translateY(16px) scale(.98)';
+    function setHidden(){
+      reveals.forEach(el=>{
+        el.style.opacity='0'; el.style.filter='blur(6px)'; el.style.transform='translateY(16px) scale(.98)';
       });
-      listL.forEach(li => { li.style.opacity = '0'; li.style.filter = 'blur(6px)'; li.style.transform = 'translateX(-14px)'; });
-      listR.forEach(li => { li.style.opacity = '0'; li.style.filter = 'blur(6px)'; li.style.transform = 'translateX(14px)'; });
+      listL.forEach(li=>{ li.style.opacity='0'; li.style.filter='blur(6px)'; li.style.transform='translateX(-14px)'; });
+      listR.forEach(li=>{ li.style.opacity='0'; li.style.filter='blur(6px)'; li.style.transform='translateX(14px)'; });
       const vs = root.querySelector('.vs');
-      if (vs) { vs.style.animation = 'none'; void vs.offsetWidth; vs.style.animation = ''; }
-      if (policy) { policy.style.animation = 'none'; void policy.offsetWidth; policy.style.animation = ''; }
+      if (vs){ vs.style.animation='none'; void vs.offsetWidth; vs.style.animation=''; }
+      if (policy){ policy.style.animation='none'; void policy.offsetWidth; policy.style.animation=''; }
     }
-
-    function setVisible() {
+    function setVisible(){
       root.classList.add('in');
       const delayed = root.querySelectorAll('[style*="--d"]');
-      delayed.forEach(el => {
+      delayed.forEach(el=>{
         el.style.transition = `opacity var(--dur) var(--ease), transform var(--dur) var(--ease), filter calc(var(--dur) + 120ms) var(--ease)`;
       });
-      raf(() => {
-        reveals.forEach(el => { el.style.opacity = '1'; el.style.filter = 'none'; el.style.transform = 'none'; });
-        listL.forEach(li => { li.style.opacity = '1'; li.style.filter = 'none'; li.style.transform = 'none'; });
-        listR.forEach(li => { li.style.opacity = '1'; li.style.filter = 'none'; li.style.transform = 'none'; });
+      raf(()=>{
+        reveals.forEach(el=>{ el.style.opacity='1'; el.style.filter='none'; el.style.transform='none'; });
+        listL.forEach(li=>{ li.style.opacity='1'; li.style.filter='none'; li.style.transform='none'; });
+        listR.forEach(li=>{ li.style.opacity='1'; li.style.filter='none'; li.style.transform='none'; });
       });
     }
-
-    function unsetVisible() {
+    function unsetVisible(){
       root.classList.remove('in');
       setHidden();
     }
 
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) { setHidden(); raf(setVisible); }
-          else if (entry.intersectionRatio === 0) { unsetVisible(); }
+    if ('IntersectionObserver' in window){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if (entry.isIntersecting){
+            setHidden();
+            raf(setVisible);
+          } else {
+            if (entry.intersectionRatio===0) unsetVisible();
+          }
         });
       }, { threshold: 0.25, rootMargin: '0px 0px -10% 0px' });
       io.observe(root);
-    } else {
-      setVisible();
     }
 
     const fine = matchMedia('(pointer:fine)').matches;
-    if (policy && fine) {
-      let rx = 0, ry = 0, TX = 0, TY = 0, frameId = null;
-      const max = 6, lerp = (a, b, t) => a + (b - a) * t;
-
-      const move = (e) => {
+    if (policy && fine){
+      let rx=0, ry=0, TX=0, TY=0, req=null;
+      const max=6, lerp=(a,b,t)=>a+(b-a)*t;
+      const move=(e)=>{
         const r = policy.getBoundingClientRect();
-        const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-        const x = (e.clientX - cx) / (r.width / 2), y = (e.clientY - cy) / (r.height / 2);
+        const cx=r.left+r.width/2, cy=r.top+r.height/2;
+        const x=(e.clientX-cx)/(r.width/2), y=(e.clientY-cy)/(r.height/2);
         TX = (max * y * -1); TY = (max * x);
-        if (!frameId) frameId = requestAnimationFrame(update);
+        if(!req) req=requestAnimationFrame(update);
       };
-      const update = () => {
-        rx = lerp(rx, TX, 0.12); ry = lerp(ry, TY, 0.12);
+      const update=()=>{
+        rx = lerp(rx,TX,0.12); ry = lerp(ry,TY,0.12);
         policy.style.transform = `translateY(-2px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-        frameId = (Math.abs(rx - TX) < 0.1 && Math.abs(ry - TY) < 0.1) ? null : requestAnimationFrame(update);
+        req = (Math.abs(rx-TX)<0.1 && Math.abs(ry-TY)<0.1) ? null : requestAnimationFrame(update);
       };
-      const leave = () => { TX = 0; TY = 0; if (!frameId) frameId = requestAnimationFrame(update); };
+      const leave=()=>{ TX=0; TY=0; if(!req) req=requestAnimationFrame(update); };
       on(policy, 'mousemove', move);
       on(policy, 'mouseleave', leave);
     }
 
-    on(document, 'visibilitychange', () => {
-      if (document.visibilityState === 'visible') {
+    on(document, 'visibilitychange', ()=>{
+      if (document.visibilityState === 'visible'){
         const rect = root.getBoundingClientRect();
         const inView = rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25;
-        if (inView) { unsetVisible(); raf(setVisible); }
+        if (inView){ unsetVisible(); raf(setVisible); }
       }
     });
 
     setHidden();
-  }
+  })();
 
-  // --------------------------------------------------------------------
-  // 14) Count-up in #late-response with re-trigger
-  // --------------------------------------------------------------------
-  function setupLateResponseCounters() {
+  /* ======================= 14) 카운트업 (late-response) ======================= */
+  (function initLateResponseCount(){
     const SCOPE = $('#late-response');
     if (!SCOPE) return;
-    const counters = SCOPE.querySelectorAll('.count');
+    const counters = $$('.count', SCOPE);
     if (!counters.length) return;
 
-    function animateCount(el) {
+    function animateCount(el){
       const target   = +el.dataset.target || 0;
       const duration = +el.dataset.duration || 1800;
       const start    = performance.now();
       el.dataset.playing = '1';
-
-      function frame(now) {
+      function frame(now){
         const p = Math.min((now - start) / duration, 1);
-        const eased = p < .5 ? 2 * p * p : -1 + (4 - 2 * p) * p; // easeInOutQuad
+        const eased = p < .5 ? 2*p*p : -1 + (4 - 2*p) * p;
         const val = Math.round(eased * target);
         el.textContent = val.toLocaleString();
         if (p < 1 && el.dataset.playing === '1') requestAnimationFrame(frame);
@@ -751,20 +696,20 @@
     }
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
+    if (prefersReduced){
       counters.forEach(el => el.textContent = (+el.dataset.target || 0).toLocaleString());
       return;
     }
 
     if (!('IntersectionObserver' in window)) {
-      counters.forEach(el => animateCount(el));
+      counters.forEach(animateCount);
       return;
     }
 
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
         const el = entry.target;
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting){
           el.dataset.playing = '0';
           el.textContent = '0';
           animateCount(el);
@@ -774,40 +719,40 @@
         }
       });
     }, { threshold: .6 });
-
     counters.forEach(el => io.observe(el));
-  }
+  })();
 
-  // --------------------------------------------------------------------
-  // 15) hbReasons vertical slider & centered card highlighting
-  // --------------------------------------------------------------------
-  function setupHbReasonsSlider() {
+  /* ======================= 15) hbReasons 수직 캐러셀 ======================= */
+  (function initHbReasons(){
     const root  = $('#hbReasons');
     if (!root) return;
     const rail  = root.querySelector('.rail');
     const frame = root.querySelector('.frame');
     if (!rail || !frame) return;
 
-    const getCards = () => Array.from(rail.querySelectorAll('.card'));
-    const getStep  = () => (qsNum('--cardH', root) + qsNum('--gap', root)) || 0;
+    const getCards = () => $$('.card', rail);
+    const getStep  = () => {
+      const cs = getComputedStyle(root);
+      return parseFloat(cs.getPropertyValue('--cardH')) + parseFloat(cs.getPropertyValue('--gap'));
+    };
     const INTERVAL = 2000;
     let timer = null, animRAF = null, locked = false;
 
-    function updateCenterByPoint() {
+    function updateCenterByPoint(){
       const rect = frame.getBoundingClientRect();
-      const midX = rect.left + rect.width / 2;
-      const midY = rect.top + rect.height / 2;
-      const el   = document.elementFromPoint(midX, midY);
+      const midX = rect.left + rect.width/2;
+      const midY = rect.top + rect.height/2;
+      const el = document.elementFromPoint(midX, midY);
       const centerCard = el && el.closest ? el.closest('.card') : null;
-      getCards().forEach(c => c.classList.toggle('is-center', c === centerCard));
+      getCards().forEach(c=>c.classList.toggle('is-center', c === centerCard));
     }
-    function startCenterTracker() {
+    function startCenterTracker(){
       if (animRAF) return;
-      const tick = () => { updateCenterByPoint(); animRAF = requestAnimationFrame(tick); };
+      const tick = ()=>{ updateCenterByPoint(); animRAF = requestAnimationFrame(tick); };
       animRAF = requestAnimationFrame(tick);
     }
 
-    function stepUp() {
+    function stepUp(){
       if (locked) return; locked = true;
       const CARD_STEP = getStep();
       rail.style.transition = `transform var(--t) var(--e)`;
@@ -817,38 +762,35 @@
       const onEnd = () => {
         rail.removeEventListener('transitionend', onEnd);
         const first = getCards()[0];
-        if (first) rail.appendChild(first);
+        rail.appendChild(first);
         rail.style.transition = 'none';
         rail.style.transform = `translateY(${currentY}px)`;
         locked = false;
-        raf(updateCenterByPoint);
+        requestAnimationFrame(updateCenterByPoint);
       };
       rail.addEventListener('transitionend', onEnd, { once: true });
     }
 
-    function start() { if (!timer) timer = setInterval(stepUp, INTERVAL); startCenterTracker(); }
-    function stop()  { if (timer) { clearInterval(timer); timer = null; } }
+    function start(){ if(!timer) timer = setInterval(stepUp, INTERVAL); startCenterTracker(); }
+    function stop(){ if(timer){ clearInterval(timer); timer=null; } }
 
     updateCenterByPoint(); start();
-    on(document, 'visibilitychange', () => { document.hidden ? stop() : start(); });
+    on(document, 'visibilitychange', ()=>{ document.hidden ? stop() : start(); });
     on(frame, 'mouseenter', stop);
     on(frame, 'mouseleave', start);
     on(frame, 'focusin',   stop);
     on(frame, 'focusout',  start);
-    on(window, 'resize', () => raf(updateCenterByPoint));
-    on(window, 'load',   () => raf(updateCenterByPoint));
-  }
+    on(window, 'resize',   ()=> raf(updateCenterByPoint));
+    on(window, 'load',     ()=> raf(updateCenterByPoint));
+  })();
 
-  // --------------------------------------------------------------------
-  // 16) nb3 ring animation + synced KPI counting
-  // --------------------------------------------------------------------
-  function setupNb3RingsAndCounting() {
+  /* ======================= 16) nb3: 링 게이지 + KPI 카운팅 ======================= */
+  (function initNb3Rings(){
     const root = $('#nb3');
     if (!root) return;
 
-    const EASE     = (t) => 1 - Math.pow(1 - t, 3);
+    const EASE = (t) => 1 - Math.pow(1 - t, 3);
     const DURATION = 900;
-
     const fmtComma = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
     function parseCurrencyParts(text) {
@@ -856,8 +798,8 @@
       if (!mAll.length) return null;
       const m = mAll[mAll.length - 1];
       const start = m.index;
-      const len   = m[0].length;
-      const num   = parseInt(m[0].replace(/,/g, ''), 10) || 0;
+      const len = m[0].length;
+      const num = parseInt(m[0].replace(/,/g, ''), 10) || 0;
       return { prefix: text.slice(0, start), suffix: text.slice(start + len), number: num };
     }
     function parseLastNumberParts(text) {
@@ -865,8 +807,8 @@
       if (!mAll.length) return null;
       const m = mAll[mAll.length - 1];
       const start = m.index;
-      const len   = m[0].length;
-      const num   = parseInt(m[0].replace(/,/g, ''), 10) || 0;
+      const len = m[0].length;
+      const num = parseInt(m[0].replace(/,/g, ''), 10) || 0;
       return { head: text.slice(0, start), tail: text.slice(start + len), number: num };
     }
     function findKpiValueEl(cardEl, labelText) {
@@ -906,13 +848,11 @@
       const cntEl = findKpiValueEl(cardEl, '총 정책자금 횟수');
       if (cntEl && cntEl.dataset.orig) cntEl.textContent = cntEl.dataset.orig;
     }
-
     function animateRing(el) {
       const target = Math.max(0, Math.min(100, Number(el.getAttribute('data-rate') || 0)));
       let start = null;
       el.style.setProperty('--p', 0);
       const card = el.closest('.case-card');
-
       function step(ts) {
         if (!start) start = ts;
         const t = Math.min(1, (ts - start) / DURATION);
@@ -935,27 +875,28 @@
     }
 
     const rings = Array.from(root.querySelectorAll('.rate-ring[data-rate]'));
-    if (!rings.length || !('IntersectionObserver' in window)) return;
-
+    if (!('IntersectionObserver' in window)) {
+      rings.forEach(animateRing);
+      return;
+    }
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         const el = entry.target;
-        entry.isIntersecting ? animateRing(el) : resetRing(el);
+        if (entry.isIntersecting) animateRing(el);
+        else resetRing(el);
       });
     }, { threshold: 0.35 });
-    rings.forEach(el => io.observe(el));
-  }
+    rings.forEach((el) => io.observe(el));
+  })();
 
-  // --------------------------------------------------------------------
-  // 17) nb3 carousel slider (drag/swipe/momentum/auto)
-  // --------------------------------------------------------------------
-  function setupNb3Slider() {
+  /* ======================= 17) nb3 슬라이더(드래그/오토) ======================= */
+  (function initNb3Slider(){
     const root = $('#nb3');
     if (!root) return;
 
-    const slider = root.querySelector('#nb3Slider');
+    const slider  = root.querySelector('#nb3Slider');
     if (!slider) return;
-    const track  = slider.querySelector('.nb3-slider-wrapper');
+    const track   = slider.querySelector('.nb3-slider-wrapper');
     const prevBtn = root.querySelector('#nb3Prev');
     const nextBtn = root.querySelector('#nb3Next');
     if (!track) return;
@@ -969,22 +910,17 @@
         const first = cards[0];
         cardWidth = first.getBoundingClientRect().width || 0;
         gap = parseFloat(getComputedStyle(track).gap) || 24;
-        const visible = Math.max(1, Math.floor((containerWidth + gap) / (cardWidth + gap)));
+        const visible = Math.max(1, Math.floor((containerWidth - 0 + gap) / (cardWidth + gap)));
         maxIndex = Math.max(0, cards.length - visible);
-      } else {
-        maxIndex = 0;
-        cardWidth = 0;
-        gap = parseFloat(getComputedStyle(track).gap) || 24;
       }
     }
-
-    function setTransform(index, animate = true) {
+    function setTransform(index, animate=true){
       const tx = -index * (cardWidth + gap);
-      if (animate) {
+      if (animate){
         slider.classList.add('animating');
         track.style.transition = 'transform .6s cubic-bezier(0.25,0.46,0.45,0.94)';
         track.style.transform  = `translateX(${tx}px)`;
-        setTimeout(() => {
+        setTimeout(()=>{
           slider.classList.remove('animating');
           track.style.transition = 'transform .1s ease';
         }, 600);
@@ -994,89 +930,87 @@
       }
       currentIndex = Math.max(0, Math.min(index, maxIndex));
     }
+    function moveTo(index){ setTransform(Math.max(0, Math.min(index, maxIndex)), true); }
 
-    const moveTo = (index) => setTransform(Math.max(0, Math.min(index, maxIndex)), true);
+    on(prevBtn, 'click', ()=>{ pauseAuto(); moveTo(currentIndex-1); resumeAutoLater(); });
+    on(nextBtn, 'click', ()=>{ pauseAuto(); moveTo(currentIndex+1); resumeAutoLater(); });
 
-    on(prevBtn, 'click', () => { pauseAuto(); moveTo(currentIndex - 1); resumeAutoLater(); });
-    on(nextBtn, 'click', () => { pauseAuto(); moveTo(currentIndex + 1); resumeAutoLater(); });
+    // 드래그/스와이프
+    let isDragging=false, started=false;
+    let startX=0, startTX=0, curTX=0, lastX=0, lastT=0, v=0, req=null;
+    const TH=8, FRICTION=0.95, MIN_V=0.8;
 
-    // Drag/swipe
-    let isDragging = false, started = false;
-    let startX = 0, startTX = 0, curTX = 0, lastX = 0, lastT = 0, v = 0, req = null;
-    const TH = 8, FRICTION = 0.95, MIN_V = 0.8;
-
-    const getTX = () => {
+    function getTX(){
       const m = track.style.transform.match(/translateX\((-?\d+(?:\.\d+)?)px\)/);
       return m ? parseFloat(m[1]) : 0;
-    };
-
-    function onStart(e) {
-      if (e.type === 'mousedown' && e.button !== 0) return;
-      isDragging = true; started = false;
-      startX = e.touches ? e.touches[0].clientX : e.clientX;
-      startTX = getTX(); curTX = startTX;
-      lastX = startX; lastT = performance.now(); v = 0;
+    }
+    function onStart(e){
+      if(e.type==='mousedown' && e.button!==0) return;
+      isDragging=true; started=false;
+      startX = e.touches? e.touches[0].clientX : e.clientX;
+      startTX = getTX(); curTX=startTX;
+      lastX=startX; lastT=performance.now(); v=0;
       slider.classList.add('dragging');
-      if (req) { cancelAnimationFrame(req); req = null; }
+      if(req){ cancelAnimationFrame(req); req=null; }
       pauseAuto();
       e.preventDefault();
     }
-    function onMove(e) {
-      if (!isDragging) return;
+    function onMove(e){
+      if(!isDragging) return;
       const now = performance.now();
-      const x = e.touches ? e.touches[0].clientX : e.clientX;
+      const x = e.touches? e.touches[0].clientX : e.clientX;
       const dx = x - lastX;
       const dt = Math.max(1, now - lastT);
 
-      if (!started && Math.abs(x - startX) > TH) started = true;
+      if(!started && Math.abs(x - startX) > TH) started = true;
 
-      if (started) {
+      if(started){
         let next = startTX + (x - startX);
         const minT = -(maxIndex * (cardWidth + gap));
         const maxT = 0;
-        if (next > maxT) next = maxT + (next - maxT) * 0.3;
-        else if (next < minT) next = minT + (next - minT) * 0.3;
+        if(next > maxT) next = maxT + (next - maxT)*0.3;
+        else if(next < minT) next = minT + (next - minT)*0.3;
 
         curTX = next;
         track.style.transform = `translateX(${next}px)`;
 
         const iv = dx / dt;
-        v = v * 0.8 + iv * 0.2;
+        v = v*0.8 + iv*0.2;
       }
 
-      lastX = x; lastT = now;
+      lastX=x; lastT=now;
       e.preventDefault();
     }
-    const snap = () => {
+    function snap(){
       const step = cardWidth + gap;
-      const idx  = step ? Math.round(-curTX / step) : 0;
+      const idx = Math.round(-curTX / step);
       const clamp = Math.max(0, Math.min(idx, maxIndex));
       currentIndex = clamp;
       setTransform(clamp, true);
-    };
-    function momentum() {
-      if (req) return;
-      const frame = () => {
-        if (Math.abs(v) < MIN_V) { snap(); req = null; return; }
-        curTX += v * 16;
+    }
+    function momentum(){
+      if(req) return;
+      function frame(){
+        if(Math.abs(v) < MIN_V){ snap(); req=null; return; }
+        curTX += v*16;
         const minT = -(maxIndex * (cardWidth + gap));
         const maxT = 0;
-        if (curTX > maxT || curTX < minT) {
+        if(curTX > maxT || curTX < minT){
           v *= -0.3;
           curTX = Math.max(minT, Math.min(maxT, curTX));
         }
         track.style.transform = `translateX(${curTX}px)`;
         v *= FRICTION;
         req = requestAnimationFrame(frame);
-      };
+      }
       frame();
     }
-    function onEnd(e) {
-      if (!isDragging) return;
-      isDragging = false;
+    function onEnd(e){
+      if(!isDragging) return;
+      isDragging=false;
       slider.classList.remove('dragging');
-      if (started) {
-        if (Math.abs(v) > MIN_V) momentum();
+      if(started){
+        if(Math.abs(v) > MIN_V) momentum();
         else snap();
         resumeAutoLater();
       } else {
@@ -1085,63 +1019,20 @@
       e.preventDefault();
     }
 
-    on(slider, document.ontouchstart !== undefined ? 'touchstart' : 'mousedown', onStart, { passive: false });
-    on(document, document.ontouchmove  !== undefined ? 'touchmove'  : 'mousemove', onMove,  { passive: false });
-    on(document, document.ontouchend   !== undefined ? 'touchend'   : 'mouseup',   onEnd,   { passive: false });
-    on(slider, 'dragstart', (e) => e.preventDefault());
-    on(slider, 'click', (e) => { if (started) { e.preventDefault(); e.stopPropagation(); started = false; } }, true);
+    on(slider, 'mousedown', onStart, { passive: false });
+    on(document, 'mousemove', onMove, { passive: false });
+    on(document, 'mouseup', onEnd, { passive: false });
+    on(slider, 'touchstart', onStart, { passive: false });
+    on(slider, 'touchmove', onMove, { passive: false });
+    on(slider, 'touchend', onEnd, { passive: false });
+    on(slider, 'touchcancel', onEnd, { passive: false });
+    on(slider, 'dragstart', (e)=>e.preventDefault());
+    on(slider, 'click', (e)=>{ if(started){ e.preventDefault(); e.stopPropagation(); started=false; } }, true);
 
-    // Auto slide
+    // 자동 롤링
     const INTERVAL = 4200;
-    let auto = null, resume = null;
-    const step = () => moveTo(currentIndex >= maxIndex ? 0 : currentIndex + 1);
-    const startAuto = () => { stopAuto(); auto = setInterval(step, INTERVAL); };
-    const stopAuto  = () => { if (auto) { clearInterval(auto); auto = null; } };
-    const pauseAuto = () => { stopAuto(); if (resume) { clearTimeout(resume); resume = null; } };
-    const resumeAutoLater = (delay = 6200) => { if (resume) clearTimeout(resume); resume = setTimeout(startAuto, delay); };
-
-    function init() { updateDimensions(); setTransform(0, false); startAuto(); }
-    let rTimer = null;
-    on(window, 'resize', () => {
-      pauseAuto(); clearTimeout(rTimer);
-      rTimer = setTimeout(() => {
-        updateDimensions();
-        setTransform(Math.min(currentIndex, maxIndex), false);
-        resumeAutoLater();
-      }, 200);
-    });
-    on(document, 'visibilitychange', () => {
-      document.hidden ? pauseAuto() : resumeAutoLater(1800);
-    });
-    init();
-  }
-
-  // --------------------------------------------------------------------
-  // Boot
-  // --------------------------------------------------------------------
-  function boot() {
-    setupSmoothAnchors();
-    setupStickyTopbar();
-    setupLegalDbHeroTicker();
-    setupWhoCanPartnerReveal();
-    setupEventRotators();
-    setupTermsModal();
-    setupSelectWrap();         // (terms 이전/이후 어느 때 호출되어도 안전)
-    setupKakaoFloatingPulse();
-    setupMaxlengthGuard();
-    setupFooterUtils();
-    setupLegalNoticeClock();
-    setupHeroRightPulse();
-    setupCarCompare();
-    setupLateResponseCounters();
-    setupHbReasonsSlider();
-    setupNb3RingsAndCounting();
-    setupNb3Slider();
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot, { once: true });
-  } else {
-    boot();
-  }
-})();
+    let auto=null, resume=null;
+    function step(){ const next = currentIndex >= maxIndex ? 0 : currentIndex+1; moveTo(next); }
+    function startAuto(){ stopAuto(); auto = setInterval(step, INTERVAL); }
+    function stopAuto(){ if(auto){ clearInterval(auto); auto=null; } }
+    function pauseAuto(){ stopAuto(); if(resume){ clear

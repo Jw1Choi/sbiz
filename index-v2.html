@@ -116,22 +116,7 @@
     </div>
     <a class="tel" href="#form_e12">바로 신청하기</a>
 
-    <script>
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function(e) {
-      const targetId = this.getAttribute("href");
-      if (targetId.length > 1) { // #만 있는 링크 제외
-        e.preventDefault();
-        const targetEl = document.querySelector(targetId);
-        if (targetEl) {
-          targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }
-    });
-  });
-});
-</script>
+
   </header>
 
 
@@ -222,55 +207,6 @@ document.addEventListener("DOMContentLoaded", () => {
   <span class="extra"></span>
 </small>
 
-<script>
-(function(){
-  const root = document.getElementById('legalNotice');
-  if(!root) return;
-
-  const tsEl    = root.querySelector('.ts')    || root.appendChild(document.createElement('span'));
-  const extraEl = root.querySelector('.extra') || root.appendChild(document.createElement('span'));
-
-  // 초기 추가 문구(data-extra 속성) 세팅
-  const initExtra = (root.getAttribute('data-extra') || '').trim();
-  if(initExtra) extraEl.textContent = '  ' + initExtra;
-
-  // KST(Asia/Seoul) 기준 시각 포맷터
-  const fmt = new Intl.DateTimeFormat('ko-KR', {
-    timeZone: 'Asia/Seoul',
-    year: 'numeric', month: '2-digit', day: '2-digit',
-    hour: '2-digit', minute: '2-digit', second: '2-digit',
-    hour12: false
-  });
-
-  function formatKST(now=new Date()){
-    const map = Object.fromEntries(fmt.formatToParts(now).map(p => [p.type, p.value]));
-    // 2025-10-09 20:15:07 형식 + KST 표기
-    return ` (${map.year}-${map.month}-${map.day} ${map.hour}:${map.minute}:${map.second} 기준)`;
-  }
-
-  function tick(){
-    tsEl.textContent = formatKST();
-  }
-
-  tick();
-  // 1초마다 갱신
-  const timer = setInterval(tick, 1000);
-
-  // 페이지 이탈 시 타이머 정리(메모리 보호)
-  window.addEventListener('beforeunload', () => clearInterval(timer));
-
-  // 외부에서 추가 문구를 쉽게 바꿀 수 있는 헬퍼 노출
-  window.setExtraNotice = function(msg){
-    if(!msg || !msg.trim()){
-      extraEl.textContent = '';
-      root.removeAttribute('data-extra');
-      return;
-    }
-    extraEl.textContent = ' · ' + msg.trim();
-    root.setAttribute('data-extra', msg.trim());
-  };
-})();
-</script>
         </div>
         <div class="actions">
           <a class="btn-fill" href="#form_e12">지원 가능 자금 확인하기</a>
@@ -281,42 +217,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
  
 
-  <script>
-    (function(){
-      const root=document.querySelector('#legalDBHero');
-      if(!root)return;
-      const list=root.querySelector('.right ul');
-      if(!list)return;
-      const items=Array.from(list.querySelectorAll('li'));
-      if(!items.length)return;
-
-      let idx=0; let timer=null; let playing=false;
-      const STEP=3000; // 항목당 유지 시간 (ms)
-
-      function tick(){
-        items.forEach(li=>li.classList.remove('pulse'));
-        items[idx].classList.add('pulse');
-        idx=(idx+1)%items.length;
-      }
-      function start(){
-        if(playing) return; playing=true; tick();
-        timer=setInterval(tick, STEP);
-      }
-      function stop(){
-        if(!playing) return; playing=false;
-        clearInterval(timer); timer=null;
-      }
-
-      // 스크롤로 섹션이 화면을 벗어나면 일시정지, 다시 들어오면 재개 (모바일/PC 모두)
-      const io=new IntersectionObserver((ents)=>{
-        ents.forEach(e=>{ if(e.isIntersecting) start(); else stop(); });
-      },{threshold:.15});
-      io.observe(list);
-
-      // 초기 1회 시도 (뷰포트 안에 있을 경우 바로 시작)
-      start();
-    })();
-  </script>
 
 </section>
 
@@ -622,96 +522,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-  <script>
-    (function(){
-      const root = document.querySelector('#carCompare');
-      if(!root) return;
-
-      const reveals = root.querySelectorAll('.reveal');
-      const listL = root.querySelectorAll('.list-l > li');
-      const listR = root.querySelectorAll('.list-r > li');
-      const policy = root.querySelector('.box.policy');
-
-      function setHidden(){
-        reveals.forEach(el=>{
-          el.style.opacity = '0';
-          el.style.filter  = 'blur(6px)';
-          el.style.transform = 'translateY(16px) scale(.98)';
-        });
-        listL.forEach(li=>{
-          li.style.opacity='0'; li.style.filter='blur(6px)'; li.style.transform='translateX(-14px)';
-        });
-        listR.forEach(li=>{
-          li.style.opacity='0'; li.style.filter='blur(6px)'; li.style.transform='translateX(14px)';
-        });
-        const vs = root.querySelector('.vs');
-        if(vs){ vs.style.animation='none'; void vs.offsetWidth; vs.style.animation=''; }
-        if(policy){ policy.style.animation='none'; void policy.offsetWidth; policy.style.animation=''; }
-      }
-
-      function setVisible(){
-        root.classList.add('in');
-        const delayed = root.querySelectorAll('[style*="--d"]');
-        delayed.forEach(el=>{
-          el.style.transition = `opacity var(--dur) var(--ease), transform var(--dur) var(--ease), filter calc(var(--dur) + 120ms) var(--ease)`;
-        });
-        requestAnimationFrame(()=>{
-          reveals.forEach(el=>{ el.style.opacity='1'; el.style.filter='none'; el.style.transform='none'; });
-          listL.forEach(li=>{ li.style.opacity='1'; li.style.filter='none'; li.style.transform='none'; });
-          listR.forEach(li=>{ li.style.opacity='1'; li.style.filter='none'; li.style.transform='none'; });
-        });
-      }
-
-      function unsetVisible(){
-        root.classList.remove('in');
-        setHidden();
-      }
-
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(entry=>{
-          if(entry.isIntersecting){
-            setHidden();
-            requestAnimationFrame(setVisible);
-          }else{
-            if(entry.intersectionRatio===0){ unsetVisible(); }
-          }
-        });
-      }, {threshold:0.25, rootMargin:'0px 0px -10% 0px'});
-      io.observe(root);
-
-      const fine = matchMedia('(pointer:fine)').matches;
-      if(policy && fine){
-        let rx=0, ry=0, TX=0, TY=0, raf=null;
-        const max=6, lerp=(a,b,t)=>a+(b-a)*t;
-        const move=(e)=>{
-          const r = policy.getBoundingClientRect();
-          const cx=r.left+r.width/2, cy=r.top+r.height/2;
-          const x=(e.clientX-cx)/(r.width/2), y=(e.clientY-cy)/(r.height/2);
-          TX = (max * y * -1); TY = (max * x);
-          if(!raf) raf=requestAnimationFrame(update);
-        };
-        const update=()=>{
-          rx = lerp(rx,TX,0.12); ry = lerp(ry,TY,0.12);
-          policy.style.transform = `translateY(-2px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-          raf = (Math.abs(rx-TX)<0.1 && Math.abs(ry-TY)<0.1) ? null : requestAnimationFrame(update);
-        };
-        const leave=()=>{ TX=0; TY=0; if(!raf) raf=requestAnimationFrame(update); };
-        policy.addEventListener('mousemove', move);
-        policy.addEventListener('mouseleave', leave);
-      }
-
-      document.addEventListener('visibilitychange', ()=>{
-        if(document.visibilityState === 'visible'){
-          const rect = root.getBoundingClientRect();
-          const inView = rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25;
-          if(inView){ unsetVisible(); requestAnimationFrame(setVisible); }
-        }
-      });
-
-      setHidden();
-    })();
-  </script>
 </section>
 
 
@@ -911,58 +721,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
 
-  <script>
-    // ===== Count-up with re-trigger on re-enter =====
-    (function(){
-      const SCOPE = document.querySelector('#late-response');
-      if(!SCOPE) return;
-      const counters = SCOPE.querySelectorAll('.count');
 
-      // helper: animate a single element
-      function animateCount(el){
-        const target   = +el.dataset.target || 0;
-        const duration = +el.dataset.duration || 1800;
-        const start    = performance.now();
-        el.dataset.playing = '1';
-
-        function frame(now){
-          const p = Math.min((now - start) / duration, 1);
-          const eased = p < .5 ? 2*p*p : -1 + (4 - 2*p) * p; // easeInOutQuad
-          const val = Math.round(eased * target);
-          el.textContent = val.toLocaleString();
-          if (p < 1 && el.dataset.playing === '1') requestAnimationFrame(frame);
-          else el.dataset.playing = '0';
-        }
-        requestAnimationFrame(frame);
-      }
-
-      // Reduced motion → set final numbers immediately
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReduced){
-        counters.forEach(el => el.textContent = (+el.dataset.target || 0).toLocaleString());
-        return;
-      }
-
-      // Intersection Observer to restart when re-entering
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(entry=>{
-          const el = entry.target;
-          if(entry.isIntersecting){
-            // start/restart
-            el.dataset.playing = '0';
-            el.textContent = '0';
-            animateCount(el);
-          }else{
-            // reset when out
-            el.dataset.playing = '0';
-            el.textContent = '0';
-          }
-        });
-      }, {threshold:.6});
-
-      counters.forEach(el => io.observe(el));
-    })();
-  </script>
 </section>
 
 
@@ -1036,7 +795,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <a class="nb3-product-slide">
           <div class="case-media">
             <img class="case-img" src="./img/h9.jpg" alt="소상공인 정책자금 후기 썸네일 - 음식점 운영자">
-            <span class="media-pin">01 / 09</span>
+            <span class="media-pin">01 / 08</span>
           </div>
           <article class="case-card">
             <div class="case-top"><span class="case-pin">정보통신업(IT) / 사업 2년차 / 김** 님</span></div>
@@ -1062,7 +821,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <a class="nb3-product-slide">
   <div class="case-media">
     <img class="case-img" src="./img/b3.jpg" alt="소상공인 정책자금 후기 썸네일 - 도배업 대표">
-    <span class="media-pin">02 / 09</span>
+    <span class="media-pin">02 / 08</span>
   </div>
   <article class="case-card">
     <div class="case-top"><span class="case-pin">도배업 / 사업 5년차 / 한** 님</span></div>
@@ -1105,7 +864,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <a class="nb3-product-slide">
   <div class="case-media">
     <img class="case-img" src="./img/b4.jpg" alt="소상공인 정책자금 후기 썸네일 - 안경점 대표">
-    <span class="media-pin">03 / 09</span>
+    <span class="media-pin">03 / 08</span>
   </div>
   <article class="case-card">
     <div class="case-top"><span class="case-pin">안경점 / 사업 7년차 / 정** 님</span></div>
@@ -1147,7 +906,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <a class="nb3-product-slide">
   <div class="case-media">
     <img class="case-img" src="./img/b5.jpg" alt="소상공인 정책자금 후기 썸네일 - 귀금속 매장 대표">
-    <span class="media-pin">04 / 09</span>
+    <span class="media-pin">04 / 08</span>
   </div>
   <article class="case-card">
     <div class="case-top"><span class="case-pin">귀금속 / 사업 8년차 / 이** 님</span></div>
@@ -1189,7 +948,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <a class="nb3-product-slide">
   <div class="case-media">
     <img class="case-img" src="./img/b6.jpg" alt="소상공인 정책자금 후기 썸네일 - 의류 매장 대표">
-    <span class="media-pin">05 / 09</span>
+    <span class="media-pin">05 / 08</span>
   </div>
   <article class="case-card">
     <div class="case-top"><span class="case-pin">의류업 / 사업 10년차 / 정** 님</span></div>
@@ -1231,7 +990,7 @@ document.addEventListener("DOMContentLoaded", () => {
    <a class="nb3-product-slide">
   <div class="case-media">
     <img class="case-img" src="./img/b8.jpg" alt="소상공인 정책자금 후기 썸네일 - 치킨 프랜차이즈 대표">
-    <span class="media-pin">06 / 09</span>
+    <span class="media-pin">06 / 08</span>
   </div>
   <article class="case-card">
     <div class="case-top"><span class="case-pin">치킨 프랜차이즈 / 사업 7년차 / 정** 님</span></div>
@@ -1274,7 +1033,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <a class="nb3-product-slide">
   <div class="case-media">
     <img class="case-img" src="./img/b9.jpg" alt="소상공인 정책자금 후기 썸네일 - 베이커리 대표">
-    <span class="media-pin">07 / 09</span>
+    <span class="media-pin">07 / 08</span>
   </div>
   <article class="case-card">
     <div class="case-top"><span class="case-pin">베이커리 / 사업 7년차 / 정** 님</span></div>
@@ -1315,7 +1074,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <a class="nb3-product-slide">
   <div class="case-media">
     <img class="case-img" src="./img/b1.jpg" alt="소상공인 정책자금 후기 썸네일 - 이삿집 대표">
-    <span class="media-pin">09 / 09</span>
+    <span class="media-pin">08 / 08</span>
   </div>
   <article class="case-card">
     <div class="case-top"><span class="case-pin">이삿집 / 사업 7년차 / 정** 님</span></div>
@@ -1359,336 +1118,9 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
 
-  <!-- ▶ 탕감율 애니메이션 + KPI 카운팅: 디자인/동작 유지, 루트만 nb3로 스코프 -->
-  <script>
-    (() => {
-      const root = document.getElementById('nb3');
-      if (!root) return;
-      const EASE = (t) => 1 - Math.pow(1 - t, 3);
-      const DURATION = 900; // 게이지 및 숫자 카운트 동일 시간
 
-      // 유틸: 숫자에 콤마
-      const fmtComma = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-      // 유틸: 통화 문자열을 prefix/number/suffix로 분해 (예: "₩150,000,000")
-      function parseCurrencyParts(text) {
-        const mAll = [...text.matchAll(/(\d[\d,]*)/g)];
-        if (!mAll.length) return null;
-        const m = mAll[mAll.length - 1]; // 마지막 숫자 그룹 기준 (일관성)
-        const start = m.index;
-        const len = m[0].length;
-        const num = parseInt(m[0].replace(/,/g, ''), 10) || 0;
-        return {
-          prefix: text.slice(0, start),
-          suffix: text.slice(start + len),
-          number: num
-        };
-      }
-
-      // 유틸: 마지막 숫자 그룹만 카운트 (예: "1년간 2회" -> 2만 카운트)
-      function parseLastNumberParts(text) {
-        const mAll = [...text.matchAll(/(\d[\d,]*)/g)];
-        if (!mAll.length) return null;
-        const m = mAll[mAll.length - 1];
-        const start = m.index;
-        const len = m[0].length;
-        const num = parseInt(m[0].replace(/,/g, ''), 10) || 0;
-        return {
-          head: text.slice(0, start),
-          tail: text.slice(start + len),
-          number: num
-        };
-      }
-
-      // 특정 슬라이드(card)에서 라벨 텍스트로 KPI value 엘리먼트 찾기
-      function findKpiValueEl(cardEl, labelText) {
-        const boxes = cardEl.querySelectorAll('.kpi-box');
-        for (const box of boxes) {
-          const lbl = box.querySelector('.kpi-label');
-          const val = box.querySelector('.kpi-value');
-          if (lbl && val && lbl.textContent.trim() === labelText) return val;
-        }
-        return null;
-      }
-
-      // 카운팅 적용: 비율(progress) [0~1] 에 맞춰 내용 갱신
-      function driveCountingForCard(cardEl, progress) {
-        // 승인금액
-        const amtEl = findKpiValueEl(cardEl, '승인금액');
-        if (amtEl) {
-          if (!amtEl.dataset.orig) amtEl.dataset.orig = amtEl.textContent.trim();
-          if (!amtEl._parts) amtEl._parts = parseCurrencyParts(amtEl.dataset.orig);
-          const p = amtEl._parts;
-          if (p) {
-            const cur = Math.round(p.number * progress);
-            amtEl.textContent = p.prefix + fmtComma(cur) + p.suffix;
-          }
-        }
-        // 총 정책자금 횟수 (문장 내 마지막 숫자만 카운트)
-        const cntEl = findKpiValueEl(cardEl, '총 정책자금 횟수');
-        if (cntEl) {
-          if (!cntEl.dataset.orig) cntEl.dataset.orig = cntEl.textContent.trim();
-          if (!cntEl._parts) cntEl._parts = parseLastNumberParts(cntEl.dataset.orig);
-          const p2 = cntEl._parts;
-          if (p2) {
-            const cur2 = Math.round(p2.number * progress);
-            cntEl.textContent = p2.head + cur2.toString() + p2.tail;
-          }
-        }
-      }
-
-      function resetCountingForCard(cardEl) {
-        const amtEl = findKpiValueEl(cardEl, '승인금액');
-        if (amtEl && amtEl.dataset.orig) amtEl.textContent = amtEl.dataset.orig;
-        const cntEl = findKpiValueEl(cardEl, '총 정책자금 횟수');
-        if (cntEl && cntEl.dataset.orig) cntEl.textContent = cntEl.dataset.orig;
-      }
-
-      function animateRing(el) {
-        const target = Math.max(0, Math.min(100, Number(el.getAttribute('data-rate') || 0)));
-        let start = null;
-        el.style.setProperty('--p', 0);
-
-        // 해당 링이 포함된 카드(article.case-card) 찾기
-        const card = el.closest('.case-card');
-
-        function step(ts) {
-          if (!start) start = ts;
-          const t = Math.min(1, (ts - start) / DURATION);
-          const eased = EASE(t);
-          const cur = Math.round(target * eased);
-          el.style.setProperty('--p', cur);
-
-          // 게이지 진행과 동기화하여 숫자 카운팅 구동
-          if (card) driveCountingForCard(card, eased);
-
-          if (t < 1) el._raf = requestAnimationFrame(step);
-          else el._raf = null;
-        }
-        if (el._raf) cancelAnimationFrame(el._raf);
-        el._raf = requestAnimationFrame(step);
-      }
-
-      function resetRing(el) {
-        if (el._raf) cancelAnimationFrame(el._raf);
-        el._raf = null;
-        el.style.setProperty('--p', 0);
-        // 중앙 텍스트(.ring-val)는 원본 유지
-        // 숫자 카운팅도 원복
-        const card = el.closest('.case-card');
-        if (card) resetCountingForCard(card);
-      }
-
-      const rings = Array.from(root.querySelectorAll('.rate-ring[data-rate]'));
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          const el = entry.target;
-          if (entry.isIntersecting) {
-            // 화면에 들어오면 다시 적용
-            animateRing(el);
-          } else {
-            // 화면 밖으로 나가면 원복
-            resetRing(el);
-          }
-        });
-      }, { threshold: 0.35 });
-
-      rings.forEach((el) => io.observe(el));
-    })();
-  </script>
 </section>
 
-<!-- ▼ nb1/nb2와 동일 패턴의 슬라이더 제어 스크립트 (디자인/스크롤 영향 없음) -->
-<script>
-  (function(){
-    const root = document.getElementById('nb3');
-    if(!root) return;
-
-    const slider = root.querySelector('#nb3Slider');
-    const track  = slider.querySelector('.nb3-slider-wrapper');
-    const prevBtn = root.querySelector('#nb3Prev');
-    const nextBtn = root.querySelector('#nb3Next');
-
-    /* ===== 상태값/유틸 ===== */
-    let currentIndex = 0;
-    let maxIndex = 0;
-    let cardWidth = 0;
-    let gap = 0;
-
-    function updateDimensions() {
-      const cards = slider.querySelectorAll('.nb3-product-slide');
-      const containerWidth = slider.clientWidth;
-      if (cards.length > 0) {
-        const first = cards[0];
-        cardWidth = first.getBoundingClientRect().width;
-        gap = parseFloat(getComputedStyle(track).gap) || 24; // 1.5rem
-        // 보여지는 카드 수 추정 (좌우 패딩 변화 없음)
-        const visible = Math.max(1, Math.floor((containerWidth - 0 + gap) / (cardWidth + gap)));
-        maxIndex = Math.max(0, cards.length - visible);
-      }
-    }
-
-    function setTransform(index, animate=true){
-      const tx = -index * (cardWidth + gap);
-      if(animate){
-        slider.classList.add('animating');
-        track.style.transition = 'transform .6s cubic-bezier(0.25,0.46,0.45,0.94)';
-        track.style.transform = `translateX(${tx}px)`;
-        setTimeout(()=>{
-          slider.classList.remove('animating');
-          track.style.transition = 'transform .1s ease';
-        }, 600);
-      }else{
-        track.style.transition = 'transform .1s ease';
-        track.style.transform = `translateX(${tx}px)`;
-      }
-      currentIndex = Math.max(0, Math.min(index, maxIndex));
-    }
-
-    function moveTo(index){ setTransform(Math.max(0, Math.min(index, maxIndex)), true); }
-
-    /* ===== 버튼 ===== */
-    if (prevBtn) prevBtn.addEventListener('click', ()=>{ pauseAuto(); moveTo(currentIndex-1); resumeAutoLater(); });
-    if (nextBtn) nextBtn.addEventListener('click', ()=>{ pauseAuto(); moveTo(currentIndex+1); resumeAutoLater(); });
-
-    /* ===== 드래그/스와이프 (디자인/스크롤 영향 없음) ===== */
-    let isDragging=false, started=false;
-    let startX=0, startTX=0, curTX=0, lastX=0, lastT=0, v=0, raf=null;
-
-    const TH=8, FRICTION=0.95, MIN_V=0.8;
-
-    function getTX(){
-      const m = track.style.transform.match(/translateX\((-?\d+(?:\.\d+)?)px\)/);
-      return m ? parseFloat(m[1]) : 0;
-    }
-
-    function onStart(e){
-      if(e.type==='mousedown' && e.button!==0) return;
-      isDragging=true; started=false;
-      startX = e.touches? e.touches[0].clientX : e.clientX;
-      startTX = getTX(); curTX=startTX;
-      lastX=startX; lastT=performance.now(); v=0;
-      slider.classList.add('dragging');
-      if(raf){ cancelAnimationFrame(raf); raf=null; }
-      pauseAuto();
-      e.preventDefault();
-    }
-
-    function onMove(e){
-      if(!isDragging) return;
-      const now = performance.now();
-      const x = e.touches? e.touches[0].clientX : e.clientX;
-      const dx = x - lastX;
-      const dt = Math.max(1, now - lastT);
-
-      if(!started && Math.abs(x - startX) > TH) started = true;
-
-      if(started){
-        let next = startTX + (x - startX);
-        const minT = -(maxIndex * (cardWidth + gap));
-        const maxT = 0;
-        if(next > maxT) next = maxT + (next - maxT)*0.3;
-        else if(next < minT) next = minT + (next - minT)*0.3;
-
-        curTX = next;
-        track.style.transform = `translateX(${next}px)`;
-
-        const iv = dx / dt;
-        v = v*0.8 + iv*0.2;
-      }
-
-      lastX=x; lastT=now;
-      e.preventDefault();
-    }
-
-    function snap(){
-      const step = cardWidth + gap;
-      const idx = Math.round(-curTX / step);
-      const clamp = Math.max(0, Math.min(idx, maxIndex));
-      currentIndex = clamp;
-      setTransform(clamp, true);
-    }
-
-    function momentum(){
-      if(raf) return;
-      function frame(){
-        if(Math.abs(v) < MIN_V){ snap(); raf=null; return; }
-        curTX += v*16; // ~60fps
-        const minT = -(maxIndex * (cardWidth + gap));
-        const maxT = 0;
-        if(curTX > maxT || curTX < minT){
-          v *= -0.3;
-          curTX = Math.max(minT, Math.min(maxT, curTX));
-        }
-        track.style.transform = `translateX(${curTX}px)`;
-        v *= FRICTION;
-        raf = requestAnimationFrame(frame);
-      }
-      frame();
-    }
-
-    function onEnd(e){
-      if(!isDragging) return;
-      isDragging=false;
-      slider.classList.remove('dragging');
-      if(started){
-        if(Math.abs(v) > MIN_V) momentum();
-        else snap();
-        resumeAutoLater();
-      }else{
-        resumeAutoLater();
-      }
-      e.preventDefault();
-    }
-
-    slider.addEventListener('mousedown', onStart, {passive:false});
-    document.addEventListener('mousemove', onMove, {passive:false});
-    document.addEventListener('mouseup', onEnd, {passive:false});
-
-    slider.addEventListener('touchstart', onStart, {passive:false});
-    slider.addEventListener('touchmove', onMove, {passive:false});
-    slider.addEventListener('touchend', onEnd, {passive:false});
-    slider.addEventListener('touchcancel', onEnd, {passive:false});
-
-    // 드래그 후 클릭 방지
-    slider.addEventListener('click', (e)=>{
-      if(started){ e.preventDefault(); e.stopPropagation(); started=false; }
-    }, true);
-
-    slider.addEventListener('dragstart', e=>e.preventDefault());
-
-    /* ===== 자동 롤링 (디자인 영향 없음) ===== */
-    const INTERVAL = 4200;
-    let auto=null, resume=null;
-
-    function step(){
-      const next = currentIndex >= maxIndex ? 0 : currentIndex+1;
-      moveTo(next);
-    }
-    function startAuto(){ stopAuto(); auto=setInterval(step, INTERVAL); }
-    function stopAuto(){ if(auto){ clearInterval(auto); auto=null; } }
-    function pauseAuto(){ stopAuto(); if(resume){ clearTimeout(resume); resume=null; } }
-    function resumeAutoLater(delay=6200){ if(resume) clearTimeout(resume); resume=setTimeout(()=>startAuto(), delay); }
-
-    /* ===== 초기화 & 리사이즈 ===== */
-    function init(){ updateDimensions(); setTransform(0,false); startAuto(); }
-    let rTimer=null;
-    window.addEventListener('resize', ()=>{
-      pauseAuto(); clearTimeout(rTimer);
-      rTimer=setTimeout(()=>{
-        updateDimensions();
-        setTransform(Math.min(currentIndex, maxIndex), false);
-        resumeAutoLater();
-      },200);
-    });
-
-    document.addEventListener('visibilitychange', ()=>{
-      if(document.hidden) pauseAuto(); else resumeAutoLater(1800);
-    });
-
-    init();
-  })();
-</script>
 
 
 
@@ -1968,69 +1400,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   </div>
 
-  <script>
-    (function(){
-      const root = document.querySelector('#hbReasons');
-      if(!root) return;
-      const rail = root.querySelector('.rail');
-      const frame = root.querySelector('.frame');
-      const getCards = () => Array.from(rail.querySelectorAll('.card'));
-      const getStep = () => {
-        const cs = getComputedStyle(root);
-        return parseFloat(cs.getPropertyValue('--cardH')) + parseFloat(cs.getPropertyValue('--gap'));
-      };
-      const INTERVAL = 2000;  // 자동 슬라이드 간격(5초)
-      let timer = null; let animRAF = null; let locked = false;
 
-      // 프레임 중앙 좌표의 카드만 is-center 유지
-      function updateCenterByPoint(){
-        const rect = frame.getBoundingClientRect();
-        const midX = rect.left + rect.width/2;
-        const midY = rect.top + rect.height/2;
-        const el = document.elementFromPoint(midX, midY);
-        const centerCard = el && el.closest ? el.closest('.card') : null;
-        getCards().forEach(c=>c.classList.toggle('is-center', c === centerCard));
-      }
-      function startCenterTracker(){ if(animRAF) return; const tick = ()=>{ updateCenterByPoint(); animRAF = requestAnimationFrame(tick); }; animRAF = requestAnimationFrame(tick); }
-
-      // 한 칸 위로 이동
-      function stepUp(){
-        if(locked) return; locked = true;
-        const CARD_STEP = getStep();
-        rail.style.transition = `transform var(--t) var(--e)`;
-        const m = new DOMMatrixReadOnly(getComputedStyle(rail).transform);
-        const currentY = m.m42 || 0;
-        rail.style.transform = `translateY(${currentY - CARD_STEP}px)`;
-        const onEnd = () => {
-          rail.removeEventListener('transitionend', onEnd);
-          const first = getCards()[0];
-          rail.appendChild(first);
-          rail.style.transition = 'none';
-          rail.style.transform = `translateY(${currentY}px)`;
-          locked = false;
-          requestAnimationFrame(updateCenterByPoint);
-        };
-        rail.addEventListener('transitionend', onEnd, {once:true});
-      }
-
-      function start(){ if(!timer) timer = setInterval(stepUp, INTERVAL); startCenterTracker(); }
-      function stop(){ if(timer){ clearInterval(timer); timer=null; } }
-
-      // 초기 실행
-      updateCenterByPoint(); start();
-
-      // 가시성/호버 제어
-      document.addEventListener('visibilitychange', ()=>{ document.hidden ? stop() : start(); });
-      frame.addEventListener('mouseenter', stop);
-      frame.addEventListener('mouseleave', start);
-      frame.addEventListener('focusin', stop);
-      frame.addEventListener('focusout', start);
-
-      // 리사이즈/로드 시 중앙 재계산
-      window.addEventListener('resize', ()=>{ requestAnimationFrame(updateCenterByPoint); });
-      window.addEventListener('load', ()=>{ requestAnimationFrame(updateCenterByPoint); });
-    })();
-  </script>
 
 </section>
 
@@ -2236,33 +1606,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <style>
 
 </style>
-<script>
-  (function(){
-    const root = document.querySelector('#applyMintForm');
-    if(!root) return;
-    const selects = root.querySelectorAll('select');
 
-    /* 원본 DOM/ID 보존: select를 래퍼로 감싸 화살표만 추가 */
-    selects.forEach(function(sel){
-      if(sel.closest('.select-wrap')) return; // 중복 래핑 방지
-      const wrap = document.createElement('div');
-      wrap.className = 'select-wrap';
-      sel.parentNode.insertBefore(wrap, sel);
-      wrap.appendChild(sel);
-
-      const open = function(){ wrap.classList.add('open'); };
-      const close = function(){ wrap.classList.remove('open'); };
-
-      sel.addEventListener('focus', open);
-      sel.addEventListener('click', open);
-      sel.addEventListener('mousedown', open);
-      sel.addEventListener('touchstart', open, {passive:true});
-      sel.addEventListener('blur', close);
-      sel.addEventListener('change', close);
-      sel.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
-    });
-  })();
-</script>
 <!-- ▲▲▲ 추가 끝: 나머지 코드는 단 한 줄도 수정/삭제하지 않았습니다 ▲▲▲ -->
 
 
@@ -2920,6 +2264,689 @@ const DB_LIST = [
       });
     })();
   </script>
+
+
+
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function(e) {
+      const targetId = this.getAttribute("href");
+      if (targetId.length > 1) { // #만 있는 링크 제외
+        e.preventDefault();
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    });
+  });
+});
+</script>
+
+
+<script>
+(function(){
+  const root = document.getElementById('legalNotice');
+  if(!root) return;
+
+  const tsEl    = root.querySelector('.ts')    || root.appendChild(document.createElement('span'));
+  const extraEl = root.querySelector('.extra') || root.appendChild(document.createElement('span'));
+
+  // 초기 추가 문구(data-extra 속성) 세팅
+  const initExtra = (root.getAttribute('data-extra') || '').trim();
+  if(initExtra) extraEl.textContent = '  ' + initExtra;
+
+  // KST(Asia/Seoul) 기준 시각 포맷터
+  const fmt = new Intl.DateTimeFormat('ko-KR', {
+    timeZone: 'Asia/Seoul',
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+    hour12: false
+  });
+
+  function formatKST(now=new Date()){
+    const map = Object.fromEntries(fmt.formatToParts(now).map(p => [p.type, p.value]));
+    // 2025-10-09 20:15:07 형식 + KST 표기
+    return ` (${map.year}-${map.month}-${map.day} ${map.hour}:${map.minute}:${map.second} 기준)`;
+  }
+
+  function tick(){
+    tsEl.textContent = formatKST();
+  }
+
+  tick();
+  // 1초마다 갱신
+  const timer = setInterval(tick, 1000);
+
+  // 페이지 이탈 시 타이머 정리(메모리 보호)
+  window.addEventListener('beforeunload', () => clearInterval(timer));
+
+  // 외부에서 추가 문구를 쉽게 바꿀 수 있는 헬퍼 노출
+  window.setExtraNotice = function(msg){
+    if(!msg || !msg.trim()){
+      extraEl.textContent = '';
+      root.removeAttribute('data-extra');
+      return;
+    }
+    extraEl.textContent = ' · ' + msg.trim();
+    root.setAttribute('data-extra', msg.trim());
+  };
+})();
+</script>
+
+
+
+  <script>
+    (function(){
+      const root=document.querySelector('#legalDBHero');
+      if(!root)return;
+      const list=root.querySelector('.right ul');
+      if(!list)return;
+      const items=Array.from(list.querySelectorAll('li'));
+      if(!items.length)return;
+
+      let idx=0; let timer=null; let playing=false;
+      const STEP=3000; // 항목당 유지 시간 (ms)
+
+      function tick(){
+        items.forEach(li=>li.classList.remove('pulse'));
+        items[idx].classList.add('pulse');
+        idx=(idx+1)%items.length;
+      }
+      function start(){
+        if(playing) return; playing=true; tick();
+        timer=setInterval(tick, STEP);
+      }
+      function stop(){
+        if(!playing) return; playing=false;
+        clearInterval(timer); timer=null;
+      }
+
+      // 스크롤로 섹션이 화면을 벗어나면 일시정지, 다시 들어오면 재개 (모바일/PC 모두)
+      const io=new IntersectionObserver((ents)=>{
+        ents.forEach(e=>{ if(e.isIntersecting) start(); else stop(); });
+      },{threshold:.15});
+      io.observe(list);
+
+      // 초기 1회 시도 (뷰포트 안에 있을 경우 바로 시작)
+      start();
+    })();
+  </script>
+
+
+
+
+
+  <script>
+    (function(){
+      const root = document.querySelector('#carCompare');
+      if(!root) return;
+
+      const reveals = root.querySelectorAll('.reveal');
+      const listL = root.querySelectorAll('.list-l > li');
+      const listR = root.querySelectorAll('.list-r > li');
+      const policy = root.querySelector('.box.policy');
+
+      function setHidden(){
+        reveals.forEach(el=>{
+          el.style.opacity = '0';
+          el.style.filter  = 'blur(6px)';
+          el.style.transform = 'translateY(16px) scale(.98)';
+        });
+        listL.forEach(li=>{
+          li.style.opacity='0'; li.style.filter='blur(6px)'; li.style.transform='translateX(-14px)';
+        });
+        listR.forEach(li=>{
+          li.style.opacity='0'; li.style.filter='blur(6px)'; li.style.transform='translateX(14px)';
+        });
+        const vs = root.querySelector('.vs');
+        if(vs){ vs.style.animation='none'; void vs.offsetWidth; vs.style.animation=''; }
+        if(policy){ policy.style.animation='none'; void policy.offsetWidth; policy.style.animation=''; }
+      }
+
+      function setVisible(){
+        root.classList.add('in');
+        const delayed = root.querySelectorAll('[style*="--d"]');
+        delayed.forEach(el=>{
+          el.style.transition = `opacity var(--dur) var(--ease), transform var(--dur) var(--ease), filter calc(var(--dur) + 120ms) var(--ease)`;
+        });
+        requestAnimationFrame(()=>{
+          reveals.forEach(el=>{ el.style.opacity='1'; el.style.filter='none'; el.style.transform='none'; });
+          listL.forEach(li=>{ li.style.opacity='1'; li.style.filter='none'; li.style.transform='none'; });
+          listR.forEach(li=>{ li.style.opacity='1'; li.style.filter='none'; li.style.transform='none'; });
+        });
+      }
+
+      function unsetVisible(){
+        root.classList.remove('in');
+        setHidden();
+      }
+
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            setHidden();
+            requestAnimationFrame(setVisible);
+          }else{
+            if(entry.intersectionRatio===0){ unsetVisible(); }
+          }
+        });
+      }, {threshold:0.25, rootMargin:'0px 0px -10% 0px'});
+      io.observe(root);
+
+      const fine = matchMedia('(pointer:fine)').matches;
+      if(policy && fine){
+        let rx=0, ry=0, TX=0, TY=0, raf=null;
+        const max=6, lerp=(a,b,t)=>a+(b-a)*t;
+        const move=(e)=>{
+          const r = policy.getBoundingClientRect();
+          const cx=r.left+r.width/2, cy=r.top+r.height/2;
+          const x=(e.clientX-cx)/(r.width/2), y=(e.clientY-cy)/(r.height/2);
+          TX = (max * y * -1); TY = (max * x);
+          if(!raf) raf=requestAnimationFrame(update);
+        };
+        const update=()=>{
+          rx = lerp(rx,TX,0.12); ry = lerp(ry,TY,0.12);
+          policy.style.transform = `translateY(-2px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+          raf = (Math.abs(rx-TX)<0.1 && Math.abs(ry-TY)<0.1) ? null : requestAnimationFrame(update);
+        };
+        const leave=()=>{ TX=0; TY=0; if(!raf) raf=requestAnimationFrame(update); };
+        policy.addEventListener('mousemove', move);
+        policy.addEventListener('mouseleave', leave);
+      }
+
+      document.addEventListener('visibilitychange', ()=>{
+        if(document.visibilityState === 'visible'){
+          const rect = root.getBoundingClientRect();
+          const inView = rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25;
+          if(inView){ unsetVisible(); requestAnimationFrame(setVisible); }
+        }
+      });
+
+      setHidden();
+    })();
+  </script>
+
+    <script>
+    // ===== Count-up with re-trigger on re-enter =====
+    (function(){
+      const SCOPE = document.querySelector('#late-response');
+      if(!SCOPE) return;
+      const counters = SCOPE.querySelectorAll('.count');
+
+      // helper: animate a single element
+      function animateCount(el){
+        const target   = +el.dataset.target || 0;
+        const duration = +el.dataset.duration || 1800;
+        const start    = performance.now();
+        el.dataset.playing = '1';
+
+        function frame(now){
+          const p = Math.min((now - start) / duration, 1);
+          const eased = p < .5 ? 2*p*p : -1 + (4 - 2*p) * p; // easeInOutQuad
+          const val = Math.round(eased * target);
+          el.textContent = val.toLocaleString();
+          if (p < 1 && el.dataset.playing === '1') requestAnimationFrame(frame);
+          else el.dataset.playing = '0';
+        }
+        requestAnimationFrame(frame);
+      }
+
+      // Reduced motion → set final numbers immediately
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced){
+        counters.forEach(el => el.textContent = (+el.dataset.target || 0).toLocaleString());
+        return;
+      }
+
+      // Intersection Observer to restart when re-entering
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          const el = entry.target;
+          if(entry.isIntersecting){
+            // start/restart
+            el.dataset.playing = '0';
+            el.textContent = '0';
+            animateCount(el);
+          }else{
+            // reset when out
+            el.dataset.playing = '0';
+            el.textContent = '0';
+          }
+        });
+      }, {threshold:.6});
+
+      counters.forEach(el => io.observe(el));
+    })();
+  </script>
+
+
+  <script>
+    (function(){
+      const root = document.querySelector('#hbReasons');
+      if(!root) return;
+      const rail = root.querySelector('.rail');
+      const frame = root.querySelector('.frame');
+      const getCards = () => Array.from(rail.querySelectorAll('.card'));
+      const getStep = () => {
+        const cs = getComputedStyle(root);
+        return parseFloat(cs.getPropertyValue('--cardH')) + parseFloat(cs.getPropertyValue('--gap'));
+      };
+      const INTERVAL = 2000;  // 자동 슬라이드 간격(5초)
+      let timer = null; let animRAF = null; let locked = false;
+
+      // 프레임 중앙 좌표의 카드만 is-center 유지
+      function updateCenterByPoint(){
+        const rect = frame.getBoundingClientRect();
+        const midX = rect.left + rect.width/2;
+        const midY = rect.top + rect.height/2;
+        const el = document.elementFromPoint(midX, midY);
+        const centerCard = el && el.closest ? el.closest('.card') : null;
+        getCards().forEach(c=>c.classList.toggle('is-center', c === centerCard));
+      }
+      function startCenterTracker(){ if(animRAF) return; const tick = ()=>{ updateCenterByPoint(); animRAF = requestAnimationFrame(tick); }; animRAF = requestAnimationFrame(tick); }
+
+      // 한 칸 위로 이동
+      function stepUp(){
+        if(locked) return; locked = true;
+        const CARD_STEP = getStep();
+        rail.style.transition = `transform var(--t) var(--e)`;
+        const m = new DOMMatrixReadOnly(getComputedStyle(rail).transform);
+        const currentY = m.m42 || 0;
+        rail.style.transform = `translateY(${currentY - CARD_STEP}px)`;
+        const onEnd = () => {
+          rail.removeEventListener('transitionend', onEnd);
+          const first = getCards()[0];
+          rail.appendChild(first);
+          rail.style.transition = 'none';
+          rail.style.transform = `translateY(${currentY}px)`;
+          locked = false;
+          requestAnimationFrame(updateCenterByPoint);
+        };
+        rail.addEventListener('transitionend', onEnd, {once:true});
+      }
+
+      function start(){ if(!timer) timer = setInterval(stepUp, INTERVAL); startCenterTracker(); }
+      function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+
+      // 초기 실행
+      updateCenterByPoint(); start();
+
+      // 가시성/호버 제어
+      document.addEventListener('visibilitychange', ()=>{ document.hidden ? stop() : start(); });
+      frame.addEventListener('mouseenter', stop);
+      frame.addEventListener('mouseleave', start);
+      frame.addEventListener('focusin', stop);
+      frame.addEventListener('focusout', start);
+
+      // 리사이즈/로드 시 중앙 재계산
+      window.addEventListener('resize', ()=>{ requestAnimationFrame(updateCenterByPoint); });
+      window.addEventListener('load', ()=>{ requestAnimationFrame(updateCenterByPoint); });
+    })();
+  </script>
+
+
+<script>
+  (function(){
+    const root = document.querySelector('#applyMintForm');
+    if(!root) return;
+    const selects = root.querySelectorAll('select');
+
+    /* 원본 DOM/ID 보존: select를 래퍼로 감싸 화살표만 추가 */
+    selects.forEach(function(sel){
+      if(sel.closest('.select-wrap')) return; // 중복 래핑 방지
+      const wrap = document.createElement('div');
+      wrap.className = 'select-wrap';
+      sel.parentNode.insertBefore(wrap, sel);
+      wrap.appendChild(sel);
+
+      const open = function(){ wrap.classList.add('open'); };
+      const close = function(){ wrap.classList.remove('open'); };
+
+      sel.addEventListener('focus', open);
+      sel.addEventListener('click', open);
+      sel.addEventListener('mousedown', open);
+      sel.addEventListener('touchstart', open, {passive:true});
+      sel.addEventListener('blur', close);
+      sel.addEventListener('change', close);
+      sel.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+    });
+  })();
+</script>
+
+
+  <!-- ▶ 탕감율 애니메이션 + KPI 카운팅: 디자인/동작 유지, 루트만 nb3로 스코프 -->
+  <script>
+    (() => {
+      const root = document.getElementById('nb3');
+      if (!root) return;
+      const EASE = (t) => 1 - Math.pow(1 - t, 3);
+      const DURATION = 900; // 게이지 및 숫자 카운트 동일 시간
+
+      // 유틸: 숫자에 콤마
+      const fmtComma = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+      // 유틸: 통화 문자열을 prefix/number/suffix로 분해 (예: "₩150,000,000")
+      function parseCurrencyParts(text) {
+        const mAll = [...text.matchAll(/(\d[\d,]*)/g)];
+        if (!mAll.length) return null;
+        const m = mAll[mAll.length - 1]; // 마지막 숫자 그룹 기준 (일관성)
+        const start = m.index;
+        const len = m[0].length;
+        const num = parseInt(m[0].replace(/,/g, ''), 10) || 0;
+        return {
+          prefix: text.slice(0, start),
+          suffix: text.slice(start + len),
+          number: num
+        };
+      }
+
+      // 유틸: 마지막 숫자 그룹만 카운트 (예: "1년간 2회" -> 2만 카운트)
+      function parseLastNumberParts(text) {
+        const mAll = [...text.matchAll(/(\d[\d,]*)/g)];
+        if (!mAll.length) return null;
+        const m = mAll[mAll.length - 1];
+        const start = m.index;
+        const len = m[0].length;
+        const num = parseInt(m[0].replace(/,/g, ''), 10) || 0;
+        return {
+          head: text.slice(0, start),
+          tail: text.slice(start + len),
+          number: num
+        };
+      }
+
+      // 특정 슬라이드(card)에서 라벨 텍스트로 KPI value 엘리먼트 찾기
+      function findKpiValueEl(cardEl, labelText) {
+        const boxes = cardEl.querySelectorAll('.kpi-box');
+        for (const box of boxes) {
+          const lbl = box.querySelector('.kpi-label');
+          const val = box.querySelector('.kpi-value');
+          if (lbl && val && lbl.textContent.trim() === labelText) return val;
+        }
+        return null;
+      }
+
+      // 카운팅 적용: 비율(progress) [0~1] 에 맞춰 내용 갱신
+      function driveCountingForCard(cardEl, progress) {
+        // 승인금액
+        const amtEl = findKpiValueEl(cardEl, '승인금액');
+        if (amtEl) {
+          if (!amtEl.dataset.orig) amtEl.dataset.orig = amtEl.textContent.trim();
+          if (!amtEl._parts) amtEl._parts = parseCurrencyParts(amtEl.dataset.orig);
+          const p = amtEl._parts;
+          if (p) {
+            const cur = Math.round(p.number * progress);
+            amtEl.textContent = p.prefix + fmtComma(cur) + p.suffix;
+          }
+        }
+        // 총 정책자금 횟수 (문장 내 마지막 숫자만 카운트)
+        const cntEl = findKpiValueEl(cardEl, '총 정책자금 횟수');
+        if (cntEl) {
+          if (!cntEl.dataset.orig) cntEl.dataset.orig = cntEl.textContent.trim();
+          if (!cntEl._parts) cntEl._parts = parseLastNumberParts(cntEl.dataset.orig);
+          const p2 = cntEl._parts;
+          if (p2) {
+            const cur2 = Math.round(p2.number * progress);
+            cntEl.textContent = p2.head + cur2.toString() + p2.tail;
+          }
+        }
+      }
+
+      function resetCountingForCard(cardEl) {
+        const amtEl = findKpiValueEl(cardEl, '승인금액');
+        if (amtEl && amtEl.dataset.orig) amtEl.textContent = amtEl.dataset.orig;
+        const cntEl = findKpiValueEl(cardEl, '총 정책자금 횟수');
+        if (cntEl && cntEl.dataset.orig) cntEl.textContent = cntEl.dataset.orig;
+      }
+
+      function animateRing(el) {
+        const target = Math.max(0, Math.min(100, Number(el.getAttribute('data-rate') || 0)));
+        let start = null;
+        el.style.setProperty('--p', 0);
+
+        // 해당 링이 포함된 카드(article.case-card) 찾기
+        const card = el.closest('.case-card');
+
+        function step(ts) {
+          if (!start) start = ts;
+          const t = Math.min(1, (ts - start) / DURATION);
+          const eased = EASE(t);
+          const cur = Math.round(target * eased);
+          el.style.setProperty('--p', cur);
+
+          // 게이지 진행과 동기화하여 숫자 카운팅 구동
+          if (card) driveCountingForCard(card, eased);
+
+          if (t < 1) el._raf = requestAnimationFrame(step);
+          else el._raf = null;
+        }
+        if (el._raf) cancelAnimationFrame(el._raf);
+        el._raf = requestAnimationFrame(step);
+      }
+
+      function resetRing(el) {
+        if (el._raf) cancelAnimationFrame(el._raf);
+        el._raf = null;
+        el.style.setProperty('--p', 0);
+        // 중앙 텍스트(.ring-val)는 원본 유지
+        // 숫자 카운팅도 원복
+        const card = el.closest('.case-card');
+        if (card) resetCountingForCard(card);
+      }
+
+      const rings = Array.from(root.querySelectorAll('.rate-ring[data-rate]'));
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const el = entry.target;
+          if (entry.isIntersecting) {
+            // 화면에 들어오면 다시 적용
+            animateRing(el);
+          } else {
+            // 화면 밖으로 나가면 원복
+            resetRing(el);
+          }
+        });
+      }, { threshold: 0.35 });
+
+      rings.forEach((el) => io.observe(el));
+    })();
+  </script>
+
+
+<!-- ▼ nb1/nb2와 동일 패턴의 슬라이더 제어 스크립트 (디자인/스크롤 영향 없음) -->
+<script>
+  (function(){
+    const root = document.getElementById('nb3');
+    if(!root) return;
+
+    const slider = root.querySelector('#nb3Slider');
+    const track  = slider.querySelector('.nb3-slider-wrapper');
+    const prevBtn = root.querySelector('#nb3Prev');
+    const nextBtn = root.querySelector('#nb3Next');
+
+    /* ===== 상태값/유틸 ===== */
+    let currentIndex = 0;
+    let maxIndex = 0;
+    let cardWidth = 0;
+    let gap = 0;
+
+    function updateDimensions() {
+      const cards = slider.querySelectorAll('.nb3-product-slide');
+      const containerWidth = slider.clientWidth;
+      if (cards.length > 0) {
+        const first = cards[0];
+        cardWidth = first.getBoundingClientRect().width;
+        gap = parseFloat(getComputedStyle(track).gap) || 24; // 1.5rem
+        // 보여지는 카드 수 추정 (좌우 패딩 변화 없음)
+        const visible = Math.max(1, Math.floor((containerWidth - 0 + gap) / (cardWidth + gap)));
+        maxIndex = Math.max(0, cards.length - visible);
+      }
+    }
+
+    function setTransform(index, animate=true){
+      const tx = -index * (cardWidth + gap);
+      if(animate){
+        slider.classList.add('animating');
+        track.style.transition = 'transform .6s cubic-bezier(0.25,0.46,0.45,0.94)';
+        track.style.transform = `translateX(${tx}px)`;
+        setTimeout(()=>{
+          slider.classList.remove('animating');
+          track.style.transition = 'transform .1s ease';
+        }, 600);
+      }else{
+        track.style.transition = 'transform .1s ease';
+        track.style.transform = `translateX(${tx}px)`;
+      }
+      currentIndex = Math.max(0, Math.min(index, maxIndex));
+    }
+
+    function moveTo(index){ setTransform(Math.max(0, Math.min(index, maxIndex)), true); }
+
+    /* ===== 버튼 ===== */
+    if (prevBtn) prevBtn.addEventListener('click', ()=>{ pauseAuto(); moveTo(currentIndex-1); resumeAutoLater(); });
+    if (nextBtn) nextBtn.addEventListener('click', ()=>{ pauseAuto(); moveTo(currentIndex+1); resumeAutoLater(); });
+
+    /* ===== 드래그/스와이프 (디자인/스크롤 영향 없음) ===== */
+    let isDragging=false, started=false;
+    let startX=0, startTX=0, curTX=0, lastX=0, lastT=0, v=0, raf=null;
+
+    const TH=8, FRICTION=0.95, MIN_V=0.8;
+
+    function getTX(){
+      const m = track.style.transform.match(/translateX\((-?\d+(?:\.\d+)?)px\)/);
+      return m ? parseFloat(m[1]) : 0;
+    }
+
+    function onStart(e){
+      if(e.type==='mousedown' && e.button!==0) return;
+      isDragging=true; started=false;
+      startX = e.touches? e.touches[0].clientX : e.clientX;
+      startTX = getTX(); curTX=startTX;
+      lastX=startX; lastT=performance.now(); v=0;
+      slider.classList.add('dragging');
+      if(raf){ cancelAnimationFrame(raf); raf=null; }
+      pauseAuto();
+      e.preventDefault();
+    }
+
+    function onMove(e){
+      if(!isDragging) return;
+      const now = performance.now();
+      const x = e.touches? e.touches[0].clientX : e.clientX;
+      const dx = x - lastX;
+      const dt = Math.max(1, now - lastT);
+
+      if(!started && Math.abs(x - startX) > TH) started = true;
+
+      if(started){
+        let next = startTX + (x - startX);
+        const minT = -(maxIndex * (cardWidth + gap));
+        const maxT = 0;
+        if(next > maxT) next = maxT + (next - maxT)*0.3;
+        else if(next < minT) next = minT + (next - minT)*0.3;
+
+        curTX = next;
+        track.style.transform = `translateX(${next}px)`;
+
+        const iv = dx / dt;
+        v = v*0.8 + iv*0.2;
+      }
+
+      lastX=x; lastT=now;
+      e.preventDefault();
+    }
+
+    function snap(){
+      const step = cardWidth + gap;
+      const idx = Math.round(-curTX / step);
+      const clamp = Math.max(0, Math.min(idx, maxIndex));
+      currentIndex = clamp;
+      setTransform(clamp, true);
+    }
+
+    function momentum(){
+      if(raf) return;
+      function frame(){
+        if(Math.abs(v) < MIN_V){ snap(); raf=null; return; }
+        curTX += v*16; // ~60fps
+        const minT = -(maxIndex * (cardWidth + gap));
+        const maxT = 0;
+        if(curTX > maxT || curTX < minT){
+          v *= -0.3;
+          curTX = Math.max(minT, Math.min(maxT, curTX));
+        }
+        track.style.transform = `translateX(${curTX}px)`;
+        v *= FRICTION;
+        raf = requestAnimationFrame(frame);
+      }
+      frame();
+    }
+
+    function onEnd(e){
+      if(!isDragging) return;
+      isDragging=false;
+      slider.classList.remove('dragging');
+      if(started){
+        if(Math.abs(v) > MIN_V) momentum();
+        else snap();
+        resumeAutoLater();
+      }else{
+        resumeAutoLater();
+      }
+      e.preventDefault();
+    }
+
+    slider.addEventListener('mousedown', onStart, {passive:false});
+    document.addEventListener('mousemove', onMove, {passive:false});
+    document.addEventListener('mouseup', onEnd, {passive:false});
+
+    slider.addEventListener('touchstart', onStart, {passive:false});
+    slider.addEventListener('touchmove', onMove, {passive:false});
+    slider.addEventListener('touchend', onEnd, {passive:false});
+    slider.addEventListener('touchcancel', onEnd, {passive:false});
+
+    // 드래그 후 클릭 방지
+    slider.addEventListener('click', (e)=>{
+      if(started){ e.preventDefault(); e.stopPropagation(); started=false; }
+    }, true);
+
+    slider.addEventListener('dragstart', e=>e.preventDefault());
+
+    /* ===== 자동 롤링 (디자인 영향 없음) ===== */
+    const INTERVAL = 4200;
+    let auto=null, resume=null;
+
+    function step(){
+      const next = currentIndex >= maxIndex ? 0 : currentIndex+1;
+      moveTo(next);
+    }
+    function startAuto(){ stopAuto(); auto=setInterval(step, INTERVAL); }
+    function stopAuto(){ if(auto){ clearInterval(auto); auto=null; } }
+    function pauseAuto(){ stopAuto(); if(resume){ clearTimeout(resume); resume=null; } }
+    function resumeAutoLater(delay=6200){ if(resume) clearTimeout(resume); resume=setTimeout(()=>startAuto(), delay); }
+
+    /* ===== 초기화 & 리사이즈 ===== */
+    function init(){ updateDimensions(); setTransform(0,false); startAuto(); }
+    let rTimer=null;
+    window.addEventListener('resize', ()=>{
+      pauseAuto(); clearTimeout(rTimer);
+      rTimer=setTimeout(()=>{
+        updateDimensions();
+        setTransform(Math.min(currentIndex, maxIndex), false);
+        resumeAutoLater();
+      },200);
+    });
+
+    document.addEventListener('visibilitychange', ()=>{
+      if(document.hidden) pauseAuto(); else resumeAutoLater(1800);
+    });
+
+    init();
+  })();
+</script>
+
 
 </section>
 </html>

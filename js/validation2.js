@@ -166,12 +166,12 @@ function maxLengthCheck(object){
                                                         if (sales1 != null)
                                                         {
                                                         
-                                                                if (fund1 != null)
-                                                                {
+                                                                // if (fund1 != null)
+                                                                // {
                                                             
 
-                                                                    if (overdue1 != null)
-                                                                    {
+                                                                //     if (overdue1 != null)
+                                                                //     {
 
 
                                                                           if (need1 != null)
@@ -205,27 +205,27 @@ function maxLengthCheck(object){
                                                                             }
                                             
                                                                                     
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        $('#send_message1').css({transition:"1s"});
-                                                                        $('#send_message1').prop("disabled", true);
-                                                                        $('#send_message1').prop("value", "연체/체납 여부를 확인하세요.");
-                                                                        $('#send_message1').css({background:"#595959"});
-                                                                        $('#send_message1').css({cursor:"default"});        
-                                                                    }
+                                                                //     }
+                                                                //     else
+                                                                //     {
+                                                                //         $('#send_message1').css({transition:"1s"});
+                                                                //         $('#send_message1').prop("disabled", true);
+                                                                //         $('#send_message1').prop("value", "연체/체납 여부를 확인하세요.");
+                                                                //         $('#send_message1').css({background:"#595959"});
+                                                                //         $('#send_message1').css({cursor:"default"});        
+                                                                //     }
 
 
                                                                                                         
-                                                                }
-                                                                else
-                                                                {
-                                                                    $('#send_message1').css({transition:"1s"});
-                                                                    $('#send_message1').prop("disabled", true);
-                                                                    $('#send_message1').prop("value", "필요 자금 선택을 확인하세요.");
-                                                                    $('#send_message1').css({background:"#595959"});
-                                                                    $('#send_message1').css({cursor:"default"});        
-                                                                }
+                                                                // }
+                                                                // else
+                                                                // {
+                                                                //     $('#send_message1').css({transition:"1s"});
+                                                                //     $('#send_message1').prop("disabled", true);
+                                                                //     $('#send_message1').prop("value", "필요 자금 선택을 확인하세요.");
+                                                                //     $('#send_message1').css({background:"#595959"});
+                                                                //     $('#send_message1').css({cursor:"default"});        
+                                                                // }
 
                                                                                                 
                                                         }

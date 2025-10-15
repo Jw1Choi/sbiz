@@ -746,73 +746,23 @@
 
 
 
-<!-- ✅ 섹션 id를 nb3로 변경 · 디자인 유지 · nb1/nb2와 동일한 JS 패턴 적용 -->
-<section id="nb3">
-  <style>
-    #nb3{background:#f6f8fb;font-family:'Noto Sans KR',sans-serif;padding:5rem 0;}
-    #nb3 *{box-sizing:border-box}
-    #nb3 .nb3-container{max-width:1300px;margin:0 auto;padding:0 1.5rem;}
-    #nb3 .nb3-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
-    #nb3 .nb3-title{font-size:2.25rem;line-height:2.5rem;font-weight:bold;color:#1f2937;}
-    @media(min-width:768px){#nb3 .nb3-title{font-size:2rem;line-height:1.4}}
-    #nb3 .nb3-nav-group{display:flex;gap:.5rem}
-    #nb3 .nb3-btn{width:40px;height:40px;border:none;border-radius:9999px;background:#0f172a;color:#fff;cursor:pointer}
-    #nb3 .nb3-slider-container{display:flex;overflow:hidden;padding-bottom:1.5rem;}
-    #nb3 .nb3-slider-wrapper{display:flex;gap:1.5rem;transition:transform .1s ease;will-change:transform;}
-    #nb3 .nb3-product-slide{
-      display:block;
-      width:340px;
-      background:#fff;
-      border-radius:.75rem;
-      box-shadow:0 4px 6px rgba(0,0,0,.1),0 2px 4px rgba(0,0,0,.06);
-      overflow:hidden;
-      text-decoration:none;
-      color:inherit;
-      transition:transform .35s ease, box-shadow .35s ease;
-      will-change:transform;
-    }
-    @media(max-width:768px){#nb3 .nb3-product-slide{width:350px}}
-    
-    #nb3 .case-media{position:relative;width:100%;overflow:hidden;background:#eef2f7;height:190px}
-    @media(max-width:640px){#nb3 .case-media{height:160px}}
-    #nb3 .case-img{width:100%;height:100%;object-fit:cover;object-position:center;}
-    #nb3 .media-pin{position:absolute;top:12px;left:12px;background:rgba(255,255,255,.95);backdrop-filter:saturate(1.2) blur(6px);border:1px solid #e2e8f0;border-radius:999px;padding:.35rem .6rem;font-size:12px;font-weight:800;color:#334155}
-    #nb3 .case-card{display:flex;flex-direction:column;gap:14px;padding:16px}
-    #nb3 .case-top{display:flex;align-items:center;justify-content:space-between}
-    #nb3 .case-pin{font-weight:800;font-size:12px;color:#475569;background:#fff;border:1px solid #e2e8f0;border-radius:999px;padding:4px 10px}
-    #nb3 .kpi-band{display:grid;grid-template-columns:1fr auto;gap:14px;padding:12px;background:#f9fafb;border:1px solid #eef2f7;border-radius:12px;align-items: center;}
-    #nb3 .kpi-stack{display:flex;flex-direction:column;gap:10px}
-    #nb3 .kpi-box{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:4px}
-    #nb3 .kpi-label{font-size:12px;color:#64748b;font-weight:800}
-    #nb3 .kpi-value{font-weight:900;color:#0f172a;font-size:clamp(13px,2.4vw,18px)}
-    #nb3 .rate-ring{--p:0;width:124px;height:124px;border-radius:9999px;background:conic-gradient(#16a34a calc(var(--p)*1%), #e5e7eb 0);border:8px solid #fff;display:grid;place-items:center}
-    #nb3 .ring-inner{width:94px;height:94px;border-radius:9999px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center}
-    #nb3 .ring-label{font-size:11px;color:#64748b;margin-bottom:4px;font-weight:700}
-    #nb3 .ring-val{font-weight:900;font-size:22px;color:#065f46}
-    #nb3 .badges{display:flex;flex-wrap:wrap;gap:8px}
-    #nb3 .badge{background:#eef2ff;border:1px solid #e0e7ff;color:#3730a3;padding:.42rem .66rem;border-radius:999px;font-size:12px;font-weight:800}
-    #nb3 .case-title{margin:6px 0 4px;font-weight:900;color:#0f172a;font-size:1.125rem;line-height:1.4}
-    #nb3 .case-desc{margin:0;color:#334155;line-height:1.6;font-size:14px}
-    #nb3 .progress{display:none;width:100%;height:12px;border-radius:9999px;background:#e2e8f0;overflow:hidden;margin-top:6px}
-    #nb3 .progress>span{display:block;height:100%;background:linear-gradient(90deg,#22c55e,#16a34a)}
+<section id="nb4">
 
-    @media(max-width:420px){#nb3 .nb3-product-slide{width:306px}}
-  </style>
 
-  <div class="nb3-container">
-    <div class="nb3-head">
-      <h2 class="nb3-title">실제 후기</h2>
-      <div class="nb3-nav-group">
-        <button id="nb3Prev" class="nb3-btn"><i class="fas fa-chevron-left"></i></button>
-        <button id="nb3Next" class="nb3-btn"><i class="fas fa-chevron-right"></i></button>
+  <div class="nb4-container">
+    <div class="nb4-head">
+      <h2 class="nb4-title">실제 후기</h2>
+      <div class="nb4-nav-group">
+        <button id="nb4Prev" class="nb4-btn" aria-label="이전"><i class="fas fa-chevron-left"></i></button>
+        <button id="nb4Next" class="nb4-btn" aria-label="다음"><i class="fas fa-chevron-right"></i></button>
       </div>
     </div>
 
-    <div id="nb3Slider" class="nb3-slider-container">
-      <div class="nb3-slider-wrapper">
+    <div id="nb4Slider" class="nb4-slider-container">
+      <div class="nb4-slider-wrapper">
 
         <!-- 카드 1 -->
-        <a class="nb3-product-slide">
+        <a class="nb4-product-slide" >
           <div class="case-media">
             <img class="case-img" src="./img/h9.jpg" alt="소상공인 정책자금 후기 썸네일 - 음식점 운영자">
             <span class="media-pin">01 / 08</span>
@@ -837,309 +787,195 @@
           </article>
         </a>
 
-      <!-- 카드 2 -->
-<a class="nb3-product-slide">
-  <div class="case-media">
-    <img class="case-img" src="./img/b3.jpg" alt="소상공인 정책자금 후기 썸네일 - 도배업 대표">
-    <span class="media-pin">02 / 08</span>
-  </div>
-  <article class="case-card">
-    <div class="case-top"><span class="case-pin">도배업 / 사업 5년차 / 윤** 님</span></div>
+        <!-- 카드 2 -->
+        <a class="nb4-product-slide" >
+          <div class="case-media">
+            <img class="case-img" src="./img/b3.jpg" alt="소상공인 정책자금 후기 썸네일 - 도배업 대표">
+            <span class="media-pin">02 / 08</span>
+          </div>
+          <article class="case-card">
+            <div class="case-top"><span class="case-pin">도배업 / 사업 5년차 / 윤** 님</span></div>
+            <div class="kpi-band">
+              <div class="kpi-stack">
+                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩30,000,000</span></div>
+                <div class="kpi-box"><span class="kpi-label">총 정책자금 횟수</span><span class="kpi-value">1회</span></div>
+              </div>
+              <div class="rate-ring" data-rate="97">
+                <div class="ring-inner">
+                  <div class="ring-label">금리</div>
+                  <div class="ring-val">2.7%</div>
+                </div>
+              </div>
+            </div>
+            <div class="badges"><span class="badge">장비 교체 · 공사 차량 보수</span></div>
+            <h3 class="case-title">공사 범위를 늘렸습니다.</h3>
+            <p class="case-desc">오래된 장비로 작업 효율이 떨어져 고민이 많았는데, 정책자금을 통해 도배 장비 교체와 차량 정비를 진행했습니다. 덕분에 현장 일정이 빨라지고 고객 문의도 꾸준히 늘어나 매출이 크게 개선되었습니다.</p>
+          </article>
+        </a>
 
-    <div class="kpi-band">
-      <div class="kpi-stack">
-        <div class="kpi-box">
-          <span class="kpi-label">승인금액</span>
-          <span class="kpi-value">₩30,000,000</span>
-        </div>
-        <div class="kpi-box">
-          <span class="kpi-label">총 정책자금 횟수</span>
-          <span class="kpi-value">1회</span>
-        </div>
-      </div>
-      <div class="rate-ring" data-rate="97">
-        <div class="ring-inner">
-          <div class="ring-label">금리</div>
-          <div class="ring-val">2.7%</div>
-        </div>
-      </div>
-    </div>
+        <!-- 카드 3 -->
+        <a class="nb4-product-slide" >
+          <div class="case-media">
+            <img class="case-img" src="./img/b4.jpg" alt="소상공인 정책자금 후기 썸네일 - 안경점 대표">
+            <span class="media-pin">03 / 08</span>
+          </div>
+          <article class="case-card">
+            <div class="case-top"><span class="case-pin">안경점 / 사업 7년차 / 정** 님</span></div>
+            <div class="kpi-band">
+              <div class="kpi-stack">
+                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩50,000,000</span></div>
+                <div class="kpi-box"><span class="kpi-label">총 정책자금 횟수</span><span class="kpi-value">1회</span></div>
+              </div>
+              <div class="rate-ring" data-rate="97">
+                <div class="ring-inner">
+                  <div class="ring-label">금리</div>
+                  <div class="ring-val">3.1%</div>
+                </div>
+              </div>
+            </div>
+            <div class="badges"><span class="badge">운전자금 · 재고 확보</span></div>
+            <h3 class="case-title">매장 운영이 한결 안정됐습니다.</h3>
+            <p class="case-desc">안경 렌즈 원가와 임대료가 계속 오르면서 운영비 부담이 커졌는데, 대출이 어려워 정책자금 통해 재고를 안정적으로 확보하고 광고비 일부도 충당했습니다. 덕분에 매출 변동이 줄고, 신규 고객 유입도 늘어나 매장 운영이 한결 여유로워졌습니다.</p>
+          </article>
+        </a>
 
-    <div class="badges">
-      <span class="badge">장비 교체 · 공사 차량 보수</span>
-    </div>
+        <!-- 카드 4 -->
+        <a class="nb4-product-slide" >
+          <div class="case-media">
+            <img class="case-img" src="./img/b5.jpg" alt="소상공인 정책자금 후기 썸네일 - 귀금속 매장 대표">
+            <span class="media-pin">04 / 08</span>
+          </div>
+          <article class="case-card">
+            <div class="case-top"><span class="case-pin">귀금속 / 사업 8년차 / 김** 님</span></div>
+            <div class="kpi-band">
+              <div class="kpi-stack">
+                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩50,000,000</span></div>
+                <div class="kpi-box"><span class="kpi-label">총 정책자금 횟수</span><span class="kpi-value">2회</span></div>
+              </div>
+              <div class="rate-ring" data-rate="97">
+                <div class="ring-inner">
+                  <div class="ring-label">금리</div>
+                  <div class="ring-val">2.4%</div>
+                </div>
+              </div>
+            </div>
+            <div class="badges"><span class="badge">매장 인테리어 리뉴얼 · 진열 시스템 개선</span></div>
+            <h3 class="case-title">매장 분위기가 달라졌어요.</h3>
+            <p class="case-desc">오래된 진열장과 조명 때문에 제품이 제대로 돋보이지 않았는데, 정책자금을 통해 인테리어를 전면 리뉴얼했습니다. 조명 색감부터 진열대 높이, 벽면 톤까지 새로 맞추니 이제 손님들도 늘고 매출도 확실히 늘어난게 보여요.</p>
+          </article>
+        </a>
 
-    <h3 class="case-title">공사 범위를 늘렸습니다.</h3>
-
-    <p class="case-desc">
-      오래된 장비로 작업 효율이 떨어져 고민이 많았는데, 정책자금을 통해 
-      도배 장비 교체와 차량 정비를 진행했습니다. 덕분에 현장 일정이 빨라지고 
-      고객 문의도 꾸준히 늘어나 매출이 크게 개선되었습니다.
-    </p>
-  </article>
-</a>
-
-
-       <!-- 카드 3 -->
-<a class="nb3-product-slide">
-  <div class="case-media">
-    <img class="case-img" src="./img/b4.jpg" alt="소상공인 정책자금 후기 썸네일 - 안경점 대표">
-    <span class="media-pin">03 / 08</span>
-  </div>
-  <article class="case-card">
-    <div class="case-top"><span class="case-pin">안경점 / 사업 7년차 / 정** 님</span></div>
-    <div class="kpi-band">
-      <div class="kpi-stack">
-        <div class="kpi-box">
-          <span class="kpi-label">승인금액</span>
-          <span class="kpi-value">₩50,000,000</span>
-        </div>
-        <div class="kpi-box">
-          <span class="kpi-label">총 정책자금 횟수</span>
-          <span class="kpi-value">1회</span>
-        </div>
-      </div>
-      <div class="rate-ring" data-rate="97">
-        <div class="ring-inner">
-          <div class="ring-label">금리</div>
-          <div class="ring-val">3.1%</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="badges">
-      <span class="badge">운전자금 · 재고 확보</span>
-    </div>
-
-    <h3 class="case-title">매장 운영이 한결 안정됐습니다.</h3>
-
-    <p class="case-desc">
-      안경 렌즈 원가와 임대료가 계속 오르면서 운영비 부담이 커졌는데,
-      대출이 어려워 정책자금 통해 재고를 안정적으로 확보하고 광고비 일부도 충당했습니다.
-      덕분에 매출 변동이 줄고, 신규 고객 유입도 늘어나 매장 운영이 한결 여유로워졌습니다.
-    </p>
-  </article>
-</a>
-
-
-       <!-- 카드 4 -->
-<a class="nb3-product-slide">
-  <div class="case-media">
-    <img class="case-img" src="./img/b5.jpg" alt="소상공인 정책자금 후기 썸네일 - 귀금속 매장 대표">
-    <span class="media-pin">04 / 08</span>
-  </div>
-  <article class="case-card">
-    <div class="case-top"><span class="case-pin">귀금속 / 사업 8년차 / 김** 님</span></div>
-    <div class="kpi-band">
-      <div class="kpi-stack">
-        <div class="kpi-box">
-          <span class="kpi-label">승인금액</span>
-          <span class="kpi-value">₩50,000,000</span>
-        </div>
-        <div class="kpi-box">
-          <span class="kpi-label">총 정책자금 횟수</span>
-          <span class="kpi-value">2회</span>
-        </div>
-      </div>
-      <div class="rate-ring" data-rate="97">
-        <div class="ring-inner">
-          <div class="ring-label">금리</div>
-          <div class="ring-val">2.4%</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="badges">
-      <span class="badge">매장 인테리어 리뉴얼 · 진열 시스템 개선</span>
-    </div>
-
-    <h3 class="case-title">매장 분위기가 달라졌어요.</h3>
-
-    <p class="case-desc">
-      오래된 진열장과 조명 때문에 제품이 제대로 돋보이지 않았는데,  
-      정책자금을 통해 인테리어를 전면 리뉴얼했습니다.  
-      조명 색감부터 진열대 높이, 벽면 톤까지 새로 맞추니  
-      이제 손님들도 늘고 매출도 확실히 늘어난게 보여요. 
-    </p>
-  </article>
-</a>
-
-    <!-- 카드 5 -->
-<a class="nb3-product-slide">
-  <div class="case-media">
-    <img class="case-img" src="./img/b6.jpg" alt="소상공인 정책자금 후기 썸네일 - 의류 매장 대표">
-    <span class="media-pin">05 / 08</span>
-  </div>
-  <article class="case-card">
-    <div class="case-top"><span class="case-pin">의류업 / 사업 10년차 / 박** 님</span></div>
-    <div class="kpi-band">
-      <div class="kpi-stack">
-        <div class="kpi-box">
-          <span class="kpi-label">승인금액</span>
-          <span class="kpi-value">₩30,000,000</span>
-        </div>
-        <div class="kpi-box">
-          <span class="kpi-label">총 정책자금 횟수</span>
-          <span class="kpi-value">1회</span>
-        </div>
-      </div>
-      <div class="rate-ring" data-rate="97">
-        <div class="ring-inner">
-          <div class="ring-label">금리</div>
-          <div class="ring-val">3.3%</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="badges">
-      <span class="badge">긴급 운영자금 · 임대료 및 인건비</span>
-    </div>
-
-    <h3 class="case-title">갑작스러운 매출 공백, 큰 숨통이 됐습니다.</h3>
-
-    <p class="case-desc">
-      매출이 급격히 줄고 카드 결제 대금이 밀리면서 운영이 한계에 부딪혔습니다.  
-      은행 대출은 연체 이력 때문에 연이어 거절돼 정말 막막했는데,  
-      정책자금 상담을 통해 긴급 운영자금을 빠르게 지원받을 수 있었습니다.  
-   
-    </p>
-  </article>
-</a>
+        <!-- 카드 5 -->
+        <a class="nb4-product-slide" >
+          <div class="case-media">
+            <img class="case-img" src="./img/b6.jpg" alt="소상공인 정책자금 후기 썸네일 - 의류 매장 대표">
+            <span class="media-pin">05 / 08</span>
+          </div>
+          <article class="case-card">
+            <div class="case-top"><span class="case-pin">의류업 / 사업 10년차 / 박** 님</span></div>
+            <div class="kpi-band">
+              <div class="kpi-stack">
+                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩30,000,000</span></div>
+                <div class="kpi-box"><span class="kpi-label">총 정책자금 횟수</span><span class="kpi-value">1회</span></div>
+              </div>
+              <div class="rate-ring" data-rate="97">
+                <div class="ring-inner">
+                  <div class="ring-label">금리</div>
+                  <div class="ring-val">3.3%</div>
+                </div>
+              </div>
+            </div>
+            <div class="badges"><span class="badge">긴급 운영자금 · 임대료 및 인건비</span></div>
+            <h3 class="case-title">갑작스러운 매출 공백, 큰 숨통이 됐습니다.</h3>
+            <p class="case-desc">매출이 급격히 줄고 카드 결제 대금이 밀리면서 운영이 한계에 부딪혔습니다. 은행 대출은 연체 이력 때문에 연이어 거절돼 정말 막막했는데, 정책자금 상담을 통해 긴급 운영자금을 빠르게 지원받을 수 있었습니다.</p>
+          </article>
+        </a>
 
         <!-- 카드 6 -->
-   <a class="nb3-product-slide">
-  <div class="case-media">
-    <img class="case-img" src="./img/b8.jpg" alt="소상공인 정책자금 후기 썸네일 - 치킨 프랜차이즈 대표">
-    <span class="media-pin">06 / 08</span>
-  </div>
-  <article class="case-card">
-    <div class="case-top"><span class="case-pin">치킨 프랜차이즈 / 사업 7년차 / 최** 님</span></div>
-    <div class="kpi-band">
-      <div class="kpi-stack">
-        <div class="kpi-box">
-          <span class="kpi-label">승인금액</span>
-          <span class="kpi-value">₩40,000,000</span>
-        </div>
-        <div class="kpi-box">
-          <span class="kpi-label">총 정책자금 횟수</span>
-          <span class="kpi-value">1회</span>
-        </div>
-      </div>
-      <div class="rate-ring" data-rate="97">
-        <div class="ring-inner">
-          <div class="ring-label">금리</div>
-          <div class="ring-val">2.6%</div>
-        </div>
-      </div>
-    </div>
+        <a class="nb4-product-slide" >
+          <div class="case-media">
+            <img class="case-img" src="./img/b8.jpg" alt="소상공인 정책자금 후기 썸네일 - 치킨 프랜차이즈 대표">
+            <span class="media-pin">06 / 08</span>
+          </div>
+          <article class="case-card">
+            <div class="case-top"><span class="case-pin">치킨 프랜차이즈 / 사업 7년차 / 최** 님</span></div>
+            <div class="kpi-band">
+              <div class="kpi-stack">
+                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩40,000,000</span></div>
+                <div class="kpi-box"><span class="kpi-label">총 정책자금 횟수</span><span class="kpi-value">1회</span></div>
+              </div>
+              <div class="rate-ring" data-rate="97">
+                <div class="ring-inner">
+                  <div class="ring-label">금리</div>
+                  <div class="ring-val">2.6%</div>
+                </div>
+              </div>
+            </div>
+            <div class="badges"><span class="badge">긴급 운영자금 · 배달 플랫폼 수수료 부담 완화</span></div>
+            <h3 class="case-title">“기름값·수수료 다 올라서 힘들었는데 귀중한 자금줄이 되었어요.”</h3>
+            <p class="case-desc">배달 수수료랑 식자재 단가가 한꺼번에 오르면서 매달 적자를 보던 상황이었습니다. 은행에서는 신용점수 때문에 연달아 거절됐는데, 정책자금으로 긴급 운영비를 확보할 수 있었어요. 덕분에 밀린 납품 대금과 월세를 정리하고, 매장 조명·간판까지 새로 손봤습니다.</p>
+          </article>
+        </a>
 
-    <div class="badges">
-      <span class="badge">긴급 운영자금 · 배달 플랫폼 수수료 부담 완화</span>
-    </div>
+        <!-- 카드 7 -->
+        <a class="nb4-product-slide" >
+          <div class="case-media">
+            <img class="case-img" src="./img/b9.jpg" alt="소상공인 정책자금 후기 썸네일 - 베이커리 대표">
+            <span class="media-pin">07 / 08</span>
+          </div>
+          <article class="case-card">
+            <div class="case-top"><span class="case-pin">베이커리 / 사업 7년차 / 한** 님</span></div>
+            <div class="kpi-band">
+              <div class="kpi-stack">
+                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩30,000,000</span></div>
+                <div class="kpi-box"><span class="kpi-label">총 정책자금 횟수</span><span class="kpi-value">1회</span></div>
+              </div>
+              <div class="rate-ring" data-rate="97">
+                <div class="ring-inner">
+                  <div class="ring-label">금리</div>
+                  <div class="ring-val">2.6%</div>
+                </div>
+              </div>
+            </div>
+            <div class="badges"><span class="badge">운전자금 · 설비 교체</span></div>
+            <h3 class="case-title">성장의 발판이 되었습니다.</h3>
+            <p class="case-desc">단골 손님이 꾸준히 늘고 매출도 오르고 있었지만, 오븐 증설과 인력 확장 타이밍을 놓치고 있었습니다. 정책자금 상담을 통해 성장자금을 지원받을 수 있었어요. 그 자금으로 설비를 교체하고 생산량을 늘리니, 하루 판매량이 이전보다 1.5배 이상 올라 매장 운영이 훨씬 안정됐습니다.</p>
+          </article>
+        </a>
 
-    <h3 class="case-title">“기름값·수수료 다 올라서 힘들었는데 귀중한 자금줄이 되었어요.”</h3>
-
-    <p class="case-desc">
-      배달 수수료랑 식자재 단가가 한꺼번에 오르면서 매달 적자를 보던 상황이었습니다.  
-      은행에서는 신용점수 때문에 연달아 거절됐는데, 정책자금으로 긴급 운영비를 확보할 수 있었어요.  
-      덕분에 밀린 납품 대금과 월세를 정리하고, 매장 조명·간판까지 새로 손봤습니다.  
-     
-    </p>
-  </article>
-</a>
-
-
-       <!-- 카드 6 -->
-<a class="nb3-product-slide">
-  <div class="case-media">
-    <img class="case-img" src="./img/b9.jpg" alt="소상공인 정책자금 후기 썸네일 - 베이커리 대표">
-    <span class="media-pin">07 / 08</span>
-  </div>
-  <article class="case-card">
-    <div class="case-top"><span class="case-pin">베이커리 / 사업 7년차 / 한** 님</span></div>
-    <div class="kpi-band">
-      <div class="kpi-stack">
-        <div class="kpi-box">
-          <span class="kpi-label">승인금액</span>
-          <span class="kpi-value">₩30,000,000</span>
-        </div>
-        <div class="kpi-box">
-          <span class="kpi-label">총 정책자금 횟수</span>
-          <span class="kpi-value">1회</span>
-        </div>
-      </div>
-      <div class="rate-ring" data-rate="97">
-        <div class="ring-inner">
-          <div class="ring-label">금리</div>
-          <div class="ring-val">2.6%</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="badges">
-      <span class="badge">운전자금 · 설비 교체</span>
-    </div>
-
-   <h3 class="case-title">성장의 발판이 되었습니다.</h3>
-
-    <p class="case-desc">
-      단골 손님이 꾸준히 늘고 매출도 오르고 있었지만,  
-      오븐 증설과 인력 확장 타이밍을 놓치고 있었습니다.  
-      정책자금 상담을 통해 성장자금을 지원받을 수 있었어요.  
-      그 자금으로 설비를 교체하고 생산량을 늘리니,  
-      하루 판매량이 이전보다 1.5배 이상 올라 매장 운영이 훨씬 안정됐습니다.  
-    </p>
-  </article>
-</a>
-<a class="nb3-product-slide">
-  <div class="case-media">
-    <img class="case-img" src="./img/b1.jpg" alt="소상공인 정책자금 후기 썸네일 - 이삿집 대표">
-    <span class="media-pin">08 / 08</span>
-  </div>
-  <article class="case-card">
-    <div class="case-top"><span class="case-pin">이삿집 / 사업 7년차 / 이** 님</span></div>
-    <div class="kpi-band">
-      <div class="kpi-stack">
-        <div class="kpi-box">
-          <span class="kpi-label">승인금액</span>
-          <span class="kpi-value">₩80,000,000</span>
-        </div>
-        <div class="kpi-box">
-          <span class="kpi-label">총 정책자금 횟수</span>
-          <span class="kpi-value">2회</span>
-        </div>
-      </div>
-      <div class="rate-ring" data-rate="97">
-        <div class="ring-inner">
-          <div class="ring-label">금리</div>
-          <div class="ring-val">2.6%</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="badges">
-      <span class="badge">운전자금 · 긴급 유동성 확보</span>
-    </div>
-
- <h3 class="case-title">“급한 자금 압박, 다행히 해결해줬어요.”</h3>
-
-    <p class="case-desc">
-      갑자기 들어온 대형 이사 계약이 취소되면서 현금 흐름이 막혔습니다.  
-      차량 유지비, 기사 인건비, 창고 임대료까지 한꺼번에 밀리며 정말 숨이 막히는 시기였죠.  
-      은행 문턱은 택도 없고 절박하게 찾다가 여기에서 승인받아
-      다행히 잘 해결했습니다. 진짜 정말 감사합니다.
-    </p>
-  </article>
-</a>
-
-
+        <!-- 카드 8 -->
+        <a class="nb4-product-slide" >
+          <div class="case-media">
+            <img class="case-img" src="./img/b1.jpg" alt="소상공인 정책자금 후기 썸네일 - 이삿집 대표">
+            <span class="media-pin">08 / 08</span>
+          </div>
+          <article class="case-card">
+            <div class="case-top"><span class="case-pin">이삿집 / 사업 7년차 / 이** 님</span></div>
+            <div class="kpi-band">
+              <div class="kpi-stack">
+                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩80,000,000</span></div>
+                <div class="kpi-box"><span class="kpi-label">총 정책자금 횟수</span><span class="kpi-value">2회</span></div>
+              </div>
+              <div class="rate-ring" data-rate="97">
+                <div class="ring-inner">
+                  <div class="ring-label">금리</div>
+                  <div class="ring-val">2.6%</div>
+                </div>
+              </div>
+            </div>
+            <div class="badges"><span class="badge">운전자금 · 긴급 유동성 확보</span></div>
+            <h3 class="case-title">“급한 자금 압박, 다행히 해결해줬어요.”</h3>
+            <p class="case-desc">갑자기 들어온 대형 이사 계약이 취소되면서 현금 흐름이 막혔습니다. 차량 유지비, 기사 인건비, 창고 임대료까지 한꺼번에 밀리며 정말 숨이 막히는 시기였죠. 은행 문턱은 택도 없고 절박하게 찾다가 여기에서 승인받아 다행히 잘 해결했습니다. 진짜 정말 감사합니다.</p>
+          </article>
+        </a>
 
       </div>
     </div>
   </div>
-
-
 </section>
+
+
+
 
 
 

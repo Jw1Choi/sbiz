@@ -967,7 +967,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-<!-- ✅ 섹션 id를 nb3로 변경 · 디자인 유지 · nb1/nb2와 동일한 JS 패턴 적용 -->
 <section id="nb3">
   <style>
     #nb3{background:#f6f8fb;font-family:'Noto Sans KR',sans-serif;padding:5rem 0;}
@@ -979,7 +978,6 @@ document.addEventListener("DOMContentLoaded", () => {
     #nb3 .nb3-nav-group{display:flex;gap:.5rem}
     #nb3 .nb3-btn{width:40px;height:40px;border:none;border-radius:9999px;background:#0f172a;color:#fff;cursor:pointer}
 
-    /* 슬라이더 */
     #nb3 .nb3-slider-container{display:flex;overflow:hidden;padding-bottom:1.5rem;}
     #nb3 .nb3-slider-wrapper{display:flex;gap:1.5rem;transition:transform .1s ease;will-change:transform;}
     #nb3 .nb3-product-slide{
@@ -995,7 +993,7 @@ document.addEventListener("DOMContentLoaded", () => {
       will-change:transform;
     }
     @media(max-width:768px){#nb3 .nb3-product-slide{width:350px}}
-
+    
     #nb3 .case-media{position:relative;width:100%;overflow:hidden;background:#eef2f7;height:190px}
     @media(max-width:640px){#nb3 .case-media{height:160px}}
     #nb3 .case-img{width:100%;height:100%;object-fit:cover;object-position:center;}
@@ -1003,7 +1001,7 @@ document.addEventListener("DOMContentLoaded", () => {
     #nb3 .case-card{display:flex;flex-direction:column;gap:14px;padding:16px}
     #nb3 .case-top{display:flex;align-items:center;justify-content:space-between}
     #nb3 .case-pin{font-weight:800;font-size:12px;color:#475569;background:#fff;border:1px solid #e2e8f0;border-radius:999px;padding:4px 10px}
-    #nb3 .kpi-band{display:grid;grid-template-columns:1fr auto;gap:14px;padding:12px;background:#f9fafb;border:1px solid #eef2f7;border-radius:12px;align-items:center;}
+    #nb3 .kpi-band{display:grid;grid-template-columns:1fr auto;gap:14px;padding:12px;background:#f9fafb;border:1px solid #eef2f7;border-radius:12px;align-items: center;}
     #nb3 .kpi-stack{display:flex;flex-direction:column;gap:10px}
     #nb3 .kpi-box{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:4px}
     #nb3 .kpi-label{font-size:12px;color:#64748b;font-weight:800}
@@ -1020,11 +1018,11 @@ document.addEventListener("DOMContentLoaded", () => {
     #nb3 .progress>span{display:block;height:100%;background:linear-gradient(90deg,#22c55e,#16a34a)}
     @media(max-width:420px){#nb3 .nb3-product-slide{width:306px}}
 
-    /* ✅ 세로 스크롤 허용: 슬라이더 내부에서도 아래로 잘 내려가게 */
+    /* ✅ 세로 스크롤 허용 - 슬라이더 내부에서도 페이지 스크롤 가능 */
     #nb3 .nb3-slider-container,
     #nb3 .nb3-slider-wrapper,
     #nb3 .nb3-product-slide{
-      touch-action: pan-y pinch-zoom; /* 가로 드래그 외 제스처는 기본 동작 유지 */
+      touch-action: pan-y pinch-zoom;
     }
   </style>
 
@@ -1044,13 +1042,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <a class="nb3-product-slide" >
           <div class="case-media">
             <img class="case-img" src="./img/h9.jpg" alt="소상공인 정책자금 후기 썸네일 - 음식점 운영자">
-            <span class="media-pin">01 / 09</span>
+            <span class="media-pin">01 / 08</span>
           </div>
           <article class="case-card">
             <div class="case-top"><span class="case-pin">정보통신업(IT) / 사업 2년차 / 김** 님</span></div>
             <div class="kpi-band">
               <div class="kpi-stack">
-                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩15,000,000</span></div>
+                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩20,000,000</span></div>
                 <div class="kpi-box"><span class="kpi-label">총 정책자금 횟수</span><span class="kpi-value">1회</span></div>
               </div>
               <div class="rate-ring" data-rate="97">
@@ -1070,13 +1068,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <a class="nb3-product-slide" >
           <div class="case-media">
             <img class="case-img" src="./img/b3.jpg" alt="소상공인 정책자금 후기 썸네일 - 도배업 대표">
-            <span class="media-pin">02 / 09</span>
+            <span class="media-pin">02 / 08</span>
           </div>
           <article class="case-card">
-            <div class="case-top"><span class="case-pin">도배업 / 사업 5년차 / 한** 님</span></div>
+            <div class="case-top"><span class="case-pin">도배업 / 사업 5년차 / 윤** 님</span></div>
             <div class="kpi-band">
               <div class="kpi-stack">
-                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩23,000,000</span></div>
+                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩30,000,000</span></div>
                 <div class="kpi-box"><span class="kpi-label">총 정책자금 횟수</span><span class="kpi-value">1회</span></div>
               </div>
               <div class="rate-ring" data-rate="97">
@@ -1096,13 +1094,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <a class="nb3-product-slide" >
           <div class="case-media">
             <img class="case-img" src="./img/b4.jpg" alt="소상공인 정책자금 후기 썸네일 - 안경점 대표">
-            <span class="media-pin">03 / 09</span>
+            <span class="media-pin">03 / 08</span>
           </div>
           <article class="case-card">
             <div class="case-top"><span class="case-pin">안경점 / 사업 7년차 / 정** 님</span></div>
             <div class="kpi-band">
               <div class="kpi-stack">
-                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩30,000,000</span></div>
+                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩50,000,000</span></div>
                 <div class="kpi-box"><span class="kpi-label">총 정책자금 횟수</span><span class="kpi-value">1회</span></div>
               </div>
               <div class="rate-ring" data-rate="97">
@@ -1122,10 +1120,10 @@ document.addEventListener("DOMContentLoaded", () => {
         <a class="nb3-product-slide" >
           <div class="case-media">
             <img class="case-img" src="./img/b5.jpg" alt="소상공인 정책자금 후기 썸네일 - 귀금속 매장 대표">
-            <span class="media-pin">04 / 09</span>
+            <span class="media-pin">04 / 08</span>
           </div>
           <article class="case-card">
-            <div class="case-top"><span class="case-pin">귀금속 / 사업 8년차 / 이** 님</span></div>
+            <div class="case-top"><span class="case-pin">귀금속 / 사업 8년차 / 김** 님</span></div>
             <div class="kpi-band">
               <div class="kpi-stack">
                 <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩50,000,000</span></div>
@@ -1148,13 +1146,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <a class="nb3-product-slide" >
           <div class="case-media">
             <img class="case-img" src="./img/b6.jpg" alt="소상공인 정책자금 후기 썸네일 - 의류 매장 대표">
-            <span class="media-pin">05 / 09</span>
+            <span class="media-pin">05 / 08</span>
           </div>
           <article class="case-card">
-            <div class="case-top"><span class="case-pin">의류업 / 사업 10년차 / 정** 님</span></div>
+            <div class="case-top"><span class="case-pin">의류업 / 사업 10년차 / 박** 님</span></div>
             <div class="kpi-band">
               <div class="kpi-stack">
-                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩31,000,000</span></div>
+                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩30,000,000</span></div>
                 <div class="kpi-box"><span class="kpi-label">총 정책자금 횟수</span><span class="kpi-value">1회</span></div>
               </div>
               <div class="rate-ring" data-rate="97">
@@ -1174,13 +1172,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <a class="nb3-product-slide" >
           <div class="case-media">
             <img class="case-img" src="./img/b8.jpg" alt="소상공인 정책자금 후기 썸네일 - 치킨 프랜차이즈 대표">
-            <span class="media-pin">06 / 09</span>
+            <span class="media-pin">06 / 08</span>
           </div>
           <article class="case-card">
-            <div class="case-top"><span class="case-pin">치킨 프랜차이즈 / 사업 7년차 / 정** 님</span></div>
+            <div class="case-top"><span class="case-pin">치킨 프랜차이즈 / 사업 7년차 / 최** 님</span></div>
             <div class="kpi-band">
               <div class="kpi-stack">
-                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩24,000,000</span></div>
+                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩40,000,000</span></div>
                 <div class="kpi-box"><span class="kpi-label">총 정책자금 횟수</span><span class="kpi-value">1회</span></div>
               </div>
               <div class="rate-ring" data-rate="97">
@@ -1200,13 +1198,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <a class="nb3-product-slide" >
           <div class="case-media">
             <img class="case-img" src="./img/b9.jpg" alt="소상공인 정책자금 후기 썸네일 - 베이커리 대표">
-            <span class="media-pin">07 / 09</span>
+            <span class="media-pin">07 / 08</span>
           </div>
           <article class="case-card">
-            <div class="case-top"><span class="case-pin">베이커리 / 사업 7년차 / 정** 님</span></div>
+            <div class="case-top"><span class="case-pin">베이커리 / 사업 7년차 / 한** 님</span></div>
             <div class="kpi-band">
               <div class="kpi-stack">
-                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩38,000,000</span></div>
+                <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩30,000,000</span></div>
                 <div class="kpi-box"><span class="kpi-label">총 정책자금 횟수</span><span class="kpi-value">1회</span></div>
               </div>
               <div class="rate-ring" data-rate="97">
@@ -1222,14 +1220,14 @@ document.addEventListener("DOMContentLoaded", () => {
           </article>
         </a>
 
-        <!-- 카드 9 -->
+        <!-- 카드 8 -->
         <a class="nb3-product-slide" >
           <div class="case-media">
             <img class="case-img" src="./img/b1.jpg" alt="소상공인 정책자금 후기 썸네일 - 이삿집 대표">
-            <span class="media-pin">09 / 09</span>
+            <span class="media-pin">08 / 08</span>
           </div>
           <article class="case-card">
-            <div class="case-top"><span class="case-pin">이삿집 / 사업 7년차 / 정** 님</span></div>
+            <div class="case-top"><span class="case-pin">이삿집 / 사업 7년차 / 이** 님</span></div>
             <div class="kpi-band">
               <div class="kpi-stack">
                 <div class="kpi-box"><span class="kpi-label">승인금액</span><span class="kpi-value">₩80,000,000</span></div>
@@ -1251,321 +1249,338 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     </div>
   </div>
-
-  <!-- ▶ 탕감율(원형 게이지) + KPI 숫자 카운팅 -->
-  <script>
-    (() => {
-      const root = document.getElementById('nb3');
-      if (!root) return;
-      const EASE = (t) => 1 - Math.pow(1 - t, 3);
-      const DURATION = 900; // 게이지 및 숫자 카운트 동일 시간
-
-      const fmtComma = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-      function parseCurrencyParts(text) {
-        const mAll = [...text.matchAll(/(\d[\d,]*)/g)];
-        if (!mAll.length) return null;
-        const m = mAll[mAll.length - 1];
-        const start = m.index;
-        const len = m[0].length;
-        const num = parseInt(m[0].replace(/,/g, ''), 10) || 0;
-        return { prefix: text.slice(0, start), suffix: text.slice(start + len), number: num };
-      }
-      function parseLastNumberParts(text) {
-        const mAll = [...text.matchAll(/(\d[\d,]*)/g)];
-        if (!mAll.length) return null;
-        const m = mAll[mAll.length - 1];
-        const start = m.index;
-        const len = m[0].length;
-        const num = parseInt(m[0].replace(/,/g, ''), 10) || 0;
-        return { head: text.slice(0, start), tail: text.slice(start + len), number: num };
-      }
-      function findKpiValueEl(cardEl, labelText) {
-        const boxes = cardEl.querySelectorAll('.kpi-box');
-        for (const box of boxes) {
-          const lbl = box.querySelector('.kpi-label');
-          const val = box.querySelector('.kpi-value');
-          if (lbl && val && lbl.textContent.trim() === labelText) return val;
-        }
-        return null;
-      }
-      function driveCountingForCard(cardEl, progress) {
-        const amtEl = findKpiValueEl(cardEl, '승인금액');
-        if (amtEl) {
-          if (!amtEl.dataset.orig) amtEl.dataset.orig = amtEl.textContent.trim();
-          if (!amtEl._parts) amtEl._parts = parseCurrencyParts(amtEl.dataset.orig);
-          const p = amtEl._parts;
-          if (p) {
-            const cur = Math.round(p.number * progress);
-            amtEl.textContent = p.prefix + fmtComma(cur) + p.suffix;
-          }
-        }
-        const cntEl = findKpiValueEl(cardEl, '총 정책자금 횟수');
-        if (cntEl) {
-          if (!cntEl.dataset.orig) cntEl.dataset.orig = cntEl.textContent.trim();
-          if (!cntEl._parts) cntEl._parts = parseLastNumberParts(cntEl.dataset.orig);
-          const p2 = cntEl._parts;
-          if (p2) {
-            const cur2 = Math.round(p2.number * progress);
-            cntEl.textContent = p2.head + cur2.toString() + p2.tail;
-          }
-        }
-      }
-      function resetCountingForCard(cardEl) {
-        const amtEl = findKpiValueEl(cardEl, '승인금액');
-        if (amtEl && amtEl.dataset.orig) amtEl.textContent = amtEl.dataset.orig;
-        const cntEl = findKpiValueEl(cardEl, '총 정책자금 횟수');
-        if (cntEl && cntEl.dataset.orig) cntEl.textContent = cntEl.dataset.orig;
-      }
-      function animateRing(el) {
-        const target = Math.max(0, Math.min(100, Number(el.getAttribute('data-rate') || 0)));
-        let start = null;
-        el.style.setProperty('--p', 0);
-        const card = el.closest('.case-card');
-        function step(ts) {
-          if (!start) start = ts;
-          const t = Math.min(1, (ts - start) / DURATION);
-          const eased = EASE(t);
-          const cur = Math.round(target * eased);
-          el.style.setProperty('--p', cur);
-          if (card) driveCountingForCard(card, eased);
-          if (t < 1) el._raf = requestAnimationFrame(step);
-          else el._raf = null;
-        }
-        if (el._raf) cancelAnimationFrame(el._raf);
-        el._raf = requestAnimationFrame(step);
-      }
-      function resetRing(el) {
-        if (el._raf) cancelAnimationFrame(el._raf);
-        el._raf = null;
-        el.style.setProperty('--p', 0);
-        const card = el.closest('.case-card');
-        if (card) resetCountingForCard(card);
-      }
-      const rings = Array.from(root.querySelectorAll('.rate-ring[data-rate]'));
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          const el = entry.target;
-          if (entry.isIntersecting) {
-            animateRing(el);
-          } else {
-            resetRing(el);
-          }
-        });
-      }, { threshold: 0.35 });
-      rings.forEach((el) => io.observe(el));
-    })();
-  </script>
 </section>
 
-<!-- ▼ nb1/nb2와 동일 패턴의 슬라이더 제어 스크립트 + 축 잠금(세로 스크롤 허용) -->
+<!-- ▶ 원형 게이지 & KPI 카운팅 (IntersectionObserver) -->
 <script>
-  (function(){
-    const root = document.getElementById('nb3');
-    if(!root) return;
+(() => {
+  const root = document.getElementById('nb3');
+  if (!root) return;
+  const EASE = (t) => 1 - Math.pow(1 - t, 3);
+  const DURATION = 900;
 
-    const slider = root.querySelector('#nb3Slider');
-    const track  = slider.querySelector('.nb3-slider-wrapper');
-    const prevBtn = root.querySelector('#nb3Prev');
-    const nextBtn = root.querySelector('#nb3Next');
+  const fmtComma = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-    /* ===== 상태값/유틸 ===== */
-    let currentIndex = 0;
-    let maxIndex = 0;
-    let cardWidth = 0;
-    let gap = 0;
-
-    function updateDimensions() {
-      const cards = slider.querySelectorAll('.nb3-product-slide');
-      const containerWidth = slider.clientWidth;
-      if (cards.length > 0) {
-        const first = cards[0];
-        cardWidth = first.getBoundingClientRect().width;
-        gap = parseFloat(getComputedStyle(track).gap) || 24; // 1.5rem
-        const visible = Math.max(1, Math.floor((containerWidth - 0 + gap) / (cardWidth + gap)));
-        maxIndex = Math.max(0, cards.length - visible);
-      }
+  function parseCurrencyParts(text) {
+    const mAll = [...text.matchAll(/(\d[\d,]*)/g)];
+    if (!mAll.length) return null;
+    const m = mAll[mAll.length - 1];
+    const start = m.index, len = m[0].length;
+    const num = parseInt(m[0].replace(/,/g, ''), 10) || 0;
+    return { prefix: text.slice(0, start), suffix: text.slice(start + len), number: num };
+  }
+  function parseLastNumberParts(text) {
+    const mAll = [...text.matchAll(/(\d[\d,]*)/g)];
+    if (!mAll.length) return null;
+    const m = mAll[mAll.length - 1];
+    const start = m.index, len = m[0].length;
+    const num = parseInt(m[0].replace(/,/g, ''), 10) || 0;
+    return { head: text.slice(0, start), tail: text.slice(start + len), number: num };
+  }
+  function findKpiValueEl(cardEl, labelText) {
+    const boxes = cardEl.querySelectorAll('.kpi-box');
+    for (const box of boxes) {
+      const lbl = box.querySelector('.kpi-label');
+      const val = box.querySelector('.kpi-value');
+      if (lbl && val && lbl.textContent.trim() === labelText) return val;
     }
-
-    function setTransform(index, animate=true){
-      const tx = -index * (cardWidth + gap);
-      if(animate){
-        slider.classList.add('animating');
-        track.style.transition = 'transform .6s cubic-bezier(0.25,0.46,0.45,0.94)';
-        track.style.transform = `translateX(${tx}px)`;
-        setTimeout(()=>{
-          slider.classList.remove('animating');
-          track.style.transition = 'transform .1s ease';
-        }, 600);
-      }else{
-        track.style.transition = 'transform .1s ease';
-        track.style.transform = `translateX(${tx}px)`;
-      }
-      currentIndex = Math.max(0, Math.min(index, maxIndex));
+    return null;
+  }
+  function driveCountingForCard(cardEl, progress) {
+    const amtEl = findKpiValueEl(cardEl, '승인금액');
+    if (amtEl) {
+      if (!amtEl.dataset.orig) amtEl.dataset.orig = amtEl.textContent.trim();
+      if (!amtEl._parts) amtEl._parts = parseCurrencyParts(amtEl.dataset.orig);
+      const p = amtEl._parts;
+      if (p) amtEl.textContent = p.prefix + fmtComma(Math.round(p.number * progress)) + p.suffix;
     }
-
-    function moveTo(index){ setTransform(Math.max(0, Math.min(index, maxIndex)), true); }
-
-    /* ===== 버튼 ===== */
-    if (prevBtn) prevBtn.addEventListener('click', ()=>{ pauseAuto(); moveTo(currentIndex-1); resumeAutoLater(); });
-    if (nextBtn) nextBtn.addEventListener('click', ()=>{ pauseAuto(); moveTo(currentIndex+1); resumeAutoLater(); });
-
-    /* ===== 드래그/스와이프 (세로 스크롤 허용: 축 잠금) ===== */
-    let isDragging=false, started=false;
-    let startX=0, startY=0, startTX=0, curTX=0, lastX=0, lastT=0, v=0, raf=null;
-    let lock = 'undecided'; // 'x' | 'y' | 'undecided'
-
-    const TH=8, FRICTION=0.95, MIN_V=0.8;
-
-    function getTX(){
-      const m = track.style.transform.match(/translateX\((-?\d+(?:\.\d+)?)px\)/);
-      return m ? parseFloat(m[1]) : 0;
+    const cntEl = findKpiValueEl(cardEl, '총 정책자금 횟수');
+    if (cntEl) {
+      if (!cntEl.dataset.orig) cntEl.dataset.orig = cntEl.textContent.trim();
+      if (!cntEl._parts) cntEl._parts = parseLastNumberParts(cntEl.dataset.orig);
+      const p2 = cntEl._parts;
+      if (p2) cntEl.textContent = p2.head + Math.round(p2.number * progress) + p2.tail;
     }
-
-    function onStart(e){
-      if(e.type==='mousedown' && e.button!==0) return;
-      isDragging=true; started=false; lock='undecided';
-      const p = e.touches ? e.touches[0] : e;
-      startX = lastX = p.clientX;
-      startY = p.clientY;
-      startTX = getTX(); curTX=startTX;
-      lastT=performance.now(); v=0;
-      slider.classList.add('dragging');
-      // 여기서는 preventDefault() 미사용 → 세로 스크롤 살리기
+  }
+  function resetCountingForCard(cardEl) {
+    const amtEl = findKpiValueEl(cardEl, '승인금액');
+    if (amtEl && amtEl.dataset.orig) amtEl.textContent = amtEl.dataset.orig;
+    const cntEl = findKpiValueEl(cardEl, '총 정책자금 횟수');
+    if (cntEl && cntEl.dataset.orig) cntEl.textContent = cntEl.dataset.orig;
+  }
+  function animateRing(el) {
+    const target = Math.max(0, Math.min(100, Number(el.getAttribute('data-rate') || 0)));
+    let start = null;
+    el.style.setProperty('--p', 0);
+    const card = el.closest('.case-card');
+    function step(ts) {
+      if (!start) start = ts;
+      const t = Math.min(1, (ts - start) / DURATION);
+      const eased = EASE(t);
+      el.style.setProperty('--p', Math.round(target * eased));
+      if (card) driveCountingForCard(card, eased);
+      if (t < 1) el._raf = requestAnimationFrame(step);
+      else el._raf = null;
     }
-
-    function onMove(e){
-      if(!isDragging) return;
-      const now = performance.now();
-      const p = e.touches ? e.touches[0] : e;
-      const dx = p.clientX - startX;
-      const dy = p.clientY - startY;
-
-      // 제스처 방향 판정
-      if (lock === 'undecided') {
-        if (Math.abs(dx) > TH || Math.abs(dy) > TH) {
-          if (Math.abs(dx) > Math.abs(dy)) {
-            lock = 'x';      // 가로 드래그
-            started = true;
-          } else {
-            lock = 'y';      // 세로 스크롤 → 드래그 중단하고 기본 스크롤 허용
-            isDragging = false;
-            slider.classList.remove('dragging');
-            return; // preventDefault 호출 안 함
-          }
-        }
-      }
-
-      if (lock === 'x') {
-        e.preventDefault(); // 가로 드래그에서만 기본 동작 차단
-
-        let next = startTX + dx;
-        const minT = -(maxIndex * (cardWidth + gap));
-        const maxT = 0;
-        if(next > maxT) next = maxT + (next - maxT)*0.3;
-        else if(next < minT) next = minT + (next - minT)*0.3;
-
-        curTX = next;
-        track.style.transform = `translateX(${next}px)`;
-
-        const dt = Math.max(1, now - lastT);
-        const iv = (p.clientX - lastX) / dt;
-        v = v*0.8 + iv*0.2;
-      }
-
-      lastX = p.clientX;
-      lastT = now;
-    }
-
-    function snap(){
-      const step = cardWidth + gap;
-      const idx = Math.round(-curTX / step);
-      const clamp = Math.max(0, Math.min(idx, maxIndex));
-      currentIndex = clamp;
-      setTransform(clamp, true);
-    }
-
-    function momentum(){
-      if(raf) return;
-      function frame(){
-        if(Math.abs(v) < MIN_V){ snap(); raf=null; return; }
-        curTX += v*16; // ~60fps
-        const minT = -(maxIndex * (cardWidth + gap));
-        const maxT = 0;
-        if(curTX > maxT || curTX < minT){
-          v *= -0.3;
-          curTX = Math.max(minT, Math.min(maxT, curTX));
-        }
-        track.style.transform = `translateX(${curTX}px)`;
-        v *= FRICTION;
-        raf = requestAnimationFrame(frame);
-      }
-      frame();
-    }
-
-    function onEnd(e){
-      if(!isDragging) return;
-      isDragging=false;
-      slider.classList.remove('dragging');
-
-      if (lock === 'x' && started){
-        if(Math.abs(v) > MIN_V) momentum();
-        else snap();
-        resumeAutoLater();
-        e.preventDefault(); // 가로 드래그 종료 시 클릭 오작동 방지
-      } else {
-        resumeAutoLater();
-      }
-    }
-
-    slider.addEventListener('mousedown', onStart, {passive:false});
-    document.addEventListener('mousemove', onMove, {passive:false});
-    document.addEventListener('mouseup', onEnd, {passive:false});
-
-    slider.addEventListener('touchstart', onStart, {passive:false});
-    slider.addEventListener('touchmove', onMove, {passive:false});
-    slider.addEventListener('touchend', onEnd, {passive:false});
-    slider.addEventListener('touchcancel', onEnd, {passive:false});
-
-    // 드래그 후 클릭 방지(가로 드래그의 경우에만)
-    slider.addEventListener('click', (e)=>{
-      if(lock==='x' && started){ e.preventDefault(); e.stopPropagation(); started=false; }
-    }, true);
-
-    slider.addEventListener('dragstart', e=>e.preventDefault());
-
-    /* ===== 자동 롤링 ===== */
-    const INTERVAL = 4200;
-    let auto=null, resume=null;
-
-    function step(){
-      const next = currentIndex >= maxIndex ? 0 : currentIndex+1;
-      moveTo(next);
-    }
-    function startAuto(){ stopAuto(); auto=setInterval(step, INTERVAL); }
-    function stopAuto(){ if(auto){ clearInterval(auto); auto=null; } }
-    function pauseAuto(){ stopAuto(); if(resume){ clearTimeout(resume); resume=null; } }
-    function resumeAutoLater(delay=6200){ if(resume) clearTimeout(resume); resume=setTimeout(()=>startAuto(), delay); }
-
-    /* ===== 초기화 & 리사이즈 ===== */
-    function init(){ updateDimensions(); setTransform(0,false); startAuto(); }
-    let rTimer=null;
-    window.addEventListener('resize', ()=>{
-      pauseAuto(); clearTimeout(rTimer);
-      rTimer=setTimeout(()=>{
-        updateDimensions();
-        setTransform(Math.min(currentIndex, maxIndex), false);
-        resumeAutoLater();
-      },200);
+    if (el._raf) cancelAnimationFrame(el._raf);
+    el._raf = requestAnimationFrame(step);
+  }
+  function resetRing(el) {
+    if (el._raf) cancelAnimationFrame(el._raf);
+    el._raf = null;
+    el.style.setProperty('--p', 0);
+    const card = el.closest('.case-card');
+    if (card) resetCountingForCard(card);
+  }
+  const rings = Array.from(root.querySelectorAll('.rate-ring[data-rate]'));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const el = entry.target;
+      if (entry.isIntersecting) animateRing(el);
+      else resetRing(el);
     });
-
-    document.addEventListener('visibilitychange', ()=>{
-      if(document.hidden) pauseAuto(); else resumeAutoLater(1800);
-    });
-
-    init();
-  })();
+  }, { threshold: 0.35 });
+  rings.forEach((el) => io.observe(el));
+})();
 </script>
+
+<!-- ▼ 슬라이더 제어 (세로 스크롤 허용 + 스냅백 방지 강화) -->
+<script>
+(function(){
+  const root = document.getElementById('nb3');
+  if(!root) return;
+
+  const slider = root.querySelector('#nb3Slider');
+  const track  = slider.querySelector('.nb3-slider-wrapper');
+  const prevBtn = root.querySelector('#nb3Prev');
+  const nextBtn = root.querySelector('#nb3Next');
+
+  /* ===== 상태값/유틸 ===== */
+  let currentIndex = 0;
+  let maxIndex = 0;
+  let cardWidth = 0;
+  let gap = 0;
+
+  function updateDimensions() {
+    const cards = slider.querySelectorAll('.nb3-product-slide');
+    const containerWidth = slider.clientWidth;
+    if (cards.length > 0) {
+      const first = cards[0];
+      cardWidth = first.getBoundingClientRect().width;
+      gap = parseFloat(getComputedStyle(track).gap) || 24; // 1.5rem
+      const visible = Math.max(1, Math.floor((containerWidth + gap) / (cardWidth + gap)));
+      maxIndex = Math.max(0, cards.length - visible);
+    }
+  }
+
+  function setTransform(index, animate=true){
+    const tx = -index * (cardWidth + gap);
+    if(animate){
+      slider.classList.add('animating');
+      track.style.transition = 'transform .6s cubic-bezier(0.25,0.46,0.45,0.94)';
+      track.style.transform = `translateX(${tx}px)`;
+      setTimeout(()=>{
+        slider.classList.remove('animating');
+        track.style.transition = 'transform .1s ease';
+      }, 600);
+    }else{
+      track.style.transition = 'transform .1s ease';
+      track.style.transform = `translateX(${tx}px)`;
+    }
+    currentIndex = Math.max(0, Math.min(index, maxIndex));
+  }
+  function moveTo(index){ setTransform(Math.max(0, Math.min(index, maxIndex)), true); }
+
+  /* ===== 버튼 ===== */
+  if (prevBtn) prevBtn.addEventListener('click', ()=>{ pauseAuto(); moveTo(currentIndex-1); resumeAutoLater(); });
+  if (nextBtn) nextBtn.addEventListener('click', ()=>{ pauseAuto(); moveTo(currentIndex+1); resumeAutoLater(); });
+
+  /* ===== 드래그/스와이프 (세로 스크롤 허용 + 스냅백 방지) ===== */
+  let isDragging=false, started=false;
+  let startX=0, startY=0, startTX=0, curTX=0, lastX=0, lastT=0, v=0, raf=null;
+  let lock = 'undecided'; // 'x' | 'y' | 'undecided'
+
+  // 조정 포인트
+  const START_LOCK_X = 12;      // X축으로 잠그기 시작할 최소 이동량(px)
+  const START_LOCK_BIAS = 6;    // 히스테리시스: X가 Y보다 이만큼 더 커야 X로 간주
+  const DEADZONE = 18;          // 소폭 드래그에 대한 시각 이동 억제(데드존)
+  const COMMIT_RATIO = 0.25;    // 카드 폭 대비 이동이 이 비율을 넘으면 페이지 이동 커밋
+  const COMMIT_MIN = 60;        // 최소 커밋 픽셀
+  const FRICTION=0.95, MIN_V=0.8;
+
+  function getTX(){
+    const m = track.style.transform.match(/translateX\((-?\d+(?:\.\d+)?)px\)/);
+    return m ? parseFloat(m[1]) : 0;
+  }
+
+  function onStart(e){
+    if(e.type==='mousedown' && e.button!==0) return;
+    isDragging=true; started=false; lock='undecided';
+    const p = e.touches ? e.touches[0] : e;
+    startX = lastX = p.clientX;
+    startY = p.clientY;
+    startTX = getTX(); curTX=startTX;
+    lastT=performance.now(); v=0;
+    slider.classList.add('dragging');
+    // 세로 스크롤 살리기 위해 여기서는 preventDefault() 하지 않음
+  }
+
+  function onMove(e){
+    if(!isDragging) return;
+    const now = performance.now();
+    const p = e.touches ? e.touches[0] : e;
+    const totalDX = p.clientX - startX;
+    const totalDY = p.clientY - startY;
+
+    // 축 잠금(히스테리시스 포함)
+    if (lock === 'undecided') {
+      const absX = Math.abs(totalDX), absY = Math.abs(totalDY);
+      if (absX > START_LOCK_X && absX > absY + START_LOCK_BIAS) {
+        lock = 'x'; started = true;
+      } else if (absY > START_LOCK_X && absY > absX + START_LOCK_BIAS) {
+        lock = 'y';
+        // 세로 판정 → 드래그 종료하고 기본 스크롤 허용
+        isDragging = false;
+        slider.classList.remove('dragging');
+        return;
+      } else {
+        // 잠금 전: 아무것도 하지 않음(시각 이동 없음) → 스냅백 체감 감소
+        lastX = p.clientX; lastT = now;
+        return;
+      }
+    }
+
+    if (lock === 'x') {
+      // 가로 드래그에서만 기본 동작 차단
+      e.preventDefault();
+
+      // 데드존: 작은 이동은 저항(탄성) 적용 → "살짝 움직였다 복귀" 느낌 최소화
+      let dx = totalDX;
+      if (Math.abs(dx) < DEADZONE) {
+        dx = Math.sign(dx) * Math.pow(Math.abs(dx)/DEADZONE, 2) * DEADZONE * 0.35; // 완만한 가속
+      }
+
+      let next = startTX + dx;
+      const minT = -(maxIndex * (cardWidth + gap));
+      const maxT = 0;
+      if(next > maxT) next = maxT + (next - maxT)*0.3;
+      else if(next < minT) next = minT + (next - minT)*0.3;
+
+      curTX = next;
+      track.style.transform = `translateX(${next}px)`;
+
+      const dt = Math.max(1, now - lastT);
+      const iv = (p.clientX - lastX) / dt;
+      v = v*0.8 + iv*0.2;
+
+      lastX = p.clientX; lastT = now;
+    }
+  }
+
+  function snapOrCommit(){
+    const step = cardWidth + gap;
+    const moved = curTX - startTX;        // 음수면 오른쪽으로, 양수면 왼쪽으로 drag된 셈(좌표상)
+    const absMoved = Math.abs(moved);
+    const commitThreshold = Math.max(COMMIT_MIN, cardWidth * COMMIT_RATIO);
+
+    // 빠른 플릭은 속도로 판정
+    const velocityCommit = Math.abs(v) > MIN_V;
+
+    let idx = currentIndex;
+    if (absMoved > commitThreshold || velocityCommit) {
+      // 방향에 따라 다음/이전 카드로 커밋
+      if (moved < 0) idx = Math.min(currentIndex + 1, maxIndex);
+      else if (moved > 0) idx = Math.max(currentIndex - 1, 0);
+      setTransform(idx, true);
+    } else {
+      // 커밋 임계치 미만 → 현재 인덱스로 부드럽게 복귀(가벼운 스냅백)
+      setTransform(currentIndex, true);
+    }
+  }
+
+  function momentum(){
+    if(raf) return;
+    function frame(){
+      if(Math.abs(v) < MIN_V){ raf=null; snapOrCommit(); return; }
+      curTX += v*16; // ~60fps
+      const minT = -(maxIndex * (cardWidth + gap));
+      const maxT = 0;
+      if(curTX > maxT || curTX < minT){
+        v *= -0.3;
+        curTX = Math.max(minT, Math.min(maxT, curTX));
+      }
+      track.style.transform = `translateX(${curTX}px)`;
+      v *= FRICTION;
+      raf = requestAnimationFrame(frame);
+    }
+    frame();
+  }
+
+  function onEnd(e){
+    if(!isDragging) return;
+    isDragging=false;
+    slider.classList.remove('dragging');
+
+    if (lock === 'x' && started){
+      // 관성 적용 후 커밋/스냅 결정
+      if(Math.abs(v) > MIN_V) momentum();
+      else snapOrCommit();
+      resumeAutoLater();
+      if (e) e.preventDefault();
+    } else {
+      resumeAutoLater();
+    }
+  }
+
+  slider.addEventListener('mousedown', onStart, {passive:false});
+  document.addEventListener('mousemove', onMove, {passive:false});
+  document.addEventListener('mouseup', onEnd, {passive:false});
+
+  slider.addEventListener('touchstart', onStart, {passive:false});
+  slider.addEventListener('touchmove', onMove, {passive:false});
+  slider.addEventListener('touchend', onEnd, {passive:false});
+  slider.addEventListener('touchcancel', onEnd, {passive:false});
+
+  // 드래그 후 클릭 방지(가로 드래그의 경우만)
+  slider.addEventListener('click', (e)=>{
+    if(lock==='x' && started){ e.preventDefault(); e.stopPropagation(); started=false; }
+  }, true);
+
+  slider.addEventListener('dragstart', e=>e.preventDefault());
+
+  /* ===== 자동 롤링 ===== */
+  const INTERVAL = 4200;
+  let auto=null, resume=null;
+
+  function step(){
+    const next = currentIndex >= maxIndex ? 0 : currentIndex+1;
+    moveTo(next);
+  }
+  function startAuto(){ stopAuto(); auto=setInterval(step, INTERVAL); }
+  function stopAuto(){ if(auto){ clearInterval(auto); auto=null; } }
+  function pauseAuto(){ stopAuto(); if(resume){ clearTimeout(resume); resume=null; } }
+  function resumeAutoLater(delay=6200){ if(resume) clearTimeout(resume); resume=setTimeout(()=>startAuto(), delay); }
+
+  /* ===== 초기화 & 리사이즈 ===== */
+  function init(){ updateDimensions(); setTransform(0,false); startAuto(); }
+  let rTimer=null;
+  window.addEventListener('resize', ()=>{
+    pauseAuto(); clearTimeout(rTimer);
+    rTimer=setTimeout(()=>{
+      updateDimensions();
+      setTransform(Math.min(currentIndex, maxIndex), false);
+      resumeAutoLater();
+    },200);
+  });
+
+  document.addEventListener('visibilitychange', ()=>{
+    if(document.hidden) pauseAuto(); else resumeAutoLater(1800);
+  });
+
+  init();
+})();
+</script>
+
 
 
 

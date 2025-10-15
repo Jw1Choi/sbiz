@@ -1145,3 +1145,404 @@
     boot();
   }
 })();
+
+
+/* ======================================================================
+   main.js
+   - nb4(있으면 nb3도) 섹션의 원형 게이지/카운팅 + 슬라이더 제어
+   - 세로 스크롤 허용(축 잠금) + 스냅백 방지(데드존/커밋 임계치/히스테리시스)
+   ====================================================================== */
+
+(function () {
+  // 이미 초기화된 루트를 중복 초기화하지 않도록
+  const inited = new WeakSet();
+
+  /** 숫자 포맷 */
+  const fmtComma = (n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+  /** 텍스트에서 마지막 금액 숫자만 추출 (₩1,234,567 처럼 접두/접미 유지) */
+  function parseCurrencyParts(text) {
+    const mAll = [...text.matchAll(/(\d[\d,]*)/g)];
+    if (!mAll.length) return null;
+    const m = mAll[mAll.length - 1];
+    const start = m.index, len = m[0].length;
+    const num = parseInt(m[0].replace(/,/g, ''), 10) || 0;
+    return { prefix: text.slice(0, start), suffix: text.slice(start + len), number: num };
+  }
+  /** 텍스트에서 마지막 숫자만 추출 (문장 끝 숫자 카운팅용) */
+  function parseLastNumberParts(text) {
+    const mAll = [...text.matchAll(/(\d[\d,]*)/g)];
+    if (!mAll.length) return null;
+    const m = mAll[mAll.length - 1];
+    const start = m.index, len = m[0].length;
+    const num = parseInt(m[0].replace(/,/g, ''), 10) || 0;
+    return { head: text.slice(0, start), tail: text.slice(start + len), number: num };
+  }
+  /** 카드 내 특정 KPI 라벨의 값 엘리먼트 찾기 */
+  function findKpiValueEl(cardEl, labelText, prefix) {
+    const boxes = cardEl.querySelectorAll(`.${prefix}-kpi-box, .kpi-box`); // fallback
+    for (const box of boxes) {
+      const lbl = box.querySelector(`.${prefix}-kpi-label, .kpi-label`);
+      const val = box.querySelector(`.${prefix}-kpi-value, .kpi-value`);
+      if (lbl && val && lbl.textContent.trim() === labelText) return val;
+    }
+    return null;
+  }
+  /** 카드 내 카운팅 구동 */
+  function driveCountingForCard(cardEl, progress, prefix) {
+    const amtEl = findKpiValueEl(cardEl, '승인금액', prefix);
+    if (amtEl) {
+      if (!amtEl.dataset.orig) amtEl.dataset.orig = amtEl.textContent.trim();
+      if (!amtEl._parts) amtEl._parts = parseCurrencyParts(amtEl.dataset.orig);
+      const p = amtEl._parts;
+      if (p) amtEl.textContent = p.prefix + fmtComma(Math.round(p.number * progress)) + p.suffix;
+    }
+    const cntEl = findKpiValueEl(cardEl, '총 정책자금 횟수', prefix);
+    if (cntEl) {
+      if (!cntEl.dataset.orig) cntEl.dataset.orig = cntEl.textContent.trim();
+      if (!cntEl._parts) cntEl._parts = parseLastNumberParts(cntEl.dataset.orig);
+      const p2 = cntEl._parts;
+      if (p2) cntEl.textContent = p2.head + Math.round(p2.number * progress) + p2.tail;
+    }
+  }
+  /** 카드 카운팅 리셋 */
+  function resetCountingForCard(cardEl, prefix) {
+    const amtEl = findKpiValueEl(cardEl, '승인금액', prefix);
+    if (amtEl && amtEl.dataset.orig) amtEl.textContent = amtEl.dataset.orig;
+    const cntEl = findKpiValueEl(cardEl, '총 정책자금 횟수', prefix);
+    if (cntEl && cntEl.dataset.orig) cntEl.textContent = cntEl.dataset.orig;
+  }
+
+  /** -------------------- 원형 게이지 & KPI 카운팅 -------------------- */
+  function initKpiAndRings(root, opts) {
+    if (!root || inited.has(root)) return;
+    const EASE = (t) => 1 - Math.pow(1 - t, 3);
+    const DURATION = 900;
+    const { ringSelector, prefix } = opts;
+
+    const rings = Array.from(root.querySelectorAll(ringSelector));
+    if (!rings.length) return;
+
+    function animateRing(el) {
+      const target = Math.max(0, Math.min(100, Number(el.getAttribute('data-rate') || 0)));
+      let start = null;
+      el.style.setProperty('--p', 0);
+      const card = el.closest(`.${prefix}-case-card, .case-card`);
+      function step(ts) {
+        if (!start) start = ts;
+        const t = Math.min(1, (ts - start) / DURATION);
+        const eased = EASE(t);
+        el.style.setProperty('--p', Math.round(target * eased));
+        if (card) driveCountingForCard(card, eased, prefix);
+        if (t < 1) el._raf = requestAnimationFrame(step);
+        else el._raf = null;
+      }
+      if (el._raf) cancelAnimationFrame(el._raf);
+      el._raf = requestAnimationFrame(step);
+    }
+    function resetRing(el) {
+      if (el._raf) cancelAnimationFrame(el._raf);
+      el._raf = null;
+      el.style.setProperty('--p', 0);
+      const card = el.closest(`.${prefix}-case-card, .case-card`);
+      if (card) resetCountingForCard(card, prefix);
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const el = entry.target;
+        if (entry.isIntersecting) animateRing(el);
+        else resetRing(el);
+      });
+    }, { threshold: 0.35 });
+
+    rings.forEach((el) => io.observe(el));
+  }
+
+  /** -------------------- 슬라이더 제어(축 잠금 + 스냅백 방지) -------------------- */
+  function initSlider(root, opts) {
+    if (!root) return;
+
+    const {
+      sliderSelector,
+      trackSelector,
+      cardSelector,
+      prevSelector,
+      nextSelector,
+    } = opts;
+
+    const slider = root.querySelector(sliderSelector);
+    const track  = slider && slider.querySelector(trackSelector);
+    const prevBtn = root.querySelector(prevSelector);
+    const nextBtn = root.querySelector(nextSelector);
+
+    if (!slider || !track) return;
+
+    let currentIndex = 0;
+    let maxIndex = 0;
+    let cardWidth = 0;
+    let gap = 0;
+
+    function updateDimensions() {
+      const cards = slider.querySelectorAll(cardSelector);
+      const containerWidth = slider.clientWidth;
+      if (cards.length > 0) {
+        const first = cards[0];
+        cardWidth = first.getBoundingClientRect().width;
+        gap = parseFloat(getComputedStyle(track).gap) || 24; // 1.5rem
+        const visible = Math.max(1, Math.floor((containerWidth + gap) / (cardWidth + gap)));
+        maxIndex = Math.max(0, cards.length - visible);
+      }
+    }
+
+    function setTransform(index, animate = true) {
+      const tx = -index * (cardWidth + gap);
+      if (animate) {
+        slider.classList.add('animating');
+        track.style.transition = 'transform .6s cubic-bezier(0.25,0.46,0.45,0.94)';
+        track.style.transform = `translateX(${tx}px)`;
+        setTimeout(() => {
+          slider.classList.remove('animating');
+          track.style.transition = 'transform .1s ease';
+        }, 600);
+      } else {
+        track.style.transition = 'transform .1s ease';
+        track.style.transform = `translateX(${tx}px)`;
+      }
+      currentIndex = Math.max(0, Math.min(index, maxIndex));
+    }
+    function moveTo(index) { setTransform(Math.max(0, Math.min(index, maxIndex)), true); }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => { pauseAuto(); moveTo(currentIndex - 1); resumeAutoLater(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { pauseAuto(); moveTo(currentIndex + 1); resumeAutoLater(); });
+
+    // 드래그/스와이프 (세로 스크롤 허용 + 스냅백 방지)
+    let isDragging = false, started = false;
+    let startX = 0, startY = 0, startTX = 0, curTX = 0, lastX = 0, lastT = 0, v = 0, raf = null;
+    let lock = 'undecided'; // 'x' | 'y' | 'undecided'
+
+    const START_LOCK_X = 12;   // X축 잠금 시작 임계치(px)
+    const START_LOCK_BIAS = 6; // 히스테리시스
+    const DEADZONE = 18;       // 데드존
+    const COMMIT_RATIO = 0.25; // 카드폭 대비 커밋 비율
+    const COMMIT_MIN = 60;     // 커밋 최소 px
+    const FRICTION = 0.95, MIN_V = 0.8;
+
+    function getTX() {
+      const m = track.style.transform.match(/translateX\((-?\d+(?:\.\d+)?)px\)/);
+      return m ? parseFloat(m[1]) : 0;
+    }
+
+    function onStart(e) {
+      if (e.type === 'mousedown' && e.button !== 0) return;
+      isDragging = true; started = false; lock = 'undecided';
+      const p = e.touches ? e.touches[0] : e;
+      startX = lastX = p.clientX;
+      startY = p.clientY;
+      startTX = getTX(); curTX = startTX;
+      lastT = performance.now(); v = 0;
+      slider.classList.add('dragging');
+      // 세로 스크롤 살리기 위해 여기서는 preventDefault() 불가
+    }
+
+    function onMove(e) {
+      if (!isDragging) return;
+      const now = performance.now();
+      const p = e.touches ? e.touches[0] : e;
+      const totalDX = p.clientX - startX;
+      const totalDY = p.clientY - startY;
+
+      if (lock === 'undecided') {
+        const absX = Math.abs(totalDX), absY = Math.abs(totalDY);
+        if (absX > START_LOCK_X && absX > absY + START_LOCK_BIAS) {
+          lock = 'x'; started = true;
+        } else if (absY > START_LOCK_X && absY > absX + START_LOCK_BIAS) {
+          lock = 'y';
+          isDragging = false;
+          slider.classList.remove('dragging');
+          return;
+        } else {
+          // 잠금 전에는 화면 이동 없음 → 미세 흔들림 무시
+          lastX = p.clientX; lastT = now;
+          return;
+        }
+      }
+
+      if (lock === 'x') {
+        e.preventDefault(); // 가로 드래그일 때만 기본 동작 보류
+
+        let dx = totalDX;
+        if (Math.abs(dx) < DEADZONE) {
+          dx = Math.sign(dx) * Math.pow(Math.abs(dx) / DEADZONE, 2) * DEADZONE * 0.35;
+        }
+
+        let next = startTX + dx;
+        const minT = -(maxIndex * (cardWidth + gap));
+        const maxT = 0;
+        if (next > maxT) next = maxT + (next - maxT) * 0.3;
+        else if (next < minT) next = minT + (next - minT) * 0.3;
+
+        curTX = next;
+        track.style.transform = `translateX(${next}px)`;
+
+        const dt = Math.max(1, now - lastT);
+        const iv = (p.clientX - lastX) / dt;
+        v = v * 0.8 + iv * 0.2;
+
+        lastX = p.clientX; lastT = now;
+      }
+    }
+
+    function snapOrCommit() {
+      const moved = curTX - startTX;
+      const absMoved = Math.abs(moved);
+      const commitThreshold = Math.max(COMMIT_MIN, cardWidth * COMMIT_RATIO);
+      const velocityCommit = Math.abs(v) > MIN_V;
+
+      let idx = currentIndex;
+      if (absMoved > commitThreshold || velocityCommit) {
+        if (moved < 0) idx = Math.min(currentIndex + 1, maxIndex);
+        else if (moved > 0) idx = Math.max(currentIndex - 1, 0);
+        setTransform(idx, true);
+      } else {
+        setTransform(currentIndex, true);
+      }
+    }
+
+    function momentum() {
+      if (raf) return;
+      function frame() {
+        if (Math.abs(v) < MIN_V) { raf = null; snapOrCommit(); return; }
+        curTX += v * 16; // ~60fps
+        const minT = -(maxIndex * (cardWidth + gap));
+        const maxT = 0;
+        if (curTX > maxT || curTX < minT) {
+          v *= -0.3;
+          curTX = Math.max(minT, Math.min(maxT, curTX));
+        }
+        track.style.transform = `translateX(${curTX}px)`;
+        v *= FRICTION;
+        raf = requestAnimationFrame(frame);
+      }
+      frame();
+    }
+
+    function onEnd(e) {
+      if (!isDragging) return;
+      isDragging = false;
+      slider.classList.remove('dragging');
+
+      if (lock === 'x' && started) {
+        if (Math.abs(v) > MIN_V) momentum();
+        else snapOrCommit();
+        resumeAutoLater();
+        if (e) e.preventDefault();
+      } else {
+        resumeAutoLater();
+      }
+    }
+
+    slider.addEventListener('mousedown', onStart, { passive: false });
+    document.addEventListener('mousemove', onMove, { passive: false });
+    document.addEventListener('mouseup', onEnd, { passive: false });
+
+    slider.addEventListener('touchstart', onStart, { passive: false });
+    slider.addEventListener('touchmove', onMove, { passive: false });
+    slider.addEventListener('touchend', onEnd, { passive: false });
+    slider.addEventListener('touchcancel', onEnd, { passive: false });
+
+    slider.addEventListener('click', (e) => {
+      if (lock === 'x' && started) { e.preventDefault(); e.stopPropagation(); started = false; }
+    }, true);
+
+    slider.addEventListener('dragstart', (e) => e.preventDefault());
+
+    // 자동 롤링
+    const INTERVAL = 4200;
+    let auto = null, resume = null;
+
+    function step() {
+      const next = currentIndex >= maxIndex ? 0 : currentIndex + 1;
+      moveTo(next);
+    }
+    function startAuto() { stopAuto(); auto = setInterval(step, INTERVAL); }
+    function stopAuto() { if (auto) { clearInterval(auto); auto = null; } }
+    function pauseAuto() { stopAuto(); if (resume) { clearTimeout(resume); resume = null; } }
+    function resumeAutoLater(delay = 6200) { if (resume) clearTimeout(resume); resume = setTimeout(() => startAuto(), delay); }
+
+    // 초기화 & 리사이즈
+    function init() { updateDimensions(); setTransform(0, false); startAuto(); }
+    let rTimer = null;
+    window.addEventListener('resize', () => {
+      pauseAuto(); clearTimeout(rTimer);
+      rTimer = setTimeout(() => {
+        updateDimensions();
+        setTransform(Math.min(currentIndex, maxIndex), false);
+        resumeAutoLater();
+      }, 200);
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) pauseAuto(); else resumeAutoLater(1800);
+    });
+
+    init();
+  }
+
+  /** -------------------- 부트스트랩: nb4 우선, nb3도 지원 -------------------- */
+  function bootstrap(id, cfg) {
+    const root = document.getElementById(id);
+    if (!root) return;
+    if (inited.has(root)) return;
+
+    // 게이지/KPI
+    initKpiAndRings(root, {
+      ringSelector: '.rate-ring[data-rate]',
+      prefix: cfg.prefix // 'nb4' 또는 'nb3'
+    });
+
+    // 슬라이더
+    initSlider(root, {
+      sliderSelector: cfg.sliderSelector,       // '#nb4Slider'
+      trackSelector: cfg.trackSelector,         // '.nb4-slider-wrapper'
+      cardSelector: cfg.cardSelector,           // '.nb4-product-slide'
+      prevSelector: cfg.prevSelector,           // '#nb4Prev'
+      nextSelector: cfg.nextSelector            // '#nb4Next'
+    });
+
+    inited.add(root);
+  }
+
+  // DOM 준비 후 실행
+  function onReady(fn) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn, { once: true });
+    } else {
+      fn();
+    }
+  }
+
+  onReady(() => {
+    // nb4 (요청 섹션) 먼저 초기화
+    bootstrap('nb4', {
+      prefix: 'nb4',
+      sliderSelector: '#nb4Slider',
+      trackSelector: '.nb4-slider-wrapper',
+      cardSelector: '.nb4-product-slide',
+      prevSelector: '#nb4Prev',
+      nextSelector: '#nb4Next'
+    });
+
+    // 동일 로직이 필요한 경우 nb3도 자동 적용 (존재할 때만)
+    bootstrap('nb3', {
+      prefix: 'nb3',
+      sliderSelector: '#nb3Slider',
+      trackSelector: '.nb3-slider-wrapper',
+      cardSelector: '.nb3-product-slide',
+      prevSelector: '#nb3Prev',
+      nextSelector: '#nb3Next'
+    });
+  });
+})();
+
+
